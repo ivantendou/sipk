@@ -1,0 +1,60 @@
+name: sipk
+description: "A new Flutter project."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.2.3 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_gen_runner: ^5.8.0
+  flutter_svg: ^2.0.17
+  get: ^4.6.6
+  another_flutter_splash_screen: ^1.2.1
+  cupertino_icons: ^1.0.2
+  cached_network_image: ^3.4.1
+  badges: ^3.1.2
+  percent_indicator: ^4.2.4
+  gauge_indicator: ^0.4.3
+  accordion: ^2.6.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  build_runner: ^2.4.14
+
+flutter_gen:
+  output: lib/app/constants/
+  integrations:
+    flutter_svg: true
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+  
+  fonts:
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito-Regular.ttf
+        - asset: assets/fonts/Nunito-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Nunito-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Nunito-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Nunito-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Nunito-Italic.ttf
+          style: italic
+
+    - family: Koblenz Serial
+      fonts:
+        - asset: assets/fonts/koblenz-serial-bold.ttf
+          weight: 700
