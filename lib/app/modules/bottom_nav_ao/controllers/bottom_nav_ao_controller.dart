@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class AoBottomNavController extends GetxController {
+class BottomNavAoController extends GetxController {
   RxInt selectedIndex = 0.obs;
 
   void onItemTapped(int index) {

@@ -32,6 +32,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/check.svg
   SvgGenImage get check => const SvgGenImage('assets/images/check.svg');
 
+  /// File path: assets/images/chevron-down-thin.svg
+  SvgGenImage get chevronDownThin =>
+      const SvgGenImage('assets/images/chevron-down-thin.svg');
+
   /// File path: assets/images/chevron-down.svg
   SvgGenImage get chevronDown =>
       const SvgGenImage('assets/images/chevron-down.svg');
@@ -54,6 +58,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/eye.svg
   SvgGenImage get eye => const SvgGenImage('assets/images/eye.svg');
+
+  /// File path: assets/images/filter.svg
+  SvgGenImage get filter => const SvgGenImage('assets/images/filter.svg');
 
   /// File path: assets/images/logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/images/logo.svg');
@@ -88,6 +95,9 @@ class $AssetsImagesGen {
   SvgGenImage get scoringOn =>
       const SvgGenImage('assets/images/scoring-on.svg');
 
+  /// File path: assets/images/search.svg
+  SvgGenImage get search => const SvgGenImage('assets/images/search.svg');
+
   /// File path: assets/images/submission-off.svg
   SvgGenImage get submissionOff =>
       const SvgGenImage('assets/images/submission-off.svg');
@@ -110,6 +120,7 @@ class $AssetsImagesGen {
         arrowRight,
         bell,
         check,
+        chevronDownThin,
         chevronDown,
         chevronRight,
         cross,
@@ -117,6 +128,7 @@ class $AssetsImagesGen {
         email,
         eyeOff,
         eye,
+        filter,
         logo,
         manageDataOff,
         manageDataOn,
@@ -126,6 +138,7 @@ class $AssetsImagesGen {
         profileOn,
         scoringOff,
         scoringOn,
+        search,
         submissionOff,
         submissionOn,
         userPlaceholder,

@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
-import 'package:sipk/app/modules/ao_profile/views/widgets/profile_data_card_widget.dart';
+import 'package:sipk/app/modules/profile/controllers/ao_profile_controller.dart';
+import 'package:sipk/app/modules/profile/views/widgets/profile_data_card_widget.dart';
 import 'package:sipk/app/widgets/custom_button_widget.dart';
 import 'package:sipk/app/widgets/user_avatar_widget.dart';
 
-import '../controllers/ao_profile_controller.dart';
-
-class AoProfileView extends GetView<AoProfileController> {
-  const AoProfileView({super.key});
+class ProfileView extends GetView<ProfileController> {
+  const ProfileView({super.key});
   @override
   Widget build(BuildContext context) {
     return SafeArea(

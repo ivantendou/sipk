@@ -6,13 +6,13 @@ import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/modules/ao_home/views/ao_home_view.dart';
 import 'package:sipk/app/modules/ao_manage_data/views/ao_manage_data_view.dart';
-import 'package:sipk/app/modules/ao_profile/views/ao_profile_view.dart';
+import 'package:sipk/app/modules/profile/views/profile_view.dart';
 import 'package:sipk/app/modules/ao_submission/views/ao_submission_view.dart';
 
-import '../controllers/ao_bottom_nav_controller.dart';
+import '../controllers/bottom_nav_ao_controller.dart';
 
-class AoBottomNavView extends GetView<AoBottomNavController> {
-  const AoBottomNavView({super.key});
+class BottomNavAoView extends GetView<BottomNavAoController> {
+  const BottomNavAoView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +24,7 @@ class AoBottomNavView extends GetView<AoBottomNavController> {
               AoHomeView(),
               AoSubmissionView(),
               AoManageDataView(),
-              AoProfileView(),
+              ProfileView(),
             ],
           );
         },
@@ -63,7 +63,7 @@ class AoBottomNavView extends GetView<AoBottomNavController> {
                         ? Assets.images.scoringOn.svg(width: 24)
                         : Assets.images.scoringOff.svg(width: 24),
                   ),
-                  label: "Beranda",
+                  label: "Skoring",
                 ),
                 BottomNavigationBarItem(
                   icon: Padding(

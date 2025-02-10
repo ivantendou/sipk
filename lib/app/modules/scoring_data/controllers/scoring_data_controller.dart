@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class AoProfileController extends GetxController {
-  //TODO: Implement AoProfileController
+class ScoringDataController extends GetxController {
+  //TODO: Implement ScoringDataController
 
   final count = 0.obs;
   @override

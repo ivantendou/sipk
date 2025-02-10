@@ -1,29 +1,43 @@
 import 'package:get/get.dart';
 
-import '../modules/ao_bottom_nav/bindings/ao_bottom_nav_binding.dart';
-import '../modules/ao_bottom_nav/views/ao_bottom_nav_view.dart';
+import '../modules/admin_manage_data/bindings/admin_manage_data_binding.dart';
+import '../modules/admin_manage_data/views/admin_manage_data_view.dart';
+import '../modules/admin_manage_user/bindings/admin_manage_user_binding.dart';
+import '../modules/admin_manage_user/views/admin_manage_user_view.dart';
 import '../modules/ao_home/bindings/ao_home_binding.dart';
 import '../modules/ao_home/views/ao_home_view.dart';
 import '../modules/ao_manage_data/bindings/ao_manage_data_binding.dart';
 import '../modules/ao_manage_data/views/ao_manage_data_view.dart';
-import '../modules/ao_profile/bindings/ao_profile_binding.dart';
-import '../modules/ao_profile/views/ao_profile_view.dart';
 import '../modules/ao_scoring_detail/bindings/ao_scoring_detail_binding.dart';
 import '../modules/ao_scoring_detail/views/ao_scoring_detail_view.dart';
 import '../modules/ao_submission/bindings/ao_submission_binding.dart';
 import '../modules/ao_submission/views/ao_submission_view.dart';
 import '../modules/ao_submission_detail/bindings/ao_submission_detail_binding.dart';
 import '../modules/ao_submission_detail/views/ao_submission_detail_view.dart';
+import '../modules/bottom_nav_admin/bindings/bottom_nav_admin_binding.dart';
+import '../modules/bottom_nav_admin/views/bottom_nav_admin_view.dart';
+import '../modules/bottom_nav_ao/bindings/bottom_nav_ao_binding.dart';
+import '../modules/bottom_nav_ao/views/bottom_nav_ao_view.dart';
+import '../modules/bottom_nav_manager/bindings/bottom_nav_manager_binding.dart';
+import '../modules/bottom_nav_manager/views/bottom_nav_manager_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/manager_scoring_detail/bindings/manager_scoring_detail_binding.dart';
 import '../modules/manager_scoring_detail/views/manager_scoring_detail_view.dart';
+import '../modules/manager_submission/bindings/manager_submission_binding.dart';
+import '../modules/manager_submission/views/manager_submission_view.dart';
 import '../modules/manager_submission_detail/bindings/manager_submission_detail_binding.dart';
 import '../modules/manager_submission_detail/views/manager_submission_detail_view.dart';
 import '../modules/notification/bindings/notification_binding.dart';
 import '../modules/notification/views/notification_view.dart';
+import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/views/profile_view.dart';
+import '../modules/scoring_data/bindings/scoring_data_binding.dart';
+import '../modules/scoring_data/views/scoring_data_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/submission_data/bindings/submission_data_binding.dart';
+import '../modules/submission_data/views/submission_data_view.dart';
 
 part 'app_routes.dart';
 
@@ -50,7 +64,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.BOTTOM_NAV_AO,
-      page: () => const AoBottomNavView(),
+      page: () => const BottomNavAoView(),
       binding: BottomNavAoBinding(),
     ),
     GetPage(
@@ -64,9 +78,9 @@ class AppPages {
       binding: AoManageDataBinding(),
     ),
     GetPage(
-      name: _Paths.AO_PROFILE,
-      page: () => const AoProfileView(),
-      binding: AoProfileBinding(),
+      name: _Paths.PROFILE,
+      page: () => const ProfileView(),
+      binding: ProfileBinding(),
     ),
     GetPage(
       name: _Paths.NOTIFICATION,
@@ -99,6 +113,41 @@ class AppPages {
       name: _Paths.MANAGER_SCORING_DETAIL,
       page: () => const ManagerScoringDetailView(),
       binding: ManagerScoringDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_MANAGE_DATA,
+      page: () => const AdminManageDataView(),
+      binding: AdminManageDataBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_MANAGE_USER,
+      page: () => const AdminManageUserView(),
+      binding: AdminManageUserBinding(),
+    ),
+    GetPage(
+      name: _Paths.BOTTOM_NAV_ADMIN,
+      page: () => const BottomNavAdminView(),
+      binding: BottomNavAdminBinding(),
+    ),
+    GetPage(
+      name: _Paths.BOTTOM_NAV_MANAGER,
+      page: () => const BottomNavManagerView(),
+      binding: BottomNavManagerBinding(),
+    ),
+    GetPage(
+      name: _Paths.MANAGER_SUBMISSION,
+      page: () => const ManagerSubmissionView(),
+      binding: ManagerSubmissionBinding(),
+    ),
+    GetPage(
+      name: _Paths.SCORING_DATA,
+      page: () => const ScoringDataView(),
+      binding: ScoringDataBinding(),
+    ),
+    GetPage(
+      name: _Paths.SUBMISSION_DATA,
+      page: () => const SubmissionDataView(),
+      binding: SubmissionDataBinding(),
     ),
   ];
 }
