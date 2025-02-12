@@ -6,7 +6,8 @@ import 'package:sipk/app/constants/assets.gen.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
 
-class CustomAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
+class CustomAppBarWidget extends StatelessWidget
+    implements PreferredSizeWidget {
   final String title;
 
   const CustomAppBarWidget({
@@ -17,29 +18,30 @@ class CustomAppBarWidget extends StatelessWidget implements PreferredSizeWidget 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-        title: Text(
-          title,
-          style: TextStyleConstant.subHeading2.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+      scrolledUnderElevation: 0.0,
+      title: Text(
+        title,
+        style: TextStyleConstant.subHeading2.copyWith(
+          fontWeight: FontWeight.bold,
         ),
-        centerTitle: true,
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: SizedBox(
-            height: 24,
-            width: 24,
-            child: Assets.images.arrowLeft.svg(),
-          ),
+      ),
+      centerTitle: true,
+      leading: IconButton(
+        onPressed: () => Get.back(),
+        icon: SizedBox(
+          height: 24,
+          width: 24,
+          child: Assets.images.arrowLeft.svg(),
         ),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1.0),
-          child: Container(
-            color: ColorsConstant.grey500,
-            height: 1.0,
-          ),
+      ),
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(1.0),
+        child: Container(
+          color: ColorsConstant.grey500,
+          height: 1.0,
         ),
-      );
+      ),
+    );
   }
 
   @override

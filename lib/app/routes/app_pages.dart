@@ -34,6 +34,8 @@ import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/scoring_data/bindings/scoring_data_binding.dart';
 import '../modules/scoring_data/views/scoring_data_view.dart';
+import '../modules/scoring_form/bindings/scoring_form_binding.dart';
+import '../modules/scoring_form/views/scoring_form_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/submission_data/bindings/submission_data_binding.dart';
@@ -148,6 +150,11 @@ class AppPages {
       name: _Paths.SUBMISSION_DATA,
       page: () => const SubmissionDataView(),
       binding: SubmissionDataBinding(),
+    ),
+    GetPage(
+      name: _Paths.SCORING_FORM,
+      page: () => const ScoringFormView(),
+      binding: ScoringFormBinding(),
     ),
   ];
 }

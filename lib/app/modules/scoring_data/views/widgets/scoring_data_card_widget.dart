@@ -1,29 +1,28 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
 import 'package:sipk/app/constants/assets.gen.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
+import 'package:sipk/app/modules/ao_home/views/widgets/credit_score_badge_widget.dart';
 import 'package:sipk/app/widgets/label_value_widget.dart';
 
-class DetailSubmissionCardWidget extends StatelessWidget {
-  final String? submissionId;
-  final String? submissionStatus;
-  final String? memberStatus;
-  final String? officeBranch;
-  final String? financingPurposes;
-  final String? submissionDate;
-  final String? totalSubmission;
+class ScoringDataCardWidget extends StatelessWidget {
+  final String? scoringNumber;
+  final String? scoringStatus;
+  final String? applicantName;
+  final String? telephoneNumber;
+  final String? scoringDate;
+  final String? rating;
+  final String? score;
 
-  const DetailSubmissionCardWidget({
+  const ScoringDataCardWidget({
     Key? key,
-    this.submissionId,
-    this.submissionStatus,
-    this.memberStatus,
-    this.officeBranch,
-    this.financingPurposes,
-    this.submissionDate,
-    this.totalSubmission,
+    this.scoringNumber,
+    this.scoringStatus,
+    this.applicantName,
+    this.telephoneNumber,
+    this.scoringDate,
+    this.rating,
+    this.score,
   }) : super(key: key);
 
   @override
@@ -52,16 +51,20 @@ class DetailSubmissionCardWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  submissionId ?? "",
+                  scoringNumber ?? "",
                   style: TextStyleConstant.body,
                 ),
               ),
               Row(
                 children: [
-                  Assets.images.waiting.svg(),
+                  Assets.images.check.svg(
+                    width: 24,
+                    colorFilter:
+                        ColorFilter.mode(ColorsConstant.black, BlendMode.srcIn),
+                  ),
                   const SizedBox(width: 4),
                   Text(
-                    submissionStatus ?? "",
+                    scoringStatus ?? "",
                     style: TextStyleConstant.body.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -72,7 +75,6 @@ class DetailSubmissionCardWidget extends StatelessWidget {
           ),
         ),
         Container(
-          width: double.infinity,
           padding: const EdgeInsets.all(16),
           decoration: const BoxDecoration(
             color: ColorsConstant.white,
@@ -86,32 +88,37 @@ class DetailSubmissionCardWidget extends StatelessWidget {
               bottom: BorderSide(color: ColorsConstant.grey500),
             ),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              LabelValueWidget(
-                label: 'Cabang Layanan',
-                value: officeBranch,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    LabelValueWidget(
+                      label: "Nama Pemohon",
+                      value: applicantName,
+                    ),
+                    const SizedBox(height: 8),
+                    LabelValueWidget(
+                      label: "Nomor Telepon",
+                      value: telephoneNumber,
+                    ),
+                    LabelValueWidget(
+                      label: "Tanggal Skoring",
+                      value: scoringDate,
+                    ),
+                  ],
+                ),
               ),
-              LabelValueWidget(
-                label: 'Status Anggota',
-                value: memberStatus,
-              ),
-              LabelValueWidget(
-                label: 'Tujuan Pembiayaan',
-                value: financingPurposes,
-              ),
-              LabelValueWidget(
-                label: 'Tanggal Pengajuan',
-                value: submissionDate,
-              ),
-              LabelValueWidget(
-                label: 'Jumlah Pengajuan',
-                value: totalSubmission,
+              const SizedBox(width: 8),
+              CreditScoreBadgeWidget(
+                rating: rating ?? "",
+                score: score ?? "-",
               ),
             ],
           ),
-        )
+        ),
       ],
     );
   }

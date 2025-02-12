@@ -20,7 +20,7 @@ class OptionButtonWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 90,
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         height: 28,
         decoration: BoxDecoration(
           color: ColorsConstant.white,
@@ -29,6 +29,7 @@ class OptionButtonWidget extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               option,

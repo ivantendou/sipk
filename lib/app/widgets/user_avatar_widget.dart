@@ -14,10 +14,11 @@ class UserAvatarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(16),
+    return ClipOval(
       child: CachedNetworkImage(
         imageUrl: imageUrl ?? "",
+        height: 180,
+        width: 180,
         placeholder: (context, url) =>
             Assets.images.userPlaceholder.svg(width: 180),
         errorWidget: (context, url, error) =>

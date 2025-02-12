@@ -22,12 +22,14 @@ class AoHomeAppbarWidget extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      scrolledUnderElevation: 0.0,
       title: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(16),
+          ClipOval(
             child: CachedNetworkImage(
               imageUrl: imageUrl ?? "",
+              height: 32,
+              width: 32,
               placeholder: (context, url) =>
                   Assets.images.userPlaceholder.svg(width: 32),
               errorWidget: (context, url, error) =>

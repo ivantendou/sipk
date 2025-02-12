@@ -79,6 +79,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/pdf.svg
   SvgGenImage get pdf => const SvgGenImage('assets/images/pdf.svg');
 
+  /// File path: assets/images/plus.svg
+  SvgGenImage get plus => const SvgGenImage('assets/images/plus.svg');
+
   /// File path: assets/images/profile-off.svg
   SvgGenImage get profileOff =>
       const SvgGenImage('assets/images/profile-off.svg');
@@ -134,6 +137,7 @@ class $AssetsImagesGen {
         manageDataOn,
         password,
         pdf,
+        plus,
         profileOff,
         profileOn,
         scoringOff,

@@ -21,8 +21,8 @@ class SearchTextFieldWidget extends StatelessWidget {
         hintText: hintText,
         hintStyle: TextStyleConstant.body,
         suffixIcon: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Assets.images.search.svg(),
+          padding: const EdgeInsets.all(16.0),
+          child: Assets.images.search.svg(width: 24),
         ),
       ),
     );
