@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
+import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/routes/app_pages.dart';
 
 import 'app/modules/splash/controllers/splash_controller.dart';
@@ -16,11 +17,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: ColorsConstant.white,
       statusBarIconBrightness: Brightness.dark,
     ));
-    
+
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'SIPK',
@@ -31,10 +32,9 @@ class MyApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: ColorsConstant.white,
         textSelectionTheme: const TextSelectionThemeData(
-          cursorColor: ColorsConstant.primary, 
-          selectionColor:
-              ColorsConstant.primaryLight2, 
-          selectionHandleColor: ColorsConstant.primary, 
+          cursorColor: ColorsConstant.primary,
+          selectionColor: ColorsConstant.primaryLight2,
+          selectionHandleColor: ColorsConstant.primary,
         ),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
@@ -48,10 +48,27 @@ class MyApp extends StatelessWidget {
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: ColorsConstant.grey400,
+              color: ColorsConstant.grey500,
               width: 1,
             ),
             borderRadius: BorderRadius.circular(8),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: ColorsConstant.error,
+              width: 1,
+            ),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: ColorsConstant.errorDark,
+              width: 1,
+            ),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          errorStyle: TextStyleConstant.caption.copyWith(
+            color: ColorsConstant.errorDark,
           ),
         ),
       ),

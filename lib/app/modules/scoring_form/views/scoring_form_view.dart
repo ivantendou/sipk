@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/modules/scoring_form/views/widgets/form_step_progress_widget.dart';
+import 'package:sipk/app/modules/scoring_form/views/widgets/step_one_form_widget.dart';
 import 'package:sipk/app/widgets/custom_app_bar_widget.dart';
 
 import '../controllers/scoring_form_controller.dart';
@@ -44,7 +45,9 @@ class ScoringFormView extends GetView<ScoringFormController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ElevatedButton(
-                          onPressed: controller.prevStep,
+                          onPressed: (){
+                            print('${controller.gender}');
+                          },
                           child: const Text("Back"),
                         ),
                         ElevatedButton(
@@ -57,10 +60,11 @@ class ScoringFormView extends GetView<ScoringFormController> {
                               controller.nextStep();
                             }
                           },
-                          child: Obx(() => Text(
-                              controller.currentIndex.value == 4
-                                  ? "Submit"
-                                  : "Next")),
+                          child: Obx(
+                            () => Text(controller.currentIndex.value == 4
+                                ? "Submit"
+                                : "Next"),
+                          ),
                         ),
                       ],
                     ),
@@ -78,17 +82,7 @@ class ScoringFormView extends GetView<ScoringFormController> {
   Widget getStepWidget(int index) {
     switch (index) {
       case 0:
-        return Column(
-          children: [
-            const Text("Step 1: Nama"),
-            TextFormField(
-              // controller: controller.nameController,
-              decoration: const InputDecoration(labelText: "Nama Lengkap"),
-              validator: (value) =>
-                  value!.isEmpty ? "Nama tidak boleh kosong" : null,
-            ),
-          ],
-        );
+        return StepOneFormWidget(controller: controller);
       case 1:
         return Column(
           children: [

@@ -22,6 +22,8 @@ dependencies:
   percent_indicator: ^4.2.4
   gauge_indicator: ^0.4.3
   accordion: ^2.6.0
+  dropdown_button2: ^2.3.9
+  date_field: ^6.0.3+1
 
 dev_dependencies:
   flutter_test:

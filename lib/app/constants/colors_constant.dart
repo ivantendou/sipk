@@ -23,5 +23,6 @@ class ColorsConstant {
   static const Color average100 = Color(0xFFF6F0D6);
   static const Color average600 = Color(0xFF7F6400);
   static const Color error = Color(0xFFFC3900);
+  static const Color errorDark = Color(0xFFd32f2f);
   static const Color success = Color(0xFF01C34F);
 }

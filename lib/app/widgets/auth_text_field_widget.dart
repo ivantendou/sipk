@@ -17,6 +17,7 @@ class AuthTextFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: TextStyleConstant.body,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 12,
