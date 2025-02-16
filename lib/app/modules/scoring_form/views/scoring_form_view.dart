@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/modules/scoring_form/views/widgets/form_step_progress_widget.dart';
+import 'package:sipk/app/modules/scoring_form/views/widgets/step_navigation_buttons_widget.dart';
 import 'package:sipk/app/modules/scoring_form/views/widgets/step_one_form_widget.dart';
+import 'package:sipk/app/modules/scoring_form/views/widgets/step_three_form_widget.dart';
+import 'package:sipk/app/modules/scoring_form/views/widgets/step_two_form_widget.dart';
 import 'package:sipk/app/widgets/custom_app_bar_widget.dart';
 
 import '../controllers/scoring_form_controller.dart';
@@ -32,43 +35,14 @@ class ScoringFormView extends GetView<ScoringFormController> {
                             key: controller
                                 .formKeys[controller.currentIndex.value],
                             child: getStepWidget(
-                              controller.currentIndex.value,
+                              2,
                             ),
                           );
                         })
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ElevatedButton(
-                          onPressed: (){
-                            print('${controller.gender}');
-                          },
-                          child: const Text("Back"),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            if (controller.currentIndex.value == 7 &&
-                                controller.formKeys[7].currentState!
-                                    .validate()) {
-                              Get.snackbar("Success", "Form Submitted!");
-                            } else {
-                              controller.nextStep();
-                            }
-                          },
-                          child: Obx(
-                            () => Text(controller.currentIndex.value == 4
-                                ? "Submit"
-                                : "Next"),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  StepNavigationButtonsWidget(controller: controller),
                 ],
               ),
             ),
@@ -84,31 +58,9 @@ class ScoringFormView extends GetView<ScoringFormController> {
       case 0:
         return StepOneFormWidget(controller: controller);
       case 1:
-        return Column(
-          children: [
-            const Text("Step 2: Email"),
-            TextFormField(
-              // controller: controller.emailController,
-              decoration: const InputDecoration(labelText: "Email"),
-              keyboardType: TextInputType.emailAddress,
-              validator: (value) =>
-                  value!.isEmpty ? "Email tidak boleh kosong" : null,
-            ),
-          ],
-        );
+        return StepTwoFormWidget(controller: controller);
       case 2:
-        return Column(
-          children: [
-            const Text("Step 3: Password"),
-            TextFormField(
-              // controller: controller.passwordController,
-              decoration: const InputDecoration(labelText: "Password"),
-              obscureText: true,
-              validator: (value) =>
-                  value!.length < 6 ? "Password minimal 6 karakter" : null,
-            ),
-          ],
-        );
+        return StepThreeFormWidget(controller: controller);
       case 3:
         return Column(
           children: [

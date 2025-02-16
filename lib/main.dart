@@ -26,9 +26,56 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'SIPK',
       theme: ThemeData(
+        primaryColor: ColorsConstant.primary,
         appBarTheme: const AppBarTheme(
           backgroundColor: ColorsConstant.white,
           foregroundColor: ColorsConstant.black,
+        ),
+        datePickerTheme: DatePickerThemeData(
+          cancelButtonStyle: ButtonStyle(
+            foregroundColor: const WidgetStatePropertyAll(ColorsConstant.primary),
+            textStyle: WidgetStatePropertyAll(TextStyleConstant.body.copyWith(
+              fontWeight: FontWeight.bold,
+            )),
+          ),
+          confirmButtonStyle: ButtonStyle(
+            foregroundColor: const WidgetStatePropertyAll(ColorsConstant.primary),
+            textStyle: WidgetStatePropertyAll(TextStyleConstant.body.copyWith(
+              fontWeight: FontWeight.bold,
+            )),
+          ),
+          todayBackgroundColor: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.selected)) {
+                return ColorsConstant.primary;
+              }
+              return Colors.transparent;
+            },
+          ),
+          todayForegroundColor: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.selected)) {
+                return ColorsConstant.white;
+              }
+              return ColorsConstant.black;
+            },
+          ),
+          dayBackgroundColor: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.selected)) {
+                return ColorsConstant.primary;
+              }
+              return Colors.transparent;
+            },
+          ),
+          yearBackgroundColor: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.selected)) {
+                return ColorsConstant.primary;
+              }
+              return Colors.transparent;
+            },
+          ),
         ),
         scaffoldBackgroundColor: ColorsConstant.white,
         textSelectionTheme: const TextSelectionThemeData(
@@ -71,6 +118,9 @@ class MyApp extends StatelessWidget {
             color: ColorsConstant.errorDark,
           ),
         ),
+        radioTheme: const RadioThemeData(
+          fillColor: WidgetStatePropertyAll(ColorsConstant.primary),
+        )
       ),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,

@@ -5,19 +5,19 @@ import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
+  final TextEditingController? controller;
   final String fieldTitle;
   final String? hintText;
   final TextInputType? keyboardType;
-  final String? Function(String?)? validator;
-  final TextEditingController? controller;
+  final String? Function(String?, String)? validator;
 
   const TextFormFieldWidget({
     Key? key,
+    required this.controller,
     required this.fieldTitle,
     this.hintText,
     this.keyboardType = TextInputType.text,
     required this.validator,
-    required this.controller,
   }) : super(key: key);
 
   @override
@@ -30,7 +30,8 @@ class TextFormFieldWidget extends StatelessWidget {
           style: TextStyleConstant.body,
         ),
         TextFormField(
-          style: TextStyleConstant.body,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          controller: controller,
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 0,
@@ -49,9 +50,8 @@ class TextFormFieldWidget extends StatelessWidget {
             ),
           ),
           keyboardType: keyboardType,
-          validator: validator,
-          controller: controller,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
+          style: TextStyleConstant.body,
+          validator: (value) => validator?.call(value, fieldTitle),
         ),
       ],
     );

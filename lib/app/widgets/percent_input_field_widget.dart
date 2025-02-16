@@ -3,19 +3,17 @@ import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
 
 class PercentInputFieldWidget extends StatelessWidget {
-  final String fieldTitle;
   final TextEditingController controller;
-  final String? Function(String?)? validator;
-  final void Function(String)? onChanged;
+  final String fieldTitle;
   final String? hintText;
+  final void Function(String)? onChanged;
 
   const PercentInputFieldWidget({
     Key? key,
-    required this.fieldTitle,
     required this.controller,
-    this.validator,
-    this.onChanged,
+    required this.fieldTitle,
     this.hintText,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -28,51 +26,50 @@ class PercentInputFieldWidget extends StatelessWidget {
           style: TextStyleConstant.body,
         ),
         TextFormField(
-          style: TextStyleConstant.body,
-          keyboardType: TextInputType.number,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Persentase tidak boleh kosong';
-            }
-            final double? percent = double.tryParse(value);
-            if (percent == null) {
-              return 'Harus berupa angka';
-            }
-            if (percent < 0 || percent > 100) {
-              return 'Persentase harus antara 0 dan 100';
-            }
-            return null;
-          },
-          decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 0,
-            ),
-            prefixIcon: const Padding(
-              padding: EdgeInsets.only(right: 16),
-              child: SizedBox(),
-            ),
-            prefixIconConstraints: const BoxConstraints(
-              minWidth: 0,
-              minHeight: 0,
-            ),
-            suffixIcon: SizedBox(
-              width: 36,
-              child: Center(
-                child: Text(
-                  '%',
-                  style: TextStyleConstant.body.copyWith(
-                    color: ColorsConstant.grey900,
-                    fontWeight: FontWeight.bold,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            controller: controller,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 0,
+              ),
+              prefixIcon: const Padding(
+                padding: EdgeInsets.only(right: 16),
+                child: SizedBox(),
+              ),
+              prefixIconConstraints: const BoxConstraints(
+                minWidth: 0,
+                minHeight: 0,
+              ),
+              suffixIcon: SizedBox(
+                width: 36,
+                child: Center(
+                  child: Text(
+                    '%',
+                    style: TextStyleConstant.body.copyWith(
+                      color: ColorsConstant.grey900,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
             ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-        )
+            keyboardType: TextInputType.number,
+            style: TextStyleConstant.body,
+            validator: (value) {
+              if (!RegExp(r"^\d+([.]\d+)?$").hasMatch(value!)) {
+                return "$fieldTitle hanya boleh berisi angka dan koma";
+              }
+
+              double? parsedValue = double.tryParse(value.replaceAll(',', '.'));
+              if (parsedValue == null || parsedValue < 0 || parsedValue > 100) {
+                return "$fieldTitle harus antara 0 - 100";
+              }
+
+              return null;
+            })
       ],
     );
   }

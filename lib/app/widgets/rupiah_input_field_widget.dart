@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
+import 'package:sipk/app/utils/form_validators.dart';
 
 class RupiahInputFieldWidget extends StatelessWidget {
-  final String fieldTitle;
   final TextEditingController controller;
-  final String? Function(String?)? validator;
-  final void Function(String)? onChanged;
+  final String fieldTitle;
   final String? hintText;
+  final void Function(String)? onChanged;
+
 
   const RupiahInputFieldWidget({
     Key? key,
-    required this.fieldTitle,
     required this.controller,
-    this.validator,
-    this.onChanged,
+    required this.fieldTitle,
     this.hintText,
+    this.onChanged,
+
   }) : super(key: key);
 
   @override
@@ -28,21 +29,18 @@ class RupiahInputFieldWidget extends StatelessWidget {
           style: TextStyleConstant.body,
         ),
         TextFormField(
-          style: TextStyleConstant.body,
-          keyboardType: TextInputType.number,
-          validator: (value) {
-            if (value == null || value.trim().isEmpty) {
-              return "Nomor telepon tidak boleh kosong";
-            }
-            return null;
-          },
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          controller: controller,
           decoration: InputDecoration(
-            prefixIconConstraints: const BoxConstraints(
-              minWidth: 0,
-              minHeight: 0,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
             ),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 0,
+            ),
+            prefixIconConstraints: const BoxConstraints(
+              minWidth: 0,
+              minHeight: 0,
             ),
             prefixIcon: SizedBox(
               width: 52,
@@ -56,11 +54,10 @@ class RupiahInputFieldWidget extends StatelessWidget {
                 ),
               ),
             ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
           ),
-          autovalidateMode: AutovalidateMode.onUserInteraction,
+          keyboardType: TextInputType.number,
+          style: TextStyleConstant.body,
+          validator: (value) => FormValidators.validateNumber(value, fieldTitle),
         )
       ],
     );

@@ -8,8 +8,10 @@ class ScoringFormController extends GetxController {
   final formKeys = List.generate(8, (index) => GlobalKey<FormState>());
 
   //sample
-  final nameController = TextEditingController();
-  RxString gender = RxString("");
+  final sampleController = TextEditingController();
+  RxString stringVariable = RxString("");
+  var selectedDate = Rxn<DateTime>();
+  Rx<String> selectedOption = Rx<String>('Tidak');
 
   void nextStep() {
     if (formKeys[currentIndex.value].currentState!.validate()) {
@@ -26,4 +28,6 @@ class ScoringFormController extends GetxController {
       currentIndex.value--;
     }
   }
+
+  void setSelectedOption(String value) => selectedOption.value = value;
 }

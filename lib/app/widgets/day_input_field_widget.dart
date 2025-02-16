@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
+import 'package:sipk/app/utils/form_validators.dart';
 
 class DayInputFieldWidget extends StatelessWidget {
-  final String fieldTitle;
   final TextEditingController controller;
-  final String? Function(String?)? validator;
-  final void Function(String)? onChanged;
+  final String fieldTitle;
   final String? hintText;
+  final void Function(String)? onChanged;
 
   const DayInputFieldWidget({
     Key? key,
-    required this.fieldTitle,
     required this.controller,
-    this.validator,
-    this.onChanged,
+    required this.fieldTitle,
     this.hintText,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -28,22 +27,12 @@ class DayInputFieldWidget extends StatelessWidget {
           style: TextStyleConstant.body,
         ),
         TextFormField(
-          style: TextStyleConstant.body,
-          keyboardType: TextInputType.number,
-          validator: (value) {
-            if (value == null) {
-              return 'Hari tidak boleh kosong';
-            }
-            final double? number = double.tryParse(value);
-            if (number == null) {
-              return 'Hari harus berupa angka';
-            }
-            if (number != number.toInt()) {
-              return 'Hari harus berupa bilangan bulat, tanpa koma';
-            }
-            return null;
-          },
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          controller: controller,
           decoration: InputDecoration(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 0,
             ),
@@ -67,11 +56,10 @@ class DayInputFieldWidget extends StatelessWidget {
                 ),
               ),
             ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
           ),
-          autovalidateMode: AutovalidateMode.onUserInteraction,
+          keyboardType: TextInputType.number,
+          style: TextStyleConstant.body,
+          validator: (value) => FormValidators.validateNumber(value, fieldTitle),
         )
       ],
     );

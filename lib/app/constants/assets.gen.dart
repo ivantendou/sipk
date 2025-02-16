@@ -40,6 +40,10 @@ class $AssetsImagesGen {
   SvgGenImage get chevronDown =>
       const SvgGenImage('assets/images/chevron-down.svg');
 
+  /// File path: assets/images/chevron-left.svg
+  SvgGenImage get chevronLeft =>
+      const SvgGenImage('assets/images/chevron-left.svg');
+
   /// File path: assets/images/chevron-right.svg
   SvgGenImage get chevronRight =>
       const SvgGenImage('assets/images/chevron-right.svg');
@@ -125,6 +129,7 @@ class $AssetsImagesGen {
         check,
         chevronDownThin,
         chevronDown,
+        chevronLeft,
         chevronRight,
         cross,
         document,

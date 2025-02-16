@@ -3,15 +3,20 @@ import 'package:date_field/date_field.dart';
 import 'package:flutter/material.dart';
 
 import 'package:sipk/app/constants/text_style_constant.dart';
+import 'package:sipk/app/modules/scoring_form/controllers/scoring_form_controller.dart';
 
 class DateInputFieldWidget extends StatelessWidget {
+  final ScoringFormController controller;
   final String hintText;
   final String fieldTitle;
+  final void Function(DateTime?)? onChanged;
 
   const DateInputFieldWidget({
     Key? key,
+    required this.controller,
     required this.hintText,
     required this.fieldTitle,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -24,20 +29,6 @@ class DateInputFieldWidget extends StatelessWidget {
           style: TextStyleConstant.body,
         ),
         DateTimeFormField(
-          mode: DateTimeFieldPickerMode.date,
-          validator: (DateTime? value) {
-            if (value == null) {
-              return "Tanggal tidak boleh kosong";
-            }
-            if (value.isAfter(DateTime.now())) {
-              return "Tanggal tidak boleh di masa depan";
-            }
-            return null;
-          },
-          // onChanged: (DateTime? value) {
-          //   selectedDate.value = value;
-          // },
-          style: TextStyleConstant.body,
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 0,
@@ -53,6 +44,18 @@ class DateInputFieldWidget extends StatelessWidget {
             hintText: hintText,
             hintStyle: TextStyleConstant.body,
           ),
+          onChanged: onChanged,
+          mode: DateTimeFieldPickerMode.date,
+          validator: (DateTime? value) {
+            if (value == null) {
+              return "Tanggal tidak boleh kosong";
+            }
+            if (value.isAfter(DateTime.now())) {
+              return "Tanggal tidak boleh di masa depan";
+            }
+            return null;
+          },
+          style: TextStyleConstant.body,
         ),
       ],
     );
