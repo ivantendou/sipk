@@ -23,6 +23,7 @@ abstract class Routes {
   static const SCORING_DATA = _Paths.SCORING_DATA;
   static const SUBMISSION_DATA = _Paths.SUBMISSION_DATA;
   static const SCORING_FORM = _Paths.SCORING_FORM;
+  static const SUBMISSION_FORM = _Paths.SUBMISSION_FORM;
 }
 
 abstract class _Paths {
@@ -47,4 +48,5 @@ abstract class _Paths {
   static const SCORING_DATA = '/scoring-data';
   static const SUBMISSION_DATA = '/submission-data';
   static const SCORING_FORM = '/scoring-form';
+  static const SUBMISSION_FORM = '/submission-form';
 }

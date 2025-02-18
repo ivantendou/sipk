@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/modules/scoring_form/controllers/scoring_form_controller.dart';
@@ -46,7 +45,9 @@ class StepOneFormWidget extends StatelessWidget {
             'Anggota < dari 1 Tahun',
             'Anggota > dari 1 Tahun',
           ],
-          selectedValue: ''.obs,
+          onChanged: (value) {
+            controller.selectedJob.value = value!;
+          },
         ),
         const SizedBox(height: 16),
         TextFormFieldWidget(
@@ -131,7 +132,9 @@ class StepOneFormWidget extends StatelessWidget {
             'Perempuan',
             'Lembaga',
           ],
-          selectedValue: ''.obs,
+          onChanged: (value) {
+            controller.selectedJob.value = value!;
+          },
         ),
         const SizedBox(height: 16),
         DropdownInputFieldWidget(
@@ -143,7 +146,9 @@ class StepOneFormWidget extends StatelessWidget {
             'SMA',
             'D3/S1-S3',
           ],
-          selectedValue: ''.obs,
+          onChanged: (value) {
+            controller.selectedJob.value = value!;
+          },
         ),
         const SizedBox(height: 16),
         DropdownInputFieldWidget(
@@ -160,7 +165,9 @@ class StepOneFormWidget extends StatelessWidget {
             'Pegawai Pemerintah P3K',
             'ASN (Pegawai Negeri)'
           ],
-          selectedValue: ''.obs,
+          onChanged: (value) {
+            controller.selectedJob.value = value!;
+          },
         ),
         const SizedBox(height: 16),
         TextFormFieldWidget(
@@ -189,7 +196,9 @@ class StepOneFormWidget extends StatelessWidget {
             'Menikah'
             'Cerai',
           ],
-          selectedValue: ''.obs,
+          onChanged: (value) {
+            controller.selectedJob.value = value!;
+          },
         ),
         const SizedBox(height: 16),
         TextFormFieldWidget(

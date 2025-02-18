@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/modules/scoring_form/controllers/scoring_form_controller.dart';
@@ -40,7 +39,9 @@ class StepTwoFormWidget extends StatelessWidget {
             'Investasi Rumah Tangga',
             'Konsumer',
           ],
-          selectedValue: ''.obs,
+          onChanged: (value) {
+            controller.selectedJob.value = value!;
+          },
         ),
         const SizedBox(height: 16),
         DropdownInputFieldWidget(
@@ -59,7 +60,9 @@ class StepTwoFormWidget extends StatelessWidget {
             '10',
             '>10',
           ],
-          selectedValue: ''.obs,
+          onChanged: (value) {
+            controller.selectedJob.value = value!;
+          },
         ),
         const SizedBox(height: 16),
         RupiahInputFieldWidget(
@@ -100,7 +103,9 @@ class StepTwoFormWidget extends StatelessWidget {
             'Flat',
             'Anuitas',
           ],
-          selectedValue: ''.obs,
+          onChanged: (value) {
+            controller.selectedJob.value = value!;
+          },
         ),
         const SizedBox(height: 16),
       ],

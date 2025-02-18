@@ -1,6 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
 
@@ -8,14 +7,14 @@ class DropdownInputFieldWidget extends StatelessWidget {
   final String fieldTitle;
   final String hintText;
   final List<String> items;
-  final RxString selectedValue;
+  final void Function(String?)? onChanged;
 
   const DropdownInputFieldWidget({
     Key? key,
     required this.fieldTitle,
     required this.hintText,
     required this.items,
-    required this.selectedValue,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -53,9 +52,7 @@ class DropdownInputFieldWidget extends StatelessWidget {
               .toList(),
           validator: (value) =>
               value == null || value.isEmpty ? "Harus dipilih" : null,
-          onChanged: (value) {
-            selectedValue.value = value!;
-          },
+          onChanged: onChanged,
           buttonStyleData: const ButtonStyleData(
             padding: EdgeInsets.only(right: 8),
           ),

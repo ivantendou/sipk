@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/modules/scoring_form/views/widgets/form_step_progress_widget.dart';
+import 'package:sipk/app/modules/scoring_form/views/widgets/step_eight_form_widget.dart';
+import 'package:sipk/app/modules/scoring_form/views/widgets/step_five_form_widget.dart';
+import 'package:sipk/app/modules/scoring_form/views/widgets/step_four_form_widget.dart';
 import 'package:sipk/app/modules/scoring_form/views/widgets/step_navigation_buttons_widget.dart';
 import 'package:sipk/app/modules/scoring_form/views/widgets/step_one_form_widget.dart';
+import 'package:sipk/app/modules/scoring_form/views/widgets/step_seven_form_widget.dart';
+import 'package:sipk/app/modules/scoring_form/views/widgets/step_six_form_widget.dart';
 import 'package:sipk/app/modules/scoring_form/views/widgets/step_three_form_widget.dart';
 import 'package:sipk/app/modules/scoring_form/views/widgets/step_two_form_widget.dart';
 import 'package:sipk/app/widgets/custom_app_bar_widget.dart';
@@ -35,7 +40,7 @@ class ScoringFormView extends GetView<ScoringFormController> {
                             key: controller
                                 .formKeys[controller.currentIndex.value],
                             child: getStepWidget(
-                              2,
+                              controller.currentIndex.value,
                             ),
                           );
                         })
@@ -62,30 +67,15 @@ class ScoringFormView extends GetView<ScoringFormController> {
       case 2:
         return StepThreeFormWidget(controller: controller);
       case 3:
-        return Column(
-          children: [
-            const Text("Step 4: Alamat"),
-            TextFormField(
-              // controller: controller.addressController,
-              decoration: const InputDecoration(labelText: "Alamat Lengkap"),
-              validator: (value) =>
-                  value!.isEmpty ? "Alamat tidak boleh kosong" : null,
-            ),
-          ],
-        );
+        return StepFourFormWidget(controller: controller);
       case 4:
-        return Column(
-          children: [
-            const Text("Step 5: Nomor HP"),
-            TextFormField(
-              // controller: controller.phoneController,
-              decoration: const InputDecoration(labelText: "Nomor HP"),
-              keyboardType: TextInputType.phone,
-              validator: (value) =>
-                  value!.length < 10 ? "Nomor HP tidak valid" : null,
-            ),
-          ],
-        );
+        return StepFiveFormWidget(controller: controller);
+      case 5:
+        return StepSixFormWidget(controller: controller);
+      case 6:
+        return StepSevenFormWidget(controller: controller);
+      case 7:
+        return StepEightFormWidget(controller: controller);
       default:
         return const SizedBox();
     }

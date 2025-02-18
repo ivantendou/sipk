@@ -11,7 +11,15 @@ class ScoringFormController extends GetxController {
   final sampleController = TextEditingController();
   RxString stringVariable = RxString("");
   var selectedDate = Rxn<DateTime>();
+  Rx<String?> selectedJob = Rx<String?>('Buruh Harian');
   Rx<String> selectedOption = Rx<String>('Tidak');
+
+  bool get isOwnBusiness => [
+        'Buruh Harian',
+        'Pedagang',
+        'Wiraswasta',
+        'Profesional',
+      ].contains(selectedJob.value);
 
   void nextStep() {
     if (formKeys[currentIndex.value].currentState!.validate()) {

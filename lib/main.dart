@@ -26,102 +26,103 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'SIPK',
       theme: ThemeData(
-        primaryColor: ColorsConstant.primary,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: ColorsConstant.white,
-          foregroundColor: ColorsConstant.black,
-        ),
-        datePickerTheme: DatePickerThemeData(
-          cancelButtonStyle: ButtonStyle(
-            foregroundColor: const WidgetStatePropertyAll(ColorsConstant.primary),
-            textStyle: WidgetStatePropertyAll(TextStyleConstant.body.copyWith(
-              fontWeight: FontWeight.bold,
-            )),
+          primaryColor: ColorsConstant.primary,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: ColorsConstant.white,
+            foregroundColor: ColorsConstant.black,
           ),
-          confirmButtonStyle: ButtonStyle(
-            foregroundColor: const WidgetStatePropertyAll(ColorsConstant.primary),
-            textStyle: WidgetStatePropertyAll(TextStyleConstant.body.copyWith(
-              fontWeight: FontWeight.bold,
-            )),
-          ),
-          todayBackgroundColor: WidgetStateProperty.resolveWith<Color>(
-            (Set<WidgetState> states) {
-              if (states.contains(WidgetState.selected)) {
-                return ColorsConstant.primary;
-              }
-              return Colors.transparent;
-            },
-          ),
-          todayForegroundColor: WidgetStateProperty.resolveWith<Color>(
-            (Set<WidgetState> states) {
-              if (states.contains(WidgetState.selected)) {
-                return ColorsConstant.white;
-              }
-              return ColorsConstant.black;
-            },
-          ),
-          dayBackgroundColor: WidgetStateProperty.resolveWith<Color>(
-            (Set<WidgetState> states) {
-              if (states.contains(WidgetState.selected)) {
-                return ColorsConstant.primary;
-              }
-              return Colors.transparent;
-            },
-          ),
-          yearBackgroundColor: WidgetStateProperty.resolveWith<Color>(
-            (Set<WidgetState> states) {
-              if (states.contains(WidgetState.selected)) {
-                return ColorsConstant.primary;
-              }
-              return Colors.transparent;
-            },
-          ),
-        ),
-        scaffoldBackgroundColor: ColorsConstant.white,
-        textSelectionTheme: const TextSelectionThemeData(
-          cursorColor: ColorsConstant.primary,
-          selectionColor: ColorsConstant.primaryLight2,
-          selectionHandleColor: ColorsConstant.primary,
-        ),
-        inputDecorationTheme: InputDecorationTheme(
-          filled: true,
-          fillColor: Colors.white,
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-              color: ColorsConstant.primary,
-              width: 2,
+          datePickerTheme: DatePickerThemeData(
+            cancelButtonStyle: ButtonStyle(
+              foregroundColor:
+                  const WidgetStatePropertyAll(ColorsConstant.primary),
+              textStyle: WidgetStatePropertyAll(TextStyleConstant.body.copyWith(
+                fontWeight: FontWeight.bold,
+              )),
             ),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-              color: ColorsConstant.grey500,
-              width: 1,
+            confirmButtonStyle: ButtonStyle(
+              foregroundColor:
+                  const WidgetStatePropertyAll(ColorsConstant.primary),
+              textStyle: WidgetStatePropertyAll(TextStyleConstant.body.copyWith(
+                fontWeight: FontWeight.bold,
+              )),
             ),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-              color: ColorsConstant.error,
-              width: 1,
+            todayBackgroundColor: WidgetStateProperty.resolveWith<Color>(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.selected)) {
+                  return ColorsConstant.primary;
+                }
+                return Colors.transparent;
+              },
             ),
-            borderRadius: BorderRadius.circular(8),
+            todayForegroundColor: WidgetStateProperty.resolveWith<Color>(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.selected)) {
+                  return ColorsConstant.white;
+                }
+                return ColorsConstant.black;
+              },
+            ),
+            dayBackgroundColor: WidgetStateProperty.resolveWith<Color>(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.selected)) {
+                  return ColorsConstant.primary;
+                }
+                return Colors.transparent;
+              },
+            ),
+            yearBackgroundColor: WidgetStateProperty.resolveWith<Color>(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.selected)) {
+                  return ColorsConstant.primary;
+                }
+                return Colors.transparent;
+              },
+            ),
           ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
+          scaffoldBackgroundColor: ColorsConstant.white,
+          textSelectionTheme: const TextSelectionThemeData(
+            cursorColor: ColorsConstant.primary,
+            selectionColor: ColorsConstant.primaryLight2,
+            selectionHandleColor: ColorsConstant.primary,
+          ),
+          inputDecorationTheme: InputDecorationTheme(
+            filled: true,
+            fillColor: Colors.white,
+            focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: ColorsConstant.primary,
+                width: 2,
+              ),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: ColorsConstant.grey500,
+                width: 1,
+              ),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: ColorsConstant.error,
+                width: 1,
+              ),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: ColorsConstant.errorDark,
+                width: 1,
+              ),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            errorStyle: TextStyleConstant.caption.copyWith(
               color: ColorsConstant.errorDark,
-              width: 1,
             ),
-            borderRadius: BorderRadius.circular(8),
           ),
-          errorStyle: TextStyleConstant.caption.copyWith(
-            color: ColorsConstant.errorDark,
-          ),
-        ),
-        radioTheme: const RadioThemeData(
-          fillColor: WidgetStatePropertyAll(ColorsConstant.primary),
-        )
-      ),
+          radioTheme: const RadioThemeData(
+            fillColor: WidgetStatePropertyAll(ColorsConstant.primary),
+          )),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
     );
