@@ -1,12 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:date_field/date_field.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:sipk/app/constants/text_style_constant.dart';
-import 'package:sipk/app/modules/scoring_form/controllers/scoring_form_controller.dart';
 
 class DateInputFieldWidget extends StatelessWidget {
-  final ScoringFormController controller;
+  final GetxController controller;
   final String hintText;
   final String fieldTitle;
   final void Function(DateTime?)? onChanged;

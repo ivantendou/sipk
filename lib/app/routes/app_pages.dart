@@ -4,6 +4,10 @@ import '../modules/admin_manage_data/bindings/admin_manage_data_binding.dart';
 import '../modules/admin_manage_data/views/admin_manage_data_view.dart';
 import '../modules/admin_manage_user/bindings/admin_manage_user_binding.dart';
 import '../modules/admin_manage_user/views/admin_manage_user_view.dart';
+import '../modules/admin_user_edit/bindings/admin_user_edit_binding.dart';
+import '../modules/admin_user_edit/views/admin_user_edit_view.dart';
+import '../modules/admin_user_info/bindings/admin_user_info_binding.dart';
+import '../modules/admin_user_info/views/admin_user_info_view.dart';
 import '../modules/ao_home/bindings/ao_home_binding.dart';
 import '../modules/ao_home/views/ao_home_view.dart';
 import '../modules/ao_manage_data/bindings/ao_manage_data_binding.dart';
@@ -162,6 +166,16 @@ class AppPages {
       name: _Paths.SUBMISSION_FORM,
       page: () => const SubmissionFormView(),
       binding: SubmissionFormBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_USER_INFO,
+      page: () => const AdminUserInfoView(),
+      binding: AdminUserInfoBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_USER_EDIT,
+      page: () => const AdminUserEditView(),
+      binding: AdminUserEditBinding(),
     ),
   ];
 }

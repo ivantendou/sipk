@@ -2,25 +2,30 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
-import 'package:sipk/app/modules/profile/controllers/ao_profile_controller.dart';
 import 'package:sipk/app/modules/profile/views/widgets/profile_data_card_widget.dart';
+import 'package:sipk/app/widgets/custom_app_bar_widget.dart';
 import 'package:sipk/app/widgets/custom_button_widget.dart';
 import 'package:sipk/app/widgets/user_avatar_widget.dart';
 
-class ProfileView extends GetView<ProfileController> {
-  const ProfileView({super.key});
+import '../controllers/admin_user_info_controller.dart';
+
+class AdminUserInfoView extends GetView<AdminUserInfoController> {
+  const AdminUserInfoView({super.key});
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: ColorsConstant.grey100,
-        body: SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16,),
-            width: double.infinity,
+    return Scaffold(
+      appBar: const CustomAppBarWidget(
+        title: 'Detail Pengguna',
+      ),
+      backgroundColor: ColorsConstant.grey100,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 16,
+            ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const UserAvatarWidget(),
                 const SizedBox(height: 16),
@@ -33,8 +38,8 @@ class ProfileView extends GetView<ProfileController> {
                 ),
                 const SizedBox(height: 16),
                 CustomButtonWidget(
-                  text: 'Logout',
-                  width: 120,
+                  text: 'Edit',
+                  width: 148,
                   onTap: () {},
                 ),
               ],
