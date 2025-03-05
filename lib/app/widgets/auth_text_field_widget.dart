@@ -6,18 +6,27 @@ class AuthTextFieldWidget extends StatelessWidget {
   final String? hintText;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
+  final bool obscureText;
 
   const AuthTextFieldWidget({
     Key? key,
     this.hintText,
     this.prefixIcon,
     this.suffixIcon,
+    required this.controller,
+    required this.validator,
+    this.obscureText = true,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
+      obscureText: obscureText,
       style: TextStyleConstant.body,
+      validator: validator,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 12,
@@ -33,6 +42,7 @@ class AuthTextFieldWidget extends StatelessWidget {
           child: suffixIcon,
         ),
       ),
+      
     );
   }
 }

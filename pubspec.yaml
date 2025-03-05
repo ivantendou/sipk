@@ -24,6 +24,9 @@ dependencies:
   accordion: ^2.6.0
   dropdown_button2: ^2.3.9
   date_field: ^6.0.3+1
+  supabase_flutter: ^2.0.0
+  loading_indicator: ^3.1.1
+  flutter_dotenv: ^5.2.1
 
 dev_dependencies:
   flutter_test:
@@ -40,7 +43,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-  
+    - .env
+
   fonts:
     - family: Nunito
       fonts:

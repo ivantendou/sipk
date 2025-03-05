@@ -14,7 +14,7 @@ class SplashController extends GetxController {
     bool token = true;
     if (token) {
       await Future.delayed(const Duration(seconds: 3));
-      Get.offNamed(Routes.ADMIN_USER_EDIT);
+      Get.offNamed(Routes.LOGIN);
     } else {
       await Future.delayed(const Duration(seconds: 3));
       Get.offNamed(Routes.AO_HOME);

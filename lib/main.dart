@@ -4,10 +4,22 @@ import 'package:get/get.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/routes/app_pages.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'app/modules/splash/controllers/splash_controller.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  try {
+    await dotenv.load(fileName: ".env");
+  } catch (e) {
+    throw Exception('Error loading .env file: $e');
+  }
+  await Supabase.initialize(
+    url: dotenv.env['PROJECT_URL'] ?? '',
+    anonKey: dotenv.env['PROJECT_API_KEYS'] ?? '',
+  );
   Get.put(SplashController());
   runApp(const MyApp());
 }
