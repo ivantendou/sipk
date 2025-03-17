@@ -18,7 +18,7 @@ void main() async {
   }
   await Supabase.initialize(
     url: dotenv.env['PROJECT_URL'] ?? '',
-    anonKey: dotenv.env['PROJECT_API_KEYS'] ?? '',
+    anonKey: dotenv.env['PROJECT_API_KEY'] ?? '',
   );
   Get.put(SplashController());
   runApp(const MyApp());

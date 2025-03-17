@@ -9,7 +9,6 @@ class ProfileDataCardWidget extends StatelessWidget {
   final String? role;
   final String? telephoneNumber;
   final String? email;
-  final String? dateOfJoining;
 
   const ProfileDataCardWidget({
     Key? key,
@@ -17,7 +16,6 @@ class ProfileDataCardWidget extends StatelessWidget {
     this.role,
     this.telephoneNumber,
     this.email,
-    this.dateOfJoining,
   }) : super(key: key);
 
   @override
@@ -57,11 +55,6 @@ class ProfileDataCardWidget extends StatelessWidget {
           LabelValueWidget(
             label: 'Email',
             value: email,
-          ),
-          const SizedBox(height: 8),
-          LabelValueWidget(
-            label: 'Tanggal Mulai Tugas',
-            value: dateOfJoining,
           ),
         ],
       ),

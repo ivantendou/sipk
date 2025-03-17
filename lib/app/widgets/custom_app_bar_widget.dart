@@ -9,10 +9,14 @@ import 'package:sipk/app/constants/text_style_constant.dart';
 class CustomAppBarWidget extends StatelessWidget
     implements PreferredSizeWidget {
   final String title;
+  final List<Widget>? actions;
+  final bool centerTitle;
 
   const CustomAppBarWidget({
     Key? key,
     required this.title,
+    this.actions,
+    this.centerTitle = true,
   }) : super(key: key);
 
   @override
@@ -24,8 +28,8 @@ class CustomAppBarWidget extends StatelessWidget
         style: TextStyleConstant.subHeading2.copyWith(
           fontWeight: FontWeight.bold,
         ),
-      ),
-      centerTitle: true,
+      ), 
+      centerTitle: centerTitle,
       leading: IconButton(
         onPressed: () => Get.back(),
         icon: SizedBox(
@@ -34,6 +38,7 @@ class CustomAppBarWidget extends StatelessWidget
           child: Assets.images.arrowLeft.svg(),
         ),
       ),
+      actions: actions,
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1.0),
         child: Container(

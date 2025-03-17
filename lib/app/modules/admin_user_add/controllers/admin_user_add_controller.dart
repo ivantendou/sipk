@@ -1,78 +1,23 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sipk/app/constants/assets.gen.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/modules/admin_manage_user/controllers/admin_manage_user_controller.dart';
-import 'package:sipk/app/modules/admin_user_detail/controllers/admin_user_detail_controller.dart';
-import 'package:sipk/app/services/user_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class AdminUserEditController extends GetxController {
-  final UserService userService = UserService();
-  final AdminManageUserController adminManageUserController =
-      Get.find<AdminManageUserController>();
-  final AdminUserDetailController adminUserDetailController =
-      Get.find<AdminUserDetailController>();
-  var userId = ''.obs;
+class AdminUserAddController extends GetxController {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final phoneNumberController = TextEditingController();
+  final AdminManageUserController adminManageUserController =
+      Get.find<AdminManageUserController>();
   var selectedRole = "".obs;
   var selectedServiceBranch = "".obs;
   final formKeys = GlobalKey<FormState>();
   RxBool isLoading = false.obs;
   final supabase = Supabase.instance.client;
-
-  @override
-  void onInit() {
-    super.onInit();
-
-    final args = Get.arguments;
-    if (args != null) {
-      userId.value = args['userId'] ?? '';
-      nameController.text = args['fullName'] ?? '';
-      emailController.text = args['email'] ?? '';
-      passwordController.text = args['password'] ?? '';
-      phoneNumberController.text = args['phoneNumber'] ?? '';
-      selectedRole.value = args['role'] ?? '';
-      selectedServiceBranch.value = args['serviceBranch'] ?? '';
-    }
-  }
-
-  void updateUser() async {
-    try {
-      if (formKeys.currentState!.validate()) {
-        isLoading(true);
-        await userService.updateUser(
-          userId: userId.value,
-          name: nameController.text,
-          email: emailController.text.trim(),
-          password: passwordController.text.trim(),
-          phoneNumber: phoneNumberController.text.trim(),
-          role: selectedRole.value,
-          serviceBranch: selectedServiceBranch.value,
-        );
-
-        adminManageUserController.pagingController.refresh();
-        adminUserDetailController.fetchUser();
-        showUserUpdatedDialog();
-      }
-    } catch (e) {
-      if (e is SocketException) {
-        showUpdateUserFailedDialog(
-          'Koneksi internet bermasalah. Periksa jaringan Anda.',
-        );
-      } else {
-        showUpdateUserFailedDialog("Email sudah digunakan oleh akun lain.");
-      }
-    } finally {
-      isLoading(false);
-    }
-  }
 
   void setRole(String? value) {
     selectedRole.value = value ?? "";
@@ -82,11 +27,44 @@ class AdminUserEditController extends GetxController {
     selectedServiceBranch.value = value ?? "";
   }
 
-  void showUserUpdatedDialog() {
+  void addUser() async {
+    try {
+      if (formKeys.currentState!.validate()) {
+        isLoading(true);
+        await supabase.auth.signUp(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim(),
+          data: {
+            'full_name': nameController.text,
+            'phone_number': phoneNumberController.text,
+            'role': selectedRole.toString(),
+            'service_branch': selectedServiceBranch.toString(),
+            'email': emailController.text,
+            'password': passwordController.text,
+          },
+        );
+
+        Get.back();
+        clearForm();
+        adminManageUserController.pagingController.refresh();
+        showUserCreatedDialog();
+      }
+    } catch (e) {
+      if (e is AuthException) {
+        showAddUserFailedDialog(e.message);
+      } else {
+        showAddUserFailedDialog("Terjadi kesalahan. Coba lagi nanti.");
+      }
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  void showUserCreatedDialog() {
     Get.defaultDialog(
       backgroundColor: ColorsConstant.white,
       contentPadding: const EdgeInsets.only(bottom: 24),
-      title: 'Perubahan Data Berhasil',
+      title: 'Pengguna Baru Ditambahkan',
       titleStyle: TextStyleConstant.subHeading.copyWith(
         fontWeight: FontWeight.bold,
       ),
@@ -108,7 +86,7 @@ class AdminUserEditController extends GetxController {
             ),
             const SizedBox(height: 8),
             const Text(
-              'Data pengguna telah berhasil diperbarui.',
+              'Pengguna berhasil ditambahkan ke sistem',
               style: TextStyleConstant.body,
               textAlign: TextAlign.center,
             ),
@@ -116,9 +94,7 @@ class AdminUserEditController extends GetxController {
         ),
       ),
       confirm: InkWell(
-        onTap: () {
-        Get.back();
-        },
+        onTap: () => Get.back(),
         child: Ink(
           width: 180,
           height: 49,
@@ -142,22 +118,19 @@ class AdminUserEditController extends GetxController {
     );
   }
 
-  void showUpdateUserFailedDialog(String errorMessage) {
+  void showAddUserFailedDialog(String errorMessage) {
     Get.defaultDialog(
       backgroundColor: ColorsConstant.white,
       contentPadding: const EdgeInsets.only(bottom: 24),
-      title: 'Gagal Memperbarui Pengguna',
+      title: 'Gagal Menambahkan Pengguna',
       titleStyle: TextStyleConstant.subHeading.copyWith(
         fontWeight: FontWeight.bold,
       ),
       titlePadding:
           const EdgeInsets.only(top: 24, bottom: 4, right: 16, left: 16),
-      content: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Text(
-          errorMessage,
-          style: TextStyleConstant.body,
-        ),
+      content: Text(
+        errorMessage,
+        style: TextStyleConstant.body,
       ),
       confirm: InkWell(
         onTap: () {
@@ -184,5 +157,15 @@ class AdminUserEditController extends GetxController {
         ),
       ),
     );
+  }
+
+  void clearForm() {
+    nameController.clear();
+    emailController.clear();
+    passwordController.clear();
+    phoneNumberController.clear();
+    selectedRole.value = "";
+    selectedServiceBranch.value = "";
+    formKeys.currentState?.reset();
   }
 }

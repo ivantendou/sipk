@@ -57,6 +57,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/email.svg
   SvgGenImage get email => const SvgGenImage('assets/images/email.svg');
 
+  /// File path: assets/images/error-image.svg
+  SvgGenImage get errorImage =>
+      const SvgGenImage('assets/images/error-image.svg');
+
   /// File path: assets/images/eye-off.svg
   SvgGenImage get eyeOff => const SvgGenImage('assets/images/eye-off.svg');
 
@@ -65,6 +69,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/filter.svg
   SvgGenImage get filter => const SvgGenImage('assets/images/filter.svg');
+
+  /// File path: assets/images/filter1.svg
+  SvgGenImage get filter1 => const SvgGenImage('assets/images/filter1.svg');
 
   /// File path: assets/images/logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/images/logo.svg');
@@ -113,6 +120,9 @@ class $AssetsImagesGen {
   SvgGenImage get submissionOn =>
       const SvgGenImage('assets/images/submission-on.svg');
 
+  /// File path: assets/images/success.svg
+  SvgGenImage get success => const SvgGenImage('assets/images/success.svg');
+
   /// File path: assets/images/user-placeholder.svg
   SvgGenImage get userPlaceholder =>
       const SvgGenImage('assets/images/user-placeholder.svg');
@@ -134,9 +144,11 @@ class $AssetsImagesGen {
         cross,
         document,
         email,
+        errorImage,
         eyeOff,
         eye,
         filter,
+        filter1,
         logo,
         manageDataOff,
         manageDataOn,
@@ -150,6 +162,7 @@ class $AssetsImagesGen {
         search,
         submissionOff,
         submissionOn,
+        success,
         userPlaceholder,
         waiting
       ];
@@ -158,7 +171,11 @@ class $AssetsImagesGen {
 class Assets {
   Assets._();
 
+  static const String aEnv = '.env';
   static const $AssetsImagesGen images = $AssetsImagesGen();
+
+  /// List of all assets
+  static List<String> get values => [aEnv];
 }
 
 class SvgGenImage {

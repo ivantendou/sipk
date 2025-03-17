@@ -49,4 +49,14 @@ class FormValidators {
     }
     return null;
   }
+
+  static String? validatePassword(String? value, String fieldName) {
+    final requiredError = validateRequired(value, fieldName);
+    if (requiredError != null) return requiredError;
+
+    if (value!.length < 8) {
+      return "$fieldName minimal 8 karakter";
+    }
+    return null;
+  }
 }

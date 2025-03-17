@@ -24,8 +24,9 @@ abstract class Routes {
   static const SUBMISSION_DATA = _Paths.SUBMISSION_DATA;
   static const SCORING_FORM = _Paths.SCORING_FORM;
   static const SUBMISSION_FORM = _Paths.SUBMISSION_FORM;
-  static const ADMIN_USER_INFO = _Paths.ADMIN_USER_INFO;
   static const ADMIN_USER_EDIT = _Paths.ADMIN_USER_EDIT;
+  static const ADMIN_USER_ADD = _Paths.ADMIN_USER_ADD;
+  static const ADMIN_USER_DETAIL = _Paths.ADMIN_USER_DETAIL;
 }
 
 abstract class _Paths {
@@ -51,6 +52,7 @@ abstract class _Paths {
   static const SUBMISSION_DATA = '/submission-data';
   static const SCORING_FORM = '/scoring-form';
   static const SUBMISSION_FORM = '/submission-form';
-  static const ADMIN_USER_INFO = '/admin-user-info';
   static const ADMIN_USER_EDIT = '/admin-user-edit';
+  static const ADMIN_USER_ADD = '/admin-user-add';
+  static const ADMIN_USER_DETAIL = '/admin-user-detail';
 }

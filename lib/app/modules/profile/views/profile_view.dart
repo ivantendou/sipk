@@ -29,7 +29,6 @@ class ProfileView extends GetView<ProfileController> {
                   role: 'Account Officer',
                   telephoneNumber: '08984763282',
                   email: 'Zafran@gmail.com',
-                  dateOfJoining: '10 Juni 2020',
                 ),
                 const SizedBox(height: 16),
                 CustomButtonWidget(

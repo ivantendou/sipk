@@ -1,22 +1,20 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/routes/app_pages.dart';
+import 'package:sipk/app/services/auth_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginController extends GetxController {
+  final AuthService authService = AuthService();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final formKeys = GlobalKey<FormState>();
-
   RxBool isLoading = false.obs;
   RxBool isPasswordVisible = false.obs;
-
-  final supabase = Supabase.instance.client;
 
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
@@ -42,7 +40,7 @@ class LoginController extends GetxController {
     if (formKeys.currentState!.validate()) {
       try {
         isLoading(true);
-        final AuthResponse res = await supabase.auth.signInWithPassword(
+        final AuthResponse res = await authService.signInWithPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
         );
@@ -50,12 +48,13 @@ class LoginController extends GetxController {
         if (res.user != null) {
           final user = res.user!;
           final role = user.userMetadata?['role'];
-          if (role == 'admin') {
-            Get.offAllNamed(Routes.ADMIN_MANAGE_DATA);
-          } else if (role == 'manager') {
-            Get.offAllNamed(Routes.MANAGER_SUBMISSION);
+
+          if (role == 'Admin') {
+            Get.offAllNamed(Routes.BOTTOM_NAV_ADMIN);
+          } else if (role == 'Manajer') {
+            Get.offAllNamed(Routes.BOTTOM_NAV_MANAGER);
           } else {
-            Get.offAllNamed(Routes.AO_HOME);
+            Get.offAllNamed(Routes.BOTTOM_NAV_AO);
           }
         }
       } catch (e) {
@@ -87,9 +86,9 @@ class LoginController extends GetxController {
       ),
       titlePadding: const EdgeInsets.only(top: 24, bottom: 4),
       content: Text(
-          errorMessage,
-          style: TextStyleConstant.body,
-        ),
+        errorMessage,
+        style: TextStyleConstant.body,
+      ),
       confirm: InkWell(
         onTap: () {
           Get.back();

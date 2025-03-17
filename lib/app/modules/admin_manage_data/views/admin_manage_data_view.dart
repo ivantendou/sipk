@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/modules/ao_home/views/widgets/ao_home_appbar_widget.dart';
+import 'package:sipk/app/routes/app_pages.dart';
 import 'package:sipk/app/widgets/folder_card_widget.dart';
 
 import '../controllers/admin_manage_data_controller.dart';
@@ -25,11 +26,12 @@ class AdminManageDataView extends GetView<AdminManageDataController> {
             ),
             child: Column(
               children: [
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     FolderCardWidget(
                       folderName: 'Data Pengguna',
+                      onTap: () => Get.toNamed(Routes.ADMIN_MANAGE_USER),
                     ),
                     SizedBox(width: 16),
                     FolderCardWidget(

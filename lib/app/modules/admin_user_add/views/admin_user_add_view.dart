@@ -1,0 +1,102 @@
+import 'package:flutter/material.dart';
+
+import 'package:get/get.dart';
+import 'package:sipk/app/constants/colors_constant.dart';
+import 'package:sipk/app/modules/admin_user_add/controllers/admin_user_add_controller.dart';
+import 'package:sipk/app/modules/admin_user_edit/views/widgets/user_avatar_edit_widget.dart';
+import 'package:sipk/app/utils/form_validators.dart';
+import 'package:sipk/app/widgets/custom_app_bar_widget.dart';
+import 'package:sipk/app/widgets/dropdown_input_field_widget.dart';
+import 'package:sipk/app/widgets/form_button_widget.dart';
+import 'package:sipk/app/widgets/text_form_field_widget.dart';
+
+class AdminUserAddView extends GetView<AdminUserAddController> {
+  const AdminUserAddView({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: const CustomAppBarWidget(title: 'Tambah Pengguna'),
+      backgroundColor: ColorsConstant.grey100,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 16,
+            ),
+            child: Column(
+              children: [
+                Form(
+                  key: controller.formKeys,
+                  child: Column(
+                    children: [
+                      const UserAvatarEditWidget(),
+                      const SizedBox(height: 16),
+                      TextFormFieldWidget(
+                        controller: controller.nameController,
+                        fieldTitle: 'Nama',
+                        validator: FormValidators.validateName,
+                      ),
+                      const SizedBox(height: 16),
+                      TextFormFieldWidget(
+                        controller: controller.emailController,
+                        fieldTitle: 'Email',
+                        validator: FormValidators.validateEmail,
+                      ),
+                      const SizedBox(height: 16),
+                      TextFormFieldWidget(
+                        controller: controller.passwordController,
+                        fieldTitle: 'Kata Sandi',
+                        validator: FormValidators.validatePassword,
+                      ),
+                      const SizedBox(height: 16),
+                      TextFormFieldWidget(
+                        controller: controller.phoneNumberController,
+                        fieldTitle: 'Nomor Telepon',
+                        validator: FormValidators.validateNumber,
+                      ),
+                      const SizedBox(height: 16),
+                      DropdownInputFieldWidget(
+                        fieldTitle: 'Jabatan',
+                        hintText: 'Pilih jabatan...',
+                        items: const [
+                          'Account Officer',
+                          'Manajer',
+                          'Supervisor'
+                        ],
+                        onChanged: (value) {
+                          controller.setRole(value);
+                        },
+                      ),
+                      const SizedBox(height: 16),
+                      DropdownInputFieldWidget(
+                        fieldTitle: 'Cabang Layanan',
+                        hintText: 'Pilih cabang layanan',
+                        items: const ['Ciluar', 'Dramaga'],
+                        onChanged: (value) {
+                          controller.setServiceBranch(value);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 32),
+                Obx(
+                  () => FormButtonWidget(
+                    isLoading: controller.isLoading.value,
+                    text: "Tambah",
+                    width: 148,
+                    onTap: () {
+                      controller.addUser();
+                    },
+                  ),
+                ),
+                const SizedBox(height: 32),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
