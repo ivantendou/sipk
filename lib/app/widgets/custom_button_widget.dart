@@ -10,6 +10,7 @@ class CustomButtonWidget extends StatelessWidget {
   final void Function()? onTap;
   final Color buttonColor;
   final Color textColor;
+  final Color borderColor;
   final FontWeight? fontWeight;
 
   const CustomButtonWidget({
@@ -20,6 +21,7 @@ class CustomButtonWidget extends StatelessWidget {
     required this.onTap,
     this.buttonColor = ColorsConstant.primary,
     this.textColor = ColorsConstant.white,
+    this.borderColor = Colors.transparent,
     this.fontWeight,
   }) : super(key: key);
 
@@ -35,6 +37,7 @@ class CustomButtonWidget extends StatelessWidget {
           borderRadius: const BorderRadius.all(
             Radius.circular(8),
           ),
+          border: Border.all(color: borderColor),
         ),
         child: Center(
           child: Text(
