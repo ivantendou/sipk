@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/routes/app_pages.dart';
@@ -48,6 +49,12 @@ class LoginController extends GetxController {
         if (res.user != null) {
           final user = res.user!;
           final role = user.userMetadata?['role'];
+          final userId = user.id;
+
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString('userId', userId);
+          await prefs.setString('role', role);
+          await prefs.setInt('loginTimestamp', DateTime.now().millisecondsSinceEpoch);
 
           if (role == 'Admin') {
             Get.offAllNamed(Routes.BOTTOM_NAV_ADMIN);

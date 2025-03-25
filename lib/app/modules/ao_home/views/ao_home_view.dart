@@ -7,6 +7,7 @@ import 'package:sipk/app/modules/ao_home/views/widgets/header_with_see_all_widge
 import 'package:sipk/app/modules/ao_home/views/widgets/monthly_target_card_widget.dart';
 import 'package:sipk/app/modules/ao_home/views/widgets/scoring_draft_card_widget.dart';
 import 'package:sipk/app/modules/ao_home/views/widgets/scoring_result_card_widget.dart';
+import 'package:sipk/app/routes/app_pages.dart';
 import 'package:sipk/app/widgets/custom_icon_button_widget.dart';
 
 import '../controllers/ao_home_controller.dart';
@@ -33,6 +34,9 @@ class AoHomeView extends GetView<AoHomeController> {
                 CustomIconButtonWidget(
                   icon: Assets.images.add1.svg(width: 24),
                   text: "Mulai Skoring Pembiayaan Baru",
+                  onTap: () {
+                    Get.toNamed(Routes.SCORING_FORM);
+                  },
                 ),
                 const SizedBox(height: 20),
                 const HeaderWithSeeAllWidget(title: "Draf Skoring"),
@@ -50,7 +54,7 @@ class AoHomeView extends GetView<AoHomeController> {
                   scoringNumber: "203284",
                   rating: "BBB+",
                   score: "92.5",
-                  onTap: (){},
+                  onTap: () {},
                 ),
                 const SizedBox(width: 80),
               ],
