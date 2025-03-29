@@ -7,13 +7,13 @@ class AdminUserDetailController extends GetxController {
   final UserService userService = UserService();
   RxBool isLoading = false.obs;
   var user = UserModel().obs;
-  var userId = ''.obs; 
+  var userId = ''.obs;
 
   @override
   void onInit() {
     super.onInit();
     final args = Get.arguments;
-    if(args != null) {
+    if (args != null) {
       userId.value = args['userId'] ?? '';
     }
     fetchUser();

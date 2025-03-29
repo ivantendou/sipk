@@ -35,7 +35,7 @@ class StepSixFormWidget extends StatelessWidget {
             'Milik Sendiri'
           ],
           onChanged: (value) {
-            controller.selectedJob.value = value!;
+            controller.selectedOccupation.value = value!;
           },
         ),
         const SizedBox(height: 16),
@@ -49,7 +49,7 @@ class StepSixFormWidget extends StatelessWidget {
             '> 8 Tahun',
           ],
           onChanged: (value) {
-            controller.selectedJob.value = value!;
+            controller.selectedOccupation.value = value!;
           },
         ),
         const SizedBox(height: 16),
@@ -62,7 +62,7 @@ class StepSixFormWidget extends StatelessWidget {
             'Tidak Dikenal',
           ],
           onChanged: (value) {
-            controller.selectedJob.value = value!;
+            controller.selectedOccupation.value = value!;
           },
         ),
         const SizedBox(height: 16),

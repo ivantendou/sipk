@@ -40,7 +40,7 @@ class StepTwoFormWidget extends StatelessWidget {
             'Konsumer',
           ],
           onChanged: (value) {
-            controller.selectedJob.value = value!;
+            controller.selectedOccupation.value = value!;
           },
         ),
         const SizedBox(height: 16),
@@ -61,7 +61,7 @@ class StepTwoFormWidget extends StatelessWidget {
             '>10',
           ],
           onChanged: (value) {
-            controller.selectedJob.value = value!;
+            controller.selectedOccupation.value = value!;
           },
         ),
         const SizedBox(height: 16),
@@ -86,26 +86,9 @@ class StepTwoFormWidget extends StatelessWidget {
           fieldTitle: 'Uang Muka (Rupiah)',
         ),
         const SizedBox(height: 16),
-        PercentInputFieldWidget(
-          controller: controller.sampleController,
-          fieldTitle: 'Ekv. Rate Margin Per-Bulan (%)',
-        ),
-        const SizedBox(height: 16),
         MonthInputFieldWidget(
           controller: controller.sampleController,
           fieldTitle: 'Jangka Waktu Pembiayaan',
-        ),
-        const SizedBox(height: 16),
-        DropdownInputFieldWidget(
-          fieldTitle: 'Jenis Pengambilan Keuntungan',
-          hintText: 'Pilih jenis pengambilan keuntungan...',
-          items: const [
-            'Flat',
-            'Anuitas',
-          ],
-          onChanged: (value) {
-            controller.selectedJob.value = value!;
-          },
         ),
         const SizedBox(height: 16),
       ],

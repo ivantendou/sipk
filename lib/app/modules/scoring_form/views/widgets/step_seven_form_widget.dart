@@ -35,7 +35,7 @@ class StepSevenFormWidget extends StatelessWidget {
             'Debitur Bank > 3 Tahun',
           ],
           onChanged: (value) {
-            controller.selectedJob.value = value!;
+            controller.selectedOccupation.value = value!;
           },
         ),
         const SizedBox(height: 16),
@@ -49,7 +49,7 @@ class StepSevenFormWidget extends StatelessWidget {
             '> 10 Juta'
           ],
           onChanged: (value) {
-            controller.selectedJob.value = value!;
+            controller.selectedOccupation.value = value!;
           },
         ),
         const SizedBox(height: 16),
@@ -63,7 +63,7 @@ class StepSevenFormWidget extends StatelessWidget {
             '> 8 kali per-bulan'
           ],
           onChanged: (value) {
-            controller.selectedJob.value = value!;
+            controller.selectedOccupation.value = value!;
           },
         ),
         const SizedBox(height: 16),
@@ -77,7 +77,7 @@ class StepSevenFormWidget extends StatelessWidget {
             'Belum Ada Riwayat Kredit',
           ],
           onChanged: (value) {
-            controller.selectedJob.value = value!;
+            controller.selectedOccupation.value = value!;
           },
         ),
         const SizedBox(height: 16),
@@ -92,7 +92,7 @@ class StepSevenFormWidget extends StatelessWidget {
             'I - J (Very Low Risk)',
           ],
           onChanged: (value) {
-            controller.selectedJob.value = value!;
+            controller.selectedOccupation.value = value!;
           },
         ),
         const SizedBox(height: 16),
@@ -100,6 +100,7 @@ class StepSevenFormWidget extends StatelessWidget {
           fieldTitle: 'Rating PT CLIK Pasangan',
           hintText: 'Pilih rating CLIK pasangan...',
           items: const [
+            'Tidak Ada',
             'A - B (Very High Risk)',
             'C - D (High Risk)',
             'E - F (Medium Risk)',
@@ -107,7 +108,7 @@ class StepSevenFormWidget extends StatelessWidget {
             'I - J (Very Low Risk)',
           ],
           onChanged: (value) {
-            controller.selectedJob.value = value!;
+            controller.selectedOccupation.value = value!;
           },
         ),
         const SizedBox(height: 16),

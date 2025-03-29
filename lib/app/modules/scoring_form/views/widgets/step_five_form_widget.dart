@@ -19,7 +19,7 @@ class StepFiveFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      if (controller.selectedOption == Rx<String>('Ya')) {
+      if (controller.hasBusiness == Rx<String>('Ya')) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

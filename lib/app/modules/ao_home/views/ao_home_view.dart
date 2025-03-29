@@ -35,7 +35,7 @@ class AoHomeView extends GetView<AoHomeController> {
                   icon: Assets.images.add1.svg(width: 24),
                   text: "Mulai Skoring Pembiayaan Baru",
                   onTap: () {
-                    Get.toNamed(Routes.SCORING_FORM);
+                    controller.createForm();
                   },
                 ),
                 const SizedBox(height: 20),

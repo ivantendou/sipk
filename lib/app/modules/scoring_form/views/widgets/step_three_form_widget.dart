@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 
 import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/modules/scoring_form/controllers/scoring_form_controller.dart';
+import 'package:sipk/app/widgets/dropdown_input_field_widget.dart';
+import 'package:sipk/app/widgets/percent_input_field_widget.dart';
 import 'package:sipk/app/widgets/rupiah_input_field_widget.dart';
 
 class StepThreeFormWidget extends StatelessWidget {
@@ -46,9 +48,9 @@ class StepThreeFormWidget extends StatelessWidget {
             children: [
               Radio<String>(
                 value: 'Ya',
-                groupValue: controller.selectedOption.value,
+                groupValue: controller.hasBusiness.value,
                 onChanged: (value) {
-                  controller.setSelectedOption(value!);
+                  controller.setHasBusiness(value!);
                 },
               ),
               const Text(
@@ -58,9 +60,9 @@ class StepThreeFormWidget extends StatelessWidget {
               const SizedBox(width: 20),
               Radio<String>(
                 value: 'Tidak',
-                groupValue: controller.selectedOption.value,
+                groupValue: controller.hasBusiness.value,
                 onChanged: (value) {
-                  controller.setSelectedOption(value!);
+                  controller.setHasBusiness(value!);
                 },
               ),
               const Text(
@@ -72,7 +74,7 @@ class StepThreeFormWidget extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         Obx(() {
-          return controller.selectedOption == Rx<String>('Ya')
+          return controller.hasBusiness == Rx<String>('Ya')
               ? Column(
                   children: [
                     RupiahInputFieldWidget(
@@ -130,6 +132,23 @@ class StepThreeFormWidget extends StatelessWidget {
         RupiahInputFieldWidget(
           controller: controller.sampleController,
           fieldTitle: 'Biaya Hiburan dan Sosial',
+        ),
+        const SizedBox(height: 16),
+        PercentInputFieldWidget(
+          controller: controller.sampleController,
+          fieldTitle: 'Uang Muka (Rupiah)',
+        ),
+        const SizedBox(height: 16),
+        DropdownInputFieldWidget(
+          fieldTitle: 'Tipe Angsuran',
+          hintText: 'Pilih tipe angsuran...',
+          items: const [
+            'Flat',
+            'Anuitas',
+          ],
+          onChanged: (value) {
+            controller.selectedOccupation.value = value!;
+          },
         ),
         const SizedBox(height: 16),
       ],

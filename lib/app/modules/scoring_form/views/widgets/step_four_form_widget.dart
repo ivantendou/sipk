@@ -38,7 +38,7 @@ class StepFourFormWidget extends StatelessWidget {
                 'LK Audited',
               ],
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.hasBusiness.value = value!;
               },
             ),
             const SizedBox(height: 16),
@@ -52,7 +52,7 @@ class StepFourFormWidget extends StatelessWidget {
                 '> 10 Tahun',
               ],
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.hasBusiness.value = value!;
               },
             ),
             const SizedBox(height: 16),
@@ -67,7 +67,7 @@ class StepFourFormWidget extends StatelessWidget {
                 'Tunai Tanpa Bon',
               ],
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.hasBusiness.value = value!;
               },
             ),
             const SizedBox(height: 16),
@@ -81,7 +81,7 @@ class StepFourFormWidget extends StatelessWidget {
                 'Milik Sendiri',
               ],
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.hasBusiness.value = value!;
               },
             ),
             const SizedBox(height: 16),
@@ -95,7 +95,7 @@ class StepFourFormWidget extends StatelessWidget {
                 'Menetap Milik Sendiri',
               ],
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.hasBusiness.value = value!;
               },
             ),
             const SizedBox(height: 16),
@@ -109,7 +109,7 @@ class StepFourFormWidget extends StatelessWidget {
                 '> 10 Orang',
               ],
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.hasBusiness.value = value!;
               },
             ),
             const SizedBox(height: 16),
@@ -123,7 +123,7 @@ class StepFourFormWidget extends StatelessWidget {
                 'Ada - Teradministrasi Sesuai Standar',
               ],
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.hasBusiness.value = value!;
               },
             ),
             const SizedBox(height: 16),
@@ -138,7 +138,7 @@ class StepFourFormWidget extends StatelessWidget {
                 'Tidak Ada atau < 5% Pengajuan',
               ],
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.hasBusiness.value = value!;
               },
             ),
             const SizedBox(height: 16),
@@ -166,7 +166,7 @@ class StepFourFormWidget extends StatelessWidget {
                 'Tetap (PKWTT)',
               ],
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.hasBusiness.value = value!;
               },
             ),
             const SizedBox(height: 16),
@@ -179,7 +179,7 @@ class StepFourFormWidget extends StatelessWidget {
                 'Tidak Bonafid',
               ],
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.hasBusiness.value = value!;
               },
             ),
             const SizedBox(height: 16),
@@ -191,7 +191,7 @@ class StepFourFormWidget extends StatelessWidget {
                 'Tidak Ada',
               ],
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.hasBusiness.value = value!;
               },
             ),
             const SizedBox(height: 16),
@@ -203,7 +203,7 @@ class StepFourFormWidget extends StatelessWidget {
                 'Tidak Ada',
               ],
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.hasBusiness.value = value!;
               },
             ),
             const SizedBox(height: 16),
@@ -216,7 +216,7 @@ class StepFourFormWidget extends StatelessWidget {
                 'Tidak Dikenal',
               ],
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.hasBusiness.value = value!;
               },
             ),
             const SizedBox(height: 16),
@@ -230,7 +230,7 @@ class StepFourFormWidget extends StatelessWidget {
                 '> 10 Tahun',
               ],
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.hasBusiness.value = value!;
               },
             ),
             const SizedBox(height: 16),

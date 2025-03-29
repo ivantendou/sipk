@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
-import 'package:sipk/app/modules/profile/controllers/ao_profile_controller.dart';
+import 'package:sipk/app/modules/profile/controllers/profile_controller.dart';
 import 'package:sipk/app/modules/profile/views/widgets/logout_confirmation_dialog_widget.dart';
 import 'package:sipk/app/modules/profile/views/widgets/profile_data_card_widget.dart';
 import 'package:sipk/app/widgets/custom_button_widget.dart';

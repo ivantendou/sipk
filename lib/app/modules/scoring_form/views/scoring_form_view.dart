@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:sipk/app/constants/assets.gen.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
+import 'package:sipk/app/constants/text_style_constant.dart';
+import 'package:sipk/app/modules/scoring_form/views/widgets/cancel_confirmation_dialog_widget.dart';
 import 'package:sipk/app/modules/scoring_form/views/widgets/form_step_progress_widget.dart';
 import 'package:sipk/app/modules/scoring_form/views/widgets/step_eight_form_widget.dart';
 import 'package:sipk/app/modules/scoring_form/views/widgets/step_five_form_widget.dart';
@@ -22,7 +25,33 @@ class ScoringFormView extends GetView<ScoringFormController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: const CustomAppBarWidget(title: 'Data Skoring'),
+        appBar: AppBar(
+          scrolledUnderElevation: 0.0,
+          title: Text(
+            'Data Skoring',
+            style: TextStyleConstant.subHeading2.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          centerTitle: true,
+          leading: IconButton(
+            onPressed: () {
+              showCancelConfirmationDialog(controller);
+            },
+            icon: SizedBox(
+              height: 24,
+              width: 24,
+              child: Assets.images.arrowLeft.svg(),
+            ),
+          ),
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(1.0),
+            child: Container(
+              color: ColorsConstant.grey500,
+              height: 1.0,
+            ),
+          ),
+        ),
         backgroundColor: ColorsConstant.grey100,
         body: Stack(
           children: [

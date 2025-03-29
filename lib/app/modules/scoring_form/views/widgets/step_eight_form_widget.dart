@@ -35,7 +35,7 @@ class StepEightFormWidget extends StatelessWidget {
             '>= 150%',
           ],
           onChanged: (value) {
-            controller.selectedJob.value = value!;
+            controller.selectedOccupation.value = value!;
           },
         ),
         const SizedBox(height: 16),
@@ -47,7 +47,7 @@ class StepEightFormWidget extends StatelessWidget {
             'Tidak Ada Asuransi',
           ],
           onChanged: (value) {
-            controller.selectedJob.value = value!;
+            controller.selectedOccupation.value = value!;
           },
         ),
         const SizedBox(height: 16),
@@ -59,7 +59,7 @@ class StepEightFormWidget extends StatelessWidget {
             'Tidak Ada Asuransi',
           ],
           onChanged: (value) {
-            controller.selectedJob.value = value!;
+            controller.selectedOccupation.value = value!;
           },
         ),
         const SizedBox(height: 16),
@@ -71,7 +71,7 @@ class StepEightFormWidget extends StatelessWidget {
             'Tidak Notaril',
           ],
           onChanged: (value) {
-            controller.selectedJob.value = value!;
+            controller.selectedOccupation.value = value!;
           },
         ),
         const SizedBox(height: 16),
