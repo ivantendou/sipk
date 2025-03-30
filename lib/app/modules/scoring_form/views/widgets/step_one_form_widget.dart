@@ -6,7 +6,6 @@ import 'package:sipk/app/modules/scoring_form/controllers/scoring_form_controlle
 import 'package:sipk/app/utils/form_validators.dart';
 import 'package:sipk/app/widgets/date_input_field_widget.dart';
 import 'package:sipk/app/widgets/dropdown_input_field_widget.dart';
-import 'package:sipk/app/widgets/phone_input_field_widget.dart';
 import 'package:sipk/app/widgets/text_form_field_widget.dart';
 
 class StepOneFormWidget extends StatelessWidget {
@@ -20,8 +19,9 @@ class StepOneFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateTime? parseDate(String? dateString) {
-      if (dateString == null || dateString.isEmpty)
-        return null; 
+      if (dateString == null || dateString.isEmpty) {
+        return null;
+      } 
       try {
         return DateTime.parse(dateString); 
       } catch (e) {
@@ -131,9 +131,11 @@ class StepOneFormWidget extends StatelessWidget {
           keyboardType: TextInputType.number,
         ),
         const SizedBox(height: 16),
-        PhoneInputField(
-          fieldTitle: 'No HP Pemohon',
+        TextFormFieldWidget(
           controller: controller.mobilePhoneController,
+          fieldTitle: 'No HP Pemohon',
+          validator: FormValidators.validateNumber,
+          keyboardType: TextInputType.number,
         ),
         const SizedBox(height: 16),
         DropdownInputFieldWidget(

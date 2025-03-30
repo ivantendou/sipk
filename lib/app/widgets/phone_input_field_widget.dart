@@ -8,6 +8,7 @@ class PhoneInputField extends StatelessWidget {
   final TextEditingController controller;
   final void Function(String)? onChanged;
   final String? hintText;
+  final String? initialValue;
 
   const PhoneInputField({
     Key? key,
@@ -15,6 +16,7 @@ class PhoneInputField extends StatelessWidget {
     required this.controller,
     this.onChanged,
     this.hintText,
+    required this.initialValue,
   }) : super(key: key);
 
   @override
@@ -27,6 +29,7 @@ class PhoneInputField extends StatelessWidget {
           style: TextStyleConstant.body,
         ),
         TextFormField(
+          initialValue: initialValue,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(

@@ -12,17 +12,32 @@ void showCancelConfirmationDialog(ScoringFormController controller) {
       fontWeight: FontWeight.bold,
     ),
     titlePadding: const EdgeInsets.only(top: 16),
-    content: const Text(
-      'Apakah Anda ingin menyimpan isian formulir skoring ini?',
-      style: TextStyleConstant.body,
+    content: RichText(
       textAlign: TextAlign.center,
+      text: TextSpan(
+        style: TextStyleConstant.body.copyWith(color: Colors.black),
+        children: [
+          const TextSpan(
+              text: 'Apakah Anda ingin menyimpan draf skoring ini? '),
+          TextSpan(
+            text:
+                'Hanya data pada tahap yang telah selesai yang akan disimpan.',
+            style: TextStyleConstant.body.copyWith(
+              color: ColorsConstant.primary,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
     ),
     contentPadding: const EdgeInsets.all(16),
     confirm: CustomButtonWidget(
       text: 'Simpan',
       width: 120,
       onTap: () {
-        //update form
+        if(controller.currentIndex.value == 0) {
+          controller.deleteForm();
+        }
         Get.back();
         Get.back();
       },

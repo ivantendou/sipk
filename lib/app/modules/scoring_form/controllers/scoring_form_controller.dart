@@ -49,6 +49,41 @@ class ScoringFormController extends GetxController {
       TextEditingController();
   final TextEditingController childCountController = TextEditingController();
 
+  final Rxn<String> financingType = Rxn<String>();
+  final Rxn<String> financingIteration = Rxn<String>();
+  final TextEditingController applicationAmountController =
+      TextEditingController();
+  final TextEditingController allocationController = TextEditingController();
+  final TextEditingController downPaymentPctController =
+      TextEditingController();
+  final TextEditingController downPaymentAmtController =
+      TextEditingController();
+
+  final TextEditingController netSalaryApplicantController =
+      TextEditingController();
+  final TextEditingController netSalarySpouseController =
+      TextEditingController();
+  final TextEditingController netBusinessIncomeApplicantController =
+      TextEditingController();
+  final TextEditingController netBusinessIncomeSpouseController =
+      TextEditingController();
+  final TextEditingController householdExpenseController =
+      TextEditingController();
+  final TextEditingController transportationExpenseController =
+      TextEditingController();
+  final TextEditingController communicationExpenseController =
+      TextEditingController();
+  final TextEditingController educationExpenseController =
+      TextEditingController();
+  final TextEditingController utilityBillsController = TextEditingController();
+  final TextEditingController ongoingInstallmentController =
+      TextEditingController();
+  final TextEditingController entertainmentExpenseController =
+      TextEditingController();
+  final TextEditingController financingTermController = TextEditingController();
+  final TextEditingController ekvRateController = TextEditingController();
+  final Rxn<String> installmentType = Rxn<String>();
+
   //sample
   final sampleController = TextEditingController();
   // RxString stringVariable = RxString("");
@@ -61,7 +96,7 @@ class ScoringFormController extends GetxController {
         'Wiraswasta',
         'Profesional',
       ].contains(selectedOccupation.value);
-  var isButtonDisabled = false.obs;
+  RxBool isLoading = false.obs;
 
   @override
   void onInit() {
@@ -118,13 +153,58 @@ class ScoringFormController extends GetxController {
     );
 
     Future.delayed(const Duration(seconds: 1), () {
-      isButtonDisabled.value = false;
+      isLoading(false);
+    });
+  }
+
+  void updateSecondStep() async {
+    await scoringService.updateSecondStep(
+      applicantId: applicantId.value,
+      allocation: allocationController.text,
+      applicationAmount: applicationAmountController.text,
+      downPaymentAmt: downPaymentAmtController.text,
+      downPaymentPct: downPaymentPctController.text,
+      financingIteration: financingIteration.value,
+      financingType: financingType.value,
+    );
+
+    Future.delayed(const Duration(seconds: 1), () {
+      isLoading(false);
+    });
+  }
+
+  void updateThirdStep() async {
+    await scoringService.updateThirdStep(
+      applicantId: applicantId.value,
+      communicationExpense: communicationExpenseController.text,
+      educationExpense: educationExpenseController.text,
+      ekvRate: ekvRateController.text,
+      entertainmentExpense: entertainmentExpenseController.text,
+      financingTerm: financingTermController.text,
+      householdExpense: householdExpenseController.text,
+      installmentType: installmentType.value,
+      netBusinessIncomeApplicant:
+          netBusinessIncomeApplicantController.text.isEmpty
+              ? "0"
+              : netBusinessIncomeApplicantController.text,
+      netBusinessIncomeSpouse: netBusinessIncomeSpouseController.text.isEmpty
+          ? "0"
+          : netBusinessIncomeSpouseController.text,
+      netSalaryApplicant: netSalaryApplicantController.text,
+      netSalarySpouse: netSalarySpouseController.text,
+      ongoingInstallment: ongoingInstallmentController.text,
+      transportationExpense: transportationExpenseController.text,
+      utilityBills: utilityBillsController.text,
+    );
+
+    Future.delayed(const Duration(seconds: 1), () {
+      isLoading(false);
     });
   }
 
   void nextStep() {
-    if (isButtonDisabled.value || !formKeys[currentIndex.value].currentState!.validate()) return;
-    isButtonDisabled.value = true;
+    if (isLoading.value || !formKeys[currentIndex.value].currentState!.validate()) return;
+    isLoading(true);
 
     stepCompleted[currentIndex.value] = true;
     if (currentIndex.value < 7) {
@@ -132,21 +212,25 @@ class ScoringFormController extends GetxController {
     }
 
     Future.delayed(const Duration(milliseconds: 500), () {
-      isButtonDisabled.value = false;
+      isLoading(false);
     });
   }
 
   void prevStep() {
-    if (isButtonDisabled.value) return;
-    isButtonDisabled.value = true;
+    if (isLoading.value) return;
+
+    isLoading(true);
 
     if (currentIndex.value > 0) {
       stepCompleted[currentIndex.value] = false;
       currentIndex.value--;
+      if (currentIndex.value == 0) {
+        stepCompleted[0] = false;
+      }
     }
 
     Future.delayed(const Duration(milliseconds: 500), () {
-      isButtonDisabled.value = false;
+      isLoading(false);
     });
   }
 

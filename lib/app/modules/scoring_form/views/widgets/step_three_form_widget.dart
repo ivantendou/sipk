@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/modules/scoring_form/controllers/scoring_form_controller.dart';
 import 'package:sipk/app/widgets/dropdown_input_field_widget.dart';
+import 'package:sipk/app/widgets/month_input_field_widget.dart';
 import 'package:sipk/app/widgets/percent_input_field_widget.dart';
 import 'package:sipk/app/widgets/rupiah_input_field_widget.dart';
 
@@ -29,12 +30,12 @@ class StepThreeFormWidget extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         RupiahInputFieldWidget(
-          controller: controller.sampleController,
+          controller: controller.netSalaryApplicantController,
           fieldTitle: 'Penghasilan Bersih (dari Gaji) Pemohon',
         ),
         const SizedBox(height: 16),
         RupiahInputFieldWidget(
-          controller: controller.sampleController,
+          controller: controller.netSalarySpouseController,
           fieldTitle: 'Penghasilan Bersih (dari Gaji) Pasangan',
         ),
         const SizedBox(height: 16),
@@ -78,12 +79,12 @@ class StepThreeFormWidget extends StatelessWidget {
               ? Column(
                   children: [
                     RupiahInputFieldWidget(
-                      controller: controller.sampleController,
+                      controller: controller.netBusinessIncomeApplicantController,
                       fieldTitle: 'Penghasilan Bersih (dari Usaha) Pemohon',
                     ),
                     const SizedBox(height: 16),
                     RupiahInputFieldWidget(
-                      controller: controller.sampleController,
+                      controller: controller.netBusinessIncomeSpouseController,
                       fieldTitle: 'Penghasilan Bersih (dari Usaha) Pasangan',
                     ),
                   ],
@@ -99,46 +100,50 @@ class StepThreeFormWidget extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         RupiahInputFieldWidget(
-          controller: controller.sampleController,
+          controller: controller.householdExpenseController,
           fieldTitle: 'Biaya Konsumsi Rumah Tangga',
         ),
         const SizedBox(height: 16),
         RupiahInputFieldWidget(
-          controller: controller.sampleController,
+          controller: controller.transportationExpenseController,
           fieldTitle: 'Biaya Transportasi',
         ),
         const SizedBox(height: 16),
         RupiahInputFieldWidget(
-          controller: controller.sampleController,
+          controller: controller.communicationExpenseController,
           fieldTitle: 'Biaya Komunikasi',
         ),
         const SizedBox(height: 16),
         RupiahInputFieldWidget(
-          controller: controller.sampleController,
+          controller: controller.educationExpenseController,
           fieldTitle: 'Biaya Pendidikan',
         ),
         const SizedBox(height: 16),
         RupiahInputFieldWidget(
-          controller: controller.sampleController,
+          controller: controller.utilityBillsController,
           fieldTitle:
               'Tagihan Rekening Rumah - Listrik, Air, Sewa, Internet, dll',
         ),
         const SizedBox(height: 16),
         RupiahInputFieldWidget(
-          controller: controller.sampleController,
+          controller: controller.ongoingInstallmentController,
           fieldTitle: 'Jumlah Angsuran Berjalan',
         ),
         const SizedBox(height: 16),
         RupiahInputFieldWidget(
-          controller: controller.sampleController,
+          controller: controller.entertainmentExpenseController,
           fieldTitle: 'Biaya Hiburan dan Sosial',
         ),
         const SizedBox(height: 16),
-        PercentInputFieldWidget(
-          controller: controller.sampleController,
-          fieldTitle: 'Uang Muka (Rupiah)',
+        MonthInputFieldWidget(
+          controller: controller.financingTermController,
+          fieldTitle: 'Jangka Waktu Pembiayaan',
         ),
         const SizedBox(height: 16),
+        PercentInputFieldWidget(
+          controller: controller.ekvRateController,
+          fieldTitle: 'Ekv. Rate Margin Per-Bulan',
+        ),
         DropdownInputFieldWidget(
           fieldTitle: 'Tipe Angsuran',
           hintText: 'Pilih tipe angsuran...',
@@ -146,8 +151,9 @@ class StepThreeFormWidget extends StatelessWidget {
             'Flat',
             'Anuitas',
           ],
+          value: controller.installmentType.value,
           onChanged: (value) {
-            controller.selectedOccupation.value = value!;
+            controller.installmentType.value = value!;
           },
         ),
         const SizedBox(height: 16),

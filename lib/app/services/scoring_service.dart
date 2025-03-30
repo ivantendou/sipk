@@ -90,7 +90,6 @@ class ScoringService {
         'is_employee': isEmployee,
       }).eq('applicant_id', applicantId);
 
-      // Update spouses table
       await supabase.from('spouses').update({
         'name': spouseName,
         'ktp_number': spouseKtpNumber,
@@ -103,6 +102,80 @@ class ScoringService {
     } catch (e) {
       if (kDebugMode) {
         print("Error in updateFirstStep: $e");
+      }
+      throw Exception("Gagal mengupdate data: $e");
+    }
+  }
+
+  Future<void> updateSecondStep({
+    required String applicantId,
+    required String? financingType,
+    required String? applicationAmount,
+    required String? allocation,
+    required String? downPaymentPct,
+    required String? downPaymentAmt,
+    required String? financingIteration,
+  }) async {
+    try {
+      await supabase.from('financing_applications').update({
+        'financing_type': financingType,
+        'application_amount': applicationAmount,
+        'down_payment_pct': downPaymentPct,
+        'down_payment_amt': downPaymentAmt,
+        'allocation': allocation,
+      }).eq('applicant_id', applicantId);
+
+      await supabase.from('credit_evaluations').update({
+        'financing_iteration': financingIteration,
+      }).eq('applicant_id', applicantId);
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in updateSecontStep: $e");
+      }
+      throw Exception("Gagal mengupdate data: $e");
+    }
+  }
+
+  Future<void> updateThirdStep({
+    required String applicantId,
+    required String? netSalaryApplicant,
+    required String? netSalarySpouse,
+    required String? netBusinessIncomeApplicant,
+    required String? netBusinessIncomeSpouse,
+    required String? householdExpense,
+    required String? transportationExpense,
+    required String? communicationExpense,
+    required String? educationExpense,
+    required String? utilityBills,
+    required String? ongoingInstallment,
+    required String? entertainmentExpense,
+    required String? financingTerm,
+    required String? ekvRate,
+    required String? installmentType,
+  }) async {
+    try {
+      await supabase.from('financial_data').update({
+        'net_salary_applicant': netSalaryApplicant,
+        'net_salary_spouse': netSalarySpouse,
+        'net_business_income_applicant': netBusinessIncomeApplicant,
+        'net_business_income_spouse': netBusinessIncomeSpouse,
+        'household_expense': householdExpense,
+        'transportation_expense': transportationExpense,
+        'communication_expense': communicationExpense,
+        'education_expense': educationExpense,
+        'utility_bills': utilityBills,
+        'ongoing_installment': ongoingInstallment,
+        'entertainment_social_expense': entertainmentExpense,
+        'ekv_rate': ekvRate,
+        'installment_type': installmentType,
+      }).eq('applicant_id', applicantId);
+
+      await supabase.from('credit_evaluations').update({
+        'financing_term': financingTerm,
+      }).eq('applicant_id', applicantId);
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in updateSecontStep: $e");
       }
       throw Exception("Gagal mengupdate data: $e");
     }

@@ -5,7 +5,6 @@ import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/modules/scoring_form/controllers/scoring_form_controller.dart';
 import 'package:sipk/app/utils/form_validators.dart';
 import 'package:sipk/app/widgets/dropdown_input_field_widget.dart';
-import 'package:sipk/app/widgets/month_input_field_widget.dart';
 import 'package:sipk/app/widgets/percent_input_field_widget.dart';
 import 'package:sipk/app/widgets/rupiah_input_field_widget.dart';
 import 'package:sipk/app/widgets/text_form_field_widget.dart';
@@ -39,8 +38,9 @@ class StepTwoFormWidget extends StatelessWidget {
             'Investasi Rumah Tangga',
             'Konsumer',
           ],
+          value: controller.financingType.value,
           onChanged: (value) {
-            controller.selectedOccupation.value = value!;
+            controller.financingType.value = value!;
           },
         ),
         const SizedBox(height: 16),
@@ -60,35 +60,31 @@ class StepTwoFormWidget extends StatelessWidget {
             '10',
             '>10',
           ],
+          value: controller.financingIteration.value,
           onChanged: (value) {
-            controller.selectedOccupation.value = value!;
+            controller.financingIteration.value = (value == '>10') ? '11' : value!;
           },
         ),
         const SizedBox(height: 16),
         RupiahInputFieldWidget(
-          controller: controller.sampleController,
+          controller: controller.applicationAmountController,
           fieldTitle: 'Jumlah Pengajuan/Harga Barang (Rupiah)',
         ),
         const SizedBox(height: 16),
         TextFormFieldWidget(
-          controller: controller.sampleController,
+          controller: controller.allocationController,
           fieldTitle: 'Peruntukan',
           validator: FormValidators.validateName,
         ),
         const SizedBox(height: 16),
         PercentInputFieldWidget(
-          controller: controller.sampleController,
+          controller: controller.downPaymentPctController,
           fieldTitle: 'Uang Muka (%)',
         ),
         const SizedBox(height: 16),
         RupiahInputFieldWidget(
-          controller: controller.sampleController,
+          controller: controller.downPaymentAmtController,
           fieldTitle: 'Uang Muka (Rupiah)',
-        ),
-        const SizedBox(height: 16),
-        MonthInputFieldWidget(
-          controller: controller.sampleController,
-          fieldTitle: 'Jangka Waktu Pembiayaan',
         ),
         const SizedBox(height: 16),
       ],

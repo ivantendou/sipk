@@ -15,7 +15,6 @@ import 'package:sipk/app/modules/scoring_form/views/widgets/step_seven_form_widg
 import 'package:sipk/app/modules/scoring_form/views/widgets/step_six_form_widget.dart';
 import 'package:sipk/app/modules/scoring_form/views/widgets/step_three_form_widget.dart';
 import 'package:sipk/app/modules/scoring_form/views/widgets/step_two_form_widget.dart';
-import 'package:sipk/app/widgets/custom_app_bar_widget.dart';
 
 import '../controllers/scoring_form_controller.dart';
 
@@ -36,7 +35,12 @@ class ScoringFormView extends GetView<ScoringFormController> {
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
-              showCancelConfirmationDialog(controller);
+              if (controller.currentIndex.value == 0) {
+                controller.deleteForm();
+                Get.back();
+              } else {
+                showCancelConfirmationDialog(controller);
+              }
             },
             icon: SizedBox(
               height: 24,
