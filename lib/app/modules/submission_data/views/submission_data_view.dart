@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sipk/app/constants/assets.gen.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
-import 'package:sipk/app/modules/scoring_data/views/widgets/search_panel_widget.dart';
 import 'package:sipk/app/modules/submission_data/views/widgets/submission_data_card_widget.dart';
 import 'package:sipk/app/widgets/custom_app_bar_widget.dart';
 
@@ -17,9 +16,9 @@ class SubmissionDataView extends GetView<SubmissionDataController> {
       child: Scaffold(
         appBar: const CustomAppBarWidget(title: 'Data Skoring'),
         backgroundColor: ColorsConstant.grey100,
-        body: Stack(
+        body: const Stack(
           children: [
-            const SingleChildScrollView(
+            SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.only(top: 124, left: 16, right: 16),
                 child: Column(
@@ -28,12 +27,6 @@ class SubmissionDataView extends GetView<SubmissionDataController> {
                   ],
                 ),
               ),
-            ),
-            SearchPanelWidget(
-              hintText: 'Cari Data Pengajuan',
-              onFilterTap: () {},
-              onFirstOptionTap: () {},
-              onSecondOptionTap: () {},
             ),
           ],
         ),

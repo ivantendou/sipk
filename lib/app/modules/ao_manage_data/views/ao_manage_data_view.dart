@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
+import 'package:sipk/app/routes/app_pages.dart';
 import 'package:sipk/app/widgets/folder_card_widget.dart';
 
 import '../controllers/ao_manage_data_controller.dart';
@@ -10,7 +11,7 @@ class AoManageDataView extends GetView<AoManageDataController> {
   const AoManageDataView({super.key});
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       child: Scaffold(
         backgroundColor: ColorsConstant.grey100,
         body: SingleChildScrollView(
@@ -26,10 +27,14 @@ class AoManageDataView extends GetView<AoManageDataController> {
               children: [
                 FolderCardWidget(
                   folderName: 'Data Skoring Pembiayaan',
+                  onTap: () {
+                    Get.toNamed(Routes.SCORING_DATA);
+                  },
                 ),
                 SizedBox(width: 16),
                 FolderCardWidget(
                   folderName: 'Data Pengajuan Pembiayaan',
+                  onTap: () {},
                 ),
               ],
             ),

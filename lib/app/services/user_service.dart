@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:sipk/models/user_model.dart';
 import 'package:sipk/models/users_model.dart';
@@ -78,6 +79,9 @@ class UserService {
   }
 
   Future<void> deleteUsers(List<String> userIds) async {
+    if (kDebugMode) {
+      print(userIds);
+    }
     await Future.wait(userIds.map((userId) async {
       await supabaseAuthAdmin.auth.admin.deleteUser(userId);
     }));

@@ -54,7 +54,9 @@ class LoginController extends GetxController {
           final prefs = await SharedPreferences.getInstance();
           await prefs.setString('userId', userId);
           await prefs.setString('role', role);
-          await prefs.setInt('loginTimestamp', DateTime.now().millisecondsSinceEpoch);
+          await prefs.setInt(
+              'loginTimestamp', DateTime.now().millisecondsSinceEpoch);
+          print(userId);
 
           if (role == 'Admin') {
             Get.offAllNamed(Routes.BOTTOM_NAV_ADMIN);

@@ -3,16 +3,12 @@ import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:sipk/app/services/user_service.dart';
 import 'package:sipk/models/users_model.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AdminManageUserController extends GetxController {
   final UserService userService = UserService();
   final PagingController<int, UsersModel> pagingController =
       PagingController(firstPageKey: 0);
 
-  final supabase = Supabase.instance.client;
-
-  final isSearchingVisible = false.obs;
   final searchQuery = ''.obs;
   final isLoading = false.obs;
   final hasMoreData = true.obs;
@@ -106,8 +102,6 @@ class AdminManageUserController extends GetxController {
 
   void resetFilters() => selectedRoles.updateAll((key, value) => false);
 
-  void toggleSearch() => isSearchingVisible.toggle();
-
   void toggleRole(String role) {
     selectedRoles[role] = !(selectedRoles[role] ?? false);
   }
@@ -119,7 +113,7 @@ class AdminManageUserController extends GetxController {
   void toggleSelectionMode() {
     isSelectionMode.toggle();
     if (!isSelectionMode.value) {
-      clearSelection();
+      selectedUsers.updateAll((key, value) => false);
     }
   }
 
@@ -134,10 +128,6 @@ class AdminManageUserController extends GetxController {
   void selectAll() {
     bool allSelected = selectedUsers.values.every((selected) => selected);
     selectedUsers.updateAll((key, value) => !allSelected);
-  }
-
-  void clearSelection() {
-    selectedUsers.updateAll((key, value) => false);
   }
 
   int get selectedCount =>

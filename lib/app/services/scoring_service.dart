@@ -1,8 +1,49 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:sipk/models/credit_scores_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ScoringService {
   final supabase = Supabase.instance.client;
+  final supabaseAuthAdmin = SupabaseClient(
+    dotenv.env['PROJECT_URL'] ?? '',
+    dotenv.env['SERVICE_ROLE_KEY'] ?? '',
+  );
+
+  Future<List<CreditScoresModel>> fetchCreditScores({
+    required String searchQuery,
+    required String accountOfficerId,
+    required int from,
+    required int to,
+    required bool ascending,
+  }) async {
+    try {
+      final data = await supabase
+          .from('applicants')
+          .select('''
+    id, name, mobile_phone,
+    credit_evaluations (
+      credit_scores (
+        total_score,
+        is_draft,
+        updated_at
+      )
+    )
+  ''')
+          .or('name.ilike.%$searchQuery%,ktp_number.ilike.%$searchQuery%,mobile_phone.ilike.%$searchQuery%').eq('account_officer_id', accountOfficerId)
+          .order('created_at', ascending: ascending)
+          .range(from, to);
+      if (kDebugMode) {
+        print(data);
+      }
+      return data.map((json) => CreditScoresModel.fromJson(json)).toList();
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in fetchScoring: $e");
+      }
+      throw Exception("Gagal mendapatkan data: $e");
+    }
+  }
 
   Future<String> createForm({required String userId}) async {
     final List<Map<String, dynamic>> applicantId =
@@ -326,5 +367,16 @@ class ScoringService {
       }
       throw Exception("Gagal mengupdate data: $e");
     }
+  }
+
+  Future<void> deleteCreditScores(List<String> dataIds) async {
+    if (kDebugMode) {
+      print(dataIds);
+    }
+    await Future.wait(dataIds.map((dataId) async {
+      await supabase.from('applicants').delete().eq('id', dataId);
+    }));
+
+    
   }
 }
