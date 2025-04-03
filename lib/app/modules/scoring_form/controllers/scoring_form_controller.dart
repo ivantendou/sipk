@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:sipk/app/constants/assets.gen.dart';
+import 'package:sipk/app/constants/colors_constant.dart';
+import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/services/scoring_service.dart';
 
 class ScoringFormController extends GetxController {
@@ -26,7 +29,7 @@ class ScoringFormController extends GetxController {
   final TextEditingController mobilePhoneController = TextEditingController();
   final Rxn<String> gender = Rxn<String>();
   final Rxn<String> educationLevel = Rxn<String>();
-  Rx<String?> selectedOccupation = Rx<String?>('Buruh Harian');
+  Rx<String?> selectedOccupation = Rx<String?>('');
   final Rxn<String> selfEmploymentType = Rxn<String>();
   final Rxn<String> employmentType = Rxn<String>();
   final TextEditingController companyNameController = TextEditingController();
@@ -84,12 +87,55 @@ class ScoringFormController extends GetxController {
   final TextEditingController ekvRateController = TextEditingController();
   final Rxn<String> installmentType = Rxn<String>();
 
-  //sample
-  final sampleController = TextEditingController();
-  // RxString stringVariable = RxString("");
-  var selectedDate = Rxn<String>();
-  Rx<String> hasBusiness = Rx<String>('Tidak');
+  final Rxn<String> businessReport = Rxn<String>();
+  final TextEditingController employmentBusinessDurationController =
+      TextEditingController();
+  final Rxn<String> paymentReceiptMethod = Rxn<String>();
+  final Rxn<String> businessPremisesStatus = Rxn<String>();
+  final Rxn<String> salesMethod = Rxn<String>();
+  final TextEditingController employeeCountController = TextEditingController();
+  final Rxn<String> businessAdministration = Rxn<String>();
+  final Rxn<String> businessLiabilities = Rxn<String>();
+  final Rxn<String> employmentStatus = Rxn<String>();
+  final Rxn<String> employerCredibility = Rxn<String>();
+  final Rxn<String> salarySlip = Rxn<String>();
+  final Rxn<String> accountStatement = Rxn<String>();
+  final Rxn<String> workplaceReputation = Rxn<String>();
 
+  final TextEditingController salesController = TextEditingController();
+  final TextEditingController cogsController = TextEditingController();
+  final TextEditingController dailyLaborController = TextEditingController();
+  final TextEditingController consumptionController = TextEditingController();
+  final TextEditingController transportCostController = TextEditingController();
+  final TextEditingController fuelController = TextEditingController();
+  final TextEditingController packagingController = TextEditingController();
+  final TextEditingController depreciationController = TextEditingController();
+  final TextEditingController otherCostsController = TextEditingController();
+  final TextEditingController activeDaysController = TextEditingController();
+  final TextEditingController monthlyLaborController = TextEditingController();
+  final TextEditingController rentalController = TextEditingController();
+  final TextEditingController assetMaintenanceController =
+      TextEditingController();
+  final TextEditingController utilitiesController = TextEditingController();
+
+  final Rxn<String> residenceOwnership = Rxn<String>();
+  final TextEditingController residenceDurationController =
+      TextEditingController();
+  final Rxn<String> neighborhoodReputation = Rxn<String>();
+
+  final Rxn<String> bankingRelationship = Rxn<String>();
+  final Rxn<String> averageMonthlyBalance = Rxn<String>();
+  final Rxn<String> averageTransactionFrequency = Rxn<String>();
+  final Rxn<String> applicantCreditQuality = Rxn<String>();
+  final Rxn<String> applicantCreditRating = Rxn<String>();
+  final Rxn<String> spouseCreditRating = Rxn<String>();
+
+  final Rxn<String> applicationCoverage = Rxn<String>();
+  final Rxn<String> vehicleCollateralInsurance = Rxn<String>();
+  final Rxn<String> applicantLifeInsurance = Rxn<String>();
+  final Rxn<String> collateralBinding = Rxn<String>();
+
+  Rx<String> hasBusiness = Rx<String>('Ya');
   bool get isOwnBusiness => [
         'Buruh Harian',
         'Pedagang',
@@ -114,8 +160,8 @@ class ScoringFormController extends GetxController {
   }
 
   void updateFirstStep() async {
+    isLoading(true);
     int applicantAge = calculateAge(dateOfBirth.value);
-
     await scoringService.updateFirstStep(
       applicantId: applicantId.value,
       applicantName: applicantNameController.text,
@@ -158,6 +204,7 @@ class ScoringFormController extends GetxController {
   }
 
   void updateSecondStep() async {
+    isLoading(true);
     await scoringService.updateSecondStep(
       applicantId: applicantId.value,
       allocation: allocationController.text,
@@ -174,13 +221,14 @@ class ScoringFormController extends GetxController {
   }
 
   void updateThirdStep() async {
+    isLoading(true);
     await scoringService.updateThirdStep(
       applicantId: applicantId.value,
       communicationExpense: communicationExpenseController.text,
       educationExpense: educationExpenseController.text,
       ekvRate: ekvRateController.text,
       entertainmentExpense: entertainmentExpenseController.text,
-      financingTerm: financingTermController.text,
+      financingTerm: double.tryParse(financingTermController.text)! / 12,
       householdExpense: householdExpenseController.text,
       installmentType: installmentType.value,
       netBusinessIncomeApplicant:
@@ -200,6 +248,107 @@ class ScoringFormController extends GetxController {
     Future.delayed(const Duration(seconds: 1), () {
       isLoading(false);
     });
+  }
+
+  void updateFourthStep() async {
+    isLoading(true);
+    await scoringService.updateFourthStep(
+      applicantId: applicantId.value,
+      accountStatement: accountStatement.value,
+      businessAdministration: businessAdministration.value,
+      businessLiabilities: businessLiabilities.value,
+      businessPremisesStatus: businessPremisesStatus.value,
+      businessReport: businessReport.value,
+      employeeCount: employeeCountController.text,
+      employerCredibility: employerCredibility.value,
+      employmentBusinessDuration:
+          double.tryParse(employmentBusinessDurationController.text)! / 12,
+      employmentStatus: employmentStatus.value,
+      paymentReceiptMethod: paymentReceiptMethod.value,
+      salarySlip: salarySlip.value,
+      salesMethod: salesMethod.value,
+      workplaceReputation: workplaceReputation.value,
+    );
+
+    Future.delayed(const Duration(seconds: 1), () {
+      isLoading(false);
+    });
+  }
+
+  void updateFifthStep() async {
+    isLoading(true);
+    await scoringService.updateFifthStep(
+      applicantId: applicantId.value,
+      activeDays: double.tryParse(activeDaysController.text) ?? 0,
+      assetMaintenance: double.tryParse(assetMaintenanceController.text) ?? 0,
+      cogs: double.tryParse(cogsController.text) ?? 0,
+      consumption: double.tryParse(consumptionController.text) ?? 0,
+      dailyLabor: double.tryParse(dailyLaborController.text) ?? 0,
+      depreciation: double.tryParse(depreciationController.text) ?? 0,
+      fuel: double.tryParse(fuelController.text) ?? 0,
+      monthlyLabor: double.tryParse(monthlyLaborController.text) ?? 0,
+      otherCosts: double.tryParse(otherCostsController.text) ?? 0,
+      packaging: double.tryParse(packagingController.text) ?? 0,
+      rental: double.tryParse(rentalController.text) ?? 0,
+      sales: double.tryParse(salesController.text) ?? 0,
+      transportCost: double.tryParse(transportCostController.text) ?? 0,
+      utilities: double.tryParse(utilitiesController.text) ?? 0,
+    );
+
+    Future.delayed(const Duration(seconds: 1), () {
+      isLoading(false);
+    });
+  }
+
+  void updateSixStep() async {
+    isLoading(true);
+    await scoringService.updateSixStep(
+      applicantId: applicantId.value,
+      neighborhoodReputation: neighborhoodReputation.value,
+      residenceDuration: residenceDurationController.text,
+      residenceOwnership: residenceOwnership.value,
+    );
+
+    Future.delayed(const Duration(seconds: 1), () {
+      isLoading(false);
+    });
+  }
+
+  void updateSevenStep() async {
+    isLoading(true);
+    await scoringService.updateSevenStep(
+      applicantId: applicantId.value,
+      applicantCreditQuality: applicantCreditQuality.value,
+      applicantCreditRating: applicantCreditRating.value,
+      averageMonthlyBalance: averageMonthlyBalance.value,
+      averageTransactionFrequency: averageTransactionFrequency.value,
+      bankingRelationship: bankingRelationship.value,
+      spouseCreditRating: spouseCreditRating.value,
+    );
+
+    Future.delayed(const Duration(seconds: 1), () {
+      isLoading(false);
+    });
+  }
+
+  void updateEightStep() async {
+    try {
+      isLoading(true);
+      await scoringService.updateEightStep(
+        applicantId: applicantId.value,
+        applicantLifeInsurance: applicantLifeInsurance.value,
+        applicationCoverage: applicationCoverage.value,
+        collateralBinding: collateralBinding.value,
+        vehicleCollateralInsurance: vehicleCollateralInsurance.value,
+      );
+      showScoreCalculatedDialog();
+    } catch (e) {
+      showScoreCalculationFailedDialog();
+    } finally {
+      Future.delayed(const Duration(seconds: 1), () {
+        isLoading(false);
+      });
+    }
   }
 
   void nextStep() {
@@ -250,5 +399,123 @@ class ScoringFormController extends GetxController {
     }
 
     return age;
+  }
+
+  void showScoreCalculatedDialog() {
+    Get.defaultDialog(
+      backgroundColor: ColorsConstant.white,
+      contentPadding: const EdgeInsets.only(bottom: 24),
+      title: 'Perhitungan Skor Selesai',
+      titleStyle: TextStyleConstant.subHeading.copyWith(
+        fontWeight: FontWeight.bold,
+      ),
+      titlePadding: const EdgeInsets.only(top: 24, bottom: 16),
+      onWillPop: () async {
+        Get.back();
+        return true;
+      },
+      content: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          children: [
+            Assets.images.success.svg(
+              width: 80,
+              colorFilter: const ColorFilter.mode(
+                Colors.green,
+                BlendMode.srcIn,
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Skor kredit telah berhasil dihitung',
+              style: TextStyleConstant.body,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+      confirm: InkWell(
+        onTap: () {
+          // pindah ke halaman detail
+        },
+        child: Ink(
+          width: 180,
+          height: 49,
+          decoration: const BoxDecoration(
+            color: ColorsConstant.primary,
+            borderRadius: BorderRadius.all(
+              Radius.circular(8),
+            ),
+          ),
+          child: Center(
+            child: Text(
+              'Lihat Skor',
+              style: TextStyleConstant.subHeading2.copyWith(
+                color: ColorsConstant.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void showScoreCalculationFailedDialog() {
+    Get.defaultDialog(
+      backgroundColor: ColorsConstant.white,
+      contentPadding: const EdgeInsets.only(bottom: 24),
+      title: 'Perhitungan Skor Gagal',
+      titleStyle: TextStyleConstant.subHeading.copyWith(
+        fontWeight: FontWeight.bold,
+      ),
+      titlePadding: const EdgeInsets.only(top: 24, bottom: 16),
+      onWillPop: () async {
+        Get.back();
+        return true;
+      },
+      content: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          children: [
+            Assets.images.success.svg(
+              width: 80,
+              colorFilter: const ColorFilter.mode(
+                Colors.green,
+                BlendMode.srcIn,
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Terjadi kesalahan saat menghitung skor kredit.\nSilakan coba lagi.',
+              style: TextStyleConstant.body,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+      confirm: InkWell(
+        onTap: () => Get.back(),
+        child: Ink(
+          width: 180,
+          height: 49,
+          decoration: const BoxDecoration(
+            color: ColorsConstant.primary,
+            borderRadius: BorderRadius.all(
+              Radius.circular(8),
+            ),
+          ),
+          child: Center(
+            child: Text(
+              'OK',
+              style: TextStyleConstant.subHeading2.copyWith(
+                color: ColorsConstant.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -74,6 +74,21 @@ class StepNavigationButtonsWidget extends StatelessWidget {
               if (controller.currentIndex.value == 2) {
                 controller.updateThirdStep();
               }
+              if (controller.currentIndex.value == 3) {
+                controller.updateFourthStep();
+              }
+              if (controller.currentIndex.value == 4) {
+                controller.updateFifthStep();
+              }
+              if (controller.currentIndex.value == 5) {
+                controller.updateSixStep();
+              }
+              if (controller.currentIndex.value == 6) {
+                controller.updateSevenStep();
+              }
+              if (controller.currentIndex.value == 7) {
+                controller.updateEightStep();
+              }
               controller.nextStep();
             },
             child: Container(

@@ -3,14 +3,14 @@ import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/utils/form_validators.dart';
 
-class MonthInputFieldWidget extends StatelessWidget {
+class YearsInputFieldWidget extends StatelessWidget {
   final TextEditingController controller;
   final String fieldTitle;
   final String? hintText;
   final void Function(String)? onChanged;
   final bool isFinancingTerm;
 
-  const MonthInputFieldWidget({
+  const YearsInputFieldWidget({
     Key? key,
     required this.controller,
     required this.fieldTitle,
@@ -50,7 +50,7 @@ class MonthInputFieldWidget extends StatelessWidget {
               width: 64,
               child: Center(
                 child: Text(
-                  'bulan',
+                  'tahun',
                   style: TextStyleConstant.body.copyWith(
                     color: ColorsConstant.grey900,
                     fontWeight: FontWeight.bold,
@@ -61,18 +61,8 @@ class MonthInputFieldWidget extends StatelessWidget {
           ),
           keyboardType: TextInputType.number,
           style: TextStyleConstant.body,
-          validator: (value) {
-            String? numberValidation = FormValidators.validateNumber(value, fieldTitle);
-            if (numberValidation != null) return numberValidation;
-
-            int? intValue = int.tryParse(value!);
-
-            if (isFinancingTerm && (intValue == null || intValue > 72)) {
-              return '$fieldTitle tidak boleh lebih dari 72 bulan (6 tahun)';
-            }
-
-            return null;
-          },
+          validator: (value) =>
+              FormValidators.validateNumber(value, fieldTitle),
         )
       ],
     );

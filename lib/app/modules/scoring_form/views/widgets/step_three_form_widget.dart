@@ -79,7 +79,8 @@ class StepThreeFormWidget extends StatelessWidget {
               ? Column(
                   children: [
                     RupiahInputFieldWidget(
-                      controller: controller.netBusinessIncomeApplicantController,
+                      controller:
+                          controller.netBusinessIncomeApplicantController,
                       fieldTitle: 'Penghasilan Bersih (dari Usaha) Pemohon',
                     ),
                     const SizedBox(height: 16),
@@ -138,12 +139,14 @@ class StepThreeFormWidget extends StatelessWidget {
         MonthInputFieldWidget(
           controller: controller.financingTermController,
           fieldTitle: 'Jangka Waktu Pembiayaan',
+          isFinancingTerm: true,
         ),
         const SizedBox(height: 16),
         PercentInputFieldWidget(
           controller: controller.ekvRateController,
           fieldTitle: 'Ekv. Rate Margin Per-Bulan',
         ),
+        const SizedBox(height: 16),
         DropdownInputFieldWidget(
           fieldTitle: 'Tipe Angsuran',
           hintText: 'Pilih tipe angsuran...',

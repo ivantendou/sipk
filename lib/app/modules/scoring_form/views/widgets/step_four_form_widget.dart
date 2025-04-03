@@ -4,7 +4,11 @@ import 'package:get/get.dart';
 
 import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/modules/scoring_form/controllers/scoring_form_controller.dart';
+import 'package:sipk/app/utils/form_validators.dart';
 import 'package:sipk/app/widgets/dropdown_input_field_widget.dart';
+import 'package:sipk/app/widgets/month_input_field_widget.dart';
+import 'package:sipk/app/widgets/text_form_field_widget.dart';
+import 'package:sipk/app/widgets/years_input_field_widget.dart';
 
 class StepFourFormWidget extends StatelessWidget {
   final ScoringFormController controller;
@@ -37,23 +41,15 @@ class StepFourFormWidget extends StatelessWidget {
                 'LK Inhouse Unaudited',
                 'LK Audited',
               ],
+              value: controller.businessReport.value,
               onChanged: (value) {
-                controller.hasBusiness.value = value!;
+                controller.businessReport.value = value!;
               },
             ),
             const SizedBox(height: 16),
-            DropdownInputFieldWidget(
+            MonthInputFieldWidget(
+              controller: controller.employmentBusinessDurationController,
               fieldTitle: 'Lama Usaha yang Sama',
-              hintText: 'Pilih lama waktu usaha...',
-              items: const [
-                '1 Tahun',
-                '> 1 s.d. 5 Tahun',
-                '> 5 s.d. 10 Tahun',
-                '> 10 Tahun',
-              ],
-              onChanged: (value) {
-                controller.hasBusiness.value = value!;
-              },
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
@@ -66,8 +62,9 @@ class StepFourFormWidget extends StatelessWidget {
                 'Konsinyasi',
                 'Tunai Tanpa Bon',
               ],
+              value: controller.paymentReceiptMethod.value,
               onChanged: (value) {
-                controller.hasBusiness.value = value!;
+                controller.paymentReceiptMethod.value = value!;
               },
             ),
             const SizedBox(height: 16),
@@ -80,8 +77,9 @@ class StepFourFormWidget extends StatelessWidget {
                 'Angsuran',
                 'Milik Sendiri',
               ],
+              value: controller.businessPremisesStatus.value,
               onChanged: (value) {
-                controller.hasBusiness.value = value!;
+                controller.businessPremisesStatus.value = value!;
               },
             ),
             const SizedBox(height: 16),
@@ -94,23 +92,17 @@ class StepFourFormWidget extends StatelessWidget {
                 'Menetap Sewa',
                 'Menetap Milik Sendiri',
               ],
+              value: controller.salesMethod.value,
               onChanged: (value) {
-                controller.hasBusiness.value = value!;
+                controller.salesMethod.value = value!;
               },
             ),
             const SizedBox(height: 16),
-            DropdownInputFieldWidget(
+            TextFormFieldWidget(
+              controller: controller.employeeCountController,
               fieldTitle: 'Jumlah Tenaga Kerja',
-              hintText: 'Pilih jumlah tenaga kerja...',
-              items: const [
-                '<= 2 Orang',
-                '> 2 s.d 5 Orang',
-                '> 5 s.d 10 Orang',
-                '> 10 Orang',
-              ],
-              onChanged: (value) {
-                controller.hasBusiness.value = value!;
-              },
+              validator: FormValidators.validateNumber,
+              keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
@@ -122,8 +114,9 @@ class StepFourFormWidget extends StatelessWidget {
                 'Sederhana - Usaha dan Keluarga Dipisah',
                 'Ada - Teradministrasi Sesuai Standar',
               ],
+              value: controller.businessAdministration.value,
               onChanged: (value) {
-                controller.hasBusiness.value = value!;
+                controller.businessAdministration.value = value!;
               },
             ),
             const SizedBox(height: 16),
@@ -137,8 +130,36 @@ class StepFourFormWidget extends StatelessWidget {
                 '5% > 25% Pengajuan',
                 'Tidak Ada atau < 5% Pengajuan',
               ],
+              value: controller.businessLiabilities.value,
               onChanged: (value) {
-                controller.hasBusiness.value = value!;
+                controller.businessLiabilities.value = value!;
+              },
+            ),
+            const SizedBox(height: 16),
+            DropdownInputFieldWidget(
+              fieldTitle: 'Mutasi Rekening Usaha',
+              hintText: 'Pilih status rekening usaha...',
+              items: const [
+                'Ada',
+                'Tidak Ada',
+              ],
+              value: controller.accountStatement.value,
+              onChanged: (value) {
+                controller.accountStatement.value = value!;
+              },
+            ),
+            const SizedBox(height: 16),
+            DropdownInputFieldWidget(
+              fieldTitle: 'Reputasi di Tempat Usaha',
+              hintText: 'Pilih reputasi...',
+              items: const [
+                'Baik',
+                'Tidak Baik',
+                'Tidak Dikenal',
+              ],
+              value: controller.workplaceReputation.value,
+              onChanged: (value) {
+                controller.workplaceReputation.value = value!;
               },
             ),
             const SizedBox(height: 16),
@@ -165,8 +186,9 @@ class StepFourFormWidget extends StatelessWidget {
                 'Kontrak (PKWT)',
                 'Tetap (PKWTT)',
               ],
+              value: controller.employmentStatus.value,
               onChanged: (value) {
-                controller.hasBusiness.value = value!;
+                controller.employmentStatus.value = value!;
               },
             ),
             const SizedBox(height: 16),
@@ -178,8 +200,9 @@ class StepFourFormWidget extends StatelessWidget {
                 'Cukup Bonafid',
                 'Tidak Bonafid',
               ],
+              value: controller.employerCredibility.value,
               onChanged: (value) {
-                controller.hasBusiness.value = value!;
+                controller.employerCredibility.value = value!;
               },
             ),
             const SizedBox(height: 16),
@@ -190,48 +213,42 @@ class StepFourFormWidget extends StatelessWidget {
                 'Ada',
                 'Tidak Ada',
               ],
+              value: controller.salarySlip.value,
               onChanged: (value) {
-                controller.hasBusiness.value = value!;
+                controller.salarySlip.value = value!;
               },
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Mutasi Rekening Gaji/Usaha',
-              hintText: 'Pilih status rekening gaji/usaha...',
+              fieldTitle: 'Mutasi Rekening Gaji',
+              hintText: 'Pilih status rekening gaji...',
               items: const [
                 'Ada',
                 'Tidak Ada',
               ],
+              value: controller.accountStatement.value,
               onChanged: (value) {
-                controller.hasBusiness.value = value!;
+                controller.accountStatement.value = value!;
               },
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Reputasi di Tempat Bekerja/Berusaha',
+              fieldTitle: 'Reputasi di Tempat Bekerja',
               hintText: 'Pilih reputasi...',
               items: const [
                 'Baik',
                 'Tidak Baik',
                 'Tidak Dikenal',
               ],
+              value: controller.workplaceReputation.value,
               onChanged: (value) {
-                controller.hasBusiness.value = value!;
+                controller.workplaceReputation.value = value!;
               },
             ),
             const SizedBox(height: 16),
-            DropdownInputFieldWidget(
+            YearsInputFieldWidget(
+              controller: controller.employmentBusinessDurationController,
               fieldTitle: 'Lama Bekerja',
-              hintText: 'Pilih waktu lama bekerja...',
-              items: const [
-                '1 Tahun',
-                '> 1 s.d. 5 Tahun',
-                '> 5 s.d. 10 Tahun',
-                '> 10 Tahun',
-              ],
-              onChanged: (value) {
-                controller.hasBusiness.value = value!;
-              },
             ),
             const SizedBox(height: 16),
           ],

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:sipk/app/constants/text_style_constant.dart';
@@ -21,11 +20,11 @@ class StepOneFormWidget extends StatelessWidget {
     DateTime? parseDate(String? dateString) {
       if (dateString == null || dateString.isEmpty) {
         return null;
-      } 
+      }
       try {
-        return DateTime.parse(dateString); 
+        return DateTime.parse(dateString);
       } catch (e) {
-        return null; 
+        return null;
       }
     }
 
@@ -127,7 +126,7 @@ class StepOneFormWidget extends StatelessWidget {
         TextFormFieldWidget(
           controller: controller.homePhoneController,
           fieldTitle: 'Telp Rumah',
-          validator: null,
+          validator: FormValidators.validateNumber,
           keyboardType: TextInputType.number,
         ),
         const SizedBox(height: 16),

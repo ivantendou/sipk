@@ -34,8 +34,9 @@ class StepEightFormWidget extends StatelessWidget {
             '150% <= 125%',
             '>= 150%',
           ],
+          value: controller.applicationCoverage.value,
           onChanged: (value) {
-            controller.selectedOccupation.value = value!;
+            controller.applicationCoverage.value = value!;
           },
         ),
         const SizedBox(height: 16),
@@ -43,11 +44,12 @@ class StepEightFormWidget extends StatelessWidget {
           fieldTitle: 'Asuransi Jaminan Kendaraan',
           hintText: 'Pilih jaminan kendaraan...',
           items: const [
-            'Ada Asuransi'
+            'Ada Asuransi',
             'Tidak Ada Asuransi',
           ],
+          value: controller.vehicleCollateralInsurance.value,
           onChanged: (value) {
-            controller.selectedOccupation.value = value!;
+            controller.vehicleCollateralInsurance.value = value!;
           },
         ),
         const SizedBox(height: 16),
@@ -55,11 +57,12 @@ class StepEightFormWidget extends StatelessWidget {
           fieldTitle: 'Asuransi Jiwa Pemohon',
           hintText: 'Pilih asuransi jiwa pemohon...',
           items: const [
-            'Ada Asuransi'
+            'Ada Asuransi',
             'Tidak Ada Asuransi',
           ],
+          value: controller.applicantLifeInsurance.value,
           onChanged: (value) {
-            controller.selectedOccupation.value = value!;
+            controller.applicantLifeInsurance.value = value!;
           },
         ),
         const SizedBox(height: 16),
@@ -70,8 +73,9 @@ class StepEightFormWidget extends StatelessWidget {
             'Notaril',
             'Tidak Notaril',
           ],
+          value: controller.collateralBinding.value,
           onChanged: (value) {
-            controller.selectedOccupation.value = value!;
+            controller.collateralBinding.value = value!;
           },
         ),
         const SizedBox(height: 16),

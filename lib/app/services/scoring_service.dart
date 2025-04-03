@@ -57,11 +57,6 @@ class ScoringService {
     required bool? isEmployee,
   }) async {
     try {
-      if (kDebugMode) {
-        print("Updating First Step with data:");
-        print("Applicant ID: $applicantId");
-      }
-
       await supabase.from('applicants').update({
         'name': applicantName,
         'ktp_number': ktpNumber,
@@ -87,6 +82,8 @@ class ScoringService {
         'marital_status': maritalStatus,
         'dependents_count': dependentsCount,
         'education_level': educationLevel,
+        'self_employment_type': selfEmploymentType,
+        'employment_type': employmentType,
         'is_employee': isEmployee,
       }).eq('applicant_id', applicantId);
 
@@ -130,7 +127,7 @@ class ScoringService {
       }).eq('applicant_id', applicantId);
     } catch (e) {
       if (kDebugMode) {
-        print("Error in updateSecontStep: $e");
+        print("Error in updateSecondStep: $e");
       }
       throw Exception("Gagal mengupdate data: $e");
     }
@@ -149,7 +146,7 @@ class ScoringService {
     required String? utilityBills,
     required String? ongoingInstallment,
     required String? entertainmentExpense,
-    required String? financingTerm,
+    required double? financingTerm,
     required String? ekvRate,
     required String? installmentType,
   }) async {
@@ -175,7 +172,157 @@ class ScoringService {
       }).eq('applicant_id', applicantId);
     } catch (e) {
       if (kDebugMode) {
-        print("Error in updateSecontStep: $e");
+        print("Error in updateThirdStep: $e");
+      }
+      throw Exception("Gagal mengupdate data: $e");
+    }
+  }
+
+  Future<void> updateFourthStep({
+    required String applicantId,
+    required String? businessReport,
+    required double? employmentBusinessDuration,
+    required String? paymentReceiptMethod,
+    required String? businessPremisesStatus,
+    required String? salesMethod,
+    required String? employeeCount,
+    required String? businessAdministration,
+    required String? businessLiabilities,
+    required String? employmentStatus,
+    required String? employerCredibility,
+    required String? salarySlip,
+    required String? accountStatement,
+    required String? workplaceReputation,
+  }) async {
+    try {
+      await supabase.from('credit_evaluations').update({
+        'business_report': businessReport,
+        'employment_business_duration': employmentBusinessDuration,
+        'payment_receipt_method': paymentReceiptMethod,
+        'business_premises_status': businessPremisesStatus,
+        'sales_method': salesMethod,
+        'employee_count': employeeCount,
+        'business_administration': businessAdministration,
+        'business_liabilities': businessLiabilities,
+        'employment_status': employmentStatus,
+        'employer_credibility': employerCredibility,
+        'salary_slip': salarySlip,
+        'account_statement': accountStatement,
+        'workplace_reputation': workplaceReputation,
+      }).eq('applicant_id', applicantId);
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in updateFourthStep: $e");
+      }
+      throw Exception("Gagal mengupdate data: $e");
+    }
+  }
+
+  Future<void> updateFifthStep({
+    required String applicantId,
+    required double? sales,
+    required double? cogs,
+    required double? dailyLabor,
+    required double? consumption,
+    required double? transportCost,
+    required double? fuel,
+    required double? packaging,
+    required double? depreciation,
+    required double? otherCosts,
+    required double? activeDays,
+    required double? monthlyLabor,
+    required double? rental,
+    required double? assetMaintenance,
+    required double? utilities,
+  }) async {
+    try {
+      await supabase.from('business_financial_details').update({
+        'sales': sales,
+        'cogs': cogs,
+        'daily_labor': dailyLabor,
+        'consumption': consumption,
+        'transport_costs': transportCost,
+        'fuel': fuel,
+        'packaging': packaging,
+        'depreciation': depreciation,
+        'other_costs': otherCosts,
+        'active_days': activeDays,
+        'monthly_labor': monthlyLabor,
+        'rental': rental,
+        'asset_maintenance': assetMaintenance,
+        'utilities': utilities,
+      }).eq('applicant_id', applicantId);
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in updateFifthStep: $e");
+      }
+      throw Exception("Gagal mengupdate data: $e");
+    }
+  }
+
+  Future<void> updateSixStep({
+    required String applicantId,
+    required String? residenceOwnership,
+    required String? residenceDuration,
+    required String? neighborhoodReputation,
+  }) async {
+    try {
+      await supabase.from('credit_evaluations').update({
+        'residence_ownership': residenceOwnership,
+        'residence_duration': residenceDuration,
+        'neighborhood_reputation': neighborhoodReputation,
+      }).eq('applicant_id', applicantId);
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in updateSixStep: $e");
+      }
+      throw Exception("Gagal mengupdate data: $e");
+    }
+  }
+
+  Future<void> updateSevenStep({
+    required String applicantId,
+    required String? bankingRelationship,
+    required String? averageMonthlyBalance,
+    required String? averageTransactionFrequency,
+    required String? applicantCreditQuality,
+    required String? applicantCreditRating,
+    required String? spouseCreditRating,
+  }) async {
+    try {
+      await supabase.from('credit_evaluations').update({
+        'banking_relationship': bankingRelationship,
+        'average_monthly_balance': averageMonthlyBalance,
+        'average_transaction_frequency': averageTransactionFrequency,
+        'applicant_credit_quality': applicantCreditQuality,
+        'applicant_credit_rating': applicantCreditRating,
+        'spouse_credit_rating': spouseCreditRating,
+      }).eq('applicant_id', applicantId);
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in updateSevenStep: $e");
+      }
+      throw Exception("Gagal mengupdate data: $e");
+    }
+  }
+
+  Future<void> updateEightStep({
+    required String applicantId,
+    required String? applicationCoverage,
+    required String? vehicleCollateralInsurance,
+    required String? applicantLifeInsurance,
+    required String? collateralBinding,
+  }) async {
+    try {
+      await supabase.from('credit_evaluations').update({
+        'application_coverage': applicationCoverage,
+        'vehicle_collateral_insurance': vehicleCollateralInsurance,
+        'applicant_life_insurance': applicantLifeInsurance,
+        'collateral_binding': collateralBinding,
+      }).eq('applicant_id', applicantId);
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in updateEightStep: $e");
       }
       throw Exception("Gagal mengupdate data: $e");
     }

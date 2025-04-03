@@ -34,22 +34,19 @@ class StepSevenFormWidget extends StatelessWidget {
             'Debitur Bank  1 < 3 Tahun',
             'Debitur Bank > 3 Tahun',
           ],
+          value: controller.bankingRelationship.value,
           onChanged: (value) {
-            controller.selectedOccupation.value = value!;
+            controller.bankingRelationship.value = value!;
           },
         ),
         const SizedBox(height: 16),
         DropdownInputFieldWidget(
           fieldTitle: 'Saldo Simpanan Rata-Rata Per-Bulan',
           hintText: 'Pilih saldo simpanan rata-rata per-bulan...',
-          items: const [
-            'Tidak Ada',
-            '< 5 Juta',
-            '5 < 10 Juta',
-            '> 10 Juta'
-          ],
+          items: const ['Tidak Ada', '< 5 Juta', '5 < 10 Juta', '> 10 Juta'],
+          value: controller.averageMonthlyBalance.value,
           onChanged: (value) {
-            controller.selectedOccupation.value = value!;
+            controller.averageMonthlyBalance.value = value!;
           },
         ),
         const SizedBox(height: 16),
@@ -62,8 +59,9 @@ class StepSevenFormWidget extends StatelessWidget {
             '3 > 8 kali per-bulan',
             '> 8 kali per-bulan'
           ],
+          value: controller.averageTransactionFrequency.value,
           onChanged: (value) {
-            controller.selectedOccupation.value = value!;
+            controller.averageTransactionFrequency.value = value!;
           },
         ),
         const SizedBox(height: 16),
@@ -76,8 +74,9 @@ class StepSevenFormWidget extends StatelessWidget {
             'Koll 1',
             'Belum Ada Riwayat Kredit',
           ],
+          value: controller.applicantCreditQuality.value,
           onChanged: (value) {
-            controller.selectedOccupation.value = value!;
+            controller.applicantCreditQuality.value = value!;
           },
         ),
         const SizedBox(height: 16),
@@ -91,8 +90,9 @@ class StepSevenFormWidget extends StatelessWidget {
             'G - H (Low Risk)',
             'I - J (Very Low Risk)',
           ],
+          value: controller.applicantCreditRating.value,
           onChanged: (value) {
-            controller.selectedOccupation.value = value!;
+            controller.applicantCreditRating.value = value!;
           },
         ),
         const SizedBox(height: 16),
@@ -107,8 +107,9 @@ class StepSevenFormWidget extends StatelessWidget {
             'G - H (Low Risk)',
             'I - J (Very Low Risk)',
           ],
+          value: controller.spouseCreditRating.value,
           onChanged: (value) {
-            controller.selectedOccupation.value = value!;
+            controller.spouseCreditRating.value = value!;
           },
         ),
         const SizedBox(height: 16),

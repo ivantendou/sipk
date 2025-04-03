@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 
 import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/modules/scoring_form/controllers/scoring_form_controller.dart';
+import 'package:sipk/app/utils/form_validators.dart';
 import 'package:sipk/app/widgets/dropdown_input_field_widget.dart';
+import 'package:sipk/app/widgets/text_form_field_widget.dart';
+import 'package:sipk/app/widgets/years_input_field_widget.dart';
 
 class StepSixFormWidget extends StatelessWidget {
   final ScoringFormController controller;
@@ -34,23 +37,15 @@ class StepSixFormWidget extends StatelessWidget {
             'Milik Sendiri (Angsuran KPR)',
             'Milik Sendiri'
           ],
+          value: controller.residenceOwnership.value,
           onChanged: (value) {
-            controller.selectedOccupation.value = value!;
+            controller.residenceOwnership.value = value!;
           },
         ),
         const SizedBox(height: 16),
-        DropdownInputFieldWidget(
+        YearsInputFieldWidget(
+          controller: controller.residenceDurationController,
           fieldTitle: 'Lama Tinggal/Menetap',
-          hintText: 'Pilih lama tinggal/menetap...',
-          items: const [
-            '0 - 2 Tahun',
-            '> 2 - 5 Tahun',
-            '> 5 - 8 Tahun',
-            '> 8 Tahun',
-          ],
-          onChanged: (value) {
-            controller.selectedOccupation.value = value!;
-          },
         ),
         const SizedBox(height: 16),
         DropdownInputFieldWidget(
@@ -61,8 +56,9 @@ class StepSixFormWidget extends StatelessWidget {
             'Tidak Baik',
             'Tidak Dikenal',
           ],
+          value: controller.neighborhoodReputation.value,
           onChanged: (value) {
-            controller.selectedOccupation.value = value!;
+            controller.neighborhoodReputation.value = value!;
           },
         ),
         const SizedBox(height: 16),
