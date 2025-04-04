@@ -7,7 +7,6 @@ import 'package:sipk/app/modules/ao_home/views/widgets/header_with_see_all_widge
 import 'package:sipk/app/modules/ao_home/views/widgets/monthly_target_card_widget.dart';
 import 'package:sipk/app/modules/ao_home/views/widgets/scoring_draft_card_widget.dart';
 import 'package:sipk/app/modules/ao_home/views/widgets/scoring_result_card_widget.dart';
-import 'package:sipk/app/routes/app_pages.dart';
 import 'package:sipk/app/widgets/custom_icon_button_widget.dart';
 
 import '../controllers/ao_home_controller.dart';

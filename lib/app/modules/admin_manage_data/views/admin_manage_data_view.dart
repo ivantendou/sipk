@@ -33,9 +33,10 @@ class AdminManageDataView extends GetView<AdminManageDataController> {
                       folderName: 'Data Pengguna',
                       onTap: () => Get.toNamed(Routes.ADMIN_MANAGE_USER),
                     ),
-                    SizedBox(width: 16),
+                    const SizedBox(width: 16),
                     FolderCardWidget(
                       folderName: 'Data Skoring Pembiayaan',
+                      onTap: () => Get.toNamed(Routes.SCORING_DATA),
                     ),
                   ],
                 ),

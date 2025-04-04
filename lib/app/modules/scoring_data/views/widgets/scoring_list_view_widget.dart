@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:sipk/app/constants/assets.gen.dart';
@@ -41,12 +38,14 @@ class ScoringListViewWidget extends StatelessWidget {
                 scoringNumber: data.id,
                 telephoneNumber: data.mobilePhone,
                 score: data.creditEvaluations?.first.creditScores?.totalScore
-                    .toString(),
+                        .toString() ??
+                    "",
                 scoringStatus:
                     data.creditEvaluations?.first.creditScores?.isDraft,
                 scoringDate: data
-                    .creditEvaluations?.first.creditScores?.updatedAt
-                    .toString(),
+                        .creditEvaluations?.first.creditScores?.updatedAt
+                        .toString() ??
+                    "2025-04-03 11:57:06.956956+00",
                 isSelected: isSelected,
                 isSelectionMode: controller.isSelectionMode.value,
                 onTap: controller.isSelectionMode.value
@@ -66,6 +65,7 @@ class ScoringListViewWidget extends StatelessWidget {
                 onCheckboxChanged: (value) {
                   controller.toggleSelection(data.id!);
                 },
+                controller: controller,
               );
             });
           },

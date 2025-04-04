@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sipk/app/constants/assets.gen.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/modules/ao_home/views/widgets/credit_score_badge_widget.dart';
+import 'package:sipk/app/modules/scoring_data/controllers/scoring_data_controller.dart';
+import 'package:sipk/app/routes/app_pages.dart';
+import 'package:sipk/app/widgets/custom_button_widget.dart';
 import 'package:sipk/app/widgets/label_value_widget.dart';
 
 class ScoringDataCardWidget extends StatelessWidget {
@@ -11,13 +15,13 @@ class ScoringDataCardWidget extends StatelessWidget {
   final String? applicantName;
   final String? telephoneNumber;
   final String? scoringDate;
-  final String? rating;
   final String? score;
   final bool isSelected;
   final bool isSelectionMode;
   final void Function()? onTap;
   final void Function()? onLongPress;
   final void Function(bool?)? onCheckboxChanged;
+  final ScoringDataController controller;
 
   const ScoringDataCardWidget({
     Key? key,
@@ -26,13 +30,13 @@ class ScoringDataCardWidget extends StatelessWidget {
     this.applicantName,
     this.telephoneNumber,
     this.scoringDate,
-    this.rating,
-    this.score,
+    required this.score,
     required this.isSelected,
     required this.isSelectionMode,
     this.onTap,
     this.onLongPress,
     this.onCheckboxChanged,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -86,22 +90,39 @@ class ScoringDataCardWidget extends StatelessWidget {
                             style: TextStyleConstant.body,
                           ),
                         ),
-                        Row(
-                          children: [
-                            Assets.images.check.svg(
-                              width: 24,
-                              colorFilter: ColorFilter.mode(
-                                  ColorsConstant.black, BlendMode.srcIn),
-                            ),
-                            const SizedBox(width: 4),
-                            // Text(
-                            //   scoringStatus ?? "",
-                            //   style: TextStyleConstant.body.copyWith(
-                            //     fontWeight: FontWeight.bold,
-                            //   ),
-                            // )
-                          ],
-                        ),
+                        scoringStatus!
+                            ? Row(
+                                children: [
+                                  Assets.images.check.svg(
+                                    width: 24,
+                                    colorFilter: const ColorFilter.mode(
+                                        ColorsConstant.black, BlendMode.srcIn),
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    "Skoring Selesai",
+                                    style: TextStyleConstant.body.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Row(
+                                children: [
+                                  Assets.images.cross.svg(
+                                    width: 24,
+                                    colorFilter: const ColorFilter.mode(
+                                        ColorsConstant.black, BlendMode.srcIn),
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    "Skoring Belum Selesai",
+                                    style: TextStyleConstant.body.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
                       ],
                     ),
                   ),
@@ -144,10 +165,17 @@ class ScoringDataCardWidget extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        CreditScoreBadgeWidget(
-                          rating: rating ?? "",
-                          score: score ?? "-",
-                        ),
+                        scoringStatus!
+                            ? CreditScoreBadgeWidget(
+                                score: score ?? "Belum Dinilai",
+                              )
+                            : CustomButtonWidget(
+                                text: "Lengkapi Draf",
+                                width: 120,
+                                onTap: () {
+                                  controller.completeForm(scoringNumber ?? "");
+                                },
+                              ),
                       ],
                     ),
                   ),

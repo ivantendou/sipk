@@ -8,7 +8,6 @@ import '../controllers/bottom_nav_ao_controller.dart';
 
 class BottomNavAoBinding extends Bindings {
   @override
-  @override
   void dependencies() {
     Get.put<BottomNavAoController>(BottomNavAoController());
     Get.put<AoHomeController>(AoHomeController());

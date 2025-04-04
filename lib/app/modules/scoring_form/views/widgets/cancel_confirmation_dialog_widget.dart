@@ -35,10 +35,9 @@ void showCancelConfirmationDialog(ScoringFormController controller) {
       text: 'Simpan',
       width: 120,
       onTap: () {
-        if(controller.currentIndex.value == 0) {
+        if (controller.currentIndex.value == 0) {
           controller.deleteForm();
         }
-        Get.back();
         Get.back();
       },
     ),
@@ -49,6 +48,7 @@ void showCancelConfirmationDialog(ScoringFormController controller) {
         width: 120,
         onTap: () {
           controller.deleteForm();
+          Get.back();
         },
         buttonColor: ColorsConstant.white,
         borderColor: ColorsConstant.primary,

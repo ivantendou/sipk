@@ -56,7 +56,6 @@ class LoginController extends GetxController {
           await prefs.setString('role', role);
           await prefs.setInt(
               'loginTimestamp', DateTime.now().millisecondsSinceEpoch);
-          print(userId);
 
           if (role == 'Admin') {
             Get.offAllNamed(Routes.BOTTOM_NAV_ADMIN);

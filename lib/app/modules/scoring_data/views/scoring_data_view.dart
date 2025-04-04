@@ -22,7 +22,7 @@ class ScoringDataView extends GetView<ScoringDataController> {
         body: ScoringListViewWidget(controller: controller),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            controller.fetchCreditScores(0);
+            controller.createForm();
           },
           backgroundColor: ColorsConstant.primary,
           shape: RoundedRectangleBorder(

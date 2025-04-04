@@ -22,73 +22,69 @@ class ScoringFormView extends GetView<ScoringFormController> {
   const ScoringFormView({super.key});
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          scrolledUnderElevation: 0.0,
-          title: Text(
-            'Data Skoring',
-            style: TextStyleConstant.subHeading2.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          centerTitle: true,
-          leading: IconButton(
-            onPressed: () {
-              if (controller.currentIndex.value == 0 &&
-                  controller.financingType.value == null &&
-                  controller.childCountController.text.isEmpty) {
-                controller.deleteForm();
-                Get.back();
-              } else {
-                showCancelConfirmationDialog(controller);
-              }
-            },
-            icon: SizedBox(
-              height: 24,
-              width: 24,
-              child: Assets.images.arrowLeft.svg(),
-            ),
-          ),
-          bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(1.0),
-            child: Container(
-              color: ColorsConstant.grey500,
-              height: 1.0,
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        scrolledUnderElevation: 0.0,
+        title: Text(
+          'Data Skoring',
+          style: TextStyleConstant.subHeading2.copyWith(
+            fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: ColorsConstant.grey100,
-        body: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    padding:
-                        const EdgeInsets.only(top: 76, left: 16, right: 16),
-                    width: double.infinity,
-                    child: Column(
-                      children: [
-                        Obx(() {
-                          return Form(
-                            key: controller
-                                .formKeys[controller.currentIndex.value],
-                            child: getStepWidget(
-                              controller.currentIndex.value,
-                            ),
-                          );
-                        })
-                      ],
-                    ),
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            if (controller.currentIndex.value == 0 &&
+                controller.financingType.value == null &&
+                controller.childCountController.text.isEmpty) {
+              controller.deleteForm();
+            } else {
+              showCancelConfirmationDialog(controller);
+            }
+          },
+          icon: SizedBox(
+            height: 24,
+            width: 24,
+            child: Assets.images.arrowLeft.svg(),
+          ),
+        ),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(
+            color: ColorsConstant.grey500,
+            height: 1.0,
+          ),
+        ),
+      ),
+      backgroundColor: ColorsConstant.grey100,
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(top: 76, left: 16, right: 16),
+                  width: double.infinity,
+                  child: Column(
+                    children: [
+                      Obx(() {
+                        return Form(
+                          key: controller
+                              .formKeys[controller.currentIndex.value],
+                          child: getStepWidget(
+                            controller.currentIndex.value,
+                          ),
+                        );
+                      })
+                    ],
                   ),
-                  StepNavigationButtonsWidget(controller: controller),
-                ],
-              ),
+                ),
+                StepNavigationButtonsWidget(controller: controller),
+              ],
             ),
-            FormStepProgressWidget(controller: controller),
-          ],
-        ),
+          ),
+          FormStepProgressWidget(controller: controller),
+        ],
       ),
     );
   }

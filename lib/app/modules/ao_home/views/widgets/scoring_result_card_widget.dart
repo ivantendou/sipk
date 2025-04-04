@@ -6,10 +6,10 @@ import 'package:sipk/app/modules/ao_home/views/widgets/credit_score_badge_widget
 import 'package:sipk/app/widgets/label_value_widget.dart';
 
 class ScoringResultCardWidget extends StatelessWidget {
-  final String applicantName;
-  final String scoringNumber;
-  final String rating;
-  final String score;
+  final String? applicantName;
+  final String? scoringNumber;
+  final String? rating;
+  final String? score;
   final void Function()? onTap;
 
   const ScoringResultCardWidget({
@@ -47,20 +47,19 @@ class ScoringResultCardWidget extends StatelessWidget {
                 children: [
                   LabelValueWidget(
                     label: "Nama Pemohon",
-                    value: applicantName,
+                    value: applicantName ?? "",
                   ),
                   const SizedBox(height: 8),
                   LabelValueWidget(
                     label: "Nomor Skoring",
-                    value: scoringNumber,
+                    value: scoringNumber ?? "",
                   ),
                 ],
               ),
             ),
             const SizedBox(width: 8),
             CreditScoreBadgeWidget(
-              rating: rating,
-              score: score,
+              score: score ?? "",
             ),
           ],
         ),

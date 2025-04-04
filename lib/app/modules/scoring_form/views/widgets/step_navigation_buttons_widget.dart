@@ -65,30 +65,6 @@ class StepNavigationButtonsWidget extends StatelessWidget {
           }),
           InkWell(
             onTap: () {
-              if (controller.currentIndex.value == 0) {
-                controller.updateFirstStep();
-              }
-              if (controller.currentIndex.value == 1) {
-                controller.updateSecondStep();
-              }
-              if (controller.currentIndex.value == 2) {
-                controller.updateThirdStep();
-              }
-              if (controller.currentIndex.value == 3) {
-                controller.updateFourthStep();
-              }
-              if (controller.currentIndex.value == 4) {
-                controller.updateFifthStep();
-              }
-              if (controller.currentIndex.value == 5) {
-                controller.updateSixStep();
-              }
-              if (controller.currentIndex.value == 6) {
-                controller.updateSevenStep();
-              }
-              if (controller.currentIndex.value == 7) {
-                controller.updateEightStep();
-              }
               controller.nextStep();
             },
             child: Container(

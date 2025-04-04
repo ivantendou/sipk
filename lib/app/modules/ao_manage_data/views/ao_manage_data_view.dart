@@ -31,7 +31,7 @@ class AoManageDataView extends GetView<AoManageDataController> {
                     Get.toNamed(Routes.SCORING_DATA);
                   },
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 FolderCardWidget(
                   folderName: 'Data Pengajuan Pembiayaan',
                   onTap: () {},

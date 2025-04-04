@@ -156,11 +156,9 @@ class ScoringFormController extends GetxController {
   void deleteForm() async {
     await scoringService.deleteForm(applicantId: applicantId.value);
     Get.back();
-    Get.back();
   }
 
   void updateFirstStep() async {
-    isLoading(true);
     int applicantAge = calculateAge(dateOfBirth.value);
     await scoringService.updateFirstStep(
       applicantId: applicantId.value,
@@ -197,14 +195,9 @@ class ScoringFormController extends GetxController {
       childCount: childCountController.text,
       isEmployee: !isOwnBusiness,
     );
-
-    Future.delayed(const Duration(seconds: 1), () {
-      isLoading(false);
-    });
   }
 
   void updateSecondStep() async {
-    isLoading(true);
     await scoringService.updateSecondStep(
       applicantId: applicantId.value,
       allocation: allocationController.text,
@@ -214,14 +207,9 @@ class ScoringFormController extends GetxController {
       financingIteration: financingIteration.value,
       financingType: financingType.value,
     );
-
-    Future.delayed(const Duration(seconds: 1), () {
-      isLoading(false);
-    });
   }
 
   void updateThirdStep() async {
-    isLoading(true);
     await scoringService.updateThirdStep(
       applicantId: applicantId.value,
       communicationExpense: communicationExpenseController.text,
@@ -244,14 +232,9 @@ class ScoringFormController extends GetxController {
       transportationExpense: transportationExpenseController.text,
       utilityBills: utilityBillsController.text,
     );
-
-    Future.delayed(const Duration(seconds: 1), () {
-      isLoading(false);
-    });
   }
 
   void updateFourthStep() async {
-    isLoading(true);
     await scoringService.updateFourthStep(
       applicantId: applicantId.value,
       accountStatement: accountStatement.value,
@@ -269,14 +252,9 @@ class ScoringFormController extends GetxController {
       salesMethod: salesMethod.value,
       workplaceReputation: workplaceReputation.value,
     );
-
-    Future.delayed(const Duration(seconds: 1), () {
-      isLoading(false);
-    });
   }
 
   void updateFifthStep() async {
-    isLoading(true);
     await scoringService.updateFifthStep(
       applicantId: applicantId.value,
       activeDays: double.tryParse(activeDaysController.text) ?? 0,
@@ -294,28 +272,18 @@ class ScoringFormController extends GetxController {
       transportCost: double.tryParse(transportCostController.text) ?? 0,
       utilities: double.tryParse(utilitiesController.text) ?? 0,
     );
-
-    Future.delayed(const Duration(seconds: 1), () {
-      isLoading(false);
-    });
   }
 
   void updateSixStep() async {
-    isLoading(true);
     await scoringService.updateSixStep(
       applicantId: applicantId.value,
       neighborhoodReputation: neighborhoodReputation.value,
       residenceDuration: residenceDurationController.text,
       residenceOwnership: residenceOwnership.value,
     );
-
-    Future.delayed(const Duration(seconds: 1), () {
-      isLoading(false);
-    });
   }
 
   void updateSevenStep() async {
-    isLoading(true);
     await scoringService.updateSevenStep(
       applicantId: applicantId.value,
       applicantCreditQuality: applicantCreditQuality.value,
@@ -325,15 +293,10 @@ class ScoringFormController extends GetxController {
       bankingRelationship: bankingRelationship.value,
       spouseCreditRating: spouseCreditRating.value,
     );
-
-    Future.delayed(const Duration(seconds: 1), () {
-      isLoading(false);
-    });
   }
 
   void updateEightStep() async {
     try {
-      isLoading(true);
       await scoringService.updateEightStep(
         applicantId: applicantId.value,
         applicantLifeInsurance: applicantLifeInsurance.value,
@@ -345,24 +308,92 @@ class ScoringFormController extends GetxController {
     } catch (e) {
       showScoreCalculationFailedDialog();
     } finally {
-      Future.delayed(const Duration(seconds: 1), () {
-        isLoading(false);
-      });
+      isLoading(false);
     }
   }
 
-  void nextStep() {
-    if (isLoading.value || !formKeys[currentIndex.value].currentState!.validate()) return;
+  void nextStep() async {
+    if (isLoading.value ||
+        !formKeys[currentIndex.value].currentState!.validate()) {
+      if (!formKeys[currentIndex.value].currentState!.validate()) {
+        Get.snackbar(
+          '',
+          '',
+          titleText: Text(
+            'Perhatian',
+            style: TextStyleConstant.body.copyWith(
+                fontWeight: FontWeight.bold, color: ColorsConstant.white),
+          ),
+          messageText: Text(
+            'Harap lengkapi semua field yang diperlukan',
+            style: TextStyleConstant.body.copyWith(
+              color: ColorsConstant.white,
+            ),
+          ),
+          backgroundColor: ColorsConstant.primary,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.all(16),
+        );
+      }
+      return;
+    }
+
     isLoading(true);
 
+    try {
+      switch (currentIndex.value) {
+        case 0:
+          await _executeUpdateStep(updateFirstStep);
+          break;
+        case 1:
+          await _executeUpdateStep(updateSecondStep);
+          break;
+        case 2:
+          await _executeUpdateStep(updateThirdStep);
+          break;
+        case 3:
+          await _executeUpdateStep(updateFourthStep);
+          break;
+        case 4:
+          await _executeUpdateStep(updateFifthStep);
+          break;
+        case 5:
+          await _executeUpdateStep(updateSixStep);
+          break;
+        case 6:
+          await _executeUpdateStep(updateSevenStep);
+          break;
+        case 7:
+          await _executeUpdateStep(updateEightStep);
+          return;
+        default:
+          throw Exception('Invalid step index');
+      }
+
+      _moveToNextStep();
+    } catch (e) {
+      debugPrint('Error in nextStep: $e');
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<void> _executeUpdateStep(Function updateFunction) async {
+    try {
+      await updateFunction();
+    } catch (e) {
+      debugPrint('Error in step update: $e');
+      rethrow;
+    }
+  }
+
+  void _moveToNextStep() {
     stepCompleted[currentIndex.value] = true;
     if (currentIndex.value < 7) {
       currentIndex.value++;
+      update();
     }
-
-    Future.delayed(const Duration(milliseconds: 500), () {
-      isLoading(false);
-    });
   }
 
   void prevStep() {
@@ -435,9 +466,7 @@ class ScoringFormController extends GetxController {
         ),
       ),
       confirm: InkWell(
-        onTap: () {
-          // pindah ke halaman detail
-        },
+        onTap: () {},
         child: Ink(
           width: 180,
           height: 49,

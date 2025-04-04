@@ -16,32 +16,103 @@ class ScoringService {
     required int from,
     required int to,
     required bool ascending,
+    required bool isDraft,
   }) async {
     try {
-      final data = await supabase
+      var query = supabase
           .from('applicants')
           .select('''
-    id, name, mobile_phone,
-    credit_evaluations (
-      credit_scores (
-        total_score,
-        is_draft,
-        updated_at
-      )
-    )
-  ''')
-          .or('name.ilike.%$searchQuery%,ktp_number.ilike.%$searchQuery%,mobile_phone.ilike.%$searchQuery%').eq('account_officer_id', accountOfficerId)
+          id, name, mobile_phone,
+          credit_evaluations (
+            credit_scores (
+              total_score,
+              is_draft,
+              updated_at
+            )
+          )
+        ''')
+          .or('name.ilike.%$searchQuery%,ktp_number.ilike.%$searchQuery%,mobile_phone.ilike.%$searchQuery%')
+          .eq('account_officer_id', accountOfficerId)
           .order('created_at', ascending: ascending)
           .range(from, to);
+
+      final data = await query;
+
+      final filteredData = data.where((applicant) {
+        final evaluations = applicant['credit_evaluations'] as List?;
+        if (evaluations == null || evaluations.isEmpty) return false;
+
+        final scores = evaluations.first['credit_scores'] as Map?;
+        return scores != null && scores['is_draft'] == isDraft;
+      }).toList();
+
       if (kDebugMode) {
-        print(data);
+        print('Fetched ${data.length} records');
+        print('Filtered to ${filteredData.length} records');
+        print(
+            'First item: ${filteredData.isNotEmpty ? filteredData.first : null}');
       }
-      return data.map((json) => CreditScoresModel.fromJson(json)).toList();
+
+      return filteredData
+          .map((json) => CreditScoresModel.fromJson(json))
+          .toList();
     } catch (e) {
       if (kDebugMode) {
-        print("Error in fetchScoring: $e");
+        print('Error in fetchCreditScores: $e');
       }
-      throw Exception("Gagal mendapatkan data: $e");
+      throw Exception('Failed to fetch data: ${e.toString()}');
+    }
+  }
+
+  Future<List<CreditScoresModel>> fetchCreditScoresAdmin({
+    required String searchQuery,
+    required int from,
+    required int to,
+    required bool ascending,
+    required bool isDraft,
+  }) async {
+    try {
+      var query = supabase
+          .from('applicants')
+          .select('''
+          id, name, mobile_phone,
+          credit_evaluations (
+            credit_scores (
+              total_score,
+              is_draft,
+              updated_at
+            )
+          )
+        ''')
+          .or('name.ilike.%$searchQuery%,ktp_number.ilike.%$searchQuery%,mobile_phone.ilike.%$searchQuery%')
+          .order('created_at', ascending: ascending)
+          .range(from, to);
+
+      final data = await query;
+
+      final filteredData = data.where((applicant) {
+        final evaluations = applicant['credit_evaluations'] as List?;
+        if (evaluations == null || evaluations.isEmpty) return false;
+
+        final scores = evaluations.first['credit_scores'] as Map?;
+        return scores != null && scores['is_draft'] == isDraft;
+      }).toList();
+
+      if (kDebugMode) {
+        print('Fetched ${data.length} records');
+        print('Filtered to ${filteredData.length} records');
+        print(
+            'First item: ${filteredData.isNotEmpty ? filteredData.first : null}');
+      }
+
+      return filteredData
+          .map((json) => CreditScoresModel.fromJson(json))
+          .toList();
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error in fetchCreditScores: $e');
+      }
+      throw Exception('Failed to fetch data: ${e.toString()}');
     }
   }
 
@@ -376,7 +447,5 @@ class ScoringService {
     await Future.wait(dataIds.map((dataId) async {
       await supabase.from('applicants').delete().eq('id', dataId);
     }));
-
-    
   }
 }

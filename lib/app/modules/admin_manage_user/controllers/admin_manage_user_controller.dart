@@ -48,7 +48,6 @@ class AdminManageUserController extends GetxController {
 
   void applyFilters() {
     pagingController.refresh();
-    Get.back();
   }
 
   Future<void> fetchUsers(int pageKey) async {
