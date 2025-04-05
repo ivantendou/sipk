@@ -185,6 +185,145 @@ class ScoringService {
     }
   }
 
+  Future<Map<String, dynamic>> fetchSecondStep(String applicantId) async {
+    try {
+      final financingAppData =
+          await supabase.from('financing_applications').select('''
+          financing_type,
+          application_amount,
+          down_payment_pct,
+          down_payment_amt,
+          allocation
+        ''').eq('applicant_id', applicantId).single();
+
+      final creditEvaluationData = await supabase
+          .from('credit_evaluations')
+          .select('financing_iteration')
+          .eq('applicant_id', applicantId)
+          .single();
+
+      return {
+        'financingApplication': financingAppData,
+        'creditEvaluation': creditEvaluationData,
+      };
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in fetchSecondStep: $e");
+      }
+      throw Exception("Gagal mengambil data: $e");
+    }
+  }
+
+  Future<Map<String, dynamic>> fetchThirdStep(String applicantId) async {
+    try {
+      final financialData = await supabase
+          .from('financial_data')
+          .select()
+          .eq('applicant_id', applicantId)
+          .maybeSingle();
+
+      final creditEvaluation = await supabase
+          .from('credit_evaluations')
+          .select('financing_term')
+          .eq('applicant_id', applicantId)
+          .maybeSingle();
+
+      return {
+        "financial_data": financialData,
+        "credit_evaluation": creditEvaluation,
+      };
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in fetchThirdStep: $e");
+      }
+      throw Exception("Gagal mengambil data: $e");
+    }
+  }
+
+  Future<Map<String, dynamic>> fetchFourthStep(String applicantId) async {
+    try {
+      final response = await supabase
+          .from('credit_evaluations')
+          .select()
+          .eq('applicant_id', applicantId)
+          .single();
+
+      return response;
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in fetchFourthStep: $e");
+      }
+      throw Exception("Gagal mengambil data: $e");
+    }
+  }
+
+  Future<Map<String, dynamic>> fetchFifthStep(String applicantId) async {
+    try {
+      final response = await supabase
+          .from('business_financial_details')
+          .select()
+          .eq('applicant_id', applicantId)
+          .single();
+      return response;
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in fetchFifthStep: $e");
+      }
+      throw Exception("Gagal mengambil data: $e");
+    }
+  }
+
+  Future<Map<String, dynamic>> fetchSixthStep(String applicantId) async {
+    try {
+      final response = await supabase
+          .from('credit_evaluations')
+          .select(
+              'residence_ownership, residence_duration, neighborhood_reputation')
+          .eq('applicant_id', applicantId)
+          .single();
+      return response;
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in fetchSixthStep: $e");
+      }
+      throw Exception("Gagal mengambil data: $e");
+    }
+  }
+
+  Future<Map<String, dynamic>> fetchSeventhStep(String applicantId) async {
+    try {
+      final response = await supabase
+          .from('credit_evaluations')
+          .select(
+              'banking_relationship, average_monthly_balance, average_transaction_frequency, applicant_credit_quality, applicant_credit_rating, spouse_credit_rating')
+          .eq('applicant_id', applicantId)
+          .single();
+      return response;
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in fetchSeventhStep: $e");
+      }
+      throw Exception("Gagal mengambil data: $e");
+    }
+  }
+
+  Future<Map<String, dynamic>> fetchEightStep(String applicantId) async {
+    try {
+      final response = await supabase
+          .from('credit_evaluations')
+          .select(
+              'application_coverage, vehicle_collateral_insurance, applicant_life_insurance, collateral_binding')
+          .eq('applicant_id', applicantId)
+          .single();
+      return response;
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in fetchEightStep: $e");
+      }
+      throw Exception("Gagal mengambil data: $e");
+    }
+  }
+
   Future<void> deleteForm({required String applicantId}) async {
     await supabase.from('applicants').delete().eq('id', applicantId);
   }

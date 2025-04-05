@@ -93,22 +93,6 @@ class ScoringDataCardWidget extends StatelessWidget {
                         scoringStatus!
                             ? Row(
                                 children: [
-                                  Assets.images.check.svg(
-                                    width: 24,
-                                    colorFilter: const ColorFilter.mode(
-                                        ColorsConstant.black, BlendMode.srcIn),
-                                  ),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                    "Skoring Selesai",
-                                    style: TextStyleConstant.body.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              )
-                            : Row(
-                                children: [
                                   Assets.images.cross.svg(
                                     width: 24,
                                     colorFilter: const ColorFilter.mode(
@@ -117,6 +101,22 @@ class ScoringDataCardWidget extends StatelessWidget {
                                   const SizedBox(width: 4),
                                   Text(
                                     "Skoring Belum Selesai",
+                                    style: TextStyleConstant.body.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Row(
+                                children: [
+                                  Assets.images.check.svg(
+                                    width: 24,
+                                    colorFilter: const ColorFilter.mode(
+                                        ColorsConstant.black, BlendMode.srcIn),
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    "Skoring Selesai",
                                     style: TextStyleConstant.body.copyWith(
                                       fontWeight: FontWeight.bold,
                                     ),

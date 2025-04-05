@@ -5,7 +5,14 @@ import 'package:sipk/app/constants/assets.gen.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/services/scoring_service.dart';
+import 'package:sipk/models/fetch_eight_step_model.dart';
+import 'package:sipk/models/fetch_fifth_step_model.dart';
 import 'package:sipk/models/fetch_first_step_model.dart';
+import 'package:sipk/models/fetch_fourth_step_model.dart';
+import 'package:sipk/models/fetch_second_step_model.dart';
+import 'package:sipk/models/fetch_seventh_step_model.dart';
+import 'package:sipk/models/fetch_sixth_step_model.dart';
+import 'package:sipk/models/fetch_third_step_model.dart';
 
 class ScoringFormController extends GetxController {
   final ScoringService scoringService = ScoringService();
@@ -167,11 +174,30 @@ class ScoringFormController extends GetxController {
   void fetchScoringSteps() async {
     final firstStepResponse =
         await scoringService.fetchFirstStep(applicantId.value);
+    final secondStepResponse =
+        await scoringService.fetchSecondStep(applicantId.value);
+    final thirdStepResponse =
+        await scoringService.fetchThirdStep(applicantId.value);
+    final fourthStepResponse =
+        await scoringService.fetchFourthStep(applicantId.value);
+    final fifthStepResponse =
+        await scoringService.fetchFifthStep(applicantId.value);
+    final sixthStepResponse =
+        await scoringService.fetchSixthStep(applicantId.value);
+    final seventhStepResponse =
+        await scoringService.fetchSeventhStep(applicantId.value);
+    final eighthStepResponse =
+        await scoringService.fetchEightStep(applicantId.value);
     final firstStepData = FetchFirstStepModel.fromJson(firstStepResponse);
-    print(firstStepData);
-    // debugPrint(jsonEncode(response), wrapWidth: 9999);
+    final secondStepData = FetchSecondStepModel.fromJson(secondStepResponse);
+    final thirdStepData = FetchThirdStepModel.fromJson(thirdStepResponse);
+    final fourthStepData = FetchFourthStepModel.fromJson(fourthStepResponse);
+    final fifthStepData = FetchFifthStepModel.fromJson(fifthStepResponse);
+    final sixthStepData = FetchSixthStepModel.fromJson(sixthStepResponse);
+    final seventhStepData = FetchSeventhStepModel.fromJson(seventhStepResponse);
+    final eighthStepData = FetchEightStepModel.fromJson(eighthStepResponse);
 
-    // --- Applicant ---
+    // First Step Assignment
     applicantNameController.text = firstStepData.applicant?.name ?? '';
     ktpNumberController.text = firstStepData.applicant?.ktpNumber ?? '';
     ktpAddressController.text = firstStepData.applicant?.ktpAddress ?? '';
@@ -190,8 +216,6 @@ class ScoringFormController extends GetxController {
     companyAddressController.text =
         firstStepData.applicant?.companyAddress ?? '';
     bossNameController.text = firstStepData.applicant?.bossName ?? '';
-
-    // --- Credit Evaluation ---
     applicantCategory.value = firstStepData.creditEvaluation?.applicantCategory;
     maritalStatus.value = firstStepData.creditEvaluation?.maritalStatus;
     dependentsCountController.text =
@@ -200,8 +224,6 @@ class ScoringFormController extends GetxController {
     selfEmploymentType.value =
         firstStepData.creditEvaluation?.selfEmploymentType;
     employmentType.value = firstStepData.creditEvaluation?.employmentType;
-
-    // --- Spouse ---
     spouseNameController.text = firstStepData.spouse?.name ?? '';
     spouseKtpNumberController.text = firstStepData.spouse?.ktpNumber ?? '';
     spousePlaceOfBirthController.text =
@@ -211,6 +233,108 @@ class ScoringFormController extends GetxController {
     spouseOccupationController.text = firstStepData.spouse?.occupation ?? '';
     spouseMotherNameController.text = firstStepData.spouse?.motherName ?? '';
     spouseAddressController.text = firstStepData.spouse?.address ?? '';
+
+    // Second Step
+    financingType.value = secondStepData.financingApplication?.financingType;
+    applicationAmountController.text =
+        secondStepData.financingApplication?.applicationAmount?.toString() ??
+            '';
+    downPaymentPctController.text =
+        secondStepData.financingApplication?.downPaymentPct?.toString() ?? '';
+    downPaymentAmtController.text =
+        secondStepData.financingApplication?.downPaymentAmt?.toString() ?? '';
+    allocationController.text =
+        secondStepData.financingApplication?.allocation ?? '';
+    financingIteration.value =
+        secondStepData.creditEvaluation?.financingIteration?.toString();
+
+    // Third Step
+    netSalaryApplicantController.text =
+        thirdStepData.financialData?.netSalaryApplicant?.toString() ?? '';
+    netSalarySpouseController.text =
+        thirdStepData.financialData?.netSalarySpouse?.toString() ?? '';
+    netBusinessIncomeApplicantController.text =
+        thirdStepData.financialData?.netBusinessIncomeApplicant?.toString() ??
+            '';
+    netBusinessIncomeSpouseController.text =
+        thirdStepData.financialData?.netBusinessIncomeSpouse?.toString() ?? '';
+    householdExpenseController.text =
+        thirdStepData.financialData?.householdExpense?.toString() ?? '';
+    transportationExpenseController.text =
+        thirdStepData.financialData?.transportationExpense?.toString() ?? '';
+    communicationExpenseController.text =
+        thirdStepData.financialData?.communicationExpense?.toString() ?? '';
+    educationExpenseController.text =
+        thirdStepData.financialData?.educationExpense?.toString() ?? '';
+    utilityBillsController.text =
+        thirdStepData.financialData?.utilityBills?.toString() ?? '';
+    ongoingInstallmentController.text =
+        thirdStepData.financialData?.ongoingInstallment?.toString() ?? '';
+    entertainmentExpenseController.text =
+        thirdStepData.financialData?.entertainmentSocialExpense?.toString() ??
+            '';
+    ekvRateController.text =
+        thirdStepData.financialData?.ekvRate?.toString() ?? '';
+    installmentType.value = thirdStepData.financialData?.installmentType ?? '';
+    financingTermController.text =
+        thirdStepData.creditEvaluation?.financingTerm?.toString() ?? '';
+
+    // Fourth Step
+    businessReport.value = fourthStepData.businessReport;
+    employmentBusinessDurationController.text =
+        fourthStepData.employmentBusinessDuration?.toString() ?? '';
+    paymentReceiptMethod.value = fourthStepData.paymentReceiptMethod;
+    businessPremisesStatus.value = fourthStepData.businessPremisesStatus;
+    salesMethod.value = fourthStepData.salesMethod;
+    employeeCountController.text =
+        fourthStepData.employeeCount?.toString() ?? '';
+    businessAdministration.value = fourthStepData.businessAdministration;
+    businessLiabilities.value = fourthStepData.businessLiabilities;
+    employmentStatus.value = fourthStepData.employmentStatus;
+    employerCredibility.value = fourthStepData.employerCredibility;
+    salarySlip.value = fourthStepData.salarySlip;
+    accountStatement.value = fourthStepData.accountStatement;
+    workplaceReputation.value = fourthStepData.workplaceReputation;
+
+    // Fifth Step
+    salesController.text = fifthStepData.sales?.toString() ?? '';
+    cogsController.text = fifthStepData.cogs?.toString() ?? '';
+    dailyLaborController.text = fifthStepData.dailyLabor?.toString() ?? '';
+    consumptionController.text = fifthStepData.consumption?.toString() ?? '';
+    transportCostController.text =
+        fifthStepData.transportCosts?.toString() ?? '';
+    fuelController.text = fifthStepData.fuel?.toString() ?? '';
+    packagingController.text = fifthStepData.packaging?.toString() ?? '';
+    depreciationController.text = fifthStepData.depreciation?.toString() ?? '';
+    otherCostsController.text = fifthStepData.otherCosts?.toString() ?? '';
+    activeDaysController.text = fifthStepData.activeDays?.toString() ?? '';
+    monthlyLaborController.text = fifthStepData.monthlyLabor?.toString() ?? '';
+    rentalController.text = fifthStepData.rental?.toString() ?? '';
+    assetMaintenanceController.text =
+        fifthStepData.assetMaintenance?.toString() ?? '';
+    utilitiesController.text = fifthStepData.utilities?.toString() ?? '';
+
+    // Sixth Step
+    residenceOwnership.value = sixthStepData.residenceOwnership;
+    residenceDurationController.text =
+        sixthStepData.residenceDuration.toString();
+    neighborhoodReputation.value = sixthStepData.neighborhoodReputation;
+
+    // Seven Step
+    bankingRelationship.value = seventhStepData.bankingRelationship;
+    averageMonthlyBalance.value = seventhStepData.averageMonthlyBalance;
+    averageTransactionFrequency.value =
+        seventhStepData.averageTransactionFrequency;
+    applicantCreditQuality.value = seventhStepData.applicantCreditQuality;
+    applicantCreditRating.value = seventhStepData.applicantCreditRating;
+    spouseCreditRating.value = seventhStepData.spouseCreditRating;
+
+    // Eight Step
+    applicationCoverage.value = eighthStepData.applicationCoverage;
+    vehicleCollateralInsurance.value =
+        eighthStepData.vehicleCollateralInsurance;
+    applicantLifeInsurance.value = eighthStepData.applicantLifeInsurance;
+    collateralBinding.value = eighthStepData.collateralBinding;
   }
 
   void updateFirstStep() async {
