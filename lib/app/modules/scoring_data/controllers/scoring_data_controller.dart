@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sipk/app/modules/scoring_form/controllers/scoring_form_controller.dart';
 import 'package:sipk/app/routes/app_pages.dart';
 import 'package:sipk/app/services/scoring_service.dart';
 import 'package:sipk/models/credit_scores_model.dart';
@@ -58,17 +57,6 @@ class ScoringDataController extends GetxController {
       Routes.SCORING_FORM,
       arguments: {'applicantId': applicantId},
     );
-  }
-
-  void completeForm(String dataId) async {
-    print(dataId);
-    // final prefs = await SharedPreferences.getInstance();
-    // final userId = prefs.getString('userId');
-    // applicantId = await scoringService.createForm(userId: userId!);
-    // Get.toNamed(
-    //   Routes.SCORING_FORM,
-    //   arguments: {'applicantId': applicantId},
-    // );
   }
 
   Future<void> deleteSelectedData() async {

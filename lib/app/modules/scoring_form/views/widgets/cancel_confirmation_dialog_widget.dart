@@ -18,7 +18,7 @@ void showCancelConfirmationDialog(ScoringFormController controller) {
         style: TextStyleConstant.body.copyWith(color: Colors.black),
         children: [
           const TextSpan(
-              text: 'Apakah Anda ingin menyimpan draf skoring ini? '),
+              text: 'Apakah Anda ingin mengakhiri proses skoring ini? '),
           TextSpan(
             text:
                 'Hanya data pada tahap yang telah selesai yang akan disimpan.',
@@ -32,22 +32,18 @@ void showCancelConfirmationDialog(ScoringFormController controller) {
     ),
     contentPadding: const EdgeInsets.all(16),
     confirm: CustomButtonWidget(
-      text: 'Simpan',
+      text: 'Tidak',
       width: 120,
       onTap: () {
-        if (controller.currentIndex.value == 0) {
-          controller.deleteForm();
-        }
         Get.back();
       },
     ),
     cancel: Padding(
       padding: const EdgeInsets.only(bottom: 4),
       child: CustomButtonWidget(
-        text: 'Hapus',
+        text: 'Ya',
         width: 120,
         onTap: () {
-          controller.deleteForm();
           Get.back();
         },
         buttonColor: ColorsConstant.white,

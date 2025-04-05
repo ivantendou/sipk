@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/modules/scoring_form/controllers/scoring_form_controller.dart';
@@ -28,7 +29,8 @@ class StepOneFormWidget extends StatelessWidget {
       }
     }
 
-    return Column(
+    return Obx((){
+      return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -49,7 +51,7 @@ class StepOneFormWidget extends StatelessWidget {
           hintText: 'Pilih kategori pemohon...',
           value: controller.applicantCategory.value,
           items: const [
-            'Walk-in Customer',
+            'Walk-In Customer',
             'Solisitasi',
             'Referensi dari Anggota',
             'Anggota < dari 1 Tahun',
@@ -283,14 +285,8 @@ class StepOneFormWidget extends StatelessWidget {
           keyboardType: TextInputType.number,
         ),
         const SizedBox(height: 16),
-        TextFormFieldWidget(
-          controller: controller.childCountController,
-          fieldTitle: 'Jumlah Anak',
-          validator: FormValidators.validateNumber,
-          keyboardType: TextInputType.number,
-        ),
-        const SizedBox(height: 16),
       ],
     );
+    });
   }
 }

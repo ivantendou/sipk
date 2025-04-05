@@ -129,6 +129,62 @@ class ScoringService {
     return applicantId.first['id'].toString();
   }
 
+  Future<Map<String, dynamic>> fetchFirstStep(String applicantId) async {
+    try {
+      final applicantData = await supabase.from('applicants').select('''
+          name,
+          ktp_number,
+          residential_address,
+          regency,
+          province,
+          postal_code,
+          place_of_birth,
+          date_of_birth,
+          mother_name,
+          home_phone,
+          mobile_phone,
+          gender,
+          ktp_address,
+          company_name,
+          company_address,
+          boss_name
+        ''').eq('id', applicantId).single();
+
+      final creditEvaluationData =
+          await supabase.from('credit_evaluations').select('''
+          applicant_age,
+          applicant_category,
+          marital_status,
+          dependents_count,
+          education_level,
+          self_employment_type,
+          employment_type,
+          is_employee
+        ''').eq('applicant_id', applicantId).single();
+
+      final spouseData = await supabase.from('spouses').select('''
+          name,
+          ktp_number,
+          place_of_birth,
+          date_of_birth,
+          occupation,
+          mother_name,
+          address
+        ''').eq('applicant_id', applicantId).single();
+
+      return {
+        'applicant': applicantData,
+        'creditEvaluation': creditEvaluationData,
+        'spouse': spouseData,
+      };
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in fetchFirstStep: $e");
+      }
+      throw Exception("Gagal mengambil data: $e");
+    }
+  }
+
   Future<void> deleteForm({required String applicantId}) async {
     await supabase.from('applicants').delete().eq('id', applicantId);
   }
@@ -165,7 +221,6 @@ class ScoringService {
     required String? spouseDateOfBirth,
     required String? spouseOccupation,
     required String? dependentsCount,
-    required String? childCount,
     required bool? isEmployee,
   }) async {
     try {
@@ -293,7 +348,7 @@ class ScoringService {
   Future<void> updateFourthStep({
     required String applicantId,
     required String? businessReport,
-    required double? employmentBusinessDuration,
+    required int? employmentBusinessDuration,
     required String? paymentReceiptMethod,
     required String? businessPremisesStatus,
     required String? salesMethod,

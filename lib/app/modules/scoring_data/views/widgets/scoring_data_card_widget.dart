@@ -166,15 +166,21 @@ class ScoringDataCardWidget extends StatelessWidget {
                         ),
                         const SizedBox(width: 8),
                         scoringStatus!
-                            ? CreditScoreBadgeWidget(
-                                score: score ?? "Belum Dinilai",
-                              )
-                            : CustomButtonWidget(
+                            ? CustomButtonWidget(
                                 text: "Lengkapi Draf",
                                 width: 120,
                                 onTap: () {
-                                  controller.completeForm(scoringNumber ?? "");
+                                  Get.toNamed(
+                                    Routes.SCORING_FORM,
+                                    arguments: {
+                                      'applicantId': scoringNumber,
+                                      'isScoringDraft': true,
+                                    },
+                                  );
                                 },
+                              )
+                            : CreditScoreBadgeWidget(
+                                score: score ?? "Belum Dinilai",
                               ),
                       ],
                     ),

@@ -36,7 +36,7 @@ class ScoringFormView extends GetView<ScoringFormController> {
           onPressed: () {
             if (controller.currentIndex.value == 0 &&
                 controller.financingType.value == null &&
-                controller.childCountController.text.isEmpty) {
+                controller.dependentsCountController.text.isEmpty) {
               controller.deleteForm();
             } else {
               showCancelConfirmationDialog(controller);

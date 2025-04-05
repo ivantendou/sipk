@@ -13,6 +13,7 @@ class CreditScoreBadgeWidget extends StatelessWidget {
   }) : super(key: key);
 
   bool get isUnrated {
+    print(score);
     return score == null ||
         score!.isEmpty ||
         score!.toLowerCase() == 'null' ||
@@ -50,7 +51,7 @@ class CreditScoreBadgeWidget extends StatelessWidget {
   String get category {
     if (isUnrated) return 'Belum Dinilai';
 
-    final scoreNum = int.tryParse(score!) ?? 0;
+    final scoreNum = double.tryParse(score!) ?? 0.0;
 
     if (scoreNum >= 98) return 'Outstanding';
     if (scoreNum >= 89) return 'Strong';
@@ -147,7 +148,7 @@ class CreditScoreBadgeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final displayText = isUnrated ? 'Belum Dinilai' : 'Skor: ${score!}/100';
+    final displayText = isUnrated ? 'Belum Dinilai' : 'Skor: ${score!}';
 
     return Column(
       children: [

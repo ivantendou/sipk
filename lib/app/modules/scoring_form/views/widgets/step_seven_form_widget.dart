@@ -54,7 +54,7 @@ class StepSevenFormWidget extends StatelessWidget {
           fieldTitle: 'Frekwensi Rata-Rata Mutasi Simpanan',
           hintText: 'Pilih frekwensi rata-rata mutasi simpanan...',
           items: const [
-            'Tidak ada',
+            'Tidak Ada',
             '< 3 kali per-bulan',
             '3 > 8 kali per-bulan',
             '> 8 kali per-bulan'

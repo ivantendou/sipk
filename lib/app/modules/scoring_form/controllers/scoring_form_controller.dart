@@ -5,11 +5,13 @@ import 'package:sipk/app/constants/assets.gen.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/services/scoring_service.dart';
+import 'package:sipk/models/fetch_first_step_model.dart';
 
 class ScoringFormController extends GetxController {
   final ScoringService scoringService = ScoringService();
   var applicantId = ''.obs;
   var currentIndex = 0.obs;
+  final isScoringDraft = false.obs;
   var stepCompleted = List.generate(8, (index) => false).obs;
   final formKeys = List.generate(8, (index) => GlobalKey<FormState>());
 
@@ -50,7 +52,6 @@ class ScoringFormController extends GetxController {
       TextEditingController();
   final TextEditingController dependentsCountController =
       TextEditingController();
-  final TextEditingController childCountController = TextEditingController();
 
   final Rxn<String> financingType = Rxn<String>();
   final Rxn<String> financingIteration = Rxn<String>();
@@ -93,7 +94,8 @@ class ScoringFormController extends GetxController {
   final Rxn<String> paymentReceiptMethod = Rxn<String>();
   final Rxn<String> businessPremisesStatus = Rxn<String>();
   final Rxn<String> salesMethod = Rxn<String>();
-  final TextEditingController employeeCountController = TextEditingController();
+  final TextEditingController employeeCountController =
+      TextEditingController(text: "1");
   final Rxn<String> businessAdministration = Rxn<String>();
   final Rxn<String> businessLiabilities = Rxn<String>();
   final Rxn<String> employmentStatus = Rxn<String>();
@@ -148,14 +150,67 @@ class ScoringFormController extends GetxController {
   void onInit() {
     super.onInit();
     final args = Get.arguments;
-    if (args != null) {
+    if (args is Map<String, dynamic>) {
       applicantId.value = args['applicantId'] ?? '';
+      isScoringDraft.value = args['isScoringDraft'] ?? false;
+    }
+    if (isScoringDraft.value == true) {
+      fetchScoringSteps();
     }
   }
 
   void deleteForm() async {
     await scoringService.deleteForm(applicantId: applicantId.value);
     Get.back();
+  }
+
+  void fetchScoringSteps() async {
+    final firstStepResponse =
+        await scoringService.fetchFirstStep(applicantId.value);
+    final firstStepData = FetchFirstStepModel.fromJson(firstStepResponse);
+    print(firstStepData);
+    // debugPrint(jsonEncode(response), wrapWidth: 9999);
+
+    // --- Applicant ---
+    applicantNameController.text = firstStepData.applicant?.name ?? '';
+    ktpNumberController.text = firstStepData.applicant?.ktpNumber ?? '';
+    ktpAddressController.text = firstStepData.applicant?.ktpAddress ?? '';
+    residentialAddressController.text =
+        firstStepData.applicant?.residentialAddress ?? '';
+    regencyController.text = firstStepData.applicant?.regency ?? '';
+    provinceController.text = firstStepData.applicant?.province ?? '';
+    postalCodeController.text = firstStepData.applicant?.postalCode ?? '';
+    placeOfBirthController.text = firstStepData.applicant?.placeOfBirth ?? '';
+    dateOfBirth.value = firstStepData.applicant?.dateOfBirth?.toIso8601String();
+    motherNameController.text = firstStepData.applicant?.motherName ?? '';
+    homePhoneController.text = firstStepData.applicant?.homePhone ?? '';
+    mobilePhoneController.text = firstStepData.applicant?.mobilePhone ?? '';
+    gender.value = firstStepData.applicant?.gender;
+    companyNameController.text = firstStepData.applicant?.companyName ?? '';
+    companyAddressController.text =
+        firstStepData.applicant?.companyAddress ?? '';
+    bossNameController.text = firstStepData.applicant?.bossName ?? '';
+
+    // --- Credit Evaluation ---
+    applicantCategory.value = firstStepData.creditEvaluation?.applicantCategory;
+    maritalStatus.value = firstStepData.creditEvaluation?.maritalStatus;
+    dependentsCountController.text =
+        firstStepData.creditEvaluation?.dependentsCount?.toString() ?? '';
+    educationLevel.value = firstStepData.creditEvaluation?.educationLevel;
+    selfEmploymentType.value =
+        firstStepData.creditEvaluation?.selfEmploymentType;
+    employmentType.value = firstStepData.creditEvaluation?.employmentType;
+
+    // --- Spouse ---
+    spouseNameController.text = firstStepData.spouse?.name ?? '';
+    spouseKtpNumberController.text = firstStepData.spouse?.ktpNumber ?? '';
+    spousePlaceOfBirthController.text =
+        firstStepData.spouse?.placeOfBirth ?? '';
+    spouseDateOfBirth.value =
+        firstStepData.spouse?.dateOfBirth?.toIso8601String();
+    spouseOccupationController.text = firstStepData.spouse?.occupation ?? '';
+    spouseMotherNameController.text = firstStepData.spouse?.motherName ?? '';
+    spouseAddressController.text = firstStepData.spouse?.address ?? '';
   }
 
   void updateFirstStep() async {
@@ -192,7 +247,6 @@ class ScoringFormController extends GetxController {
       spouseDateOfBirth: spouseDateOfBirth.value,
       spouseOccupation: spouseOccupationController.text,
       dependentsCount: dependentsCountController.text,
-      childCount: childCountController.text,
       isEmployee: !isOwnBusiness,
     );
   }
@@ -216,7 +270,7 @@ class ScoringFormController extends GetxController {
       educationExpense: educationExpenseController.text,
       ekvRate: ekvRateController.text,
       entertainmentExpense: entertainmentExpenseController.text,
-      financingTerm: double.tryParse(financingTermController.text)! / 12,
+      financingTerm: double.tryParse(financingTermController.text),
       householdExpense: householdExpenseController.text,
       installmentType: installmentType.value,
       netBusinessIncomeApplicant:
@@ -245,7 +299,7 @@ class ScoringFormController extends GetxController {
       employeeCount: employeeCountController.text,
       employerCredibility: employerCredibility.value,
       employmentBusinessDuration:
-          double.tryParse(employmentBusinessDurationController.text)! / 12,
+          int.tryParse(employmentBusinessDurationController.text),
       employmentStatus: employmentStatus.value,
       paymentReceiptMethod: paymentReceiptMethod.value,
       salarySlip: salarySlip.value,
