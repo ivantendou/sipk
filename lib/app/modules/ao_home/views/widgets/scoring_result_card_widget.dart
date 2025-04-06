@@ -8,7 +8,6 @@ import 'package:sipk/app/widgets/label_value_widget.dart';
 class ScoringResultCardWidget extends StatelessWidget {
   final String? applicantName;
   final String? scoringNumber;
-  final String? rating;
   final String? score;
   final void Function()? onTap;
 
@@ -16,7 +15,6 @@ class ScoringResultCardWidget extends StatelessWidget {
     Key? key,
     required this.applicantName,
     required this.scoringNumber,
-    required this.rating,
     required this.score,
     required this.onTap,
   }) : super(key: key);

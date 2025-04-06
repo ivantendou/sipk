@@ -31,6 +31,7 @@ dependencies:
   infinite_scroll_pagination: 4.0.0
   shared_preferences: ^2.5.2
   intl: ^0.20.2
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

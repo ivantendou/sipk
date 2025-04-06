@@ -86,7 +86,7 @@ class ScoringDataCardWidget extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            "SKORING-${scoringNumber ?? ""}",
+                            scoringNumber ?? "",
                             style: TextStyleConstant.body,
                           ),
                         ),
