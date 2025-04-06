@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -172,169 +173,213 @@ class ScoringFormController extends GetxController {
   }
 
   void fetchScoringSteps() async {
-    final firstStepResponse =
-        await scoringService.fetchFirstStep(applicantId.value);
-    final secondStepResponse =
-        await scoringService.fetchSecondStep(applicantId.value);
-    final thirdStepResponse =
-        await scoringService.fetchThirdStep(applicantId.value);
-    final fourthStepResponse =
-        await scoringService.fetchFourthStep(applicantId.value);
-    final fifthStepResponse =
-        await scoringService.fetchFifthStep(applicantId.value);
-    final sixthStepResponse =
-        await scoringService.fetchSixthStep(applicantId.value);
-    final seventhStepResponse =
-        await scoringService.fetchSeventhStep(applicantId.value);
-    final eighthStepResponse =
-        await scoringService.fetchEightStep(applicantId.value);
-    final firstStepData = FetchFirstStepModel.fromJson(firstStepResponse);
-    final secondStepData = FetchSecondStepModel.fromJson(secondStepResponse);
-    final thirdStepData = FetchThirdStepModel.fromJson(thirdStepResponse);
-    final fourthStepData = FetchFourthStepModel.fromJson(fourthStepResponse);
-    final fifthStepData = FetchFifthStepModel.fromJson(fifthStepResponse);
-    final sixthStepData = FetchSixthStepModel.fromJson(sixthStepResponse);
-    final seventhStepData = FetchSeventhStepModel.fromJson(seventhStepResponse);
-    final eighthStepData = FetchEightStepModel.fromJson(eighthStepResponse);
+    try {
+      isLoading(true);
+      // First Step
+      final firstStepResponse =
+          await scoringService.fetchFirstStep(applicantId.value);
+      final firstStepData = FetchFirstStepModel.fromJson(firstStepResponse);
+      // First Step Assignment
+      applicantNameController.text = firstStepData.applicant?.name ?? '';
+      ktpNumberController.text = firstStepData.applicant?.ktpNumber ?? '';
+      ktpAddressController.text = firstStepData.applicant?.ktpAddress ?? '';
+      residentialAddressController.text =
+          firstStepData.applicant?.residentialAddress ?? '';
+      regencyController.text = firstStepData.applicant?.regency ?? '';
+      provinceController.text = firstStepData.applicant?.province ?? '';
+      postalCodeController.text = firstStepData.applicant?.postalCode ?? '';
+      placeOfBirthController.text = firstStepData.applicant?.placeOfBirth ?? '';
+      dateOfBirth.value =
+          firstStepData.applicant?.dateOfBirth?.toIso8601String();
+      motherNameController.text = firstStepData.applicant?.motherName ?? '';
+      homePhoneController.text = firstStepData.applicant?.homePhone ?? '';
+      mobilePhoneController.text = firstStepData.applicant?.mobilePhone ?? '';
+      gender.value = firstStepData.applicant?.gender;
+      companyNameController.text = firstStepData.applicant?.companyName ?? '';
+      companyAddressController.text =
+          firstStepData.applicant?.companyAddress ?? '';
+      bossNameController.text = firstStepData.applicant?.bossName ?? '';
+      applicantCategory.value =
+          firstStepData.creditEvaluation?.applicantCategory;
+      maritalStatus.value = firstStepData.creditEvaluation?.maritalStatus;
+      dependentsCountController.text =
+          firstStepData.creditEvaluation?.dependentsCount?.toString() ?? '';
+      educationLevel.value = firstStepData.creditEvaluation?.educationLevel;
+      selfEmploymentType.value =
+          firstStepData.creditEvaluation?.selfEmploymentType;
+      employmentType.value = firstStepData.creditEvaluation?.employmentType;
+      spouseNameController.text = firstStepData.spouse?.name ?? '';
+      spouseKtpNumberController.text = firstStepData.spouse?.ktpNumber ?? '';
+      spousePlaceOfBirthController.text =
+          firstStepData.spouse?.placeOfBirth ?? '';
+      spouseDateOfBirth.value =
+          firstStepData.spouse?.dateOfBirth?.toIso8601String();
+      spouseOccupationController.text = firstStepData.spouse?.occupation ?? '';
+      spouseMotherNameController.text = firstStepData.spouse?.motherName ?? '';
+      spouseAddressController.text = firstStepData.spouse?.address ?? '';
+      await Future.delayed(const Duration(milliseconds: 200));
+      if (_validateStep(0)) currentIndex.value++;
 
-    // First Step Assignment
-    applicantNameController.text = firstStepData.applicant?.name ?? '';
-    ktpNumberController.text = firstStepData.applicant?.ktpNumber ?? '';
-    ktpAddressController.text = firstStepData.applicant?.ktpAddress ?? '';
-    residentialAddressController.text =
-        firstStepData.applicant?.residentialAddress ?? '';
-    regencyController.text = firstStepData.applicant?.regency ?? '';
-    provinceController.text = firstStepData.applicant?.province ?? '';
-    postalCodeController.text = firstStepData.applicant?.postalCode ?? '';
-    placeOfBirthController.text = firstStepData.applicant?.placeOfBirth ?? '';
-    dateOfBirth.value = firstStepData.applicant?.dateOfBirth?.toIso8601String();
-    motherNameController.text = firstStepData.applicant?.motherName ?? '';
-    homePhoneController.text = firstStepData.applicant?.homePhone ?? '';
-    mobilePhoneController.text = firstStepData.applicant?.mobilePhone ?? '';
-    gender.value = firstStepData.applicant?.gender;
-    companyNameController.text = firstStepData.applicant?.companyName ?? '';
-    companyAddressController.text =
-        firstStepData.applicant?.companyAddress ?? '';
-    bossNameController.text = firstStepData.applicant?.bossName ?? '';
-    applicantCategory.value = firstStepData.creditEvaluation?.applicantCategory;
-    maritalStatus.value = firstStepData.creditEvaluation?.maritalStatus;
-    dependentsCountController.text =
-        firstStepData.creditEvaluation?.dependentsCount?.toString() ?? '';
-    educationLevel.value = firstStepData.creditEvaluation?.educationLevel;
-    selfEmploymentType.value =
-        firstStepData.creditEvaluation?.selfEmploymentType;
-    employmentType.value = firstStepData.creditEvaluation?.employmentType;
-    spouseNameController.text = firstStepData.spouse?.name ?? '';
-    spouseKtpNumberController.text = firstStepData.spouse?.ktpNumber ?? '';
-    spousePlaceOfBirthController.text =
-        firstStepData.spouse?.placeOfBirth ?? '';
-    spouseDateOfBirth.value =
-        firstStepData.spouse?.dateOfBirth?.toIso8601String();
-    spouseOccupationController.text = firstStepData.spouse?.occupation ?? '';
-    spouseMotherNameController.text = firstStepData.spouse?.motherName ?? '';
-    spouseAddressController.text = firstStepData.spouse?.address ?? '';
+      // Second Step
+      final secondStepResponse =
+          await scoringService.fetchSecondStep(applicantId.value);
+      final secondStepData = FetchSecondStepModel.fromJson(secondStepResponse);
+      financingType.value = secondStepData.financingApplication?.financingType;
+      applicationAmountController.text =
+          secondStepData.financingApplication?.applicationAmount?.toString() ??
+              '';
+      downPaymentPctController.text =
+          secondStepData.financingApplication?.downPaymentPct?.toString() ?? '';
+      downPaymentAmtController.text =
+          secondStepData.financingApplication?.downPaymentAmt?.toString() ?? '';
+      allocationController.text =
+          secondStepData.financingApplication?.allocation ?? '';
+      financingIteration.value =
+          secondStepData.creditEvaluation?.financingIteration?.toString();
+      await Future.delayed(const Duration(milliseconds: 200));
+      if (_validateStep(1)) currentIndex.value++;
 
-    // Second Step
-    financingType.value = secondStepData.financingApplication?.financingType;
-    applicationAmountController.text =
-        secondStepData.financingApplication?.applicationAmount?.toString() ??
-            '';
-    downPaymentPctController.text =
-        secondStepData.financingApplication?.downPaymentPct?.toString() ?? '';
-    downPaymentAmtController.text =
-        secondStepData.financingApplication?.downPaymentAmt?.toString() ?? '';
-    allocationController.text =
-        secondStepData.financingApplication?.allocation ?? '';
-    financingIteration.value =
-        secondStepData.creditEvaluation?.financingIteration?.toString();
+      // Third Step
+      final thirdStepResponse =
+          await scoringService.fetchThirdStep(applicantId.value);
+      final thirdStepData = FetchThirdStepModel.fromJson(thirdStepResponse);
+      netSalaryApplicantController.text =
+          thirdStepData.financialData?.netSalaryApplicant?.toString() ?? '';
+      netSalarySpouseController.text =
+          thirdStepData.financialData?.netSalarySpouse?.toString() ?? '';
+      netBusinessIncomeApplicantController.text =
+          thirdStepData.financialData?.netBusinessIncomeApplicant?.toString() ??
+              '';
+      netBusinessIncomeSpouseController.text =
+          thirdStepData.financialData?.netBusinessIncomeSpouse?.toString() ??
+              '';
+      householdExpenseController.text =
+          thirdStepData.financialData?.householdExpense?.toString() ?? '';
+      transportationExpenseController.text =
+          thirdStepData.financialData?.transportationExpense?.toString() ?? '';
+      communicationExpenseController.text =
+          thirdStepData.financialData?.communicationExpense?.toString() ?? '';
+      educationExpenseController.text =
+          thirdStepData.financialData?.educationExpense?.toString() ?? '';
+      utilityBillsController.text =
+          thirdStepData.financialData?.utilityBills?.toString() ?? '';
+      ongoingInstallmentController.text =
+          thirdStepData.financialData?.ongoingInstallment?.toString() ?? '';
+      entertainmentExpenseController.text =
+          thirdStepData.financialData?.entertainmentSocialExpense?.toString() ??
+              '';
+      ekvRateController.text =
+          thirdStepData.financialData?.ekvRate?.toString() ?? '';
+      installmentType.value =
+          thirdStepData.financialData?.installmentType ?? '';
+      financingTermController.text =
+          thirdStepData.creditEvaluation?.financingTerm?.toString() ?? '';
+      await Future.delayed(const Duration(milliseconds: 200));
+      if (_validateStep(2)) currentIndex.value++;
 
-    // Third Step
-    netSalaryApplicantController.text =
-        thirdStepData.financialData?.netSalaryApplicant?.toString() ?? '';
-    netSalarySpouseController.text =
-        thirdStepData.financialData?.netSalarySpouse?.toString() ?? '';
-    netBusinessIncomeApplicantController.text =
-        thirdStepData.financialData?.netBusinessIncomeApplicant?.toString() ??
-            '';
-    netBusinessIncomeSpouseController.text =
-        thirdStepData.financialData?.netBusinessIncomeSpouse?.toString() ?? '';
-    householdExpenseController.text =
-        thirdStepData.financialData?.householdExpense?.toString() ?? '';
-    transportationExpenseController.text =
-        thirdStepData.financialData?.transportationExpense?.toString() ?? '';
-    communicationExpenseController.text =
-        thirdStepData.financialData?.communicationExpense?.toString() ?? '';
-    educationExpenseController.text =
-        thirdStepData.financialData?.educationExpense?.toString() ?? '';
-    utilityBillsController.text =
-        thirdStepData.financialData?.utilityBills?.toString() ?? '';
-    ongoingInstallmentController.text =
-        thirdStepData.financialData?.ongoingInstallment?.toString() ?? '';
-    entertainmentExpenseController.text =
-        thirdStepData.financialData?.entertainmentSocialExpense?.toString() ??
-            '';
-    ekvRateController.text =
-        thirdStepData.financialData?.ekvRate?.toString() ?? '';
-    installmentType.value = thirdStepData.financialData?.installmentType ?? '';
-    financingTermController.text =
-        thirdStepData.creditEvaluation?.financingTerm?.toString() ?? '';
+      // Fourth Step
+      final fourthStepResponse =
+          await scoringService.fetchFourthStep(applicantId.value);
+      final fourthStepData = FetchFourthStepModel.fromJson(fourthStepResponse);
+      businessReport.value = fourthStepData.businessReport;
+      employmentBusinessDurationController.text =
+          fourthStepData.employmentBusinessDuration?.toString() ?? '';
+      paymentReceiptMethod.value = fourthStepData.paymentReceiptMethod;
+      businessPremisesStatus.value = fourthStepData.businessPremisesStatus;
+      salesMethod.value = fourthStepData.salesMethod;
+      employeeCountController.text =
+          fourthStepData.employeeCount?.toString() ?? '';
+      businessAdministration.value = fourthStepData.businessAdministration;
+      businessLiabilities.value = fourthStepData.businessLiabilities;
+      employmentStatus.value = fourthStepData.employmentStatus;
+      employerCredibility.value = fourthStepData.employerCredibility;
+      salarySlip.value = fourthStepData.salarySlip;
+      accountStatement.value = fourthStepData.accountStatement;
+      workplaceReputation.value = fourthStepData.workplaceReputation;
+      await Future.delayed(const Duration(milliseconds: 200));
+      if (_validateStep(3)) currentIndex.value++;
 
-    // Fourth Step
-    businessReport.value = fourthStepData.businessReport;
-    employmentBusinessDurationController.text =
-        fourthStepData.employmentBusinessDuration?.toString() ?? '';
-    paymentReceiptMethod.value = fourthStepData.paymentReceiptMethod;
-    businessPremisesStatus.value = fourthStepData.businessPremisesStatus;
-    salesMethod.value = fourthStepData.salesMethod;
-    employeeCountController.text =
-        fourthStepData.employeeCount?.toString() ?? '';
-    businessAdministration.value = fourthStepData.businessAdministration;
-    businessLiabilities.value = fourthStepData.businessLiabilities;
-    employmentStatus.value = fourthStepData.employmentStatus;
-    employerCredibility.value = fourthStepData.employerCredibility;
-    salarySlip.value = fourthStepData.salarySlip;
-    accountStatement.value = fourthStepData.accountStatement;
-    workplaceReputation.value = fourthStepData.workplaceReputation;
+      // Fifth Step
+      final fifthStepResponse =
+          await scoringService.fetchFifthStep(applicantId.value);
+      final fifthStepData = FetchFifthStepModel.fromJson(fifthStepResponse);
+      salesController.text = fifthStepData.sales?.toString() ?? '';
+      cogsController.text = fifthStepData.cogs?.toString() ?? '';
+      dailyLaborController.text = fifthStepData.dailyLabor?.toString() ?? '';
+      consumptionController.text = fifthStepData.consumption?.toString() ?? '';
+      transportCostController.text =
+          fifthStepData.transportCosts?.toString() ?? '';
+      fuelController.text = fifthStepData.fuel?.toString() ?? '';
+      packagingController.text = fifthStepData.packaging?.toString() ?? '';
+      depreciationController.text =
+          fifthStepData.depreciation?.toString() ?? '';
+      otherCostsController.text = fifthStepData.otherCosts?.toString() ?? '';
+      activeDaysController.text = fifthStepData.activeDays?.toString() ?? '';
+      monthlyLaborController.text =
+          fifthStepData.monthlyLabor?.toString() ?? '';
+      rentalController.text = fifthStepData.rental?.toString() ?? '';
+      assetMaintenanceController.text =
+          fifthStepData.assetMaintenance?.toString() ?? '';
+      utilitiesController.text = fifthStepData.utilities?.toString() ?? '';
+      await Future.delayed(const Duration(milliseconds: 200));
+      if (_validateStep(4)) currentIndex.value++;
 
-    // Fifth Step
-    salesController.text = fifthStepData.sales?.toString() ?? '';
-    cogsController.text = fifthStepData.cogs?.toString() ?? '';
-    dailyLaborController.text = fifthStepData.dailyLabor?.toString() ?? '';
-    consumptionController.text = fifthStepData.consumption?.toString() ?? '';
-    transportCostController.text =
-        fifthStepData.transportCosts?.toString() ?? '';
-    fuelController.text = fifthStepData.fuel?.toString() ?? '';
-    packagingController.text = fifthStepData.packaging?.toString() ?? '';
-    depreciationController.text = fifthStepData.depreciation?.toString() ?? '';
-    otherCostsController.text = fifthStepData.otherCosts?.toString() ?? '';
-    activeDaysController.text = fifthStepData.activeDays?.toString() ?? '';
-    monthlyLaborController.text = fifthStepData.monthlyLabor?.toString() ?? '';
-    rentalController.text = fifthStepData.rental?.toString() ?? '';
-    assetMaintenanceController.text =
-        fifthStepData.assetMaintenance?.toString() ?? '';
-    utilitiesController.text = fifthStepData.utilities?.toString() ?? '';
+      // Sixth Step
+      final sixthStepResponse =
+          await scoringService.fetchSixthStep(applicantId.value);
+      final sixthStepData = FetchSixthStepModel.fromJson(sixthStepResponse);
+      residenceOwnership.value = sixthStepData.residenceOwnership;
+      residenceDurationController.text =
+          sixthStepData.residenceDuration.toString();
+      neighborhoodReputation.value = sixthStepData.neighborhoodReputation;
+      await Future.delayed(const Duration(milliseconds: 200));
+      if (_validateStep(5)) currentIndex.value++;
 
-    // Sixth Step
-    residenceOwnership.value = sixthStepData.residenceOwnership;
-    residenceDurationController.text =
-        sixthStepData.residenceDuration.toString();
-    neighborhoodReputation.value = sixthStepData.neighborhoodReputation;
+      // Seventh Step
+      final seventhStepResponse =
+          await scoringService.fetchSeventhStep(applicantId.value);
+      final seventhStepData =
+          FetchSeventhStepModel.fromJson(seventhStepResponse);
+      bankingRelationship.value = seventhStepData.bankingRelationship;
+      averageMonthlyBalance.value = seventhStepData.averageMonthlyBalance;
+      averageTransactionFrequency.value =
+          seventhStepData.averageTransactionFrequency;
+      applicantCreditQuality.value = seventhStepData.applicantCreditQuality;
+      applicantCreditRating.value = seventhStepData.applicantCreditRating;
+      spouseCreditRating.value = seventhStepData.spouseCreditRating;
+      await Future.delayed(const Duration(milliseconds: 200));
+      if (_validateStep(6)) currentIndex.value++;
 
-    // Seven Step
-    bankingRelationship.value = seventhStepData.bankingRelationship;
-    averageMonthlyBalance.value = seventhStepData.averageMonthlyBalance;
-    averageTransactionFrequency.value =
-        seventhStepData.averageTransactionFrequency;
-    applicantCreditQuality.value = seventhStepData.applicantCreditQuality;
-    applicantCreditRating.value = seventhStepData.applicantCreditRating;
-    spouseCreditRating.value = seventhStepData.spouseCreditRating;
+      // Eighth Step
+      final eighthStepResponse =
+          await scoringService.fetchEightStep(applicantId.value);
+      final eighthStepData = FetchEightStepModel.fromJson(eighthStepResponse);
+      applicationCoverage.value = eighthStepData.applicationCoverage;
+      vehicleCollateralInsurance.value =
+          eighthStepData.vehicleCollateralInsurance;
+      applicantLifeInsurance.value = eighthStepData.applicantLifeInsurance;
+      collateralBinding.value = eighthStepData.collateralBinding;
+    } catch (e) {
+      showFetchDataFailed();
+      if (kDebugMode) {
+        print('Error fetching scoring steps: $e');
+      }
+    } finally {
+      isLoading(false);
+    }
+  }
 
-    // Eight Step
-    applicationCoverage.value = eighthStepData.applicationCoverage;
-    vehicleCollateralInsurance.value =
-        eighthStepData.vehicleCollateralInsurance;
-    applicantLifeInsurance.value = eighthStepData.applicantLifeInsurance;
-    collateralBinding.value = eighthStepData.collateralBinding;
+  bool _validateStep(int stepIndex) {
+    final form = formKeys[stepIndex].currentState;
+    if (form == null) return false;
+    final isValid = form.validate();
+    if (!isValid) {
+      currentIndex.value = stepIndex;
+      return false;
+    } else {
+      stepCompleted[stepIndex] = true;
+      return true;
+    }
   }
 
   void updateFirstStep() async {
@@ -685,10 +730,10 @@ class ScoringFormController extends GetxController {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
-            Assets.images.success.svg(
+            Assets.images.errorImage.svg(
               width: 80,
               colorFilter: const ColorFilter.mode(
-                Colors.green,
+                Colors.red,
                 BlendMode.srcIn,
               ),
             ),
@@ -703,6 +748,68 @@ class ScoringFormController extends GetxController {
       ),
       confirm: InkWell(
         onTap: () => Get.back(),
+        child: Ink(
+          width: 180,
+          height: 49,
+          decoration: const BoxDecoration(
+            color: ColorsConstant.primary,
+            borderRadius: BorderRadius.all(
+              Radius.circular(8),
+            ),
+          ),
+          child: Center(
+            child: Text(
+              'OK',
+              style: TextStyleConstant.subHeading2.copyWith(
+                color: ColorsConstant.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void showFetchDataFailed() {
+    Get.defaultDialog(
+      barrierDismissible: false,
+      backgroundColor: ColorsConstant.white,
+      contentPadding: const EdgeInsets.only(bottom: 24),
+      title: 'Perhitungan Skor Gagal',
+      titleStyle: TextStyleConstant.subHeading.copyWith(
+        fontWeight: FontWeight.bold,
+      ),
+      titlePadding: const EdgeInsets.only(top: 24, bottom: 16),
+      onWillPop: () async {
+        Get.back();
+        return true;
+      },
+      content: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          children: [
+            Assets.images.errorImage.svg(
+              width: 80,
+              colorFilter: const ColorFilter.mode(
+                Colors.red,
+                BlendMode.srcIn,
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Terjadi kesalahan saat mengambil data skoring. Periksa internet Anda dan coba lagi',
+              style: TextStyleConstant.body,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+      confirm: InkWell(
+        onTap: () {
+          Get.back();
+          Get.back();
+        },
         child: Ink(
           width: 180,
           height: 49,

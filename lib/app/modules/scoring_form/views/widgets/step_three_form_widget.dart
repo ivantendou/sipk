@@ -19,32 +19,32 @@ class StepThreeFormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Data Terkait Penghasilan',
-          style: TextStyleConstant.subHeading2.copyWith(
-            fontWeight: FontWeight.bold,
+    return Obx(() {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Data Terkait Penghasilan',
+            style: TextStyleConstant.subHeading2.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        const SizedBox(height: 16),
-        RupiahInputFieldWidget(
-          controller: controller.netSalaryApplicantController,
-          fieldTitle: 'Penghasilan Bersih (dari Gaji) Pemohon',
-        ),
-        const SizedBox(height: 16),
-        RupiahInputFieldWidget(
-          controller: controller.netSalarySpouseController,
-          fieldTitle: 'Penghasilan Bersih (dari Gaji) Pasangan',
-        ),
-        const SizedBox(height: 16),
-        const Text(
-          'Apakah pemohon memiliki usaha mandiri?',
-          style: TextStyleConstant.body,
-        ),
-        Obx(
-          () => Row(
+          const SizedBox(height: 16),
+          RupiahInputFieldWidget(
+            controller: controller.netSalaryApplicantController,
+            fieldTitle: 'Penghasilan Bersih (dari Gaji) Pemohon',
+          ),
+          const SizedBox(height: 16),
+          RupiahInputFieldWidget(
+            controller: controller.netSalarySpouseController,
+            fieldTitle: 'Penghasilan Bersih (dari Gaji) Pasangan',
+          ),
+          const SizedBox(height: 16),
+          const Text(
+            'Apakah pemohon memiliki usaha mandiri?',
+            style: TextStyleConstant.body,
+          ),
+          Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Radio<String>(
@@ -72,10 +72,8 @@ class StepThreeFormWidget extends StatelessWidget {
               ),
             ],
           ),
-        ),
-        const SizedBox(height: 16),
-        Obx(() {
-          return controller.hasBusiness == Rx<String>('Ya')
+          const SizedBox(height: 16),
+          controller.hasBusiness == Rx<String>('Ya')
               ? Column(
                   children: [
                     RupiahInputFieldWidget(
@@ -90,77 +88,77 @@ class StepThreeFormWidget extends StatelessWidget {
                     ),
                   ],
                 )
-              : const SizedBox();
-        }),
-        const SizedBox(height: 16),
-        Text(
-          'Data Terkait Pengeluaran',
-          style: TextStyleConstant.subHeading2.copyWith(
-            fontWeight: FontWeight.bold,
+              : const SizedBox(),
+          const SizedBox(height: 16),
+          Text(
+            'Data Terkait Pengeluaran',
+            style: TextStyleConstant.subHeading2.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        const SizedBox(height: 16),
-        RupiahInputFieldWidget(
-          controller: controller.householdExpenseController,
-          fieldTitle: 'Biaya Konsumsi Rumah Tangga',
-        ),
-        const SizedBox(height: 16),
-        RupiahInputFieldWidget(
-          controller: controller.transportationExpenseController,
-          fieldTitle: 'Biaya Transportasi',
-        ),
-        const SizedBox(height: 16),
-        RupiahInputFieldWidget(
-          controller: controller.communicationExpenseController,
-          fieldTitle: 'Biaya Komunikasi',
-        ),
-        const SizedBox(height: 16),
-        RupiahInputFieldWidget(
-          controller: controller.educationExpenseController,
-          fieldTitle: 'Biaya Pendidikan',
-        ),
-        const SizedBox(height: 16),
-        RupiahInputFieldWidget(
-          controller: controller.utilityBillsController,
-          fieldTitle:
-              'Tagihan Rekening Rumah - Listrik, Air, Sewa, Internet, dll',
-        ),
-        const SizedBox(height: 16),
-        RupiahInputFieldWidget(
-          controller: controller.ongoingInstallmentController,
-          fieldTitle: 'Jumlah Angsuran Berjalan',
-        ),
-        const SizedBox(height: 16),
-        RupiahInputFieldWidget(
-          controller: controller.entertainmentExpenseController,
-          fieldTitle: 'Biaya Hiburan dan Sosial',
-        ),
-        const SizedBox(height: 16),
-        MonthInputFieldWidget(
-          controller: controller.financingTermController,
-          fieldTitle: 'Jangka Waktu Pembiayaan',
-          isFinancingTerm: true,
-        ),
-        const SizedBox(height: 16),
-        PercentInputFieldWidget(
-          controller: controller.ekvRateController,
-          fieldTitle: 'Ekv. Rate Margin Per-Bulan',
-        ),
-        const SizedBox(height: 16),
-        DropdownInputFieldWidget(
-          fieldTitle: 'Tipe Angsuran',
-          hintText: 'Pilih tipe angsuran...',
-          items: const [
-            'Flat',
-            'Anuitas',
-          ],
-          value: controller.installmentType.value,
-          onChanged: (value) {
-            controller.installmentType.value = value!;
-          },
-        ),
-        const SizedBox(height: 16),
-      ],
-    );
+          const SizedBox(height: 16),
+          RupiahInputFieldWidget(
+            controller: controller.householdExpenseController,
+            fieldTitle: 'Biaya Konsumsi Rumah Tangga',
+          ),
+          const SizedBox(height: 16),
+          RupiahInputFieldWidget(
+            controller: controller.transportationExpenseController,
+            fieldTitle: 'Biaya Transportasi',
+          ),
+          const SizedBox(height: 16),
+          RupiahInputFieldWidget(
+            controller: controller.communicationExpenseController,
+            fieldTitle: 'Biaya Komunikasi',
+          ),
+          const SizedBox(height: 16),
+          RupiahInputFieldWidget(
+            controller: controller.educationExpenseController,
+            fieldTitle: 'Biaya Pendidikan',
+          ),
+          const SizedBox(height: 16),
+          RupiahInputFieldWidget(
+            controller: controller.utilityBillsController,
+            fieldTitle:
+                'Tagihan Rekening Rumah - Listrik, Air, Sewa, Internet, dll',
+          ),
+          const SizedBox(height: 16),
+          RupiahInputFieldWidget(
+            controller: controller.ongoingInstallmentController,
+            fieldTitle: 'Jumlah Angsuran Berjalan',
+          ),
+          const SizedBox(height: 16),
+          RupiahInputFieldWidget(
+            controller: controller.entertainmentExpenseController,
+            fieldTitle: 'Biaya Hiburan dan Sosial',
+          ),
+          const SizedBox(height: 16),
+          MonthInputFieldWidget(
+            controller: controller.financingTermController,
+            fieldTitle: 'Jangka Waktu Pembiayaan',
+            isFinancingTerm: true,
+          ),
+          const SizedBox(height: 16),
+          PercentInputFieldWidget(
+            controller: controller.ekvRateController,
+            fieldTitle: 'Ekv. Rate Margin Per-Bulan',
+          ),
+          const SizedBox(height: 16),
+          DropdownInputFieldWidget(
+            fieldTitle: 'Tipe Angsuran',
+            hintText: 'Pilih tipe angsuran...',
+            items: const [
+              'Flat',
+              'Anuitas',
+            ],
+            value: controller.installmentType.value,
+            onChanged: (value) {
+              controller.installmentType.value = value!;
+            },
+          ),
+          const SizedBox(height: 16),
+        ],
+      );
+    });
   }
 }

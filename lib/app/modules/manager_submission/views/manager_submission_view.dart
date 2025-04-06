@@ -12,20 +12,20 @@ class ManagerSubmissionView extends GetView<ManagerSubmissionController> {
   const ManagerSubmissionView({super.key});
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       child: Scaffold(
-        appBar: AoHomeAppbarWidget(),
+        appBar: const AoHomeAppbarWidget(),
         body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
-                SizedBox(height: 16),
-                SearchTextFieldWidget(hintText: 'Cari Data Pengajuan'),
-                SizedBox(height: 16),
-                HeaderWithSeeAllWidget(title: 'Pengajuan Terbaru'),
-                SizedBox(height: 8),
-                SubmissionDataCardWidget(),
+                const SizedBox(height: 16),
+                const SearchTextFieldWidget(hintText: 'Cari Data Pengajuan'),
+                const SizedBox(height: 16),
+                HeaderWithSeeAllWidget(title: 'Pengajuan Terbaru',onTap: (){},),
+                const SizedBox(height: 8),
+                const SubmissionDataCardWidget(),
               ],
             ),
           ),

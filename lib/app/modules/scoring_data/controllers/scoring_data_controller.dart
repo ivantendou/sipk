@@ -91,6 +91,7 @@ class ScoringDataController extends GetxController {
       final prefs = await SharedPreferences.getInstance();
       final userId = prefs.getString('userId');
       final role = prefs.getString('role');
+      showDraftsOnly.value = Get.arguments ?? false;
 
       final isAscending = selectedSortOption.value == 'terlama';
 

@@ -39,7 +39,7 @@ class AoHomeController extends GetxController {
         accountOfficerId: userId ?? "",
         from: 0,
         to: 10,
-        ascending: true,
+        ascending: false,
         isDraft: true,
       ));
 
@@ -48,7 +48,7 @@ class AoHomeController extends GetxController {
         accountOfficerId: userId ?? "",
         from: 0,
         to: 10,
-        ascending: true,
+        ascending: false,
         isDraft: false,
       ));
     } catch (e) {

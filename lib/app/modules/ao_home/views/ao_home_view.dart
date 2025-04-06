@@ -40,7 +40,15 @@ class AoHomeView extends GetView<AoHomeController> {
                   },
                 ),
                 const SizedBox(height: 20),
-                const HeaderWithSeeAllWidget(title: "Draf Skoring"),
+                HeaderWithSeeAllWidget(
+                  title: "Draf Skoring",
+                  onTap: () {
+                    Get.toNamed(
+                      Routes.SCORING_DATA,
+                      arguments: true,
+                    );
+                  },
+                ),
                 const SizedBox(height: 8),
                 Obx(() {
                   if (controller.isLoading.value) {
@@ -85,7 +93,15 @@ class AoHomeView extends GetView<AoHomeController> {
                   }
                 }),
                 const SizedBox(height: 16),
-                const HeaderWithSeeAllWidget(title: "Hasil Skoring"),
+                HeaderWithSeeAllWidget(
+                  title: "Hasil Skoring",
+                  onTap: () {
+                    Get.toNamed(
+                      Routes.SCORING_DATA,
+                      arguments: false,
+                    );
+                  },
+                ),
                 const SizedBox(height: 8),
                 Obx(() {
                   if (controller.isLoading.value) {

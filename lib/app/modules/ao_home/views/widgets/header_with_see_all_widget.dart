@@ -7,10 +7,12 @@ import 'package:sipk/app/constants/text_style_constant.dart';
 
 class HeaderWithSeeAllWidget extends StatelessWidget {
   final String title;
+  final void Function()? onTap;
 
   const HeaderWithSeeAllWidget({
     Key? key,
     required this.title,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -25,18 +27,27 @@ class HeaderWithSeeAllWidget extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              'Lihat Semua',
-              style: TextStyleConstant.caption.copyWith(
-                color: ColorsConstant.primary,
+        Material(
+          child: InkWell(
+            onTap: onTap,
+            borderRadius: BorderRadius.circular(8),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Lihat Semua',
+                    style: TextStyleConstant.caption.copyWith(
+                      color: ColorsConstant.primary,
+                    ),
+                  ),
+                  const SizedBox(width: 6),
+                  Assets.images.chevronRight.svg(width: 14),
+                ],
               ),
             ),
-            const SizedBox(width: 6),
-            Assets.images.chevronRight.svg(width: 14),
-          ],
+          ),
         ),
       ],
     );
