@@ -22,6 +22,8 @@ class ScoringDataController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    final bool isDraftOnly = Get.arguments ?? false;
+    showDraftsOnly.value = isDraftOnly;
     debounce(
       searchQuery,
       (_) {
@@ -91,7 +93,6 @@ class ScoringDataController extends GetxController {
       final prefs = await SharedPreferences.getInstance();
       final userId = prefs.getString('userId');
       final role = prefs.getString('role');
-      showDraftsOnly.value = Get.arguments ?? false;
 
       final isAscending = selectedSortOption.value == 'terlama';
 
@@ -102,11 +103,12 @@ class ScoringDataController extends GetxController {
 
       if (role == 'Admin') {
         fetchedData = await scoringService.fetchCreditScoresAdmin(
-            searchQuery: searchQuery.value,
-            from: from,
-            to: to,
-            ascending: isAscending,
-            isDraft: showDraftsOnly.value);
+          searchQuery: searchQuery.value,
+          from: from,
+          to: to,
+          ascending: isAscending,
+          isDraft: showDraftsOnly.value,
+        );
       } else {
         fetchedData = await scoringService.fetchCreditScores(
             searchQuery: searchQuery.value,
