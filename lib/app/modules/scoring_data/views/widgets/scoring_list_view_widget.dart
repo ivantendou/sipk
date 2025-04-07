@@ -52,8 +52,8 @@ class ScoringListViewWidget extends StatelessWidget {
                     ? () => controller.toggleSelection(data.id!)
                     : () {
                         Get.toNamed(
-                          Routes.MANAGER_SCORING_DETAIL,
-                          arguments: {'dataId': data.id},
+                          Routes.AO_SCORING_DETAIL,
+                          parameters: {'id': data.id.toString()},
                         );
                       },
                 onLongPress: () {

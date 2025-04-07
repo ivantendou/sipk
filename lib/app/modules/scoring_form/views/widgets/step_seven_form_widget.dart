@@ -36,7 +36,14 @@ class StepSevenFormWidget extends StatelessWidget {
               'Debitur Bank  1 < 3 Tahun',
               'Debitur Bank > 3 Tahun',
             ],
-            value: controller.bankingRelationship.value,
+            value: [
+              'Belum Pernah',
+              'Debitur Bank < 1 Tahun',
+              'Debitur Bank  1 < 3 Tahun',
+              'Debitur Bank > 3 Tahun'
+            ].contains(controller.bankingRelationship.value)
+                ? controller.bankingRelationship.value
+                : null,
             onChanged: (value) {
               controller.bankingRelationship.value = value!;
             },
@@ -46,7 +53,10 @@ class StepSevenFormWidget extends StatelessWidget {
             fieldTitle: 'Saldo Simpanan Rata-Rata Per-Bulan',
             hintText: 'Pilih saldo simpanan rata-rata per-bulan...',
             items: const ['Tidak Ada', '< 5 Juta', '5 < 10 Juta', '> 10 Juta'],
-            value: controller.averageMonthlyBalance.value,
+            value: ['Tidak Ada', '< 5 Juta', '5 < 10 Juta', '> 10 Juta']
+                    .contains(controller.averageMonthlyBalance.value)
+                ? controller.averageMonthlyBalance.value
+                : null,
             onChanged: (value) {
               controller.averageMonthlyBalance.value = value!;
             },
@@ -59,9 +69,16 @@ class StepSevenFormWidget extends StatelessWidget {
               'Tidak Ada',
               '< 3 kali per-bulan',
               '3 > 8 kali per-bulan',
-              '> 8 kali per-bulan'
+              '> 8 kali per-bulan',
             ],
-            value: controller.averageTransactionFrequency.value,
+            value: [
+              'Tidak Ada',
+              '< 3 kali per-bulan',
+              '3 > 8 kali per-bulan',
+              '> 8 kali per-bulan'
+            ].contains(controller.averageTransactionFrequency.value)
+                ? controller.averageTransactionFrequency.value
+                : null,
             onChanged: (value) {
               controller.averageTransactionFrequency.value = value!;
             },
@@ -76,7 +93,14 @@ class StepSevenFormWidget extends StatelessWidget {
               'Koll 1',
               'Belum Ada Riwayat Kredit',
             ],
-            value: controller.applicantCreditQuality.value,
+            value: [
+              'Koll 3 s.d. 5',
+              'Koll 2',
+              'Koll 1',
+              'Belum Ada Riwayat Kredit'
+            ].contains(controller.applicantCreditQuality.value)
+                ? controller.applicantCreditQuality.value
+                : null,
             onChanged: (value) {
               controller.applicantCreditQuality.value = value!;
             },
@@ -92,7 +116,15 @@ class StepSevenFormWidget extends StatelessWidget {
               'G - H (Low Risk)',
               'I - J (Very Low Risk)',
             ],
-            value: controller.applicantCreditRating.value,
+            value: [
+              'A - B (Very High Risk)',
+              'C - D (High Risk)',
+              'E - F (Medium Risk)',
+              'G - H (Low Risk)',
+              'I - J (Very Low Risk)'
+            ].contains(controller.applicantCreditRating.value)
+                ? controller.applicantCreditRating.value
+                : null,
             onChanged: (value) {
               controller.applicantCreditRating.value = value!;
             },
@@ -109,7 +141,16 @@ class StepSevenFormWidget extends StatelessWidget {
               'G - H (Low Risk)',
               'I - J (Very Low Risk)',
             ],
-            value: controller.spouseCreditRating.value,
+            value: [
+              'Tidak Ada',
+              'A - B (Very High Risk)',
+              'C - D (High Risk)',
+              'E - F (Medium Risk)',
+              'G - H (Low Risk)',
+              'I - J (Very Low Risk)'
+            ].contains(controller.spouseCreditRating.value)
+                ? controller.spouseCreditRating.value
+                : null,
             onChanged: (value) {
               controller.spouseCreditRating.value = value!;
             },

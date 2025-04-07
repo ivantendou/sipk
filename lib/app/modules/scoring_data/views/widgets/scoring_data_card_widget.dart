@@ -158,7 +158,7 @@ class ScoringDataCardWidget extends StatelessWidget {
                               ),
                               const SizedBox(height: 8),
                               LabelValueWidget(
-                                label: "Tanggal Pembuatan Form",
+                                label: "Tanggal Skoring",
                                 value: formatDate(scoringDate),
                               ),
                             ],

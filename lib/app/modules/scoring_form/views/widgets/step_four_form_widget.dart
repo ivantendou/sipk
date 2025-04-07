@@ -41,7 +41,14 @@ class StepFourFormWidget extends StatelessWidget {
                 'LK Inhouse Unaudited',
                 'LK Audited',
               ],
-              value: controller.businessReport.value,
+              value: [
+                'Tidak Ada',
+                'Catatan Jual Beli',
+                'LK Inhouse Unaudited',
+                'LK Audited'
+              ].contains(controller.businessReport.value)
+                  ? controller.businessReport.value
+                  : null,
               onChanged: (value) {
                 controller.businessReport.value = value!;
               },
@@ -62,7 +69,15 @@ class StepFourFormWidget extends StatelessWidget {
                 'Konsinyasi',
                 'Tunai Tanpa Bon',
               ],
-              value: controller.paymentReceiptMethod.value,
+              value: [
+                'Tunai Tagihan Bon 1 sd 3',
+                'Piutang > 30 Hari',
+                'Piutang < 30 Hari',
+                'Konsinyasi',
+                'Tunai Tanpa Bon'
+              ].contains(controller.paymentReceiptMethod.value)
+                  ? controller.paymentReceiptMethod.value
+                  : null,
               onChanged: (value) {
                 controller.paymentReceiptMethod.value = value!;
               },
@@ -77,7 +92,10 @@ class StepFourFormWidget extends StatelessWidget {
                 'Angsuran',
                 'Milik Sendiri',
               ],
-              value: controller.businessPremisesStatus.value,
+              value: ['Pinjam Pakai', 'Sewa', 'Angsuran', 'Milik Sendiri']
+                      .contains(controller.businessPremisesStatus.value)
+                  ? controller.businessPremisesStatus.value
+                  : null,
               onChanged: (value) {
                 controller.businessPremisesStatus.value = value!;
               },
@@ -92,7 +110,14 @@ class StepFourFormWidget extends StatelessWidget {
                 'Menetap Sewa',
                 'Menetap Milik Sendiri',
               ],
-              value: controller.salesMethod.value,
+              value: [
+                'Dijajakan Keliling',
+                'Mangkal Kaki Lima',
+                'Menetap Sewa',
+                'Menetap Milik Sendiri'
+              ].contains(controller.salesMethod.value)
+                  ? controller.salesMethod.value
+                  : null,
               onChanged: (value) {
                 controller.salesMethod.value = value!;
               },
@@ -114,7 +139,14 @@ class StepFourFormWidget extends StatelessWidget {
                 'Sederhana - Usaha dan Keluarga Dipisah',
                 'Ada - Teradministrasi Sesuai Standar',
               ],
-              value: controller.businessAdministration.value,
+              value: [
+                'Tidak Ada',
+                'Sederhana - Usaha dan Keluarga Bercampur',
+                'Sederhana - Usaha dan Keluarga Dipisah',
+                'Ada - Teradministrasi Sesuai Standar'
+              ].contains(controller.businessAdministration.value)
+                  ? controller.businessAdministration.value
+                  : null,
               onChanged: (value) {
                 controller.businessAdministration.value = value!;
               },
@@ -130,7 +162,15 @@ class StepFourFormWidget extends StatelessWidget {
                 '5% > 25% Pengajuan',
                 'Tidak Ada atau < 5% Pengajuan',
               ],
-              value: controller.businessLiabilities.value,
+              value: [
+                '> Pengajuan',
+                '50% > 100% Pengajuan',
+                '25% > 50% Pengajuan',
+                '5% > 25% Pengajuan',
+                'Tidak Ada atau < 5% Pengajuan'
+              ].contains(controller.businessLiabilities.value)
+                  ? controller.businessLiabilities.value
+                  : null,
               onChanged: (value) {
                 controller.businessLiabilities.value = value!;
               },
@@ -143,7 +183,10 @@ class StepFourFormWidget extends StatelessWidget {
                 'Ada',
                 'Tidak Ada',
               ],
-              value: controller.accountStatement.value,
+              value: ['Ada', 'Tidak Ada']
+                      .contains(controller.accountStatement.value)
+                  ? controller.accountStatement.value
+                  : null,
               onChanged: (value) {
                 controller.accountStatement.value = value!;
               },
@@ -157,7 +200,10 @@ class StepFourFormWidget extends StatelessWidget {
                 'Tidak Baik',
                 'Tidak Dikenal',
               ],
-              value: controller.workplaceReputation.value,
+              value: ['Baik', 'Tidak Baik', 'Tidak Dikenal']
+                      .contains(controller.workplaceReputation.value)
+                  ? controller.workplaceReputation.value
+                  : null,
               onChanged: (value) {
                 controller.workplaceReputation.value = value!;
               },
@@ -186,7 +232,15 @@ class StepFourFormWidget extends StatelessWidget {
                 'Kontrak (PKWT)',
                 'Tetap (PKWTT)',
               ],
-              value: controller.employmentStatus.value,
+              value: [
+                'Freelance',
+                'Part Time',
+                'Honorer',
+                'Kontrak (PKWT)',
+                'Tetap (PKWTT)'
+              ].contains(controller.employmentStatus.value)
+                  ? controller.employmentStatus.value
+                  : null,
               onChanged: (value) {
                 controller.employmentStatus.value = value!;
               },
@@ -200,7 +254,10 @@ class StepFourFormWidget extends StatelessWidget {
                 'Cukup Bonafid',
                 'Tidak Bonafid',
               ],
-              value: controller.employerCredibility.value,
+              value: ['Bonafid', 'Cukup Bonafid', 'Tidak Bonafid']
+                      .contains(controller.employerCredibility.value)
+                  ? controller.employerCredibility.value
+                  : null,
               onChanged: (value) {
                 controller.employerCredibility.value = value!;
               },
@@ -213,7 +270,9 @@ class StepFourFormWidget extends StatelessWidget {
                 'Ada',
                 'Tidak Ada',
               ],
-              value: controller.salarySlip.value,
+              value: ['Ada', 'Tidak Ada'].contains(controller.salarySlip.value)
+                  ? controller.salarySlip.value
+                  : null,
               onChanged: (value) {
                 controller.salarySlip.value = value!;
               },
@@ -226,7 +285,10 @@ class StepFourFormWidget extends StatelessWidget {
                 'Ada',
                 'Tidak Ada',
               ],
-              value: controller.accountStatement.value,
+              value: ['Ada', 'Tidak Ada']
+                      .contains(controller.accountStatement.value)
+                  ? controller.accountStatement.value
+                  : null,
               onChanged: (value) {
                 controller.accountStatement.value = value!;
               },
@@ -240,7 +302,10 @@ class StepFourFormWidget extends StatelessWidget {
                 'Tidak Baik',
                 'Tidak Dikenal',
               ],
-              value: controller.workplaceReputation.value,
+              value: ['Baik', 'Tidak Baik', 'Tidak Dikenal']
+                      .contains(controller.workplaceReputation.value)
+                  ? controller.workplaceReputation.value
+                  : null,
               onChanged: (value) {
                 controller.workplaceReputation.value = value!;
               },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:sipk/app/constants/assets.gen.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
@@ -68,13 +69,24 @@ class ScoringFormView extends GetView<ScoringFormController> {
                   child: Column(
                     children: [
                       Obx(() {
-                        return Form(
-                          key: controller
-                              .formKeys[controller.currentIndex.value],
-                          child: getStepWidget(
-                            controller.currentIndex.value,
-                          ),
-                        );
+                        return controller.isLoading.value
+                            ? Center(
+                                child: SizedBox(
+                                  width: 48,
+                                  child: LoadingIndicator(
+                                    indicatorType: Indicator.ballBeat,
+                                    strokeWidth: 4.0,
+                                    colors: [Theme.of(context).primaryColor],
+                                  ),
+                                ),
+                              )
+                            : Form(
+                                key: controller
+                                    .formKeys[controller.currentIndex.value],
+                                child: getStepWidget(
+                                  controller.currentIndex.value,
+                                ),
+                              );
                       })
                     ],
                   ),

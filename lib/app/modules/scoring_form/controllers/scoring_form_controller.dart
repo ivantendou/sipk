@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:sipk/app/constants/assets.gen.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
+import 'package:sipk/app/routes/app_pages.dart';
 import 'package:sipk/app/services/scoring_service.dart';
 import 'package:sipk/models/fetch_eight_step_model.dart';
 import 'package:sipk/models/fetch_fifth_step_model.dart';
@@ -145,7 +146,7 @@ class ScoringFormController extends GetxController {
   final Rxn<String> applicantLifeInsurance = Rxn<String>();
   final Rxn<String> collateralBinding = Rxn<String>();
 
-  Rx<String> hasBusiness = Rx<String>('Ya');
+  Rx<String> hasBusiness = Rx<String>('Tidak');
   bool get isOwnBusiness => [
         'Buruh Harian',
         'Pedagang',
@@ -176,8 +177,15 @@ class ScoringFormController extends GetxController {
     try {
       isLoading(true);
       // First Step
-      final firstStepResponse =
-          await scoringService.fetchFirstStep(applicantId.value);
+      final firstStepResponse = await scoringService.fetchFirstStep(applicantId.value);
+    final secondStepResponse = await scoringService.fetchSecondStep(applicantId.value);
+    final thirdStepResponse = await scoringService.fetchThirdStep(applicantId.value);
+    final fourthStepResponse = await scoringService.fetchFourthStep(applicantId.value);
+    final fifthStepResponse = await scoringService.fetchFifthStep(applicantId.value);
+    final sixthStepResponse = await scoringService.fetchSixthStep(applicantId.value);
+    final seventhStepResponse = await scoringService.fetchSeventhStep(applicantId.value);
+    final eighthStepResponse = await scoringService.fetchEightStep(applicantId.value);
+      isLoading(false);
       final firstStepData = FetchFirstStepModel.fromJson(firstStepResponse);
       // First Step Assignment
       applicantNameController.text = firstStepData.applicant?.name ?? '';
@@ -221,8 +229,6 @@ class ScoringFormController extends GetxController {
       if (_validateStep(0)) currentIndex.value++;
 
       // Second Step
-      final secondStepResponse =
-          await scoringService.fetchSecondStep(applicantId.value);
       final secondStepData = FetchSecondStepModel.fromJson(secondStepResponse);
       financingType.value = secondStepData.financingApplication?.financingType;
       applicationAmountController.text =
@@ -234,14 +240,18 @@ class ScoringFormController extends GetxController {
           secondStepData.financingApplication?.downPaymentAmt?.toString() ?? '';
       allocationController.text =
           secondStepData.financingApplication?.allocation ?? '';
-      financingIteration.value =
-          secondStepData.creditEvaluation?.financingIteration?.toString();
+      var financingIterationTemp =
+          secondStepData.creditEvaluation?.financingIteration;
+      if (financingIterationTemp != null) {
+        financingIteration.value = financingIterationTemp == 11
+            ? ">10"
+            : financingIterationTemp.toString();
+      }
+
       await Future.delayed(const Duration(milliseconds: 200));
       if (_validateStep(1)) currentIndex.value++;
 
       // Third Step
-      final thirdStepResponse =
-          await scoringService.fetchThirdStep(applicantId.value);
       final thirdStepData = FetchThirdStepModel.fromJson(thirdStepResponse);
       netSalaryApplicantController.text =
           thirdStepData.financialData?.netSalaryApplicant?.toString() ?? '';
@@ -253,6 +263,10 @@ class ScoringFormController extends GetxController {
       netBusinessIncomeSpouseController.text =
           thirdStepData.financialData?.netBusinessIncomeSpouse?.toString() ??
               '';
+      if (thirdStepData.financialData?.netBusinessIncomeApplicant != null ||
+          thirdStepData.financialData?.netBusinessIncomeSpouse != null) {
+        hasBusiness.value = "Ya";
+      }
       householdExpenseController.text =
           thirdStepData.financialData?.householdExpense?.toString() ?? '';
       transportationExpenseController.text =
@@ -278,8 +292,6 @@ class ScoringFormController extends GetxController {
       if (_validateStep(2)) currentIndex.value++;
 
       // Fourth Step
-      final fourthStepResponse =
-          await scoringService.fetchFourthStep(applicantId.value);
       final fourthStepData = FetchFourthStepModel.fromJson(fourthStepResponse);
       businessReport.value = fourthStepData.businessReport;
       employmentBusinessDurationController.text =
@@ -300,10 +312,11 @@ class ScoringFormController extends GetxController {
       if (_validateStep(3)) currentIndex.value++;
 
       // Fifth Step
-      final fifthStepResponse =
-          await scoringService.fetchFifthStep(applicantId.value);
       final fifthStepData = FetchFifthStepModel.fromJson(fifthStepResponse);
       salesController.text = fifthStepData.sales?.toString() ?? '';
+      if (fifthStepData.sales != null) {
+        hasBusiness.value = "Ya";
+      }
       cogsController.text = fifthStepData.cogs?.toString() ?? '';
       dailyLaborController.text = fifthStepData.dailyLabor?.toString() ?? '';
       consumptionController.text = fifthStepData.consumption?.toString() ?? '';
@@ -325,19 +338,15 @@ class ScoringFormController extends GetxController {
       if (_validateStep(4)) currentIndex.value++;
 
       // Sixth Step
-      final sixthStepResponse =
-          await scoringService.fetchSixthStep(applicantId.value);
       final sixthStepData = FetchSixthStepModel.fromJson(sixthStepResponse);
       residenceOwnership.value = sixthStepData.residenceOwnership;
       residenceDurationController.text =
-          sixthStepData.residenceDuration.toString();
+          sixthStepData.residenceDuration?.toString() ?? '';
       neighborhoodReputation.value = sixthStepData.neighborhoodReputation;
       await Future.delayed(const Duration(milliseconds: 200));
       if (_validateStep(5)) currentIndex.value++;
 
       // Seventh Step
-      final seventhStepResponse =
-          await scoringService.fetchSeventhStep(applicantId.value);
       final seventhStepData =
           FetchSeventhStepModel.fromJson(seventhStepResponse);
       bankingRelationship.value = seventhStepData.bankingRelationship;
@@ -351,8 +360,6 @@ class ScoringFormController extends GetxController {
       if (_validateStep(6)) currentIndex.value++;
 
       // Eighth Step
-      final eighthStepResponse =
-          await scoringService.fetchEightStep(applicantId.value);
       final eighthStepData = FetchEightStepModel.fromJson(eighthStepResponse);
       applicationCoverage.value = eighthStepData.applicationCoverage;
       vehicleCollateralInsurance.value =
@@ -421,6 +428,9 @@ class ScoringFormController extends GetxController {
   }
 
   void updateSecondStep() async {
+    if (financingIteration.value == ">10") {
+      financingIteration.value = "11";
+    }
     await scoringService.updateSecondStep(
       applicantId: applicantId.value,
       allocation: allocationController.text,
@@ -465,7 +475,7 @@ class ScoringFormController extends GetxController {
       businessLiabilities: businessLiabilities.value,
       businessPremisesStatus: businessPremisesStatus.value,
       businessReport: businessReport.value,
-      employeeCount: employeeCountController.text,
+      employeeCount: int.tryParse(employeeCountController.text),
       employerCredibility: employerCredibility.value,
       employmentBusinessDuration:
           int.tryParse(employmentBusinessDurationController.text),
@@ -689,7 +699,13 @@ class ScoringFormController extends GetxController {
         ),
       ),
       confirm: InkWell(
-        onTap: () {},
+        onTap: () {
+          Get.back();
+          Get.offNamed(
+            Routes.AO_SCORING_DETAIL,
+            parameters: {'id': applicantId.value},
+          );
+        },
         child: Ink(
           width: 180,
           height: 49,

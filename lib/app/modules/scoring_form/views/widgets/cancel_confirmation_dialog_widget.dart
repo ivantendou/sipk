@@ -45,6 +45,7 @@ void showCancelConfirmationDialog(ScoringFormController controller) {
         width: 120,
         onTap: () {
           Get.back();
+          Get.back();
         },
         buttonColor: ColorsConstant.white,
         borderColor: ColorsConstant.primary,

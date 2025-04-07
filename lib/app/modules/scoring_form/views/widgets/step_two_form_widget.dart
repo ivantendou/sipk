@@ -40,7 +40,14 @@ class StepTwoFormWidget extends StatelessWidget {
               'Investasi Rumah Tangga',
               'Konsumer',
             ],
-            value: controller.financingType.value,
+            value: [
+              'Modal Kerja',
+              'Investasi Usaha',
+              'Investasi Rumah Tangga',
+              'Konsumer'
+            ].contains(controller.financingType.value)
+                ? controller.financingType.value
+                : null,
             onChanged: (value) {
               controller.financingType.value = value!;
             },
@@ -62,10 +69,23 @@ class StepTwoFormWidget extends StatelessWidget {
               '10',
               '>10',
             ],
-            value: controller.financingIteration.value,
+            value: [
+              '1',
+              '2',
+              '3',
+              '4',
+              '5',
+              '6',
+              '7',
+              '8',
+              '9',
+              '10',
+              '>10',
+            ].contains(controller.financingIteration.value)
+                ? controller.financingIteration.value
+                : null,
             onChanged: (value) {
-              controller.financingIteration.value =
-                  (value == '>10') ? '11' : value!;
+              controller.financingIteration.value = value!;
             },
           ),
           const SizedBox(height: 16),

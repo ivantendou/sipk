@@ -136,7 +136,14 @@ class AoHomeView extends GetView<AoHomeController> {
                       score: controller.scoringResult.first.creditEvaluations
                           ?.first.creditScores?.totalScore
                           .toString(),
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed(
+                          Routes.AO_SCORING_DETAIL,
+                          parameters: {
+                            'id': controller.scoringResult.first.id.toString()
+                          },
+                        );
+                      },
                     );
                   }
                 }),

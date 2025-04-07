@@ -151,7 +151,10 @@ class StepThreeFormWidget extends StatelessWidget {
               'Flat',
               'Anuitas',
             ],
-            value: controller.installmentType.value,
+            value:
+                ['Flat', 'Anuitas'].contains(controller.installmentType.value)
+                    ? controller.installmentType.value
+                    : null,
             onChanged: (value) {
               controller.installmentType.value = value!;
             },

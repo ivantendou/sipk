@@ -36,7 +36,10 @@ class StepEightFormWidget extends StatelessWidget {
               '150% <= 125%',
               '>= 150%',
             ],
-            value: controller.applicationCoverage.value,
+            value: ['< 100%', '125% <= 100%', '150% <= 125%', '>= 150%']
+                    .contains(controller.applicationCoverage.value)
+                ? controller.applicationCoverage.value
+                : null,
             onChanged: (value) {
               controller.applicationCoverage.value = value!;
             },
@@ -49,7 +52,10 @@ class StepEightFormWidget extends StatelessWidget {
               'Ada Asuransi',
               'Tidak Ada Asuransi',
             ],
-            value: controller.vehicleCollateralInsurance.value,
+            value: ['Ada Asuransi', 'Tidak Ada Asuransi']
+                    .contains(controller.vehicleCollateralInsurance.value)
+                ? controller.vehicleCollateralInsurance.value
+                : null,
             onChanged: (value) {
               controller.vehicleCollateralInsurance.value = value!;
             },
@@ -62,7 +68,10 @@ class StepEightFormWidget extends StatelessWidget {
               'Ada Asuransi',
               'Tidak Ada Asuransi',
             ],
-            value: controller.applicantLifeInsurance.value,
+            value: ['Ada Asuransi', 'Tidak Ada Asuransi']
+                    .contains(controller.applicantLifeInsurance.value)
+                ? controller.applicantLifeInsurance.value
+                : null,
             onChanged: (value) {
               controller.applicantLifeInsurance.value = value!;
             },
@@ -75,7 +84,10 @@ class StepEightFormWidget extends StatelessWidget {
               'Notaril',
               'Tidak Notaril',
             ],
-            value: controller.collateralBinding.value,
+            value: ['Notaril', 'Tidak Notaril']
+                    .contains(controller.collateralBinding.value)
+                ? controller.collateralBinding.value
+                : null,
             onChanged: (value) {
               controller.collateralBinding.value = value!;
             },

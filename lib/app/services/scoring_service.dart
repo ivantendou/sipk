@@ -10,6 +10,47 @@ class ScoringService {
     dotenv.env['SERVICE_ROLE_KEY'] ?? '',
   );
 
+  Future<Map<String, dynamic>> fetchCreditScore(String applicantId) async {
+    try {
+      final applicant = await supabase
+          .from('applicants')
+          .select(
+              'id, account_officer_id, name, mobile_phone, residential_address, ktp_number, gender')
+          .eq('id', applicantId)
+          .single();
+
+      final creditEvaluations = await supabase
+          .from('credit_evaluations')
+          .select('applicant_category, credit_scores (total_score, updated_at)')
+          .eq('applicant_id', applicantId);
+
+      final financingApplications = await supabase
+          .from('financing_applications')
+          .select('application_amount')
+          .eq('applicant_id', applicantId);
+
+      final accountOfficerId = applicant['account_officer_id'];
+
+      final profileData = await supabase
+          .from('profiles')
+          .select('full_name')
+          .eq('id', accountOfficerId)
+          .single();
+
+      return {
+        'applicant': applicant,
+        'creditEvaluations': creditEvaluations,
+        'financingApplications': financingApplications,
+        'accountOfficer': profileData['full_name'],
+      };
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in fetchFirstStep: $e");
+      }
+      throw Exception("Gagal mengambil data: $e");
+    }
+  }
+
   Future<List<CreditScoresModel>> fetchCreditScores({
     required String searchQuery,
     required String accountOfficerId,
@@ -491,7 +532,7 @@ class ScoringService {
     required String? paymentReceiptMethod,
     required String? businessPremisesStatus,
     required String? salesMethod,
-    required String? employeeCount,
+    required int? employeeCount,
     required String? businessAdministration,
     required String? businessLiabilities,
     required String? employmentStatus,

@@ -13,7 +13,6 @@ class CreditScoreBadgeWidget extends StatelessWidget {
   }) : super(key: key);
 
   bool get isUnrated {
-    print(score);
     return score == null ||
         score!.isEmpty ||
         score!.toLowerCase() == 'null' ||
