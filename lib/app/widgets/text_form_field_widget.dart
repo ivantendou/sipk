@@ -30,6 +30,7 @@ class TextFormFieldWidget extends StatelessWidget {
           style: TextStyleConstant.body,
         ),
         TextFormField(
+          textInputAction: TextInputAction.next,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           controller: controller,
           decoration: InputDecoration(

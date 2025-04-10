@@ -6,6 +6,7 @@ import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/modules/ao_scoring_detail/views/widgets/score_chart_widget.dart';
 import 'package:sipk/app/modules/ao_scoring_detail/views/widgets/scoring_detail_accordion_widget.dart';
 import 'package:sipk/app/modules/ao_scoring_detail/views/widgets/submission_button_widget.dart';
+import 'package:sipk/app/routes/app_pages.dart';
 import 'package:sipk/app/widgets/custom_app_bar_widget.dart';
 
 import '../controllers/ao_scoring_detail_controller.dart';
@@ -112,7 +113,20 @@ class AoScoringDetailView extends GetView<AoScoringDetailController> {
                 );
         }),
       ),
-      floatingActionButton: SubmissionButtonWidget(onTap: () {}),
+      floatingActionButton: Obx(() {
+        return SubmissionButtonWidget(
+        isLoading: controller.isLoading.value,
+        onTap: () {
+          if (controller.isLoading.value == true) return;
+          Get.toNamed(Routes.SUBMISSION_FORM);
+          controller.callSubmissionFormController(
+            controller.creditScoreData.value?.applicant?.id.toString() ?? "",
+            controller.creditScoreData.value?.applicant?.name ?? "",
+            controller.creditScoreData.value?.applicant?.ktpNumber ?? "",
+          );
+        },
+      );
+      }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }

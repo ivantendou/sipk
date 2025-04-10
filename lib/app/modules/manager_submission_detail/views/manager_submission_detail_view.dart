@@ -26,12 +26,12 @@ class ManagerSubmissionDetailView
                 const SizedBox(height: 16),
                 const DetailSubmissionCardWidget(
                   submissionId: 'Pengajuan-2232',
-                  submissionStatus: 'Diproses',
+                  applicationStatus: 'Diproses',
                   officeBranch: 'Ciluar',
                   memberStatus: 'Anggota Baru',
-                  financingPurposes: 'Investasi Usaha Tanah',
+                  allocation: 'Investasi Usaha Tanah',
                   submissionDate: '4 Juni 2023',
-                  totalSubmission: 'Rp2.000.000',
+                  applicationAmount: 'Rp2.000.000',
                 ),
                 const SizedBox(height: 16),
                 CustomIconButtonWidget(

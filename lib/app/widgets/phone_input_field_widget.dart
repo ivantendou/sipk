@@ -29,6 +29,7 @@ class PhoneInputField extends StatelessWidget {
           style: TextStyleConstant.body,
         ),
         TextFormField(
+          textInputAction: TextInputAction.next,
           initialValue: initialValue,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
@@ -50,7 +51,8 @@ class PhoneInputField extends StatelessWidget {
           ),
           keyboardType: TextInputType.number,
           style: TextStyleConstant.body,
-          validator: (value) => FormValidators.validateNumber(value, fieldTitle),
+          validator: (value) =>
+              FormValidators.validateNumber(value, fieldTitle),
         )
       ],
     );

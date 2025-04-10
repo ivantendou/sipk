@@ -11,27 +11,27 @@ String creditScoresModelToJson(List<CreditScoresModel> data) => json.encode(List
 class CreditScoresModel {
     String? id;
     String? name;
-    String? mobilePhone;
+    String? ktpNumber;
     List<CreditEvaluation>? creditEvaluations;
 
     CreditScoresModel({
         this.id,
         this.name,
-        this.mobilePhone,
+        this.ktpNumber,
         this.creditEvaluations,
     });
 
     factory CreditScoresModel.fromJson(Map<String, dynamic> json) => CreditScoresModel(
         id: json["id"]?.toString(),
         name: json["name"],
-        mobilePhone: json["mobile_phone"],
+        ktpNumber: json["ktp_number"],
         creditEvaluations: json["credit_evaluations"] == null ? [] : List<CreditEvaluation>.from(json["credit_evaluations"]!.map((x) => CreditEvaluation.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
-        "mobile_phone": mobilePhone,
+        "ktp_number": ktpNumber,
         "credit_evaluations": creditEvaluations == null ? [] : List<dynamic>.from(creditEvaluations!.map((x) => x.toJson())),
     };
 }

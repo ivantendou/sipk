@@ -3,27 +3,22 @@ import 'package:get/get.dart';
 import 'package:sipk/app/constants/assets.gen.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
-import 'package:sipk/app/modules/ao_home/views/widgets/credit_score_badge_widget.dart';
-import 'package:sipk/app/modules/scoring_data/controllers/scoring_data_controller.dart';
-import 'package:sipk/app/routes/app_pages.dart';
+import 'package:sipk/app/modules/ao_select_scoring/controllers/ao_select_scoring_controller.dart';
+import 'package:sipk/app/modules/ao_select_scoring/views/widgets/credit_score_widget.dart';
 import 'package:sipk/app/widgets/custom_button_widget.dart';
 import 'package:sipk/app/widgets/label_value_widget.dart';
 
-class ScoringDataCardWidget extends StatelessWidget {
+class SelectDataCardWidget extends StatelessWidget {
   final String? scoringNumber;
   final bool? scoringStatus;
   final String? applicantName;
   final String? ktpNumber;
   final String? scoringDate;
   final String? score;
-  final bool isSelected;
-  final bool isSelectionMode;
   final void Function()? onTap;
-  final void Function()? onLongPress;
-  final void Function(bool?)? onCheckboxChanged;
-  final ScoringDataController controller;
+  final AoSelectScoringController controller;
 
-  const ScoringDataCardWidget({
+  const SelectDataCardWidget({
     Key? key,
     this.scoringNumber,
     this.scoringStatus,
@@ -31,11 +26,7 @@ class ScoringDataCardWidget extends StatelessWidget {
     this.ktpNumber,
     this.scoringDate,
     required this.score,
-    required this.isSelected,
-    required this.isSelectionMode,
     this.onTap,
-    this.onLongPress,
-    this.onCheckboxChanged,
     required this.controller,
   }) : super(key: key);
 
@@ -45,37 +36,23 @@ class ScoringDataCardWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: InkWell(
         onTap: onTap,
-        onLongPress: onLongPress,
         child: Row(
           children: [
-            if (isSelectionMode)
-              Padding(
-                padding: const EdgeInsets.only(right: 8),
-                child: SizedBox(
-                  width: 24,
-                  height: 24,
-                  child: Checkbox(
-                    value: isSelected,
-                    onChanged: onCheckboxChanged,
-                    activeColor: ColorsConstant.primary,
-                  ),
-                ),
-              ),
             Expanded(
               child: Column(
                 children: [
                   Container(
                     width: double.infinity,
                     decoration: const BoxDecoration(
-                      color: ColorsConstant.primary,
+                      color: ColorsConstant.grey300,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(4),
                         topRight: Radius.circular(4),
                       ),
                       border: Border(
-                        left: BorderSide(color: ColorsConstant.primary),
-                        right: BorderSide(color: ColorsConstant.primary),
-                        top: BorderSide(color: ColorsConstant.primary),
+                        left: BorderSide(color: ColorsConstant.grey500),
+                        right: BorderSide(color: ColorsConstant.grey500),
+                        top: BorderSide(color: ColorsConstant.grey500),
                       ),
                     ),
                     padding: const EdgeInsets.symmetric(
@@ -86,11 +63,8 @@ class ScoringDataCardWidget extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            'No. $scoringNumber',
-                            style: TextStyleConstant.body.copyWith(
-                              color: ColorsConstant.white,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            scoringNumber ?? "",
+                            style: TextStyleConstant.body,
                           ),
                         ),
                         scoringStatus!
@@ -99,16 +73,13 @@ class ScoringDataCardWidget extends StatelessWidget {
                                   Assets.images.cross.svg(
                                     width: 24,
                                     colorFilter: const ColorFilter.mode(
-                                      ColorsConstant.white,
-                                      BlendMode.srcIn,
-                                    ),
+                                        ColorsConstant.black, BlendMode.srcIn),
                                   ),
                                   const SizedBox(width: 4),
                                   Text(
                                     "Skoring Belum Selesai",
                                     style: TextStyleConstant.body.copyWith(
                                       fontWeight: FontWeight.bold,
-                                      color: ColorsConstant.white,
                                     ),
                                   ),
                                 ],
@@ -118,16 +89,13 @@ class ScoringDataCardWidget extends StatelessWidget {
                                   Assets.images.check.svg(
                                     width: 24,
                                     colorFilter: const ColorFilter.mode(
-                                      ColorsConstant.white,
-                                      BlendMode.srcIn,
-                                    ),
+                                        ColorsConstant.black, BlendMode.srcIn),
                                   ),
                                   const SizedBox(width: 4),
                                   Text(
                                     "Skoring Selesai",
                                     style: TextStyleConstant.body.copyWith(
                                       fontWeight: FontWeight.bold,
-                                      color: ColorsConstant.white,
                                     ),
                                   ),
                                 ],
@@ -166,33 +134,36 @@ class ScoringDataCardWidget extends StatelessWidget {
                                 value: ktpNumber,
                               ),
                               const SizedBox(height: 16),
-                              controller.showDraftsOnly.value
-                                  ? const SizedBox()
-                                  : LabelValueWidget(
-                                      label: "Tanggal Skoring",
-                                      value: formatDate(scoringDate),
-                                    ),
+                              LabelValueWidget(
+                                label: "Tanggal Skoring",
+                                value: formatDate(scoringDate),
+                              ),
                             ],
                           ),
                         ),
                         const SizedBox(width: 8),
-                        scoringStatus!
-                            ? CustomButtonWidget(
-                                text: "Lengkapi Draf",
-                                width: 120,
-                                onTap: () {
-                                  Get.toNamed(
-                                    Routes.SCORING_FORM,
-                                    arguments: {
-                                      'applicantId': scoringNumber,
-                                      'isScoringDraft': true,
-                                    },
-                                  );
-                                },
-                              )
-                            : CreditScoreBadgeWidget(
-                                score: score ?? "Belum Dinilai",
-                              ),
+                        Column(
+                          children: [
+                            CreditScoreWidget(
+                              score: score ?? "Belum Dinilai",
+                            ),
+                            const SizedBox(height: 16),
+                            CustomButtonWidget(
+                              text: "Pilih",
+                              width: 120,
+                              onTap: () {
+                                controller.callSubmissionFormController(
+                                  scoringNumber ?? "",
+                                  applicantName ?? "",
+                                  ktpNumber ?? "",
+                                );
+                                Future.delayed(
+                                    const Duration(milliseconds: 200));
+                                Get.back();
+                              },
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),

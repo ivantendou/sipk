@@ -23,6 +23,7 @@ class AuthTextFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      textInputAction: TextInputAction.next,
       controller: controller,
       obscureText: obscureText,
       style: TextStyleConstant.body,
@@ -42,7 +43,6 @@ class AuthTextFieldWidget extends StatelessWidget {
           child: suffixIcon,
         ),
       ),
-      
     );
   }
 }

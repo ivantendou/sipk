@@ -16,6 +16,8 @@ import '../modules/ao_manage_data/bindings/ao_manage_data_binding.dart';
 import '../modules/ao_manage_data/views/ao_manage_data_view.dart';
 import '../modules/ao_scoring_detail/bindings/ao_scoring_detail_binding.dart';
 import '../modules/ao_scoring_detail/views/ao_scoring_detail_view.dart';
+import '../modules/ao_select_scoring/bindings/ao_select_scoring_binding.dart';
+import '../modules/ao_select_scoring/views/ao_select_scoring_view.dart';
 import '../modules/ao_submission/bindings/ao_submission_binding.dart';
 import '../modules/ao_submission/views/ao_submission_view.dart';
 import '../modules/ao_submission_detail/bindings/ao_submission_detail_binding.dart';
@@ -183,6 +185,11 @@ class AppPages {
       name: _Paths.ADMIN_USER_DETAIL,
       page: () => const AdminUserDetailView(),
       binding: AdminUserDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.AO_SELECT_SCORING,
+      page: () => const AoSelectScoringView(),
+      binding: AoSelectScoringBinding(),
     ),
   ];
 }

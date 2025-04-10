@@ -5,6 +5,7 @@ import 'package:sipk/app/constants/assets.gen.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/modules/ao_submission/views/widgets/submission_card_widget.dart';
+import 'package:sipk/app/routes/app_pages.dart';
 import 'package:sipk/app/widgets/custom_icon_button_widget.dart';
 
 import '../controllers/ao_submission_controller.dart';
@@ -52,7 +53,10 @@ class AoSubmissionView extends GetView<AoSubmissionController> {
               children: [
                 CustomIconButtonWidget(
                   icon: Assets.images.add1.svg(width: 24),
-                  text: 'Ajukan Permohonan Pembiayaan',
+                  text: 'Ajukan Pembiayaan',
+                  onTap: () {
+                    Get.toNamed(Routes.SUBMISSION_FORM);
+                  },
                 ),
                 const SizedBox(height: 16),
                 Text(

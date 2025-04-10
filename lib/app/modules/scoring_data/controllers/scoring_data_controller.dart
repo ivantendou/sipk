@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sipk/app/modules/ao_home/controllers/ao_home_controller.dart';
 import 'package:sipk/app/routes/app_pages.dart';
 import 'package:sipk/app/services/scoring_service.dart';
 import 'package:sipk/models/credit_scores_model.dart';
@@ -16,8 +17,9 @@ class ScoringDataController extends GetxController {
   final int pageSize = 10;
   final searchQuery = ''.obs;
   final selectedCreditScores = <String, bool>{}.obs;
-  var selectedSortOption = 'terbaru'.obs;
-  var showDraftsOnly = false.obs;
+  final selectedSortOption = 'terbaru'.obs;
+  final showDraftsOnly = false.obs;
+  final userRole = ''.obs;
 
   @override
   void onInit() {
@@ -47,6 +49,12 @@ class ScoringDataController extends GetxController {
     pagingController.refresh();
   }
 
+  void callAoHomeController() {
+    final secondController = Get.find<AoHomeController>();
+
+    secondController.fetchCreditScores();
+  }
+
   void changeSortOption(String option) {
     selectedSortOption.value = option;
   }
@@ -73,6 +81,7 @@ class ScoringDataController extends GetxController {
       isLoading(false);
       pagingController.refresh();
       isSelectionMode(false);
+      callAoHomeController();
     } catch (e) {
       ScaffoldMessenger.of(Get.context!).showSnackBar(
         SnackBar(
@@ -92,7 +101,7 @@ class ScoringDataController extends GetxController {
     try {
       final prefs = await SharedPreferences.getInstance();
       final userId = prefs.getString('userId');
-      final role = prefs.getString('role');
+      userRole.value = prefs.getString('role') ?? "";
 
       final isAscending = selectedSortOption.value == 'terlama';
 
@@ -100,8 +109,7 @@ class ScoringDataController extends GetxController {
       final int to = from + pageSize - 1;
 
       List<CreditScoresModel> fetchedData;
-
-      if (role == 'Admin') {
+      if (userRole.value == 'Admin') {
         fetchedData = await scoringService.fetchCreditScoresAdmin(
           searchQuery: searchQuery.value,
           from: from,

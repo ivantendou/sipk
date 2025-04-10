@@ -25,7 +25,7 @@ class ScoringService {
           .eq('applicant_id', applicantId);
 
       final financingApplications = await supabase
-          .from('financing_applications')
+          .from('financing_data')
           .select('application_amount')
           .eq('applicant_id', applicantId);
 
@@ -63,7 +63,7 @@ class ScoringService {
       var query = supabase
           .from('applicants')
           .select('''
-          id, name, mobile_phone,
+          id, name, ktp_number,
           credit_evaluations (
             credit_scores (
               total_score,
@@ -116,7 +116,7 @@ class ScoringService {
       var query = supabase
           .from('applicants')
           .select('''
-          id, name, mobile_phone,
+          id, name, ktp_number,
           credit_evaluations (
             credit_scores (
               total_score,
@@ -229,7 +229,7 @@ class ScoringService {
   Future<Map<String, dynamic>> fetchSecondStep(String applicantId) async {
     try {
       final financingAppData =
-          await supabase.from('financing_applications').select('''
+          await supabase.from('financing_data').select('''
           financing_type,
           application_amount,
           down_payment_pct,
@@ -461,7 +461,7 @@ class ScoringService {
     required String? financingIteration,
   }) async {
     try {
-      await supabase.from('financing_applications').update({
+      await supabase.from('financing_data').update({
         'financing_type': financingType,
         'application_amount': applicationAmount,
         'down_payment_pct': downPaymentPct,

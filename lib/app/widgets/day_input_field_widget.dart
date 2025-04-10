@@ -27,6 +27,7 @@ class DayInputFieldWidget extends StatelessWidget {
           style: TextStyleConstant.body,
         ),
         TextFormField(
+          textInputAction: TextInputAction.next,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           controller: controller,
           decoration: InputDecoration(
@@ -59,7 +60,8 @@ class DayInputFieldWidget extends StatelessWidget {
           ),
           keyboardType: TextInputType.number,
           style: TextStyleConstant.body,
-          validator: (value) => FormValidators.validateNumber(value, fieldTitle),
+          validator: (value) =>
+              FormValidators.validateNumber(value, fieldTitle),
         )
       ],
     );

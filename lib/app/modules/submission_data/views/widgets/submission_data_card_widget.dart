@@ -48,7 +48,7 @@ class SubmissionDataCardWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  scoringNumber ?? "",
+                  'No. $scoringNumber',
                   style: TextStyleConstant.body,
                 ),
               ),

@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:sipk/app/constants/assets.gen.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
-import 'package:sipk/app/modules/scoring_data/controllers/scoring_data_controller.dart';
-import 'package:sipk/app/modules/scoring_data/views/widgets/scoring_data_card_widget.dart';
-import 'package:sipk/app/routes/app_pages.dart';
+import 'package:sipk/app/modules/ao_select_scoring/controllers/ao_select_scoring_controller.dart';
+import 'package:sipk/app/modules/ao_select_scoring/views/widgets/select_data_card_widget.dart';
 import 'package:sipk/models/credit_scores_model.dart';
 
-class ScoringListViewWidget extends StatelessWidget {
-  final ScoringDataController controller;
+class SelectScoringListViewWidget extends StatelessWidget {
+  final AoSelectScoringController controller;
 
-  const ScoringListViewWidget({
+  const SelectScoringListViewWidget({
     Key? key,
     required this.controller,
   }) : super(key: key);
@@ -30,55 +28,20 @@ class ScoringListViewWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         builderDelegate: PagedChildBuilderDelegate<CreditScoresModel>(
           itemBuilder: (context, data, index) {
-            return Obx(() {
-              final isSelected =
-                  controller.selectedCreditScores[data.id] ?? false;
-              return ScoringDataCardWidget(
-                applicantName: data.name,
-                scoringNumber: data.id,
-                ktpNumber: data.ktpNumber,
-                score: data.creditEvaluations?.first.creditScores?.totalScore
-                        .toString() ??
-                    "",
-                scoringStatus:
-                    data.creditEvaluations?.first.creditScores?.isDraft,
-                scoringDate: data
-                        .creditEvaluations?.first.creditScores?.updatedAt
-                        .toString() ??
-                    "2025-04-03 11:57:06.956956+00",
-                isSelected: isSelected,
-                isSelectionMode: controller.isSelectionMode.value,
-                onTap: controller.isSelectionMode.value
-                    ? () => controller.toggleSelection(data.id!)
-                    : () {
-                        if (data.creditEvaluations?.first.creditScores
-                                ?.isDraft ==
-                            true) return;
-                        Get.toNamed(
-                          Routes.AO_SCORING_DETAIL,
-                          parameters: {'id': data.id.toString()},
-                        );
-                      },
-                onLongPress: () {
-                  if (controller.userRole.value == "Account Officer" &&
-                      controller.showDraftsOnly.value == true) {
-                    if (!controller.isSelectionMode.value) {
-                      controller.toggleSelectionMode();
-                      controller.toggleSelection(data.id!);
-                    }
-                  } else if (controller.userRole.value == "Admin") {
-                    if (!controller.isSelectionMode.value) {
-                      controller.toggleSelectionMode();
-                      controller.toggleSelection(data.id!);
-                    }
-                  }
-                },
-                onCheckboxChanged: (value) {
-                  controller.toggleSelection(data.id!);
-                },
-                controller: controller,
-              );
-            });
+            return SelectDataCardWidget(
+              applicantName: data.name,
+              scoringNumber: data.id,
+              ktpNumber: data.ktpNumber,
+              score: data.creditEvaluations?.first.creditScores?.totalScore
+                      .toString() ??
+                  "",
+              scoringStatus:
+                  data.creditEvaluations?.first.creditScores?.isDraft,
+              scoringDate: data.creditEvaluations?.first.creditScores?.updatedAt
+                      .toString() ??
+                  "2025-04-03 11:57:06.956956+00",
+              controller: controller,
+            );
           },
           firstPageProgressIndicatorBuilder: (context) => Center(
             child: SizedBox(

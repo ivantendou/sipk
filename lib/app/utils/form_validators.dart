@@ -36,6 +36,12 @@ class FormValidators {
     return null;
   }
 
+  static String? validateCurrency(String? value, String fieldName) {
+    final requiredError = validateRequired(value, fieldName);
+    if (requiredError != null) return requiredError;
+    return null;
+  }
+
   static String? validateEmail(String? value, String fieldName) {
     final requiredError = validateRequired(value, fieldName);
     if (requiredError != null) return requiredError;

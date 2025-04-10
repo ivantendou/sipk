@@ -8,22 +8,24 @@ import 'package:sipk/app/widgets/label_value_widget.dart';
 
 class DetailSubmissionCardWidget extends StatelessWidget {
   final String? submissionId;
-  final String? submissionStatus;
+  final String? applicantName;
+  final String? applicationStatus;
   final String? memberStatus;
   final String? officeBranch;
-  final String? financingPurposes;
+  final String? allocation;
   final String? submissionDate;
-  final String? totalSubmission;
+  final String? applicationAmount;
 
   const DetailSubmissionCardWidget({
     Key? key,
     this.submissionId,
-    this.submissionStatus,
+    this.applicantName,
+    this.applicationStatus,
     this.memberStatus,
     this.officeBranch,
-    this.financingPurposes,
+    this.allocation,
     this.submissionDate,
-    this.totalSubmission,
+    this.applicationAmount,
   }) : super(key: key);
 
   @override
@@ -52,20 +54,44 @@ class DetailSubmissionCardWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  submissionId ?? "",
-                  style: TextStyleConstant.body,
+                  'No. $submissionId',
+                  style: TextStyleConstant.body.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               Row(
                 children: [
-                  Assets.images.waiting.svg(),
+                  applicationStatus == null
+                      ? const Text('')
+                      : applicationStatus == 'Pending'
+                          ? Assets.images.waiting.svg()
+                          : applicationStatus == 'Accepted'
+                              ? Assets.images.check.svg()
+                              : Assets.images.cross.svg(),
                   const SizedBox(width: 4),
-                  Text(
-                    submissionStatus ?? "",
-                    style: TextStyleConstant.body.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
+                  applicationStatus == null
+                      ? const Text('-')
+                      : applicationStatus == 'Pending'
+                          ? Text(
+                              "Diproses",
+                              style: TextStyleConstant.body.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          : applicationStatus == 'Accepted'
+                              ? Text(
+                                  "Diterima",
+                                  style: TextStyleConstant.body.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              : Text(
+                                  "Ditolak",
+                                  style: TextStyleConstant.body.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                 ],
               ),
             ],
@@ -90,24 +116,33 @@ class DetailSubmissionCardWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               LabelValueWidget(
+                label: 'Nama Nasabah/Pemohon',
+                value: applicantName,
+              ),
+              const SizedBox(height: 8),
+              LabelValueWidget(
                 label: 'Cabang Layanan',
                 value: officeBranch,
               ),
+              const SizedBox(height: 8),
               LabelValueWidget(
                 label: 'Status Anggota',
                 value: memberStatus,
               ),
+              const SizedBox(height: 8),
               LabelValueWidget(
                 label: 'Tujuan Pembiayaan',
-                value: financingPurposes,
+                value: allocation,
               ),
+              const SizedBox(height: 8),
               LabelValueWidget(
                 label: 'Tanggal Pengajuan',
                 value: submissionDate,
               ),
+              const SizedBox(height: 8),
               LabelValueWidget(
                 label: 'Jumlah Pengajuan',
-                value: totalSubmission,
+                value: applicationAmount,
               ),
             ],
           ),

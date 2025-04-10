@@ -149,48 +149,26 @@ class CreditScoreBadgeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final displayText = isUnrated ? 'Belum Dinilai' : 'Skor: ${score!}';
 
-    return Column(
-      children: [
-        Container(
-          width: 124,
-          height: 28,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: containerColor,
-          ),
-          child: Center(
-            child: Text(
-              rating,
-              style: TextStyleConstant.body.copyWith(
-                fontWeight: FontWeight.bold,
-                color: textColor,
-              ),
-            ),
+    return Container(
+      width: 124,
+      height: 28,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: ColorsConstant.white,
+        border: Border.all(
+          color: ColorsConstant.primary,
+          width: 1,
+        ),
+      ),
+      child: Center(
+        child: Text(
+          displayText,
+          style: TextStyleConstant.body.copyWith(
+            fontWeight: FontWeight.bold,
+            color: ColorsConstant.primary,
           ),
         ),
-        const SizedBox(height: 16),
-        Container(
-          width: 124,
-          height: 28,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: ColorsConstant.white,
-            border: Border.all(
-              color: ColorsConstant.primary,
-              width: 1,
-            ),
-          ),
-          child: Center(
-            child: Text(
-              displayText,
-              style: TextStyleConstant.body.copyWith(
-                fontWeight: FontWeight.bold,
-                color: ColorsConstant.primary,
-              ),
-            ),
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

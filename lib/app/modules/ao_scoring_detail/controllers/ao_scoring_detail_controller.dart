@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:sipk/app/modules/submission_form/controllers/submission_form_controller.dart';
 import 'package:sipk/app/services/scoring_service.dart';
 import 'package:sipk/models/credit_score_model.dart';
 
@@ -13,6 +14,18 @@ class AoScoringDetailController extends GetxController {
     super.onInit();
     final String id = Get.parameters['id'] ?? 'No message received';
     fetchCreditScore(id);
+  }
+
+  void callSubmissionFormController(
+      String userId, String name, String ktpNumber) {
+
+    final submissionFormController =
+        Get.put<SubmissionFormController>(SubmissionFormController());
+
+    submissionFormController.applicantId.value = userId;
+    submissionFormController.name.value = name;
+    submissionFormController.ktpNumber.value = ktpNumber;
+    submissionFormController.fetchFinancialData();
   }
 
   void fetchCreditScore(String id) async {

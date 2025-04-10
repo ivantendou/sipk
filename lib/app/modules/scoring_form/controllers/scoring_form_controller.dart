@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:sipk/app/constants/assets.gen.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
+import 'package:sipk/app/modules/ao_home/controllers/ao_home_controller.dart';
 import 'package:sipk/app/routes/app_pages.dart';
 import 'package:sipk/app/services/scoring_service.dart';
 import 'package:sipk/models/fetch_eight_step_model.dart';
@@ -168,6 +169,12 @@ class ScoringFormController extends GetxController {
     }
   }
 
+  void callAoHomeController() {
+    final secondController = Get.find<AoHomeController>();
+
+    secondController.fetchCreditScores();
+  }
+
   void deleteForm() async {
     await scoringService.deleteForm(applicantId: applicantId.value);
     Get.back();
@@ -177,14 +184,22 @@ class ScoringFormController extends GetxController {
     try {
       isLoading(true);
       // First Step
-      final firstStepResponse = await scoringService.fetchFirstStep(applicantId.value);
-    final secondStepResponse = await scoringService.fetchSecondStep(applicantId.value);
-    final thirdStepResponse = await scoringService.fetchThirdStep(applicantId.value);
-    final fourthStepResponse = await scoringService.fetchFourthStep(applicantId.value);
-    final fifthStepResponse = await scoringService.fetchFifthStep(applicantId.value);
-    final sixthStepResponse = await scoringService.fetchSixthStep(applicantId.value);
-    final seventhStepResponse = await scoringService.fetchSeventhStep(applicantId.value);
-    final eighthStepResponse = await scoringService.fetchEightStep(applicantId.value);
+      final firstStepResponse =
+          await scoringService.fetchFirstStep(applicantId.value);
+      final secondStepResponse =
+          await scoringService.fetchSecondStep(applicantId.value);
+      final thirdStepResponse =
+          await scoringService.fetchThirdStep(applicantId.value);
+      final fourthStepResponse =
+          await scoringService.fetchFourthStep(applicantId.value);
+      final fifthStepResponse =
+          await scoringService.fetchFifthStep(applicantId.value);
+      final sixthStepResponse =
+          await scoringService.fetchSixthStep(applicantId.value);
+      final seventhStepResponse =
+          await scoringService.fetchSeventhStep(applicantId.value);
+      final eighthStepResponse =
+          await scoringService.fetchEightStep(applicantId.value);
       isLoading(false);
       final firstStepData = FetchFirstStepModel.fromJson(firstStepResponse);
       // First Step Assignment
@@ -425,12 +440,14 @@ class ScoringFormController extends GetxController {
       dependentsCount: dependentsCountController.text,
       isEmployee: !isOwnBusiness,
     );
+    callAoHomeController();
   }
 
   void updateSecondStep() async {
     if (financingIteration.value == ">10") {
       financingIteration.value = "11";
     }
+
     await scoringService.updateSecondStep(
       applicantId: applicantId.value,
       allocation: allocationController.text,
