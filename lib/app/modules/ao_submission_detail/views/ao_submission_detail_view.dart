@@ -7,7 +7,6 @@ import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/modules/ao_submission_detail/views/widgets/detail_submission_card_widget.dart';
 import 'package:sipk/app/routes/app_pages.dart';
 import 'package:sipk/app/widgets/custom_app_bar_widget.dart';
-import 'package:sipk/app/widgets/custom_button_widget.dart';
 import 'package:sipk/app/widgets/custom_icon_button_widget.dart';
 
 import '../controllers/ao_submission_detail_controller.dart';
@@ -65,9 +64,14 @@ class AoSubmissionDetailView extends GetView<AoSubmissionDetailController> {
                         .financingApplicationData.value?.applicant?.name,
                   ),
                   const SizedBox(height: 16),
-                  CustomButtonWidget(
+                  CustomIconButtonWidget(
+                    icon: Assets.images.scoringOff.svg(
+                      colorFilter: const ColorFilter.mode(
+                        ColorsConstant.white,
+                        BlendMode.srcIn,
+                      ),
+                    ),
                     text: 'Lihat Hasil Skoring',
-                    width: double.infinity,
                     onTap: () {
                       Get.toNamed(
                         Routes.AO_SCORING_DETAIL,
@@ -76,12 +80,10 @@ class AoSubmissionDetailView extends GetView<AoSubmissionDetailController> {
                                   ?.financingApplication?.applicantId
                                   .toString() ??
                               "",
+                          'isFrom': 'true',
                         },
                       );
                     },
-                    buttonColor: ColorsConstant.white,
-                    textColor: ColorsConstant.primary,
-                    borderColor: ColorsConstant.primary,
                   ),
                   const SizedBox(height: 12),
                   CustomIconButtonWidget(
@@ -89,11 +91,18 @@ class AoSubmissionDetailView extends GetView<AoSubmissionDetailController> {
                     text: 'Lihat Proposal Pembiayaan',
                   ),
                   const SizedBox(height: 12),
-                  CustomIconButtonWidget(
-                    icon: Assets.images.cross.svg(),
-                    text: 'Batalkan Pengajuan',
-                    backgroundColor: ColorsConstant.error,
-                  ),
+                  controller.financingApplicationData.value
+                                  ?.financingApplication?.applicationStatus ==
+                              'Accepted' ||
+                          controller.financingApplicationData.value
+                                  ?.financingApplication?.applicationStatus ==
+                              'Accepted'
+                      ? const SizedBox()
+                      : CustomIconButtonWidget(
+                          icon: Assets.images.cross.svg(),
+                          text: 'Batalkan Pengajuan',
+                          backgroundColor: ColorsConstant.error,
+                        ),
                 ],
               ),
             ),

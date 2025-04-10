@@ -1,5 +1,5 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'package:sipk/app/constants/assets.gen.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
@@ -30,20 +30,53 @@ class DetailSubmissionCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String formatTimestamp(String timestamp) {
+      DateTime dateTime = DateTime.parse(timestamp);
+      String formattedDate = DateFormat('d MMMM yyyy, HH:mm').format(dateTime);
+      return formattedDate;
+    }
+
+    Color headerBackgroundColor;
+    Color borderColor;
+    Color textColor;
+    String statusText;
+
+    switch (applicationStatus) {
+      case 'Accepted':
+        headerBackgroundColor = ColorsConstant.good100;
+        borderColor = ColorsConstant.good600;
+        textColor = ColorsConstant.good600;
+        statusText = "Diterima";
+        break;
+      case 'Rejected':
+        headerBackgroundColor = ColorsConstant.doubtful100;
+        borderColor = ColorsConstant.doubtful600;
+        textColor = ColorsConstant.doubtful600;
+        statusText = "Ditolak";
+        break;
+      case 'Pending':
+      default:
+        headerBackgroundColor = ColorsConstant.average100;
+        borderColor = ColorsConstant.average600;
+        textColor = ColorsConstant.average600;
+        statusText = "Diproses";
+        break;
+    }
+
     return Column(
       children: [
         Container(
           width: double.infinity,
-          decoration: const BoxDecoration(
-            color: ColorsConstant.grey300,
-            borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+            color: headerBackgroundColor,
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(4),
               topRight: Radius.circular(4),
             ),
             border: Border(
-              left: BorderSide(color: ColorsConstant.grey500),
-              right: BorderSide(color: ColorsConstant.grey500),
-              top: BorderSide(color: ColorsConstant.grey500),
+              left: BorderSide(color: borderColor),
+              right: BorderSide(color: borderColor),
+              top: BorderSide(color: borderColor),
             ),
           ),
           padding: const EdgeInsets.symmetric(
@@ -57,6 +90,7 @@ class DetailSubmissionCardWidget extends StatelessWidget {
                   'No. $submissionId',
                   style: TextStyleConstant.body.copyWith(
                     fontWeight: FontWeight.bold,
+                    color: textColor,
                   ),
                 ),
               ),
@@ -65,33 +99,29 @@ class DetailSubmissionCardWidget extends StatelessWidget {
                   applicationStatus == null
                       ? const Text('')
                       : applicationStatus == 'Pending'
-                          ? Assets.images.waiting.svg()
-                          : applicationStatus == 'Accepted'
-                              ? Assets.images.check.svg()
-                              : Assets.images.cross.svg(),
-                  const SizedBox(width: 4),
-                  applicationStatus == null
-                      ? const Text('-')
-                      : applicationStatus == 'Pending'
-                          ? Text(
-                              "Diproses",
-                              style: TextStyleConstant.body.copyWith(
-                                fontWeight: FontWeight.bold,
+                          ? Assets.images.waiting.svg(
+                              colorFilter: ColorFilter.mode(
+                                textColor,
+                                BlendMode.srcIn,
                               ),
                             )
                           : applicationStatus == 'Accepted'
-                              ? Text(
-                                  "Diterima",
-                                  style: TextStyleConstant.body.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                              ? Assets.images.check.svg(
+                                  colorFilter: ColorFilter.mode(
+                                      textColor, BlendMode.srcIn),
                                 )
-                              : Text(
-                                  "Ditolak",
-                                  style: TextStyleConstant.body.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                              : Assets.images.cross.svg(
+                                  colorFilter: ColorFilter.mode(
+                                      textColor, BlendMode.srcIn),
                                 ),
+                  const SizedBox(width: 4),
+                  Text(
+                    statusText,
+                    style: TextStyleConstant.body.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: textColor,
+                    ),
+                  ),
                 ],
               ),
             ],
@@ -100,16 +130,16 @@ class DetailSubmissionCardWidget extends StatelessWidget {
         Container(
           width: double.infinity,
           padding: const EdgeInsets.all(16),
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: ColorsConstant.white,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(4),
               bottomRight: Radius.circular(4),
             ),
             border: Border(
-              left: BorderSide(color: ColorsConstant.grey500),
-              right: BorderSide(color: ColorsConstant.grey500),
-              bottom: BorderSide(color: ColorsConstant.grey500),
+              left: BorderSide(color: borderColor),
+              right: BorderSide(color: borderColor),
+              bottom: BorderSide(color: borderColor),
             ),
           ),
           child: Column(
@@ -137,7 +167,9 @@ class DetailSubmissionCardWidget extends StatelessWidget {
               const SizedBox(height: 8),
               LabelValueWidget(
                 label: 'Tanggal Pengajuan',
-                value: submissionDate,
+                value: submissionDate != null
+                    ? formatTimestamp(submissionDate!)
+                    : '-',
               ),
               const SizedBox(height: 8),
               LabelValueWidget(

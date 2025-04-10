@@ -79,4 +79,42 @@ class SubmissionService {
       throw Exception("Gagal mengambil data: $e");
     }
   }
+
+  Future<List<Map<String, dynamic>>> fetchMonthlyFinancingApplications(
+      String userId) async {
+    try {
+      final now = DateTime.now();
+      final startOfMonth = DateTime(now.year, now.month, 1).toIso8601String();
+      final endOfMonth = DateTime(now.year, now.month + 1, 1).toIso8601String();
+
+      final applications = await supabase
+          .from('financing_applications')
+          .select('*')
+          .eq('account_officer_id', userId)
+          .gte('created_at', startOfMonth)
+          .lt('created_at', endOfMonth)
+          .order('created_at', ascending: false);
+
+      List<Map<String, dynamic>> result = [];
+
+      for (var application in applications) {
+        final applicantId = application['applicant_id'];
+
+        final applicant = await supabase
+            .from('applicants')
+            .select('name')
+            .eq('id', applicantId)
+            .single();
+
+        result.add({
+          'financing_application': application,
+          'applicant': applicant,
+        });
+      }
+
+      return result;
+    } catch (e) {
+      throw Exception("Gagal mengambil data pengajuan: $e");
+    }
+  }
 }

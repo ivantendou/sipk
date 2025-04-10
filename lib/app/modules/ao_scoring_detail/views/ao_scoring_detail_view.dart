@@ -114,18 +114,23 @@ class AoScoringDetailView extends GetView<AoScoringDetailController> {
         }),
       ),
       floatingActionButton: Obx(() {
-        return SubmissionButtonWidget(
-        isLoading: controller.isLoading.value,
-        onTap: () {
-          if (controller.isLoading.value == true) return;
-          Get.toNamed(Routes.SUBMISSION_FORM);
-          controller.callSubmissionFormController(
-            controller.creditScoreData.value?.applicant?.id.toString() ?? "",
-            controller.creditScoreData.value?.applicant?.name ?? "",
-            controller.creditScoreData.value?.applicant?.ktpNumber ?? "",
-          );
-        },
-      );
+        return controller.isFromSubmissionPage.value == 'true'
+            ? const SizedBox()
+            : SubmissionButtonWidget(
+                isLoading: controller.isLoading.value,
+                onTap: () {
+                  if (controller.isLoading.value == true) return;
+                  Get.toNamed(Routes.SUBMISSION_FORM);
+                  controller.callSubmissionFormController(
+                    controller.creditScoreData.value?.applicant?.id
+                            .toString() ??
+                        "",
+                    controller.creditScoreData.value?.applicant?.name ?? "",
+                    controller.creditScoreData.value?.applicant?.ktpNumber ??
+                        "",
+                  );
+                },
+              );
       }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
