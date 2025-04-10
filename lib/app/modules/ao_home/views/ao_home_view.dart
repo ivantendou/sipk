@@ -19,9 +19,14 @@ class AoHomeView extends GetView<AoHomeController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: const AoHomeAppbarWidget(
-          imageUrl: "",
-          name: "Muhamad Ivan Fadillah",
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(56),
+          child: Obx(
+            () => AoHomeAppbarWidget(
+              imageUrl: "",
+              name: controller.username.value,
+            ),
+          ),
         ),
         backgroundColor: ColorsConstant.grey100,
         body: SingleChildScrollView(

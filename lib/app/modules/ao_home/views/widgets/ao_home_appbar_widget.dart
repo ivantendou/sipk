@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -74,12 +73,12 @@ class AoHomeAppbarWidget extends StatelessWidget
                 icon: Assets.images.bell.svg(width: 24),
               ),
               const Positioned(
-                right: 15, 
-                top: 10, 
+                right: 15,
+                top: 10,
                 child: badges.Badge(
                   badgeStyle: badges.BadgeStyle(
                     badgeColor: Colors.red,
-                    padding: EdgeInsets.all(4), 
+                    padding: EdgeInsets.all(4),
                   ),
                 ),
               ),

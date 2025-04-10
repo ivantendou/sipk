@@ -50,10 +50,12 @@ class LoginController extends GetxController {
           final user = res.user!;
           final role = user.userMetadata?['role'];
           final userId = user.id;
+          final username = user.userMetadata?['full_name'];
 
           final prefs = await SharedPreferences.getInstance();
           await prefs.setString('userId', userId);
           await prefs.setString('role', role);
+          await prefs.setString('username', username);
           await prefs.setInt(
               'loginTimestamp', DateTime.now().millisecondsSinceEpoch);
 

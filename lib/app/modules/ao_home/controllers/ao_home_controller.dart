@@ -8,13 +8,17 @@ import 'package:sipk/models/credit_scores_model.dart';
 class AoHomeController extends GetxController {
   final ScoringService scoringService = ScoringService();
   late String? applicantId;
+  final username = ''.obs;
   final isLoading = false.obs;
   final RxList<CreditScoresModel> scoringDraft = <CreditScoresModel>[].obs;
   final RxList<CreditScoresModel> scoringResult = <CreditScoresModel>[].obs;
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    final prefs = await SharedPreferences.getInstance();
+    username.value = prefs.getString('username') ?? "";
+    print(username.value);
     fetchCreditScores();
   }
 
