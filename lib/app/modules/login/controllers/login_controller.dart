@@ -74,7 +74,8 @@ class LoginController extends GetxController {
           showLoginFailedDialog(
               "Koneksi internet bermasalah. Periksa jaringan Anda.");
         } else {
-          showLoginFailedDialog("Terjadi kesalahan. Coba lagi nanti.");
+          showLoginFailedDialog(
+              "Terjadi kesalahan. Periksa jaringan Anda dan coba lagi.");
         }
       } finally {
         isLoading(false);

@@ -601,6 +601,7 @@ class ScoringFormController extends GetxController {
           break;
         case 2:
           await _executeUpdateStep(updateThirdStep);
+          await _executeUpdateStep(updateThirdStep);
           break;
         case 3:
           await _executeUpdateStep(updateFourthStep);

@@ -79,7 +79,7 @@ class StepOneFormWidget extends StatelessWidget {
           TextFormFieldWidget(
             controller: controller.residentialAddressController,
             fieldTitle: 'Alamat Domisili',
-            keyboardType: TextInputType.phone,
+            keyboardType: TextInputType.text,
             validator: FormValidators.validateAddress,
           ),
           const SizedBox(height: 16),
@@ -203,9 +203,11 @@ class StepOneFormWidget extends StatelessWidget {
               if (controller.isOwnBusiness) {
                 controller.selfEmploymentType.value = value;
                 controller.employmentType.value = null;
+                controller.hasBusiness.value = 'Ya';
               } else {
                 controller.employmentType.value = value;
                 controller.selfEmploymentType.value = null;
+                controller.hasBusiness.value = 'Tidak';
               }
             },
           ),

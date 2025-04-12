@@ -33,13 +33,13 @@ class StepSevenFormWidget extends StatelessWidget {
             items: const [
               'Belum Pernah',
               'Debitur Bank < 1 Tahun',
-              'Debitur Bank  1 < 3 Tahun',
+              'Debitur Bank 1 < 3 Tahun',
               'Debitur Bank > 3 Tahun',
             ],
             value: [
               'Belum Pernah',
               'Debitur Bank < 1 Tahun',
-              'Debitur Bank  1 < 3 Tahun',
+              'Debitur Bank 1 < 3 Tahun',
               'Debitur Bank > 3 Tahun'
             ].contains(controller.bankingRelationship.value)
                 ? controller.bankingRelationship.value

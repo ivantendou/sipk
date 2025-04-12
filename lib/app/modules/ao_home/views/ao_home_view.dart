@@ -37,13 +37,16 @@ class AoHomeView extends GetView<AoHomeController> {
                 const SizedBox(height: 16),
                 const MonthlyTargetCardWidget(),
                 const SizedBox(height: 16),
-                CustomIconButtonWidget(
-                  icon: Assets.images.add1.svg(width: 24),
-                  text: "Buat Skoring Pembiayaan Baru",
-                  onTap: () {
-                    controller.createForm();
-                  },
-                ),
+                Obx(() {
+                  return CustomIconButtonWidget(
+                    icon: Assets.images.add1.svg(width: 24),
+                    text: "Buat Skoring Pembiayaan Baru",
+                    isLoading: controller.isLoadingForm.value,
+                    onTap: () {
+                      controller.createForm();
+                    },
+                  );
+                }),
                 const SizedBox(height: 20),
                 HeaderWithSeeAllWidget(
                   title: "Draf Skoring",

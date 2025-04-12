@@ -7,9 +7,10 @@ import 'package:sipk/models/credit_scores_model.dart';
 
 class AoHomeController extends GetxController {
   final ScoringService scoringService = ScoringService();
-  late String? applicantId;
+  final applicantId = ''.obs;
   final username = ''.obs;
   final isLoading = false.obs;
+  final isLoadingForm = false.obs;
   final RxList<CreditScoresModel> scoringDraft = <CreditScoresModel>[].obs;
   final RxList<CreditScoresModel> scoringResult = <CreditScoresModel>[].obs;
 
@@ -22,13 +23,15 @@ class AoHomeController extends GetxController {
   }
 
   Future<void> createForm() async {
+    isLoadingForm(true);
     final prefs = await SharedPreferences.getInstance();
     final userId = prefs.getString('userId');
-    applicantId = await scoringService.createForm(userId: userId!);
+    applicantId.value = await scoringService.createForm(userId: userId!);
     Get.toNamed(
       Routes.SCORING_FORM,
-      arguments: {'applicantId': applicantId},
+      arguments: {'applicantId': applicantId.value},
     );
+    isLoadingForm(false);
   }
 
   void fetchCreditScores() async {

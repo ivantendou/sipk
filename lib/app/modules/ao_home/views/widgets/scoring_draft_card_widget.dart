@@ -26,9 +26,10 @@ class ScoringDraftCardWidget extends StatelessWidget {
         color: ColorsConstant.white,
         boxShadow: [
           BoxShadow(
-            color: ColorsConstant.black.withValues(alpha: 0.2),
-            offset: const Offset(0, 1),
-            blurRadius: 2,
+            color: ColorsConstant.black.withValues(alpha: 0.05),
+            offset: const Offset(0, 2),
+            blurRadius: 8,
+            spreadRadius: 1,
           ),
         ],
       ),
