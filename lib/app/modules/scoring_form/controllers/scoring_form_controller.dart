@@ -24,6 +24,7 @@ class ScoringFormController extends GetxController {
   final isScoringDraft = false.obs;
   var stepCompleted = List.generate(8, (index) => false).obs;
   final formKeys = List.generate(8, (index) => GlobalKey<FormState>());
+  bool _isUpdatingFields = false;
 
   final TextEditingController applicantNameController = TextEditingController();
   final Rxn<String> applicantCategory = Rxn<String>();
@@ -167,6 +168,9 @@ class ScoringFormController extends GetxController {
     if (isScoringDraft.value == true) {
       fetchScoringSteps();
     }
+    downPaymentPctController.addListener(_onDownPaymentPctChanged);
+    downPaymentAmtController.addListener(_onDownPaymentAmtChanged);
+    applicationAmountController.addListener(_onApplicationAmountChanged);
   }
 
   void callAoHomeController() {
@@ -865,5 +869,84 @@ class ScoringFormController extends GetxController {
         ),
       ),
     );
+  }
+
+  void _onDownPaymentPctChanged() {
+    if (_isUpdatingFields) return;
+
+    final percentText = downPaymentPctController.text;
+    if (percentText.isEmpty) return;
+
+    final applicationAmountText = applicationAmountController.text;
+    if (applicationAmountText.isEmpty) return;
+
+    try {
+      var percentValue = double.parse(percentText) / 100;
+      var applicationAmount = double.parse(applicationAmountText);
+      final downPaymentAmount = applicationAmount * percentValue;
+
+      _isUpdatingFields = true;
+      downPaymentAmtController.text = downPaymentAmount.round().toString();
+      _isUpdatingFields = false;
+
+      if (kDebugMode) {
+        print(
+          'Updated downPaymentAmtController to: ${downPaymentAmtController.text}');
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error menghitung jumlah uang muka: $e');
+      }
+    }
+  }
+
+  void _onDownPaymentAmtChanged() {
+    if (_isUpdatingFields) return;
+
+
+    final amountText = downPaymentAmtController.text;
+    if (amountText.isEmpty) return;
+
+    final applicationAmountText = applicationAmountController.text;
+    if (applicationAmountText.isEmpty) return;
+
+    try {
+      final downPaymentAmount = double.parse(amountText);
+      final applicationAmount = double.parse(applicationAmountText);
+      if (applicationAmount <= 0) return;
+      final percentValue = (downPaymentAmount / applicationAmount) * 100;
+
+      _isUpdatingFields = true;
+      downPaymentPctController.text = percentValue.toStringAsFixed(2);
+      _isUpdatingFields = false;
+
+      if (kDebugMode) {
+        print(
+            'Updated downPaymentPctController to: ${downPaymentPctController.text}');
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error menghitung persentase uang muka: $e');
+      }
+    }
+  }
+
+  void _onApplicationAmountChanged() {
+    if (_isUpdatingFields) return;
+
+    if (downPaymentPctController.text.isNotEmpty) {
+      _onDownPaymentPctChanged();
+    } else if (downPaymentAmtController.text.isNotEmpty) {
+      _onDownPaymentAmtChanged();
+    }
+  }
+
+  @override
+  void onClose() {
+    downPaymentPctController.removeListener(_onDownPaymentPctChanged);
+    downPaymentAmtController.removeListener(_onDownPaymentAmtChanged);
+    applicationAmountController.removeListener(_onApplicationAmountChanged);
+
+    super.onClose();
   }
 }

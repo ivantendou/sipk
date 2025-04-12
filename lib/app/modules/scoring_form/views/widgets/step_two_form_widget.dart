@@ -105,11 +105,6 @@ class StepTwoFormWidget extends StatelessWidget {
             fieldTitle: 'Uang Muka (%)',
           ),
           const SizedBox(height: 16),
-          RupiahInputFieldWidget(
-            controller: controller.downPaymentAmtController,
-            fieldTitle: 'Uang Muka (Rupiah)',
-          ),
-          const SizedBox(height: 16),
         ],
       );
     });
