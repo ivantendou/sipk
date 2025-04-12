@@ -14,7 +14,15 @@ class AdminManageDataView extends GetView<AdminManageDataController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: const AoHomeAppbarWidget(),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(56),
+          child: Obx(
+            () => AoHomeAppbarWidget(
+              imageUrl: "",
+              name: controller.username.value,
+            ),
+          ),
+        ),
         backgroundColor: ColorsConstant.grey100,
         body: SingleChildScrollView(
           child: Padding(
@@ -44,8 +52,9 @@ class AdminManageDataView extends GetView<AdminManageDataController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const FolderCardWidget(
+                    FolderCardWidget(
                       folderName: 'Data Pengajuan Pembiayaan',
+                      onTap: () => Get.toNamed(Routes.SUBMISSION_DATA),
                     ),
                     const SizedBox(width: 16),
                     Expanded(

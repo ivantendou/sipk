@@ -4,15 +4,15 @@ import 'package:get/get.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:sipk/app/constants/assets.gen.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
-import 'package:sipk/app/modules/ao_submission_detail/views/widgets/detail_submission_card_widget.dart';
+import 'package:sipk/app/modules/submission_detail/views/widgets/detail_submission_card_widget.dart';
 import 'package:sipk/app/routes/app_pages.dart';
 import 'package:sipk/app/widgets/custom_app_bar_widget.dart';
 import 'package:sipk/app/widgets/custom_icon_button_widget.dart';
 
-import '../controllers/ao_submission_detail_controller.dart';
+import '../controllers/submission_detail_controller.dart';
 
-class AoSubmissionDetailView extends GetView<AoSubmissionDetailController> {
-  const AoSubmissionDetailView({super.key});
+class SubmissionDetailView extends GetView<SubmissionDetailController> {
+  const SubmissionDetailView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +41,7 @@ class AoSubmissionDetailView extends GetView<AoSubmissionDetailController> {
                 children: [
                   const SizedBox(height: 16),
                   DetailSubmissionCardWidget(
+                    userRole: controller.userRole.value,
                     submissionId: controller.financingApplicationData.value
                         ?.financingApplication?.id
                         .toString(),
@@ -96,13 +97,41 @@ class AoSubmissionDetailView extends GetView<AoSubmissionDetailController> {
                               'Accepted' ||
                           controller.financingApplicationData.value
                                   ?.financingApplication?.applicationStatus ==
-                              'Accepted'
+                              'Rejected'
                       ? const SizedBox()
-                      : CustomIconButtonWidget(
-                          icon: Assets.images.cross.svg(),
-                          text: 'Batalkan Pengajuan',
-                          backgroundColor: ColorsConstant.error,
-                        ),
+                      : controller.userRole.value == 'Manajer'
+                          ? Row(
+                              children: [
+                                Expanded(
+                                  child: CustomIconButtonWidget(
+                                    icon: Assets.images.cross.svg(),
+                                    text: 'Tolak',
+                                    backgroundColor: ColorsConstant.error,
+                                    onTap: () {
+                                      controller.showRejectConfirmationDialog();
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(width: 16),
+                                Expanded(
+                                  child: CustomIconButtonWidget(
+                                    icon: Assets.images.check.svg(),
+                                    text: 'Terima',
+                                    backgroundColor: ColorsConstant.success,
+                                    onTap: () {
+                                      controller.showAcceptConfirmationDialog();
+                                    },
+                                  ),
+                                ),
+                              ],
+                            )
+                          : controller.userRole.value == 'Account Officer'
+                              ? CustomIconButtonWidget(
+                                  icon: Assets.images.cross.svg(),
+                                  text: 'Batalkan Pengajuan',
+                                  backgroundColor: ColorsConstant.error,
+                                )
+                              : const SizedBox(),
                 ],
               ),
             ),

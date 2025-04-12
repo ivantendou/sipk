@@ -21,6 +21,7 @@ void main() async {
     anonKey: dotenv.env['PROJECT_API_KEY'] ?? '',
   );
   Get.put(SplashController());
+ 
   runApp(const MyApp());
 }
 

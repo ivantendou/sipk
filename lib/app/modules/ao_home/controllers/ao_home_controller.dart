@@ -18,7 +18,6 @@ class AoHomeController extends GetxController {
     super.onInit();
     final prefs = await SharedPreferences.getInstance();
     username.value = prefs.getString('username') ?? "";
-    print(username.value);
     fetchCreditScores();
   }
 

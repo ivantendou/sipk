@@ -20,8 +20,8 @@ import '../modules/ao_select_scoring/bindings/ao_select_scoring_binding.dart';
 import '../modules/ao_select_scoring/views/ao_select_scoring_view.dart';
 import '../modules/ao_submission/bindings/ao_submission_binding.dart';
 import '../modules/ao_submission/views/ao_submission_view.dart';
-import '../modules/ao_submission_detail/bindings/ao_submission_detail_binding.dart';
-import '../modules/ao_submission_detail/views/ao_submission_detail_view.dart';
+import '../modules/submission_detail/bindings/submission_detail_binding.dart';
+import '../modules/submission_detail/views/submission_detail_view.dart';
 import '../modules/bottom_nav_admin/bindings/bottom_nav_admin_binding.dart';
 import '../modules/bottom_nav_admin/views/bottom_nav_admin_view.dart';
 import '../modules/bottom_nav_ao/bindings/bottom_nav_ao_binding.dart';
@@ -34,8 +34,6 @@ import '../modules/manager_scoring_detail/bindings/manager_scoring_detail_bindin
 import '../modules/manager_scoring_detail/views/manager_scoring_detail_view.dart';
 import '../modules/manager_submission/bindings/manager_submission_binding.dart';
 import '../modules/manager_submission/views/manager_submission_view.dart';
-import '../modules/manager_submission_detail/bindings/manager_submission_detail_binding.dart';
-import '../modules/manager_submission_detail/views/manager_submission_detail_view.dart';
 import '../modules/notification/bindings/notification_binding.dart';
 import '../modules/notification/views/notification_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
@@ -100,21 +98,16 @@ class AppPages {
       binding: NotificationBinding(),
     ),
     GetPage(
-      name: _Paths.AO_SUBMISSION_DETAIL,
-      page: () => const AoSubmissionDetailView(),
-      binding: AoSubmissionDetailBinding(),
+      name: _Paths.SUBMISSION_DETAIL,
+      page: () => const SubmissionDetailView(),
+      binding: SubmissionDetailBinding(),
       children: [
         GetPage(
-          name: _Paths.AO_SUBMISSION_DETAIL,
-          page: () => const AoSubmissionDetailView(),
-          binding: AoSubmissionDetailBinding(),
+          name: _Paths.SUBMISSION_DETAIL,
+          page: () => const SubmissionDetailView(),
+          binding: SubmissionDetailBinding(),
         ),
       ],
-    ),
-    GetPage(
-      name: _Paths.MANAGER_SUBMISSION_DETAIL,
-      page: () => const ManagerSubmissionDetailView(),
-      binding: ManagerSubmissionDetailBinding(),
     ),
     GetPage(
       name: _Paths.AO_SCORING_DETAIL,

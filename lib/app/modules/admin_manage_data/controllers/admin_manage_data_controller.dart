@@ -1,23 +1,14 @@
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AdminManageDataController extends GetxController {
-  //TODO: Implement AdminManageDataController
+  final username = ''.obs;
 
-  final count = 0.obs;
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    final prefs = await SharedPreferences.getInstance();
+    username.value = prefs.getString('username') ?? "";
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

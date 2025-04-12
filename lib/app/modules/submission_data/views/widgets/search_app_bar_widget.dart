@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:sipk/app/constants/assets.gen.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
-import 'package:sipk/app/modules/scoring_data/controllers/scoring_data_controller.dart';
-import 'package:sipk/app/modules/scoring_data/views/widgets/filter_bottom_sheet_widget.dart';
+import 'package:sipk/app/modules/submission_data/controllers/submission_data_controller.dart';
+import 'package:sipk/app/modules/submission_data/views/widgets/filter_bottom_sheet_widget.dart';
 import 'package:sipk/app/widgets/custom_app_bar_widget.dart';
 
 AppBarWithSearchSwitch buildRegularAppBar(
-    BuildContext context, ScoringDataController controller) {
+    BuildContext context, SubmissionDataController controller) {
   return AppBarWithSearchSwitch(
     titleTextStyle: TextStyleConstant.subHeading2,
     scrolledUnderElevation: 0.0,
@@ -25,7 +25,7 @@ AppBarWithSearchSwitch buildRegularAppBar(
     animation: AppBarAnimationSlideLeft.call,
     appBarBuilder: (context) {
       return CustomAppBarWidget(
-        title: 'Data Skoring',
+        title: 'Data Pengajuan',
         centerTitle: false,
         actions: [
           GestureDetector(

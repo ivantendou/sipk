@@ -87,6 +87,8 @@ class SubmissionFormController extends GetxController {
         officeBranch: officeBranch.value ?? "",
         memberStatus: memberStatus.value ?? "",
         applicationStatus: "Pending",
+        name: name.value,
+        ktpNumber: ktpNumber.value,
       );
       applicationId.value = response;
       showPostDataSuccess();
@@ -194,7 +196,7 @@ class SubmissionFormController extends GetxController {
         onTap: () {
           Get.back();
           Get.offNamed(
-            Routes.AO_SUBMISSION_DETAIL,
+            Routes.SUBMISSION_DETAIL,
             parameters: {'id': applicationId.value},
           );
         },

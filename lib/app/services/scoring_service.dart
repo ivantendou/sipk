@@ -72,7 +72,7 @@ class ScoringService {
             )
           )
         ''')
-          .or('name.ilike.%$searchQuery%,ktp_number.ilike.%$searchQuery%,mobile_phone.ilike.%$searchQuery%')
+          .or('name.ilike.%$searchQuery%,ktp_number.ilike.%$searchQuery%')
           .eq('account_officer_id', accountOfficerId)
           .order('created_at', ascending: ascending)
           .range(from, to);
@@ -125,7 +125,7 @@ class ScoringService {
             )
           )
         ''')
-          .or('name.ilike.%$searchQuery%,ktp_number.ilike.%$searchQuery%,mobile_phone.ilike.%$searchQuery%')
+          .or('name.ilike.%$searchQuery%,ktp_number.ilike.%$searchQuery%')
           .order('created_at', ascending: ascending)
           .range(from, to);
 
@@ -228,8 +228,7 @@ class ScoringService {
 
   Future<Map<String, dynamic>> fetchSecondStep(String applicantId) async {
     try {
-      final financingAppData =
-          await supabase.from('financing_data').select('''
+      final financingAppData = await supabase.from('financing_data').select('''
           financing_type,
           application_amount,
           down_payment_pct,

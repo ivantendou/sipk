@@ -11,7 +11,7 @@ abstract class Routes {
   static const AO_MANAGE_DATA = _Paths.AO_MANAGE_DATA;
   static const PROFILE = _Paths.PROFILE;
   static const NOTIFICATION = _Paths.NOTIFICATION;
-  static const AO_SUBMISSION_DETAIL = _Paths.AO_SUBMISSION_DETAIL;
+  static const SUBMISSION_DETAIL = _Paths.SUBMISSION_DETAIL;
   static const MANAGER_SUBMISSION_DETAIL = _Paths.MANAGER_SUBMISSION_DETAIL;
   static const AO_SCORING_DETAIL = _Paths.AO_SCORING_DETAIL;
   static const MANAGER_SCORING_DETAIL = _Paths.MANAGER_SCORING_DETAIL;
@@ -40,7 +40,7 @@ abstract class _Paths {
   static const AO_MANAGE_DATA = '/ao-manage-data';
   static const PROFILE = '/profile';
   static const NOTIFICATION = '/notification';
-  static const AO_SUBMISSION_DETAIL = '/ao-submission-detail';
+  static const SUBMISSION_DETAIL = '/submission-detail';
   static const MANAGER_SUBMISSION_DETAIL = '/manager-submission-detail';
   static const AO_SCORING_DETAIL = '/ao-scoring-detail';
   static const MANAGER_SCORING_DETAIL = '/manager-scoring-detail';

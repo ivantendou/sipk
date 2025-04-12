@@ -15,6 +15,7 @@ class DetailSubmissionCardWidget extends StatelessWidget {
   final String? allocation;
   final String? submissionDate;
   final String? applicationAmount;
+  final String userRole;
 
   const DetailSubmissionCardWidget({
     Key? key,
@@ -26,6 +27,7 @@ class DetailSubmissionCardWidget extends StatelessWidget {
     this.allocation,
     this.submissionDate,
     this.applicationAmount,
+    required this.userRole,
   }) : super(key: key);
 
   @override
@@ -59,7 +61,8 @@ class DetailSubmissionCardWidget extends StatelessWidget {
         headerBackgroundColor = ColorsConstant.average100;
         borderColor = ColorsConstant.average600;
         textColor = ColorsConstant.average600;
-        statusText = "Diproses";
+        statusText =
+            userRole == 'Manajer' ? "Menunggu Persetujuan" : "Diproses";
         break;
     }
 
@@ -174,7 +177,7 @@ class DetailSubmissionCardWidget extends StatelessWidget {
               const SizedBox(height: 8),
               LabelValueWidget(
                 label: 'Jumlah Pengajuan',
-                value: applicationAmount,
+                value: 'Rp$applicationAmount',
               ),
             ],
           ),

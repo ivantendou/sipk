@@ -62,7 +62,6 @@ class AdminUserAddView extends GetView<AdminUserAddController> {
                         items: const [
                           'Account Officer',
                           'Manajer',
-                          'Supervisor'
                         ],
                         onChanged: (value) {
                           controller.setRole(value);

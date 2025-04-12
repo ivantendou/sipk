@@ -16,7 +16,7 @@ class AoManageDataView extends GetView<AoManageDataController> {
         backgroundColor: ColorsConstant.grey100,
         body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               right: 16,
               left: 16,
               top: 16,
@@ -34,7 +34,9 @@ class AoManageDataView extends GetView<AoManageDataController> {
                 const SizedBox(width: 16),
                 FolderCardWidget(
                   folderName: 'Data Pengajuan Pembiayaan',
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(Routes.SUBMISSION_DATA);
+                  },
                 ),
               ],
             ),

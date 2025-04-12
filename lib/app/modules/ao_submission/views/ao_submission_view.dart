@@ -126,7 +126,7 @@ class AoSubmissionView extends GetView<AoSubmissionController> {
                   status: status,
                   onTap: () {
                     Get.toNamed(
-                      Routes.AO_SUBMISSION_DETAIL,
+                      Routes.SUBMISSION_DETAIL,
                       parameters: {
                         'id': application.financingApplication?.id.toString() ??
                             "",

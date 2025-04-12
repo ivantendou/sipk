@@ -12,12 +12,7 @@ class SubmissionDataCardWidget extends StatelessWidget {
   final String? financingPurpose;
   final String? totalSubmission;
   final String? submissionDate;
-  final bool isSelected;
-  final bool isSelectionMode;
   final void Function()? onTap;
-  final void Function()? onLongPress;
-  final void Function(bool?)? onCheckboxChanged;
-  final String userRole;
 
   const SubmissionDataCardWidget({
     Key? key,
@@ -27,12 +22,7 @@ class SubmissionDataCardWidget extends StatelessWidget {
     this.financingPurpose,
     this.totalSubmission,
     this.submissionDate,
-    required this.isSelected,
-    required this.isSelectionMode,
     this.onTap,
-    this.onLongPress,
-    this.onCheckboxChanged,
-    required this.userRole,
   }) : super(key: key);
 
   @override
@@ -76,8 +66,7 @@ class SubmissionDataCardWidget extends StatelessWidget {
             BlendMode.srcIn,
           ),
         );
-        statusText =
-            userRole == 'Manajer' ? "Menunggu Persetujuan" : "Diproses";
+        statusText = "Menunggu Persetujuan";
         break;
     }
 
@@ -85,22 +74,8 @@ class SubmissionDataCardWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: InkWell(
         onTap: onTap,
-        onLongPress: onLongPress,
         child: Row(
           children: [
-            if (isSelectionMode)
-              Padding(
-                padding: const EdgeInsets.only(right: 8),
-                child: SizedBox(
-                  width: 24,
-                  height: 24,
-                  child: Checkbox(
-                    value: isSelected,
-                    onChanged: onCheckboxChanged,
-                    activeColor: ColorsConstant.primary,
-                  ),
-                ),
-              ),
             Expanded(
               child: Column(
                 children: [

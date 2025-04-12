@@ -28,6 +28,7 @@ class HeaderWithSeeAllWidget extends StatelessWidget {
           ),
         ),
         Material(
+          color: ColorsConstant.grey100,
           child: InkWell(
             onTap: onTap,
             borderRadius: BorderRadius.circular(8),
