@@ -129,6 +129,9 @@ class SubmissionDetailView extends GetView<SubmissionDetailController> {
                               ? CustomIconButtonWidget(
                                   icon: Assets.images.cross.svg(),
                                   text: 'Batalkan Pengajuan',
+                                  onTap: () {
+                                    controller.showCancelConfirmationDialog();
+                                  },
                                   backgroundColor: ColorsConstant.error,
                                 )
                               : const SizedBox(),

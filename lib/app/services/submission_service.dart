@@ -22,13 +22,17 @@ class SubmissionService {
     }
   }
 
-  Future<void> deleteSubmission(List<String> dataIds) async {
+  Future<void> deleteSubmissions(List<String> dataIds) async {
     if (kDebugMode) {
       print(dataIds);
     }
     await Future.wait(dataIds.map((dataId) async {
       await supabase.from('financing_applications').delete().eq('id', dataId);
     }));
+  }
+
+  Future<void> deleteSubmission(String dataId) async {
+    await supabase.from('financing_applications').delete().eq('id', dataId);
   }
 
   Future<String> postFinancingApplications({
@@ -136,7 +140,7 @@ class SubmissionService {
           .filter('application_status', 'eq', applicationStatus)
           .order('created_at', ascending: ascending)
           .range(from, to);
-          
+
       return response
           .map((json) => FinancingApplicationsModel.fromJson(json))
           .toList();

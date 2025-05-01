@@ -37,6 +37,9 @@ class SubmissionDataCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currencyFormat =
+        NumberFormat.currency(locale: 'id', symbol: '', decimalDigits: 0);
+
     String formatTimestamp(String timestamp) {
       DateTime dateTime = DateTime.parse(timestamp);
       String formattedDate = DateFormat('d MMMM yyyy, HH:mm').format(dateTime);
@@ -189,7 +192,8 @@ class SubmissionDataCardWidget extends StatelessWidget {
                             children: [
                               LabelValueWidget(
                                 label: "Jumlah Pengajuan",
-                                value: 'Rp$totalSubmission',
+                                value:
+                                    'Rp${currencyFormat.format(int.tryParse(totalSubmission ?? '0') ?? 0)}',
                               ),
                               const SizedBox(height: 8),
                               LabelValueWidget(

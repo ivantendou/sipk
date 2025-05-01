@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sipk/app/constants/assets.gen.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
+import 'package:sipk/app/modules/ao_submission/controllers/ao_submission_controller.dart';
 import 'package:sipk/app/routes/app_pages.dart';
 import 'package:sipk/app/services/submission_service.dart';
 import 'package:sipk/models/financial_data_model.dart';
@@ -25,6 +26,13 @@ class SubmissionFormController extends GetxController {
   final Rxn<String> memberStatus = Rxn<String>();
   final TextEditingController allocation = TextEditingController();
   final TextEditingController applicationAmount = TextEditingController();
+
+  void callAoSubmissionController() {
+    final aoSubmissionController =
+        Get.put<AoSubmissionController>(AoSubmissionController());
+
+    aoSubmissionController.refreshApplications();
+  }
 
   void fetchFinancialData() async {
     final response =
@@ -92,6 +100,7 @@ class SubmissionFormController extends GetxController {
       );
       applicationId.value = response;
       showPostDataSuccess();
+      callAoSubmissionController();
     } catch (e) {
       showPostDataFailed();
       if (kDebugMode) {

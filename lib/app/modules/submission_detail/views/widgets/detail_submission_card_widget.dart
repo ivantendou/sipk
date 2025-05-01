@@ -32,10 +32,12 @@ class DetailSubmissionCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currencyFormat =
+        NumberFormat.currency(locale: 'id', symbol: '', decimalDigits: 0);
+
     String formatTimestamp(String timestamp) {
       DateTime dateTime = DateTime.parse(timestamp);
-      String formattedDate = DateFormat('d MMMM yyyy, HH:mm').format(dateTime);
-      return formattedDate;
+      return DateFormat('d MMMM yyyy, HH:mm', 'id').format(dateTime);
     }
 
     Color headerBackgroundColor;
@@ -176,9 +178,9 @@ class DetailSubmissionCardWidget extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               LabelValueWidget(
-                label: 'Jumlah Pengajuan',
-                value: 'Rp$applicationAmount',
-              ),
+                  label: 'Jumlah Pengajuan',
+                  value:
+                      'Rp${currencyFormat.format(int.tryParse(applicationAmount ?? '0') ?? 0)}'),
             ],
           ),
         )

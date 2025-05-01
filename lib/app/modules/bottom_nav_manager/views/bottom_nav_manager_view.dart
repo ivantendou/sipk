@@ -57,7 +57,13 @@ class BottomNavManagerView extends GetView<BottomNavManagerController> {
                   icon: Padding(
                     padding: const EdgeInsets.only(bottom: 4),
                     child: controller.selectedIndex.value == 0
-                        ? Assets.images.submissionOn.svg(width: 24)
+                        ? Assets.images.submissionOn.svg(
+                            width: 24,
+                            colorFilter: const ColorFilter.mode(
+                              ColorsConstant.primary,
+                              BlendMode.srcIn,
+                            ),
+                          )
                         : Assets.images.submissionOff.svg(width: 24),
                   ),
                   label: "Pengajuan",
@@ -66,7 +72,13 @@ class BottomNavManagerView extends GetView<BottomNavManagerController> {
                   icon: Padding(
                     padding: const EdgeInsets.only(bottom: 4),
                     child: controller.selectedIndex.value == 1
-                        ? Assets.images.profileOn.svg(width: 24)
+                        ? Assets.images.profileOn.svg(
+                            width: 24,
+                            colorFilter: const ColorFilter.mode(
+                              ColorsConstant.primary,
+                              BlendMode.srcIn,
+                            ),
+                          )
                         : Assets.images.profileOff.svg(width: 24),
                   ),
                   label: "Profil",

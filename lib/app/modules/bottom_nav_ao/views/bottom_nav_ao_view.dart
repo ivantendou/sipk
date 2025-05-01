@@ -60,7 +60,13 @@ class BottomNavAoView extends GetView<BottomNavAoController> {
                   icon: Padding(
                     padding: const EdgeInsets.only(bottom: 4),
                     child: controller.selectedIndex.value == 0
-                        ? Assets.images.scoringOn.svg(width: 24)
+                        ? Assets.images.scoringOn.svg(
+                            width: 24,
+                            colorFilter: const ColorFilter.mode(
+                              ColorsConstant.primary,
+                              BlendMode.srcIn,
+                            ),
+                          )
                         : Assets.images.scoringOff.svg(width: 24),
                   ),
                   label: "Skoring",
@@ -69,7 +75,13 @@ class BottomNavAoView extends GetView<BottomNavAoController> {
                   icon: Padding(
                     padding: const EdgeInsets.only(bottom: 4),
                     child: controller.selectedIndex.value == 1
-                        ? Assets.images.submissionOn.svg(width: 24)
+                        ? Assets.images.submissionOn.svg(
+                            width: 24,
+                            colorFilter: const ColorFilter.mode(
+                              ColorsConstant.primary,
+                              BlendMode.srcIn,
+                            ),
+                          )
                         : Assets.images.submissionOff.svg(width: 24),
                   ),
                   label: "Pengajuan",
@@ -78,7 +90,13 @@ class BottomNavAoView extends GetView<BottomNavAoController> {
                   icon: Padding(
                     padding: const EdgeInsets.only(bottom: 4),
                     child: controller.selectedIndex.value == 2
-                        ? Assets.images.manageDataOn.svg(width: 24)
+                        ? Assets.images.manageDataOn.svg(
+                            width: 24,
+                            colorFilter: const ColorFilter.mode(
+                              ColorsConstant.primary,
+                              BlendMode.srcIn,
+                            ),
+                          )
                         : Assets.images.manageDataOff.svg(width: 24),
                   ),
                   label: "Kelola Data",
@@ -87,7 +105,13 @@ class BottomNavAoView extends GetView<BottomNavAoController> {
                   icon: Padding(
                     padding: const EdgeInsets.only(bottom: 4),
                     child: controller.selectedIndex.value == 3
-                        ? Assets.images.profileOn.svg(width: 24)
+                        ? Assets.images.profileOn.svg(
+                            width: 24,
+                            colorFilter: const ColorFilter.mode(
+                              ColorsConstant.primary,
+                              BlendMode.srcIn,
+                            ),
+                          )
                         : Assets.images.profileOff.svg(width: 24),
                   ),
                   label: "Profil",

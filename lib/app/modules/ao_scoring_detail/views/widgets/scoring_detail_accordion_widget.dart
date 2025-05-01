@@ -38,7 +38,7 @@ class ScoringDetailAccordionWidget extends StatelessWidget {
 
     return Accordion(
       paddingListHorizontal: 0,
-      headerBorderColor: ColorsConstant.grey500,
+      headerBorderColor: ColorsConstant.grey300,
       headerBorderRadius: 8,
       headerBackgroundColor: ColorsConstant.white,
       headerBorderWidth: 1,
@@ -53,7 +53,7 @@ class ScoringDetailAccordionWidget extends StatelessWidget {
       disableScrolling: true,
       children: [
         AccordionSection(
-          contentBorderColor: ColorsConstant.grey500,
+          contentBorderColor: ColorsConstant.grey300,
           header: Text(
             'Detail Informasi Pemohon',
             style: TextStyleConstant.subHeading.copyWith(
@@ -111,7 +111,7 @@ class ScoringDetailAccordionWidget extends StatelessWidget {
           ),
         ),
         AccordionSection(
-          contentBorderColor: ColorsConstant.grey500,
+          contentBorderColor: ColorsConstant.grey300,
           header: Text(
             'Keterangan Rating: ${ratingInfo['rank'] ?? 'Special Mention'}',
             style: TextStyleConstant.subHeading.copyWith(

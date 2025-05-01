@@ -12,7 +12,7 @@ AppBarWithSearchSwitch buildRegularAppBar(
   return AppBarWithSearchSwitch(
     titleTextStyle: TextStyleConstant.subHeading2,
     scrolledUnderElevation: 0.0,
-    fieldHintText: 'Cari berdasarkan Nama/NIK',
+    fieldHintText: 'Cari dengan Nama/NIK',
     bottom: PreferredSize(
       preferredSize: const Size.fromHeight(1.0),
       child: Container(

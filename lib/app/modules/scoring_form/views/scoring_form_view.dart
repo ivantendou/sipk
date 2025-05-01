@@ -27,7 +27,7 @@ class ScoringFormView extends GetView<ScoringFormController> {
       appBar: AppBar(
         scrolledUnderElevation: 0.0,
         title: Text(
-          'Data Skoring',
+          'Formulir Skoring',
           style: TextStyleConstant.subHeading2.copyWith(
             fontWeight: FontWeight.bold,
           ),

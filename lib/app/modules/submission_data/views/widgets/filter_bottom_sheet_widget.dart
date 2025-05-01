@@ -23,7 +23,7 @@ void showFilterBottomSheet(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Filter Data Skoring',
+                  'Filter Data Pengajuan',
                   style: TextStyleConstant.subHeading
                       .copyWith(fontWeight: FontWeight.bold),
                 ),

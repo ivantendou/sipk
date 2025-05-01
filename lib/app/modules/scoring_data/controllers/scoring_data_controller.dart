@@ -81,7 +81,9 @@ class ScoringDataController extends GetxController {
       isLoading(false);
       pagingController.refresh();
       isSelectionMode(false);
-      callAoHomeController();
+      if (Get.isRegistered<AoHomeController>()) {
+        callAoHomeController();
+      }
     } catch (e) {
       ScaffoldMessenger.of(Get.context!).showSnackBar(
         SnackBar(

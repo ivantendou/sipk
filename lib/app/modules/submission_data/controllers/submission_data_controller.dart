@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sipk/app/modules/ao_submission/controllers/ao_submission_controller.dart';
 import 'package:sipk/app/services/submission_service.dart';
 import 'package:sipk/models/financing_applications_model.dart';
 
@@ -44,6 +45,13 @@ class SubmissionDataController extends GetxController {
     pagingController.refresh();
   }
 
+  void callAoSubmissionController() {
+    final aoSubmissionController =
+        Get.put<AoSubmissionController>(AoSubmissionController());
+
+    aoSubmissionController.refreshApplications();
+  }
+
   void changeSortOption(String option) {
     selectedSortOption.value = option;
   }
@@ -60,10 +68,13 @@ class SubmissionDataController extends GetxController {
 
       if (submissionsToDelete.isEmpty) return;
 
-      await submissionService.deleteSubmission(submissionsToDelete);
+      await submissionService.deleteSubmissions(submissionsToDelete);
       isLoading(false);
       pagingController.refresh();
       isSelectionMode(false);
+      if (Get.isRegistered<AoSubmissionController>()) {
+        callAoSubmissionController();
+      }
     } catch (e) {
       ScaffoldMessenger.of(Get.context!).showSnackBar(
         SnackBar(

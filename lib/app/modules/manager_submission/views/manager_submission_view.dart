@@ -13,7 +13,7 @@ import '../controllers/manager_submission_controller.dart';
 
 class ManagerSubmissionView extends GetView<ManagerSubmissionController> {
   const ManagerSubmissionView({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -88,7 +88,7 @@ class ManagerSubmissionView extends GetView<ManagerSubmissionController> {
       ),
     );
   }
-  
+
   Widget _buildSubmissionsList() {
     return Obx(() {
       if (controller.isLoading.value) {
@@ -103,7 +103,7 @@ class ManagerSubmissionView extends GetView<ManagerSubmissionController> {
           ),
         );
       }
-      
+
       if (controller.hasError.value) {
         return Padding(
           padding: const EdgeInsets.all(16),
@@ -134,7 +134,7 @@ class ManagerSubmissionView extends GetView<ManagerSubmissionController> {
           ),
         );
       }
-      
+
       if (controller.latestSubmissions.isEmpty) {
         return const Center(
           child: Padding(
@@ -146,7 +146,7 @@ class ManagerSubmissionView extends GetView<ManagerSubmissionController> {
           ),
         );
       }
-      
+
       return ListView.builder(
         itemCount: controller.latestSubmissions.length,
         itemBuilder: (context, index) {

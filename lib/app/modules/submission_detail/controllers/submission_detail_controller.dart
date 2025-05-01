@@ -50,12 +50,52 @@ class SubmissionDetailController extends GetxController {
     }
   }
 
+  void deleteSubmission() async {
+    await submissionService.deleteSubmission(applicationId.value);
+    Get.back();
+  }
+
   Future<void> rejectSubmission() async {
     await submissionService.rejectSubmission(applicationId.value);
   }
 
   Future<void> acceptSubmission() async {
     await submissionService.acceptSubmission(applicationId.value);
+  }
+
+  void showCancelConfirmationDialog() {
+    Get.defaultDialog(
+      title: 'Batalkan Pengajuan',
+      titleStyle: TextStyleConstant.subHeading.copyWith(
+        fontWeight: FontWeight.bold,
+      ),
+      titlePadding: const EdgeInsets.only(top: 16),
+      content: const Text(
+        'Apakah Anda yakin ingin membatalkan pengajuan ini?',
+        style: TextStyleConstant.body,
+        textAlign: TextAlign.center,
+      ),
+      contentPadding: const EdgeInsets.all(16),
+      confirm: CustomButtonWidget(
+        text: 'Ya',
+        width: 120,
+        onTap: () async {
+          Get.back();
+          deleteSubmission();
+        },
+      ),
+      cancel: Padding(
+        padding: const EdgeInsets.only(bottom: 8),
+        child: CustomButtonWidget(
+          text: 'Tidak',
+          width: 120,
+          onTap: () => Get.back(),
+          buttonColor: ColorsConstant.white,
+          borderColor: ColorsConstant.primary,
+          textColor: ColorsConstant.primary,
+        ),
+      ),
+    );
   }
 
   void showRejectConfirmationDialog() {

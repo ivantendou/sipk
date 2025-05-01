@@ -29,136 +29,142 @@ class AoHomeView extends GetView<AoHomeController> {
           ),
         ),
         backgroundColor: ColorsConstant.grey100,
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              children: [
-                const SizedBox(height: 16),
-                const MonthlyTargetCardWidget(),
-                const SizedBox(height: 16),
-                Obx(() {
-                  return CustomIconButtonWidget(
-                    icon: Assets.images.add1.svg(width: 24),
-                    text: "Buat Skoring Pembiayaan Baru",
-                    isLoading: controller.isLoadingForm.value,
+        body: RefreshIndicator(
+          color: ColorsConstant.primary,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                children: [
+                  const SizedBox(height: 16),
+                  const MonthlyTargetCardWidget(),
+                  const SizedBox(height: 16),
+                  Obx(() {
+                    return CustomIconButtonWidget(
+                      icon: Assets.images.add1.svg(width: 24),
+                      text: "Buat Skoring Pembiayaan Baru",
+                      isLoading: controller.isLoadingForm.value,
+                      onTap: () {
+                        controller.createForm();
+                      },
+                    );
+                  }),
+                  const SizedBox(height: 20),
+                  HeaderWithSeeAllWidget(
+                    title: "Draf Skoring",
                     onTap: () {
-                      controller.createForm();
+                      Get.toNamed(
+                        Routes.SCORING_DATA,
+                        arguments: true,
+                      );
                     },
-                  );
-                }),
-                const SizedBox(height: 20),
-                HeaderWithSeeAllWidget(
-                  title: "Draf Skoring",
-                  onTap: () {
-                    Get.toNamed(
-                      Routes.SCORING_DATA,
-                      arguments: true,
-                    );
-                  },
-                ),
-                const SizedBox(height: 8),
-                Obx(() {
-                  if (controller.isLoading.value) {
-                    return Shimmer.fromColors(
-                      baseColor: Colors.grey[300]!,
-                      highlightColor: Colors.grey[100]!,
-                      child: Container(
+                  ),
+                  const SizedBox(height: 8),
+                  Obx(() {
+                    if (controller.isLoading.value) {
+                      return Shimmer.fromColors(
+                        baseColor: Colors.grey[300]!,
+                        highlightColor: Colors.grey[100]!,
+                        child: Container(
+                          width: double.infinity,
+                          height: 132,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      );
+                    } else if (controller.scoringDraft.isEmpty) {
+                      return Container(
                         width: double.infinity,
                         height: 132,
+                        alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          color: Colors.white,
                           borderRadius: BorderRadius.circular(12),
                         ),
-                      ),
-                    );
-                  } else if (controller.scoringDraft.isEmpty) {
-                    return Container(
-                      width: double.infinity,
-                      height: 132,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: const Center(
-                        child: Text('Belum ada draf skoring'),
-                      ),
-                    );
-                  } else {
-                    return ScoringDraftCardWidget(
-                      onTap: () {
-                        Get.toNamed(
-                          Routes.SCORING_FORM,
-                          arguments: {
-                            'applicantId': controller.scoringDraft.first.id,
-                            'isScoringDraft': true,
-                          },
-                        );
-                      },
-                      applicantName: controller.scoringDraft.first.name,
-                      scoringNumber: controller.scoringDraft.first.id,
-                    );
-                  }
-                }),
-                const SizedBox(height: 16),
-                HeaderWithSeeAllWidget(
-                  title: "Hasil Skoring",
-                  onTap: () {
-                    Get.toNamed(
-                      Routes.SCORING_DATA,
-                      arguments: false,
-                    );
-                  },
-                ),
-                const SizedBox(height: 8),
-                Obx(() {
-                  if (controller.isLoading.value) {
-                    return Shimmer.fromColors(
-                      baseColor: Colors.grey[300]!,
-                      highlightColor: Colors.grey[100]!,
-                      child: Container(
+                        child: const Center(
+                          child: Text('Belum ada draf skoring'),
+                        ),
+                      );
+                    } else {
+                      return ScoringDraftCardWidget(
+                        onTap: () {
+                          Get.toNamed(
+                            Routes.SCORING_FORM,
+                            arguments: {
+                              'applicantId': controller.scoringDraft.first.id,
+                              'isScoringDraft': true,
+                            },
+                          );
+                        },
+                        applicantName: controller.scoringDraft.first.name,
+                        scoringNumber: controller.scoringDraft.first.id,
+                      );
+                    }
+                  }),
+                  const SizedBox(height: 16),
+                  HeaderWithSeeAllWidget(
+                    title: "Hasil Skoring",
+                    onTap: () {
+                      Get.toNamed(
+                        Routes.SCORING_DATA,
+                        arguments: false,
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 8),
+                  Obx(() {
+                    if (controller.isLoading.value) {
+                      return Shimmer.fromColors(
+                        baseColor: Colors.grey[300]!,
+                        highlightColor: Colors.grey[100]!,
+                        child: Container(
+                          width: double.infinity,
+                          height: 132,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      );
+                    } else if (controller.scoringResult.isEmpty) {
+                      return Container(
                         width: double.infinity,
                         height: 132,
+                        alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          color: Colors.white,
                           borderRadius: BorderRadius.circular(12),
                         ),
-                      ),
-                    );
-                  } else if (controller.scoringResult.isEmpty) {
-                    return Container(
-                      width: double.infinity,
-                      height: 132,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: const Center(
-                        child: Text('Belum ada hasil skoring'),
-                      ),
-                    );
-                  } else {
-                    return ScoringResultCardWidget(
-                      applicantName: controller.scoringResult.first.name,
-                      scoringNumber: controller.scoringResult.first.id,
-                      score: controller.scoringResult.first.creditEvaluations
-                          ?.first.creditScores?.totalScore
-                          .toString(),
-                      onTap: () {
-                        Get.toNamed(
-                          Routes.AO_SCORING_DETAIL,
-                          parameters: {
-                            'id': controller.scoringResult.first.id.toString()
-                          },
-                        );
-                      },
-                    );
-                  }
-                }),
-                const SizedBox(width: 80),
-              ],
+                        child: const Center(
+                          child: Text('Belum ada hasil skoring'),
+                        ),
+                      );
+                    } else {
+                      return ScoringResultCardWidget(
+                        applicantName: controller.scoringResult.first.name,
+                        scoringNumber: controller.scoringResult.first.id,
+                        score: controller.scoringResult.first.creditEvaluations
+                            ?.first.creditScores?.totalScore
+                            .toString(),
+                        onTap: () {
+                          Get.toNamed(
+                            Routes.AO_SCORING_DETAIL,
+                            parameters: {
+                              'id': controller.scoringResult.first.id.toString()
+                            },
+                          );
+                        },
+                      );
+                    }
+                  }),
+                  const SizedBox(height: 80),
+                ],
+              ),
             ),
           ),
+          onRefresh: () async {
+            controller.fetchCreditScores();
+          },
         ),
       ),
     );

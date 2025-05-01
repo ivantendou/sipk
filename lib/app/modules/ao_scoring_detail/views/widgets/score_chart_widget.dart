@@ -160,6 +160,7 @@ class ScoreChartWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
                   color: ColorsConstant.white,
+                  border: Border.all(color: ColorsConstant.grey300),
                   boxShadow: [
                     BoxShadow(
                       color: ColorsConstant.black.withValues(alpha: 0.05),
