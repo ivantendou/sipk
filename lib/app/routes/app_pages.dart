@@ -20,14 +20,14 @@ import '../modules/ao_select_scoring/bindings/ao_select_scoring_binding.dart';
 import '../modules/ao_select_scoring/views/ao_select_scoring_view.dart';
 import '../modules/ao_submission/bindings/ao_submission_binding.dart';
 import '../modules/ao_submission/views/ao_submission_view.dart';
-import '../modules/submission_detail/bindings/submission_detail_binding.dart';
-import '../modules/submission_detail/views/submission_detail_view.dart';
 import '../modules/bottom_nav_admin/bindings/bottom_nav_admin_binding.dart';
 import '../modules/bottom_nav_admin/views/bottom_nav_admin_view.dart';
 import '../modules/bottom_nav_ao/bindings/bottom_nav_ao_binding.dart';
 import '../modules/bottom_nav_ao/views/bottom_nav_ao_view.dart';
 import '../modules/bottom_nav_manager/bindings/bottom_nav_manager_binding.dart';
 import '../modules/bottom_nav_manager/views/bottom_nav_manager_view.dart';
+import '../modules/financing_proposal/bindings/financing_proposal_binding.dart';
+import '../modules/financing_proposal/views/financing_proposal_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/manager_scoring_detail/bindings/manager_scoring_detail_binding.dart';
@@ -46,6 +46,8 @@ import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/submission_data/bindings/submission_data_binding.dart';
 import '../modules/submission_data/views/submission_data_view.dart';
+import '../modules/submission_detail/bindings/submission_detail_binding.dart';
+import '../modules/submission_detail/views/submission_detail_view.dart';
 import '../modules/submission_form/bindings/submission_form_binding.dart';
 import '../modules/submission_form/views/submission_form_view.dart';
 
@@ -183,6 +185,11 @@ class AppPages {
       name: _Paths.AO_SELECT_SCORING,
       page: () => const AoSelectScoringView(),
       binding: AoSelectScoringBinding(),
+    ),
+    GetPage(
+      name: _Paths.FINANCING_PROPOSAL,
+      page: () => const FinancingProposalView(),
+      binding: FinancingProposalBinding(),
     ),
   ];
 }

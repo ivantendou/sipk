@@ -59,23 +59,6 @@ void showFilterBottomSheet(
               ),
               ListTile(
                 title: const Text(
-                  'Supervisor',
-                  style: TextStyleConstant.body,
-                ),
-                contentPadding: const EdgeInsets.all(0),
-                trailing: SizedBox(
-                  height: 24,
-                  width: 24,
-                  child: Checkbox(
-                    value: controller.selectedRoles['Supervisor'] ?? false,
-                    onChanged: (value) => controller.toggleRole('Supervisor'),
-                    activeColor: ColorsConstant.primary,
-                  ),
-                ),
-                onTap: () => controller.toggleRole('Supervisor'),
-              ),
-              ListTile(
-                title: const Text(
                   'Manajer',
                   style: TextStyleConstant.body,
                 ),

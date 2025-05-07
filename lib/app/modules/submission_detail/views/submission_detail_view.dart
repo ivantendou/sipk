@@ -90,6 +90,17 @@ class SubmissionDetailView extends GetView<SubmissionDetailController> {
                   CustomIconButtonWidget(
                     icon: Assets.images.pdf.svg(),
                     text: 'Lihat Proposal Pembiayaan',
+                    onTap: () {
+                      Get.toNamed(
+                        Routes.FINANCING_PROPOSAL,
+                        parameters: {
+                          'id': controller.financingApplicationData.value
+                                  ?.financingApplication?.applicantId
+                                  .toString() ??
+                              "",
+                        },
+                      );
+                    },
                   ),
                   const SizedBox(height: 12),
                   controller.financingApplicationData.value

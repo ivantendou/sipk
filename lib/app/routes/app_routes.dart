@@ -28,6 +28,7 @@ abstract class Routes {
   static const ADMIN_USER_ADD = _Paths.ADMIN_USER_ADD;
   static const ADMIN_USER_DETAIL = _Paths.ADMIN_USER_DETAIL;
   static const AO_SELECT_SCORING = _Paths.AO_SELECT_SCORING;
+  static const FINANCING_PROPOSAL = _Paths.FINANCING_PROPOSAL;
 }
 
 abstract class _Paths {
@@ -57,4 +58,5 @@ abstract class _Paths {
   static const ADMIN_USER_ADD = '/admin-user-add';
   static const ADMIN_USER_DETAIL = '/admin-user-detail';
   static const AO_SELECT_SCORING = '/ao-select-scoring';
+  static const FINANCING_PROPOSAL = '/financing-proposal';
 }
