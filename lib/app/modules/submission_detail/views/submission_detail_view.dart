@@ -94,10 +94,11 @@ class SubmissionDetailView extends GetView<SubmissionDetailController> {
                       Get.toNamed(
                         Routes.FINANCING_PROPOSAL,
                         parameters: {
-                          'id': controller.financingApplicationData.value
-                                  ?.financingApplication?.applicantId
+                          'applicant_id': controller.financingApplicationData
+                                  .value?.financingApplication?.applicantId
                                   .toString() ??
                               "",
+                          'application_id': controller.applicationId.toString()
                         },
                       );
                     },

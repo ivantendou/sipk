@@ -28,7 +28,7 @@ class FinancingProposalView extends GetView<FinancingProposalController> {
             ),
           ),
         ),
-        pdfFileName: "contoh_dokumen.pdf",
+        pdfFileName: "proposal-pembiayaan${controller.applicationId}.pdf",
       ),
     );
   }

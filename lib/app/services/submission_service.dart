@@ -190,6 +190,79 @@ class SubmissionService {
     }
   }
 
+  Future<Map<String, dynamic>> fetchFinancingProposal(
+      String applicantId, String applicationId) async {
+    try {
+      final financingApplication = await supabase
+          .from('financing_applications')
+          .select('*')
+          .eq('id', applicationId)
+          .single();
+
+      final applicant = await supabase
+          .from('applicants')
+          .select('*')
+          .eq('id', applicantId)
+          .single();
+
+      final accountOfficerId = applicant['account_officer_id'];
+
+      final accountOfficerName = await supabase
+          .from('profiles')
+          .select('full_name')
+          .eq('id', accountOfficerId)
+          .single();
+
+      final creditEvaluation = await supabase
+          .from('credit_evaluations')
+          .select('*')
+          .eq('applicant_id', applicantId)
+          .single();
+
+      final evaluationId = creditEvaluation['id'];
+
+      final creditScore = await supabase
+          .from('credit_scores')
+          .select('*')
+          .eq('evaluation_id', evaluationId)
+          .single();
+
+      final financialData = await supabase
+          .from('financial_data')
+          .select('*')
+          .eq('applicant_id', applicantId)
+          .single();
+
+      final financingData = await supabase
+          .from('financing_data')
+          .select('*')
+          .eq('applicant_id', applicantId)
+          .single();
+
+      final spouse = await supabase
+          .from('spouses')
+          .select('*')
+          .eq('applicant_id', applicantId)
+          .single();
+
+      return {
+        'financing_application': financingApplication,
+        'applicant': applicant,
+        'credit_evaluation': creditEvaluation,
+        'credit_score': creditScore,
+        'financial_data': financialData,
+        'financing_data': financingData,
+        'spouse': spouse,
+        'account_officer': accountOfficerName,
+      };
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in fetchFinancingProposal: $e");
+      }
+      throw Exception("Gagal mengambil data: $e");
+    }
+  }
+
   Future<void> rejectSubmission(String applicationId) async {
     try {
       await supabase
@@ -203,11 +276,15 @@ class SubmissionService {
     }
   }
 
-  Future<void> acceptSubmission(String applicationId) async {
+  Future<void> acceptSubmission(
+      String applicationId, String applicationAmount, String remarks) async {
     try {
-      await supabase
-          .from('financing_applications')
-          .update({'application_status': 'Accepted'}).eq('id', applicationId);
+      await supabase.from('financing_applications').update({
+        'application_status': 'Accepted',
+        'application_amount': applicationAmount,
+        'accepted_amount': applicationAmount,
+        'remarks': remarks,
+      }).eq('id', applicationId);
     } catch (e) {
       if (kDebugMode) {
         print("Error in acceptSubmission: $e");

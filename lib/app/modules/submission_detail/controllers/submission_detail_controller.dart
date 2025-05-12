@@ -9,15 +9,21 @@ import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/modules/manager_submission/controllers/manager_submission_controller.dart';
 import 'package:sipk/app/services/submission_service.dart';
 import 'package:sipk/app/widgets/custom_button_widget.dart';
+import 'package:sipk/app/widgets/rupiah_input_field_widget.dart';
 import 'package:sipk/models/financing_application_model.dart';
 
 class SubmissionDetailController extends GetxController {
   final SubmissionService submissionService = SubmissionService();
   final applicationId = ''.obs;
+  final formKeys = GlobalKey<FormState>();
   final isLoading = false.obs;
   Rxn<FinancingApplicationModel> financingApplicationData =
       Rxn<FinancingApplicationModel>();
   final userRole = ''.obs;
+
+  final TextEditingController applicationAmountController =
+      TextEditingController();
+  final TextEditingController remarksController = TextEditingController();
 
   @override
   void onInit() async {
@@ -60,7 +66,11 @@ class SubmissionDetailController extends GetxController {
   }
 
   Future<void> acceptSubmission() async {
-    await submissionService.acceptSubmission(applicationId.value);
+    await submissionService.acceptSubmission(
+      applicationId.value,
+      applicationAmountController.text,
+      remarksController.text,
+    );
   }
 
   void showCancelConfirmationDialog() {
@@ -142,20 +152,43 @@ class SubmissionDetailController extends GetxController {
         fontWeight: FontWeight.bold,
       ),
       titlePadding: const EdgeInsets.only(top: 16),
-      content: const Text(
-        'Apakah Anda yakin ingin menyetujui pengajuan ini?',
-        style: TextStyleConstant.body,
-        textAlign: TextAlign.center,
+      content: SizedBox(
+        width: Get.width * 0.9,
+        child: Form(
+          key: formKeys,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              RupiahInputFieldWidget(
+                controller: applicationAmountController,
+                fieldTitle: 'Jumlah Pengajuan yand Disetujui',
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Catatan (Opsional)',
+                style: TextStyleConstant.body,
+              ),
+              TextField(
+                controller: remarksController,
+                keyboardType: TextInputType.multiline,
+                minLines: 3,
+                maxLines: 5,
+              )
+            ],
+          ),
+        ),
       ),
       contentPadding: const EdgeInsets.all(16),
       confirm: CustomButtonWidget(
         text: 'Terima',
         width: 120,
         onTap: () async {
-          Get.back();
-          await acceptSubmission();
-          fetchFinancingApplication();
-          callManagerSubmissionController();
+          if (formKeys.currentState!.validate()) {
+            Get.back();
+            await acceptSubmission();
+            fetchFinancingApplication();
+            callManagerSubmissionController();
+          }
         },
       ),
       cancel: Padding(

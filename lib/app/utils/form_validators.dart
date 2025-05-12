@@ -1,7 +1,7 @@
 class FormValidators {
   static String? validateRequired(String? value, String fieldName) {
     if (value == null || value.trim().isEmpty) {
-      return "$fieldName tidak boleh kosong";
+      return "$fieldName wajib diisi";
     }
     return null;
   }
