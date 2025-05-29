@@ -116,7 +116,7 @@ class SubmissionFormController extends GetxController {
       barrierDismissible: false,
       backgroundColor: ColorsConstant.white,
       contentPadding: const EdgeInsets.only(bottom: 24),
-      title: 'Gagal Mengirim Data',
+      title: 'Submit Data Failed',
       titleStyle: TextStyleConstant.subHeading.copyWith(
         fontWeight: FontWeight.bold,
       ),
@@ -134,7 +134,7 @@ class SubmissionFormController extends GetxController {
             ),
             const SizedBox(height: 8),
             const Text(
-              'Terjadi kesalahan saat mengirim data pengajuan. Periksa internet Anda dan coba lagi',
+              'An error occurred while submitting the financing application data. Please check your internet connection and try again.',
               style: TextStyleConstant.body,
               textAlign: TextAlign.center,
             ),
@@ -172,11 +172,12 @@ class SubmissionFormController extends GetxController {
     Get.defaultDialog(
       backgroundColor: ColorsConstant.white,
       contentPadding: const EdgeInsets.only(bottom: 24),
-      title: 'Pengajuan Berhasil Dikirim',
+      title: 'Application Submitted Successfully',
       titleStyle: TextStyleConstant.subHeading.copyWith(
         fontWeight: FontWeight.bold,
       ),
-      titlePadding: const EdgeInsets.only(top: 24, bottom: 16),
+      titlePadding:
+          const EdgeInsets.only(top: 24, bottom: 16, right: 8, left: 8),
       onWillPop: () async {
         Get.back();
         return true;
@@ -194,7 +195,7 @@ class SubmissionFormController extends GetxController {
             ),
             const SizedBox(height: 8),
             const Text(
-              'Data pengajuan telah berhasil dikirim.\nSilakan menunggu proses verifikasi.',
+              'Application data has been successfully submitted.\nPlease wait for the verification process.',
               style: TextStyleConstant.body,
               textAlign: TextAlign.center,
             ),
@@ -220,7 +221,7 @@ class SubmissionFormController extends GetxController {
           ),
           child: Center(
             child: Text(
-              'Lihat Data Pengajuan',
+              'View Application Data',
               style: TextStyleConstant.subHeading2.copyWith(
                 color: ColorsConstant.white,
                 fontWeight: FontWeight.bold,

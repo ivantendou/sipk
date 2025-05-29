@@ -34,7 +34,7 @@ class StepOneFormWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Data Pribadi Pemohon',
+            'Applicant Personal Information',
             style: TextStyleConstant.subHeading2.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -42,13 +42,13 @@ class StepOneFormWidget extends StatelessWidget {
           const SizedBox(height: 16),
           TextFormFieldWidget(
             controller: controller.applicantNameController,
-            fieldTitle: 'Nama Pemohon',
+            fieldTitle: 'Applicant Name',
             validator: FormValidators.validateName,
           ),
           const SizedBox(height: 16),
           DropdownInputFieldWidget(
-            fieldTitle: 'Kategori Pemohon',
-            hintText: 'Pilih kategori pemohon...',
+            fieldTitle: 'Applicant Category',
+            hintText: 'Select applicant category...',
             value: [
               'Walk-In Customer',
               'Solisitasi',
@@ -72,47 +72,47 @@ class StepOneFormWidget extends StatelessWidget {
           const SizedBox(height: 16),
           TextFormFieldWidget(
             controller: controller.ktpAddressController,
-            fieldTitle: 'Alamat KTP',
+            fieldTitle: 'KTP Address',
             validator: FormValidators.validateAddress,
           ),
           const SizedBox(height: 16),
           TextFormFieldWidget(
             controller: controller.residentialAddressController,
-            fieldTitle: 'Alamat Domisili',
+            fieldTitle: 'Residential Address',
             keyboardType: TextInputType.text,
             validator: FormValidators.validateAddress,
           ),
           const SizedBox(height: 16),
           TextFormFieldWidget(
             controller: controller.regencyController,
-            fieldTitle: 'Kabupaten/Kodya',
+            fieldTitle: 'Regency/City',
             validator: FormValidators.validateName,
           ),
           const SizedBox(height: 16),
           TextFormFieldWidget(
             controller: controller.provinceController,
-            fieldTitle: 'Provinsi',
+            fieldTitle: 'Province',
             validator: FormValidators.validateName,
           ),
           const SizedBox(height: 16),
           TextFormFieldWidget(
             controller: controller.postalCodeController,
-            fieldTitle: 'Kode Pos',
+            fieldTitle: 'Postal Code',
             validator: FormValidators.validateNumber,
             keyboardType: TextInputType.number,
           ),
           const SizedBox(height: 16),
           TextFormFieldWidget(
             controller: controller.placeOfBirthController,
-            fieldTitle: 'Tempat Lahir',
+            fieldTitle: 'Place of Birth',
             validator: FormValidators.validateName,
             keyboardType: TextInputType.name,
           ),
           const SizedBox(height: 16),
           DateInputFieldWidget(
             controller: controller,
-            hintText: "Pilih tanggal lahir...",
-            fieldTitle: 'Tanggal Lahir',
+            hintText: "Select date of birth...",
+            fieldTitle: 'Date of Birth',
             initialValue: parseDate(controller.dateOfBirth.value),
             onChanged: (value) {
               controller.dateOfBirth.value = value;
@@ -121,35 +121,35 @@ class StepOneFormWidget extends StatelessWidget {
           const SizedBox(height: 16),
           TextFormFieldWidget(
             controller: controller.ktpNumberController,
-            fieldTitle: 'No. KTP',
+            fieldTitle: 'KTP Number',
             validator: FormValidators.validateNumber,
             keyboardType: TextInputType.number,
           ),
           const SizedBox(height: 16),
           TextFormFieldWidget(
             controller: controller.motherNameController,
-            fieldTitle: 'Nama Ibu Kandung Pemohon',
+            fieldTitle: "Applicant's Mother Name",
             validator: FormValidators.validateName,
             keyboardType: TextInputType.name,
           ),
           const SizedBox(height: 16),
           TextFormFieldWidget(
             controller: controller.homePhoneController,
-            fieldTitle: 'Telp Rumah',
+            fieldTitle: 'Home Phone',
             validator: FormValidators.validateNumber,
             keyboardType: TextInputType.number,
           ),
           const SizedBox(height: 16),
           TextFormFieldWidget(
             controller: controller.mobilePhoneController,
-            fieldTitle: 'No HP Pemohon',
+            fieldTitle: 'Phone Number',
             validator: FormValidators.validateNumber,
             keyboardType: TextInputType.number,
           ),
           const SizedBox(height: 16),
           DropdownInputFieldWidget(
-            fieldTitle: 'Jenis Kelamin',
-            hintText: 'Pilih jenis kelamin...',
+            fieldTitle: 'Gender',
+            hintText: 'Select gender...',
             items: const [
               'Laki-laki',
               'Perempuan',
@@ -165,8 +165,8 @@ class StepOneFormWidget extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           DropdownInputFieldWidget(
-            fieldTitle: 'Tingkat Pendidikan',
-            hintText: 'Pilih tingkat pendidikan...',
+            fieldTitle: 'Education Level',
+            hintText: 'Select education level...',
             items: const [
               'SD',
               'SMP',
@@ -183,8 +183,8 @@ class StepOneFormWidget extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           DropdownInputFieldWidget(
-            fieldTitle: 'Pekerjaan',
-            hintText: 'Pilih pekerjaan pemohon...',
+            fieldTitle: 'Occupation',
+            hintText: 'Select occupation...',
             items: const [
               'Buruh Harian',
               'Pedagang',
@@ -214,25 +214,25 @@ class StepOneFormWidget extends StatelessWidget {
           const SizedBox(height: 16),
           TextFormFieldWidget(
             controller: controller.companyNameController,
-            fieldTitle: 'Nama Perusahaan',
+            fieldTitle: 'Company Name',
             validator: FormValidators.validateName,
           ),
           const SizedBox(height: 16),
           TextFormFieldWidget(
             controller: controller.companyAddressController,
-            fieldTitle: 'Alamat Perusahaan',
+            fieldTitle: 'Company Address',
             validator: FormValidators.validateAddress,
           ),
           const SizedBox(height: 16),
           TextFormFieldWidget(
             controller: controller.bossNameController,
-            fieldTitle: 'Nama Atasan',
+            fieldTitle: 'Supervisor Name',
             validator: FormValidators.validateName,
             keyboardType: TextInputType.name,
           ),
           const SizedBox(height: 16),
           DropdownInputFieldWidget(
-            fieldTitle: 'Status Perkawinan',
+            fieldTitle: 'Marital Status',
             hintText: 'Pilih status perkawinan...',
             items: const [
               'Belum Menikah',
@@ -247,41 +247,41 @@ class StepOneFormWidget extends StatelessWidget {
           const SizedBox(height: 16),
           TextFormFieldWidget(
             controller: controller.spouseNameController,
-            fieldTitle: 'Nama Pasangan/Wali',
+            fieldTitle: 'Spouse/Guardian Name',
             validator: FormValidators.validateName,
             keyboardType: TextInputType.name,
           ),
           const SizedBox(height: 16),
           TextFormFieldWidget(
             controller: controller.spouseMotherNameController,
-            fieldTitle: 'Nama Ibu Kandung Pasangan/Wali',
+            fieldTitle: "Spouse/Guardian's Mother Name",
             validator: FormValidators.validateName,
             keyboardType: TextInputType.name,
           ),
           const SizedBox(height: 16),
           TextFormFieldWidget(
             controller: controller.spouseAddressController,
-            fieldTitle: 'Alamat Pasangan/Wali',
+            fieldTitle: 'Spouse/Guardian Address',
             validator: FormValidators.validateAddress,
           ),
           const SizedBox(height: 16),
           TextFormFieldWidget(
             controller: controller.spouseKtpNumberController,
-            fieldTitle: 'No.KTP Pasangan/Wali',
+            fieldTitle: 'Spouse/Guardian KTP Number',
             validator: FormValidators.validateNumber,
             keyboardType: TextInputType.number,
           ),
           const SizedBox(height: 16),
           TextFormFieldWidget(
             controller: controller.spousePlaceOfBirthController,
-            fieldTitle: 'Tempat Lahir Pasangan/Wali',
+            fieldTitle: "Spouse/Guardian's Place of Birth",
             validator: FormValidators.validateName,
           ),
           const SizedBox(height: 16),
           DateInputFieldWidget(
             controller: controller,
-            hintText: "Pilih tanggal lahir...",
-            fieldTitle: 'Tanggal Lahir Pasangan/Wali',
+            hintText: "Select date of brith...",
+            fieldTitle: "Spouse/Guardian's Date of Birth",
             initialValue: parseDate(controller.spouseDateOfBirth.value),
             onChanged: (value) {
               controller.spouseDateOfBirth.value = value;
@@ -290,13 +290,13 @@ class StepOneFormWidget extends StatelessWidget {
           const SizedBox(height: 16),
           TextFormFieldWidget(
             controller: controller.spouseOccupationController,
-            fieldTitle: 'Pekerjaan Pasangan/Wali',
+            fieldTitle: "Spouse/Guardian's Occupation",
             validator: FormValidators.validateName,
           ),
           const SizedBox(height: 16),
           TextFormFieldWidget(
             controller: controller.dependentsCountController,
-            fieldTitle: 'Jumlah Tanggungan',
+            fieldTitle: "Number of Dependents",
             validator: FormValidators.validateNumber,
             keyboardType: TextInputType.number,
           ),

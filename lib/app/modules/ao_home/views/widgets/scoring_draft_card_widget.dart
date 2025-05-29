@@ -41,12 +41,12 @@ class ScoringDraftCardWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 LabelValueWidget(
-                  label: "Nama Pemohon",
+                  label: "Applicant Name",
                   value: applicantName,
                 ),
                 const SizedBox(height: 8),
                 LabelValueWidget(
-                  label: "Nomor Skoring",
+                  label: "Scoring Number",
                   value: scoringNumber,
                 ),
               ],
@@ -54,7 +54,7 @@ class ScoringDraftCardWidget extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           CustomButtonWidget(
-            text: "Lengkapi Draf",
+            text: "Fill Draft",
             width: 120,
             onTap: onTap,
           ),

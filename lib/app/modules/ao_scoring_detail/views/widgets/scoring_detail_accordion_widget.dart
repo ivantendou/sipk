@@ -55,7 +55,7 @@ class ScoringDetailAccordionWidget extends StatelessWidget {
         AccordionSection(
           contentBorderColor: ColorsConstant.grey300,
           header: Text(
-            'Detail Informasi Pemohon',
+            'Applicant Information Details',
             style: TextStyleConstant.subHeading.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -66,12 +66,12 @@ class ScoringDetailAccordionWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 LabelValueWidget(
-                  label: 'Nama Pemohon',
+                  label: 'Applicant Name',
                   value: applicantName,
                 ),
                 const SizedBox(height: 8),
                 LabelValueWidget(
-                  label: 'Alamat',
+                  label: 'Address',
                   value: address,
                 ),
                 const SizedBox(height: 8),
@@ -81,29 +81,29 @@ class ScoringDetailAccordionWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 LabelValueWidget(
-                  label: 'No Telepon',
+                  label: 'Phone Number',
                   value: mobilePhone,
                 ),
                 const SizedBox(height: 8),
                 LabelValueWidget(
-                  label: 'Jenis Kelamin',
+                  label: 'Gender',
                   value: gender,
                 ),
                 const SizedBox(height: 8),
                 LabelValueWidget(
-                  label: 'Nominal Pengajuan',
+                  label: 'Total Applications',
                   value: _formatCurrency(totalSubmission != null
                       ? num.tryParse(totalSubmission!)
                       : null),
                 ),
                 const SizedBox(height: 8),
                 LabelValueWidget(
-                  label: 'Jenis Pemohon',
+                  label: 'Applicant Category',
                   value: applicantCategory,
                 ),
                 const SizedBox(height: 8),
                 LabelValueWidget(
-                  label: 'Nama Account Officer',
+                  label: 'Account Officer Name',
                   value: aoName,
                 ),
               ],
@@ -113,7 +113,7 @@ class ScoringDetailAccordionWidget extends StatelessWidget {
         AccordionSection(
           contentBorderColor: ColorsConstant.grey300,
           header: Text(
-            'Keterangan Rating: ${ratingInfo['rank'] ?? 'Special Mention'}',
+            'Rating Description: ${ratingInfo['rank'] ?? 'Special Mention'}',
             style: TextStyleConstant.subHeading.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -122,24 +122,24 @@ class ScoringDetailAccordionWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Skor: ${score?.toStringAsFixed(1) ?? '-'}",
+                "Score: ${score?.toStringAsFixed(1) ?? '-'}",
                 style: TextStyleConstant.body.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 8),
               Text(
-                "Tingkat Rating: ${ratingInfo['rank'] ?? '-'} (${ratingInfo['rating'] ?? '-'})",
+                "Rating Level: ${ratingInfo['rank'] ?? '-'} (${ratingInfo['rating'] ?? '-'})",
                 style: TextStyleConstant.body,
               ),
               const SizedBox(height: 8),
               Text(
-                "Kategori: ${ratingInfo['category'] ?? '-'}",
+                "Category: ${ratingInfo['category'] ?? '-'}",
                 style: TextStyleConstant.body,
               ),
               const SizedBox(height: 8),
               Text(
-                "Penjelasan: ${ratingInfo['explanation'] ?? '-'}",
+                "Explanation: ${ratingInfo['explanation'] ?? '-'}",
                 style: TextStyleConstant.body,
               ),
             ],
@@ -169,161 +169,161 @@ class ScoringDetailAccordionWidget extends StatelessWidget {
       return {
         'rank': 'AAA',
         'rating': 'Outstanding',
-        'category': 'Sangat Baik',
+        'category': 'Very Good',
         'explanation':
-            'Ini adalah rating tertinggi dan terbaik yang diberikan kepada debitur. Kapasitas debitur untuk memenuhi komitmen keuangannya pada pinjaman bank dipandang tidak diragukan.'
+            'This is the highest and best rating given to a debtor. The debtor\'s capacity to meet their financial commitments on bank loans is considered undoubted.'
       };
     } else if (numericScore >= 95) {
       return {
         'rank': 'AA+',
         'rating': 'Strong',
-        'category': 'Sangat Baik',
+        'category': 'Very Good',
         'explanation':
-            'Debitur yang diberikan rating "AA+" hanya berbeda sedikit dari debitur yang diberikan rating tertinggi (AAA). Kapasitas debitur untuk memenuhi komitmen keuangannya pada pinjamannya sangat baik.'
+            'Debtors with an "AA+" rating differ only slightly from debtors with the highest rating (AAA). The debtor\'s capacity to meet their financial commitments on their loans is very good.'
       };
     } else if (numericScore >= 92) {
       return {
         'rank': 'AA',
         'rating': 'Strong',
-        'category': 'Sangat Baik',
+        'category': 'Very Good',
         'explanation':
-            'Debitur yang diberikan rating "AA" hanya berbeda sedikit dari debitur yang diberikan rating tertinggi (AAA). Kapasitas debitur untuk memenuhi komitmen keuangannya pada pinjamannya sangat baik.'
+            'Debtors with an "AA" rating differ only slightly from debtors with the highest rating (AAA). The debtor\'s capacity to meet their financial commitments on their loans is very good.'
       };
     } else if (numericScore >= 89) {
       return {
         'rank': 'AA-',
         'rating': 'Strong',
-        'category': 'Sangat Baik',
+        'category': 'Very Good',
         'explanation':
-            'Debitur yang diberikan rating "AA-" hanya berbeda sedikit dari debitur yang diberikan rating tertinggi (AAA). Kapasitas debitur untuk memenuhi komitmen keuangannya pada pinjamannya sangat baik.'
+            'Debtors with an "AA-" rating differ only slightly from debtors with the highest rating (AAA). The debtor\'s capacity to meet their financial commitments on their loans is very good.'
       };
     } else if (numericScore >= 86) {
       return {
         'rank': 'A+',
         'rating': 'Good',
-        'category': 'Baik',
+        'category': 'Good',
         'explanation':
-            'Debitur yang diberikan rating "A+" agak lebih rentan terhadap keadaan dan kondisi ekonomi yang memburuk dari pada debitur pada rating yang lebih tinggi. Meskipun demikian kapasitas debitur untuk memenuhi komitmen keuangannya pada obligasi masih kuat.'
+            'Debtors with an "A+" rating are somewhat more vulnerable to deteriorating economic conditions than debtors with higher ratings. Nevertheless, the debtor\'s capacity to meet their financial commitments on their obligations remains strong.'
       };
     } else if (numericScore >= 83) {
       return {
         'rank': 'A',
         'rating': 'Good',
-        'category': 'Baik',
+        'category': 'Good',
         'explanation':
-            'Debitur yang diberikan rating "A" agak lebih rentan terhadap keadaan dan kondisi ekonomi yang memburuk dari pada debitur pada rating yang lebih tinggi. Meskipun demikian kapasitas debitur untuk memenuhi komitmen keuangannya pada obligasi masih kuat.'
+            'Debtors with an "A" rating are somewhat more vulnerable to deteriorating economic conditions than debtors with higher ratings. Nevertheless, the debtor\'s capacity to meet their financial commitments on their obligations remains strong.'
       };
     } else if (numericScore >= 80) {
       return {
         'rank': 'A-',
         'rating': 'Good',
-        'category': 'Baik',
+        'category': 'Good',
         'explanation':
-            'Debitur yang diberikan rating "A-" agak lebih rentan terhadap keadaan dan kondisi ekonomi yang memburuk dari pada debitur pada rating yang lebih tinggi. Meskipun demikian kapasitas debitur untuk memenuhi komitmen keuangannya pada obligasi masih kuat.'
+            'Debtors with an "A-" rating are somewhat more vulnerable to deteriorating economic conditions than debtors with higher ratings. Nevertheless, the debtor\'s capacity to meet their financial commitments on their obligations remains strong.'
       };
     } else if (numericScore >= 77) {
       return {
         'rank': 'BBB+',
         'rating': 'Average',
-        'category': 'Cukup',
+        'category': 'Sufficient',
         'explanation':
-            'Debitur yang mendapat rating "BBB+" memperlihatkan kondisi yang memadai. Meskipun demikian kondisi ekonomi yang memburuk kemungkinan besar akan memperlemah kapasitas debitur untuk memenuhi komitmen keuangannya pada pinjamannya.'
+            'Debtors with a "BBB+" rating show adequate conditions. However, deteriorating economic conditions are likely to weaken the debtor\'s capacity to meet their financial commitments on their loans.'
       };
     } else if (numericScore >= 74) {
       return {
         'rank': 'BBB',
         'rating': 'Average',
-        'category': 'Cukup',
+        'category': 'Sufficient',
         'explanation':
-            'Debitur yang mendapat rating "BBB" memperlihatkan kondisi yang memadai. Meskipun demikian kondisi ekonomi yang memburuk kemungkinan besar akan memperlemah kapasitas debitur untuk memenuhi komitmen keuangannya pada pinjamannya.'
+            'Debtors with a "BBB" rating show adequate conditions. However, deteriorating economic conditions are likely to weaken the debtor\'s capacity to meet their financial commitments on their loans.'
       };
     } else if (numericScore >= 71) {
       return {
         'rank': 'BBB-',
         'rating': 'Average',
-        'category': 'Cukup',
+        'category': 'Sufficient',
         'explanation':
-            'Debitur yang mendapat rating "BBB-" memperlihatkan kondisi yang memadai. Meskipun demikian kondisi ekonomi yang memburuk kemungkinan besar akan memperlemah kapasitas debitur untuk memenuhi komitmen keuangannya pada pinjamannya.'
+            'Debtors with a "BBB-" rating show adequate conditions. However, deteriorating economic conditions are likely to weaken the debtor\'s capacity to meet their financial commitments on their loans.'
       };
     } else if (numericScore >= 68) {
       return {
         'rank': 'BB+',
         'rating': 'Acceptable',
-        'category': 'Kurang',
+        'category': 'Less Than Good',
         'explanation':
-            'Debitur yang diberikan rating "BB+" lebih baik dibandingkan dengan debitur yang mendapat rating B dalam hal pembayaran pinjaman. Meskipun demikian, debitur ini menghadapi ketidakpastian yang besar pada kondisi bisnis, keuangan atau ekonomi yang memburuk yang dapat mengarah pada kapasitas debitur yang tidak memadai untuk memenuhi komitmen pinjamannya.'
+            'Debtors with a "BB+" rating are better than debtors with a "B" rating in terms of loan repayment. However, these debtors face significant uncertainty under deteriorating business, financial, or economic conditions, which could lead to an inadequate capacity to meet their loan commitments.'
       };
     } else if (numericScore >= 65) {
       return {
         'rank': 'BB',
         'rating': 'Acceptable',
-        'category': 'Kurang',
+        'category': 'Less Than Good',
         'explanation':
-            'Debitur yang diberikan rating "BB" lebih baik dibandingkan dengan debitur yang mendapat rating B dalam hal pembayaran pinjaman. Meskipun demikian, debitur ini menghadapi ketidakpastian yang besar pada kondisi bisnis, keuangan atau ekonomi yang memburuk yang dapat mengarah pada kapasitas debitur yang tidak memadai untuk memenuhi komitmen pinjamannya.'
+            'Debtors with a "BB" rating are better than debtors with a "B" rating in terms of loan repayment. However, these debtors face significant uncertainty under deteriorating business, financial, or economic conditions, which could lead to an inadequate capacity to meet their loan commitments.'
       };
     } else if (numericScore >= 62) {
       return {
         'rank': 'BB-',
         'rating': 'High Risk',
-        'category': 'Risiko Tinggi',
+        'category': 'High Risk',
         'explanation':
-            'Debitur yang diberikan rating "BB-" lebih baik dibandingkan dengan debitur yang mendapat rating B dalam hal pembayaran pinjaman. Meskipun demikian, debitur ini menghadapi ketidakpastian yang besar pada kondisi bisnis, keuangan atau ekonomi yang memburuk yang dapat mengarah pada kapasitas debitur yang tidak memadai untuk memenuhi komitmen pinjamannya.'
+            'Debtors with a "BB-" rating are better than debtors with a "B" rating in terms of loan repayment. However, these debtors face significant uncertainty under deteriorating business, financial, or economic conditions, which could lead to an inadequate capacity to meet their loan commitments.'
       };
     } else if (numericScore >= 59) {
       return {
         'rank': 'B+',
         'rating': 'High Risk',
-        'category': 'Risiko Tinggi',
+        'category': 'High Risk',
         'explanation':
-            'Debitur yang diberikan rating "B+" lebih rentan untuk menjadi kredit macet dari pada debitur yang diberikan rating "BB". Debitur saat ini memiliki kapasitas untuk memenuhi komitmen keuangannya pada pinjamannya. Kondisi bisnis, keuangan atau ekonomi yang memburuk kemungkinan akan mengganggu kemampuan debitur untuk memenuhi komitmen pinjamannya.'
+            'Debtors with a "B+" rating are more susceptible to default than debtors with a "BB" rating. The debtor currently has the capacity to meet their financial commitments on their loans. Deteriorating business, financial, or economic conditions are likely to impair the debtor\'s ability to meet their loan commitments.'
       };
     } else if (numericScore >= 56) {
       return {
         'rank': 'B',
         'rating': 'Watch List',
-        'category': 'Perhatian Khusus',
+        'category': 'Special Attention',
         'explanation':
-            'Debitur yang diberikan rating "B" lebih rentan untuk menjadi kredit macet dari pada debitur yang diberikan rating "BB". Debitur saat ini memiliki kapasitas untuk memenuhi komitmen keuangannya pada pinjamannya. Kondisi bisnis, keuangan atau ekonomi yang memburuk kemungkinan akan mengganggu kemampuan debitur untuk memenuhi komitmen pinjamannya.'
+            'Debtors with a "B" rating are more susceptible to default than debtors with a "BB" rating. The debtor currently has the capacity to meet their financial commitments on their loans. Deteriorating business, financial, or economic conditions are likely to impair the debtor\'s ability to meet their loan commitments.'
       };
     } else if (numericScore >= 53) {
       return {
         'rank': 'B-',
         'rating': 'Watch List',
-        'category': 'Perhatian Khusus',
+        'category': 'Special Attention',
         'explanation':
-            'Debitur yang diberikan rating "B-" lebih rentan untuk menjadi kredit macet dari pada debitur yang diberikan rating "BB". Debitur saat ini memiliki kapasitas untuk memenuhi komitmen keuangannya pada pinjamannya. Kondisi bisnis, keuangan atau ekonomi yang memburuk kemungkinan akan mengganggu kemampuan debitur untuk memenuhi komitmen pinjamannya.'
+            'Debtors with a "B-" rating are more susceptible to default than debtors with a "BB" rating. The debtor currently has the capacity to meet their financial commitments on their loans. Deteriorating business, financial, or economic conditions are likely to impair the debtor\'s ability to meet their loan commitments.'
       };
     } else if (numericScore >= 50) {
       return {
         'rank': 'CCC+',
         'rating': 'Special Mention',
-        'category': 'Perhatian Khusus',
+        'category': 'Special Attention',
         'explanation':
-            'Debitur yang diberikan rating "CCC+" saat ini rentan untuk menjadi kredit macet. Debitur ini tergantung pada kondisi bisnis, keuangan dan ekonomi yang baik agar debitur dapat memenuhi komitmen pinjamannya. Saat kondisi bisnis, keuangan atau ekonomi memburuk, debitur kemungkinan besar tidak mempunyai kapasitas untuk memenuhi kewajiban keuangannya.'
+            'Debtors with a "CCC+" rating are currently vulnerable to default. These debtors depend on favorable business, financial, and economic conditions to meet their loan commitments. When business, financial, or economic conditions deteriorate, the debtor is likely to lack the capacity to meet their financial obligations.'
       };
     } else if (numericScore >= 47) {
       return {
         'rank': 'CCC',
         'rating': 'Special Mention',
-        'category': 'Perhatian Khusus',
+        'category': 'Special Attention',
         'explanation':
-            'Debitur yang diberikan rating "CCC" saat ini rentan untuk menjadi kredit macet. Debitur ini tergantung pada kondisi bisnis, keuangan dan ekonomi yang baik agar debitur dapat memenuhi komitmen pinjamannya. Saat kondisi bisnis, keuangan atau ekonomi memburuk, debitur kemungkinan besar tidak mempunyai kapasitas untuk memenuhi kewajiban keuangannya.'
+            'Debtors with a "CCC" rating are currently vulnerable to default. These debtors depend on favorable business, financial, and economic conditions to meet their loan commitments. When business, financial, or economic conditions deteriorate, the debtor is likely to lack the capacity to meet their financial obligations.'
       };
     } else if (numericScore >= 44) {
       return {
         'rank': 'CCC-',
         'rating': 'Substandard',
-        'category': 'Tidak Sehat',
+        'category': 'Unhealthy',
         'explanation':
-            'Debitur yang diberikan rating "CCC-" saat ini rentan untuk menjadi kredit macet. Debitur ini tergantung pada kondisi bisnis, keuangan dan ekonomi yang baik agar debitur dapat memenuhi komitmen pinjamannya. Saat kondisi bisnis, keuangan atau ekonomi memburuk, debitur kemungkinan besar tidak mempunyai kapasitas untuk memenuhi kewajiban keuangannya.'
+            'Debtors with a "CCC-" rating are currently vulnerable to default. These debtors depend on favorable business, financial, and economic conditions to meet their loan commitments. When business, financial, or economic conditions deteriorate, the debtor is likely to lack the capacity to meet their financial obligations.'
       };
     } else {
       return {
         'rank': 'D',
         'rating': 'Doubtful',
-        'category': 'Diragukan',
+        'category': 'Doubtful',
         'explanation':
-            'Tidak prospektif. Rating ini diberikan kepada debitur yang diperkirakan akan menjadi kredit macet.'
+            'Unprospective. This rating is given to debtors who are expected to default.'
       };
     }
   }

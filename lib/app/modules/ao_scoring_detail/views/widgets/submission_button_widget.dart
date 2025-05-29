@@ -30,7 +30,7 @@ class SubmissionButtonWidget extends StatelessWidget {
       ),
       child: CustomIconButtonWidget(
         icon: Assets.images.document.svg(),
-        text: 'Ajukan Permohonan Pembiayaan',
+        text: 'Submit Application',
         onTap: onTap,
         isLoading: isLoading,
       ),

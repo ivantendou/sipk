@@ -55,7 +55,7 @@ class ManagerSubmissionView extends GetView<ManagerSubmissionController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Cari Data Pengajuan',
+                          'Search Application Data',
                           style: TextStyleConstant.body.copyWith(
                             color: ColorsConstant.grey700,
                           ),
@@ -72,7 +72,7 @@ class ManagerSubmissionView extends GetView<ManagerSubmissionController> {
                 ),
                 const SizedBox(height: 16),
                 HeaderWithSeeAllWidget(
-                  title: 'Pengajuan Terbaru',
+                  title: 'Latest Application',
                   onTap: () {
                     Get.toNamed(Routes.SUBMISSION_DATA);
                   },
@@ -114,12 +114,12 @@ class ManagerSubmissionView extends GetView<ManagerSubmissionController> {
               Assets.images.errorImage.svg(width: 240),
               const SizedBox(height: 6),
               const Text(
-                'Terjadi Kesalahan',
+                'An error occurred',
                 style: TextStyleConstant.subHeading2,
               ),
               const SizedBox(height: 4),
               Text(
-                'Pastikan perangkat Anda terhubung ke internet dan coba lagi.',
+                'Make sure your device is connected to the internet and try again.',
                 textAlign: TextAlign.center,
                 style: TextStyleConstant.body.copyWith(
                   color: ColorsConstant.grey700,
@@ -128,7 +128,7 @@ class ManagerSubmissionView extends GetView<ManagerSubmissionController> {
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () => controller.refreshSubmissions(),
-                child: const Text('Coba Lagi'),
+                child: const Text('Try Again'),
               ),
             ],
           ),
@@ -140,7 +140,7 @@ class ManagerSubmissionView extends GetView<ManagerSubmissionController> {
           child: Padding(
             padding: EdgeInsets.all(16.0),
             child: Text(
-              'Tidak ada data ditemukan',
+              'No data found',
               style: TextStyleConstant.body,
             ),
           ),

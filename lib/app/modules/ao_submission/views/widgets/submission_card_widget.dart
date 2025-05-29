@@ -24,15 +24,15 @@ class SubmissionCardWidget extends StatelessWidget {
     Color textColor;
 
     switch (status) {
-      case "Disetujui":
+      case "Approved":
         backgroundColor = ColorsConstant.good100;
         textColor = ColorsConstant.good600;
         break;
-      case "Ditolak":
+      case "Rejected":
         backgroundColor = ColorsConstant.doubtful100;
         textColor = ColorsConstant.doubtful600;
         break;
-      case "Diproses":
+      case "In Process":
       default:
         backgroundColor = ColorsConstant.average100;
         textColor = ColorsConstant.average600;
@@ -66,11 +66,12 @@ class SubmissionCardWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       LabelValueWidget(
-                        label: "Nama Pemohon",
+                        label: "Applicant Name",
                         value: applicantName,
                       ),
+                      const SizedBox(height: 4),
                       LabelValueWidget(
-                        label: "Nomor Skoring",
+                        label: "Scoring Number",
                         value: scoringNumber,
                       ),
                     ],

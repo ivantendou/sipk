@@ -22,7 +22,7 @@ class SubmissionFormView extends GetView<SubmissionFormController> {
     final currencyFormat =
         NumberFormat.currency(locale: 'id', symbol: '', decimalDigits: 0);
     return Scaffold(
-      appBar: const CustomAppBarWidget(title: 'Formulir Pengajuan'),
+      appBar: const CustomAppBarWidget(title: 'Application Form'),
       backgroundColor: ColorsConstant.grey100,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -37,7 +37,7 @@ class SubmissionFormView extends GetView<SubmissionFormController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Data Skoring Pemohon',
+                    'Applicant Scoring Data',
                     style: TextStyleConstant.body,
                   ),
                   GestureDetector(
@@ -64,7 +64,7 @@ class SubmissionFormView extends GetView<SubmissionFormController> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'Pilih Data Skoring Pemohon',
+                                        'Select Applicant Scoring Data',
                                         style: TextStyleConstant.body.copyWith(
                                           color: ColorsConstant.grey700,
                                         ),
@@ -100,8 +100,8 @@ class SubmissionFormView extends GetView<SubmissionFormController> {
                   ),
                   const SizedBox(height: 16),
                   DropdownInputFieldWidget(
-                    fieldTitle: 'Cabang Layanan',
-                    hintText: 'Pilih cabang layanan',
+                    fieldTitle: 'Service Branch',
+                    hintText: 'Select Service Branch',
                     items: const [
                       'Ciluar',
                       'Dramaga',
@@ -112,8 +112,8 @@ class SubmissionFormView extends GetView<SubmissionFormController> {
                   ),
                   const SizedBox(height: 16),
                   DropdownInputFieldWidget(
-                    fieldTitle: 'Status Anggota',
-                    hintText: 'Pilih status anggota',
+                    fieldTitle: 'Member Status',
+                    hintText: 'Select Member Status',
                     items: const [
                       'Anggota Baru',
                       'Anggota Lama',
@@ -125,13 +125,13 @@ class SubmissionFormView extends GetView<SubmissionFormController> {
                   const SizedBox(height: 16),
                   TextFormFieldWidget(
                     controller: controller.allocation,
-                    fieldTitle: 'Tujuan Pembiayaan',
+                    fieldTitle: 'Purpose of Financing',
                     validator: FormValidators.validateRequired,
                   ),
                   const SizedBox(height: 16),
                   RupiahInputFieldWidget(
                     controller: controller.applicationAmount,
-                    fieldTitle: 'Jumlah Pembiayaan',
+                    fieldTitle: 'Total Applications',
                   ),
                   const SizedBox(height: 16),
                   Obx(() {
@@ -139,7 +139,7 @@ class SubmissionFormView extends GetView<SubmissionFormController> {
                             controller.maxInstallment.value == 0
                         ? const SizedBox()
                         : Text(
-                            'Rekomendasi Jumlah Pembiayaan:',
+                            'Total Applications Recommendation:',
                             style: TextStyleConstant.body.copyWith(
                               fontWeight: FontWeight.bold,
                             ),
@@ -155,7 +155,7 @@ class SubmissionFormView extends GetView<SubmissionFormController> {
 
                     if (maxFinancing < 0 || maxInstallment < 0) {
                       return Text(
-                        'Sisa penghasilan tidak mencukupi untuk pembiayaan.',
+                        'The remaining income is not sufficient for the financing.',
                         style: TextStyleConstant.body.copyWith(
                           color: Colors.red,
                           fontWeight: FontWeight.bold,
@@ -169,13 +169,13 @@ class SubmissionFormView extends GetView<SubmissionFormController> {
                             .copyWith(color: ColorsConstant.black),
                         children: [
                           const TextSpan(
-                              text: 'Angsuran Maksimum yang Dapat Dibayar: '),
+                              text: 'Maximum Installment Affordable: '),
                           TextSpan(
                             text: 'Rp ${currencyFormat.format(maxInstallment)}',
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           const TextSpan(
-                              text: ' per bulan\nJumlah Pembiayaan Maksimum: '),
+                              text: ' per month\nMaximum Financing Amount: '),
                           TextSpan(
                             text: 'Rp ${currencyFormat.format(maxFinancing)}',
                             style: const TextStyle(fontWeight: FontWeight.bold),
@@ -188,7 +188,7 @@ class SubmissionFormView extends GetView<SubmissionFormController> {
                   Obx(
                     () {
                       return CustomButtonWidget(
-                        text: 'Ajukan Pembiayaan',
+                        text: 'Submit Application',
                         width: double.infinity,
                         isLoading: controller.isLoading.value,
                         onTap: () {

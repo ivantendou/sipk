@@ -45,12 +45,12 @@ class ScoringResultCardWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   LabelValueWidget(
-                    label: "Nama Pemohon",
+                    label: "Applicant Name",
                     value: applicantName ?? "",
                   ),
                   const SizedBox(height: 8),
                   LabelValueWidget(
-                    label: "Nomor Skoring",
+                    label: "Scoring Number",
                     value: scoringNumber ?? "",
                   ),
                 ],

@@ -58,7 +58,7 @@ class SubmissionDataCardWidget extends StatelessWidget {
             BlendMode.srcIn,
           ),
         );
-        statusText = "Diterima";
+        statusText = "Approved";
         break;
       case 'Rejected':
         statusIcon = Assets.images.cross.svg(
@@ -68,7 +68,7 @@ class SubmissionDataCardWidget extends StatelessWidget {
             BlendMode.srcIn,
           ),
         );
-        statusText = "Ditolak";
+        statusText = "Rejected";
         break;
       case 'Pending':
       default:
@@ -80,7 +80,7 @@ class SubmissionDataCardWidget extends StatelessWidget {
           ),
         );
         statusText =
-            userRole == 'Manajer' ? "Menunggu Persetujuan" : "Diproses";
+            userRole == 'Manajer' ? "Waiting for Approval" : "In Process";
         break;
     }
 
@@ -174,12 +174,12 @@ class SubmissionDataCardWidget extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               LabelValueWidget(
-                                label: "Nama Pemohon",
+                                label: "Applicant Name",
                                 value: applicantName,
                               ),
                               const SizedBox(height: 8),
                               LabelValueWidget(
-                                label: "Tujuan Pembiayaan",
+                                label: "Purpose of Financing",
                                 value: financingPurpose,
                               ),
                             ],
@@ -191,13 +191,13 @@ class SubmissionDataCardWidget extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               LabelValueWidget(
-                                label: "Jumlah Pengajuan",
+                                label: "Total Applications",
                                 value:
                                     'Rp${currencyFormat.format(int.tryParse(totalSubmission ?? '0') ?? 0)}',
                               ),
                               const SizedBox(height: 8),
                               LabelValueWidget(
-                                label: "Tanggal Pengajuan",
+                                label: "Application Date",
                                 value: formatTimestamp(submissionDate ?? ""),
                               ),
                             ],

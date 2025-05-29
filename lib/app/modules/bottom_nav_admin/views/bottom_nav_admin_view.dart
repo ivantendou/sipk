@@ -65,7 +65,7 @@ class BottomNavAdminView extends GetView<BottomNavAdminController> {
                           )
                         : Assets.images.manageDataOff.svg(width: 24),
                   ),
-                  label: "Pengajuan",
+                  label: "Application",
                 ),
                 BottomNavigationBarItem(
                   icon: Padding(
@@ -80,7 +80,7 @@ class BottomNavAdminView extends GetView<BottomNavAdminController> {
                           )
                         : Assets.images.profileOff.svg(width: 24),
                   ),
-                  label: "Profil",
+                  label: "Profile",
                 ),
               ],
             );

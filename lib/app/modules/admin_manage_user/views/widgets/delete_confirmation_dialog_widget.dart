@@ -7,19 +7,19 @@ import 'package:sipk/app/widgets/custom_button_widget.dart';
 
 void showDeleteConfirmationDialog(AdminManageUserController controller) {
   Get.defaultDialog(
-    title: 'Konfirmasi Penghapusan',
+    title: 'Delete Confirmation',
     titleStyle: TextStyleConstant.subHeading.copyWith(
       fontWeight: FontWeight.bold,
     ),
     titlePadding: const EdgeInsets.only(top: 16),
-    content: Text(
-      'Apakah Anda yakin ingin menghapus ${controller.selectedCount} pengguna? Tindakan ini tidak dapat dibatalkan.',
+    content: const Text(
+      'Are you sure you want to delete the selected data? This action cannot be undone.',
       style: TextStyleConstant.body,
       textAlign: TextAlign.center,
     ),
     contentPadding: const EdgeInsets.all(16),
     confirm: CustomButtonWidget(
-      text: 'Hapus',
+      text: 'Delete',
       width: 120,
       onTap: () {
         Get.back();
@@ -29,7 +29,7 @@ void showDeleteConfirmationDialog(AdminManageUserController controller) {
     cancel: Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: CustomButtonWidget(
-        text: 'Batal',
+        text: 'Cancel',
         width: 120,
         onTap: () => Get.back(),
         buttonColor: ColorsConstant.white,

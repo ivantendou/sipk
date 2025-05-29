@@ -26,14 +26,14 @@ class AoManageDataView extends GetView<AoManageDataController> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 FolderCardWidget(
-                  folderName: 'Data Skoring Pembiayaan',
+                  folderName: 'Scoring Data',
                   onTap: () {
                     Get.toNamed(Routes.SCORING_DATA);
                   },
                 ),
                 const SizedBox(width: 16),
                 FolderCardWidget(
-                  folderName: 'Data Pengajuan Pembiayaan',
+                  folderName: 'Application Data',
                   onTap: () {
                     Get.toNamed(Routes.SUBMISSION_DATA);
                   },

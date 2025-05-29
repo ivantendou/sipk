@@ -7,19 +7,19 @@ import 'package:sipk/app/widgets/custom_button_widget.dart';
 
 void showLogoutConfirmationDialog(ProfileController controller) {
   Get.defaultDialog(
-    title: 'Konfirmasi Logout',
+    title: 'Logout Confirmation',
     titleStyle: TextStyleConstant.subHeading.copyWith(
       fontWeight: FontWeight.bold,
     ),
     titlePadding: const EdgeInsets.only(top: 16),
     content: const Text(
-      'Apakah Anda yakin ingin keluar?',
+      'Are you sure you want to exit?',
       style: TextStyleConstant.body,
       textAlign: TextAlign.center,
     ),
     contentPadding: const EdgeInsets.all(16),
     confirm: CustomButtonWidget(
-      text: 'Keluar',
+      text: 'Logout',
       width: 120,
       onTap: () {
         Get.back();
@@ -29,7 +29,7 @@ void showLogoutConfirmationDialog(ProfileController controller) {
     cancel: Padding(
       padding: const EdgeInsets.only(bottom: 4),
       child: CustomButtonWidget(
-        text: 'Batal',
+        text: 'Cancel',
         width: 120,
         onTap: () => Get.back(),
         buttonColor: ColorsConstant.white,

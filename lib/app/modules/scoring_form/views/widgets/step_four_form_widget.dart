@@ -26,15 +26,15 @@ class StepFourFormWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Data Terkait Usaha',
+              'Business-Related Data',
               style: TextStyleConstant.subHeading2.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Laporan Usaha',
-              hintText: 'Pilih jenis laporan usaha...',
+              fieldTitle: 'Business Report',
+              hintText: 'Select business report type...',
               items: const [
                 'Tidak Ada',
                 'Catatan Jual Beli',
@@ -56,12 +56,12 @@ class StepFourFormWidget extends StatelessWidget {
             const SizedBox(height: 16),
             MonthInputFieldWidget(
               controller: controller.employmentBusinessDurationController,
-              fieldTitle: 'Lama Usaha yang Sama',
+              fieldTitle: 'Duration of Same Business',
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Cara Penerimaan Pembayaran',
-              hintText: 'Pilih cara penerimaan pembayaran...',
+              fieldTitle: 'Method of Payment Receipt',
+              hintText: 'Select method of payment receipt...',
               items: const [
                 'Tunai Tagihan Bon 1 sd 3',
                 'Piutang > 30 Hari',
@@ -84,8 +84,8 @@ class StepFourFormWidget extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Status Tempat Usaha',
-              hintText: 'Pilih status tempat usaha...',
+              fieldTitle: 'Business Premises Status',
+              hintText: 'Select business premises status...',
               items: const [
                 'Pinjam Pakai',
                 'Sewa',
@@ -102,8 +102,8 @@ class StepFourFormWidget extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Metode Menjual/Menjajakan',
-              hintText: 'Pilih metode menjual/menjajakan...',
+              fieldTitle: 'Selling/Vending Method',
+              hintText: 'Select selling/vending method...',
               items: const [
                 'Dijajakan Keliling',
                 'Mangkal Kaki Lima',
@@ -125,14 +125,14 @@ class StepFourFormWidget extends StatelessWidget {
             const SizedBox(height: 16),
             TextFormFieldWidget(
               controller: controller.employeeCountController,
-              fieldTitle: 'Jumlah Tenaga Kerja',
+              fieldTitle: 'Number of Employees',
               validator: FormValidators.validateNumber,
               keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Administrasi Usaha',
-              hintText: 'Pilih administrasi usaha...',
+              fieldTitle: 'Business Administrationa',
+              hintText: 'Select business administration...',
               items: const [
                 'Tidak Ada',
                 'Sederhana - Usaha dan Keluarga Bercampur',
@@ -153,8 +153,8 @@ class StepFourFormWidget extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Kewajiban Usaha',
-              hintText: 'Pilih kewajiban usaha...',
+              fieldTitle: 'Business Liabilities',
+              hintText: 'Select business liabilities...',
               items: const [
                 '> Pengajuan',
                 '50% > 100% Pengajuan',
@@ -177,8 +177,8 @@ class StepFourFormWidget extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Mutasi Rekening Usaha',
-              hintText: 'Pilih status rekening usaha...',
+              fieldTitle: 'Business Account Statement',
+              hintText: 'Select business account statement...',
               items: const [
                 'Ada',
                 'Tidak Ada',
@@ -193,8 +193,8 @@ class StepFourFormWidget extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Reputasi di Tempat Usaha',
-              hintText: 'Pilih reputasi...',
+              fieldTitle: 'Reputation at Business Place',
+              hintText: 'Select reputation...',
               items: const [
                 'Baik',
                 'Tidak Baik',
@@ -216,15 +216,15 @@ class StepFourFormWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Data Terkait Pekerjaan',
+              'Employment-Related Data',
               style: TextStyleConstant.subHeading2.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Status Bekerja Pemohon',
-              hintText: 'Pilih status bekerja...',
+              fieldTitle: 'Applicant\'s Employment Status',
+              hintText: 'Select employment status...',
               items: const [
                 'Freelance',
                 'Part Time',
@@ -247,8 +247,8 @@ class StepFourFormWidget extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Bonafiditas Perusahaan',
-              hintText: 'Pilih bonafiditas perusahaan...',
+              fieldTitle: 'Company Credibility',
+              hintText: 'Select company credibility...',
               items: const [
                 'Bonafid',
                 'Cukup Bonafid',
@@ -264,8 +264,8 @@ class StepFourFormWidget extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Slip Gaji',
-              hintText: 'Pilih status slip gaji...',
+              fieldTitle: 'Payslip',
+              hintText: 'Select payslip...',
               items: const [
                 'Ada',
                 'Tidak Ada',
@@ -279,8 +279,8 @@ class StepFourFormWidget extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Mutasi Rekening Gaji',
-              hintText: 'Pilih status rekening gaji...',
+              fieldTitle: 'Salary Account Statement',
+              hintText: 'Select salary account...',
               items: const [
                 'Ada',
                 'Tidak Ada',
@@ -295,8 +295,8 @@ class StepFourFormWidget extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Reputasi di Tempat Bekerja',
-              hintText: 'Pilih reputasi...',
+              fieldTitle: 'Reputation at Workplace',
+              hintText: 'Select reputation...',
               items: const [
                 'Baik',
                 'Tidak Baik',
@@ -313,7 +313,7 @@ class StepFourFormWidget extends StatelessWidget {
             const SizedBox(height: 16),
             YearsInputFieldWidget(
               controller: controller.employmentBusinessDurationController,
-              fieldTitle: 'Lama Bekerja',
+              fieldTitle: 'Years of Employment',
             ),
             const SizedBox(height: 16),
           ],

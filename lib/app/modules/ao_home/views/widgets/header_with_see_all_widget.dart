@@ -38,7 +38,7 @@ class HeaderWithSeeAllWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Lihat Semua',
+                    'View All',
                     style: TextStyleConstant.caption.copyWith(
                       color: ColorsConstant.primary,
                     ),

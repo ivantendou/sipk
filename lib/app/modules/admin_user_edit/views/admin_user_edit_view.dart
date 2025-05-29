@@ -15,7 +15,7 @@ class AdminUserEditView extends GetView<AdminUserEditController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBarWidget(title: 'Tambah Pengguna'),
+      appBar: const CustomAppBarWidget(title: 'Edit User'),
       backgroundColor: ColorsConstant.grey100,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -35,7 +35,7 @@ class AdminUserEditView extends GetView<AdminUserEditController> {
                         const SizedBox(height: 16),
                         TextFormFieldWidget(
                           controller: controller.nameController,
-                          fieldTitle: 'Nama',
+                          fieldTitle: 'Name',
                           validator: FormValidators.validateName,
                         ),
                         const SizedBox(height: 16),
@@ -47,13 +47,13 @@ class AdminUserEditView extends GetView<AdminUserEditController> {
                         const SizedBox(height: 16),
                         TextFormFieldWidget(
                           controller: controller.passwordController,
-                          fieldTitle: 'Kata Sandi',
+                          fieldTitle: 'Password',
                           validator: FormValidators.validatePassword,
                         ),
                         const SizedBox(height: 16),
                         TextFormFieldWidget(
                           controller: controller.phoneNumberController,
-                          fieldTitle: 'Nomor Telepon',
+                          fieldTitle: 'Phone Number',
                           validator: FormValidators.validateNumber,
                         ),
                         const SizedBox(height: 16),
@@ -66,7 +66,6 @@ class AdminUserEditView extends GetView<AdminUserEditController> {
                           items: const [
                             'Account Officer',
                             'Manajer',
-                            'Supervisor'
                           ],
                           onChanged: (value) {
                             controller.setRole(value);
@@ -78,8 +77,8 @@ class AdminUserEditView extends GetView<AdminUserEditController> {
                               controller.selectedServiceBranch.value.isNotEmpty
                                   ? controller.selectedServiceBranch.value
                                   : null,
-                          fieldTitle: 'Cabang Layanan',
-                          hintText: 'Pilih cabang layanan',
+                          fieldTitle: 'Service Branch',
+                          hintText: 'Select service branch',
                           items: const ['Ciluar', 'Dramaga'],
                           onChanged: (value) {
                             controller.setServiceBranch(value);

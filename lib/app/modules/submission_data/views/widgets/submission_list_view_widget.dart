@@ -91,7 +91,7 @@ class SubmissionListViewWidget extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                'Tidak ada data ditemukan',
+                'No data found',
                 style: TextStyleConstant.body,
               ),
             ),
@@ -100,7 +100,7 @@ class SubmissionListViewWidget extends StatelessWidget {
             padding: EdgeInsets.all(16.0),
             child: Center(
               child: Text(
-                'Tidak ada data lagi',
+                'No more data',
                 style: TextStyleConstant.caption,
               ),
             ),
@@ -113,12 +113,12 @@ class SubmissionListViewWidget extends StatelessWidget {
                 Assets.images.errorImage.svg(width: 240),
                 const SizedBox(height: 6),
                 const Text(
-                  'Terjadi Kesalahan',
+                  'An error occurred',
                   style: TextStyleConstant.subHeading2,
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Pastikan perangkat Anda terhubung ke internet dan coba lagi.',
+                  'Make sure your device is connected to the internet and try again.',
                   textAlign: TextAlign.center,
                   style: TextStyleConstant.body.copyWith(
                     color: ColorsConstant.grey700,

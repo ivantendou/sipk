@@ -39,23 +39,23 @@ class AoSubmissionView extends GetView<AoSubmissionController> {
               ),
               indicatorSize: TabBarIndicatorSize.label,
               tabs: const [
-                Tab(text: 'Diproses'),
-                Tab(text: 'Disetujui'),
-                Tab(text: 'Ditolak'),
+                Tab(text: 'In Process'),
+                Tab(text: 'Approved'),
+                Tab(text: 'Rejected'),
               ],
             ),
             title: Column(
               children: [
                 CustomIconButtonWidget(
                   icon: Assets.images.add1.svg(width: 24),
-                  text: 'Ajukan Pembiayaan',
+                  text: 'Submit Financing Application',
                   onTap: () {
                     Get.toNamed(Routes.SUBMISSION_FORM);
                   },
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  'Status Pengajuan Pembiayaan Bulan Ini',
+                  "This Month's Financing Application Status",
                   style: TextStyleConstant.subHeading2.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -83,19 +83,19 @@ class AoSubmissionView extends GetView<AoSubmissionController> {
                   color: ColorsConstant.primary,
                   onRefresh: controller.refreshApplications,
                   child: _buildApplicationsList(
-                      controller.pendingApplications, 'Diproses'),
+                      controller.pendingApplications, 'In Process'),
                 ),
                 RefreshIndicator(
                   color: ColorsConstant.primary,
                   onRefresh: controller.refreshApplications,
                   child: _buildApplicationsList(
-                      controller.acceptedApplications, 'Disetujui'),
+                      controller.acceptedApplications, 'Approved'),
                 ),
                 RefreshIndicator(
                   color: ColorsConstant.primary,
                   onRefresh: controller.refreshApplications,
                   child: _buildApplicationsList(
-                      controller.rejectedApplications, 'Ditolak'),
+                      controller.rejectedApplications, 'Rejected'),
                 ),
               ],
             );
@@ -147,7 +147,7 @@ class AoSubmissionView extends GetView<AoSubmissionController> {
           height: 300,
           child: Center(
             child: Text(
-              'Tidak ada pengajuan dengan status $status',
+              'No applications with $status status',
               style: TextStyleConstant.body,
             ),
           ),

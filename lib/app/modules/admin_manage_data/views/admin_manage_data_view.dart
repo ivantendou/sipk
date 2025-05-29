@@ -38,12 +38,12 @@ class AdminManageDataView extends GetView<AdminManageDataController> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     FolderCardWidget(
-                      folderName: 'Data Pengguna',
+                      folderName: 'User Data',
                       onTap: () => Get.toNamed(Routes.ADMIN_MANAGE_USER),
                     ),
                     const SizedBox(width: 16),
                     FolderCardWidget(
-                      folderName: 'Data Skoring Pembiayaan',
+                      folderName: 'Scoring Data',
                       onTap: () => Get.toNamed(Routes.SCORING_DATA),
                     ),
                   ],
@@ -53,7 +53,7 @@ class AdminManageDataView extends GetView<AdminManageDataController> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     FolderCardWidget(
-                      folderName: 'Data Pengajuan Pembiayaan',
+                      folderName: 'Application Data',
                       onTap: () => Get.toNamed(Routes.SUBMISSION_DATA),
                     ),
                     const SizedBox(width: 16),

@@ -77,7 +77,7 @@ class SelectDataCardWidget extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 4),
                                   Text(
-                                    "Skoring Belum Selesai",
+                                    "Scoring Incomplete",
                                     style: TextStyleConstant.body.copyWith(
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -93,7 +93,7 @@ class SelectDataCardWidget extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 4),
                                   Text(
-                                    "Skoring Selesai",
+                                    "Skoring Completed",
                                     style: TextStyleConstant.body.copyWith(
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -125,7 +125,7 @@ class SelectDataCardWidget extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               LabelValueWidget(
-                                label: "Nama Pemohon",
+                                label: "Applicant Name",
                                 value: applicantName,
                               ),
                               const SizedBox(height: 16),
@@ -135,7 +135,7 @@ class SelectDataCardWidget extends StatelessWidget {
                               ),
                               const SizedBox(height: 16),
                               LabelValueWidget(
-                                label: "Tanggal Skoring",
+                                label: "Scoring Date",
                                 value: formatDate(scoringDate),
                               ),
                             ],
@@ -149,7 +149,7 @@ class SelectDataCardWidget extends StatelessWidget {
                             ),
                             const SizedBox(height: 16),
                             CustomButtonWidget(
-                              text: "Pilih",
+                              text: "Select",
                               width: 120,
                               onTap: () {
                                 controller.callSubmissionFormController(
@@ -179,18 +179,18 @@ class SelectDataCardWidget extends StatelessWidget {
   String formatDate(String? dateStr) {
     DateTime dateTime = DateTime.parse(dateStr ?? "").toLocal();
     List<String> months = [
-      "Januari",
-      "Februari",
-      "Maret",
+      "January",
+      "February",
+      "March",
       "April",
-      "Mei",
-      "Juni",
-      "Juli",
-      "Agustus",
+      "May",
+      "June",
+      "July",
+      "August",
       "September",
-      "Oktober",
+      "October",
       "November",
-      "Desember"
+      "December"
     ];
     return "${dateTime.day} ${months[dateTime.month - 1]} ${dateTime.year}";
   }

@@ -10,7 +10,7 @@ class FinancingProposalView extends GetView<FinancingProposalController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBarWidget(title: 'Proposal Pembiayaan'),
+      appBar: const CustomAppBarWidget(title: 'Financing Proposal'),
       body: PdfPreview(
         build: (format) => controller.generatePdf(),
         canChangePageFormat: false,

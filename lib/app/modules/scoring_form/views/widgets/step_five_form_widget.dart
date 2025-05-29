@@ -24,7 +24,7 @@ class StepFiveFormWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Data Rincian Usaha Mandiri',
+              'Independent Business Details',
               style: TextStyleConstant.subHeading2.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -32,72 +32,72 @@ class StepFiveFormWidget extends StatelessWidget {
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
               controller: controller.salesController,
-              fieldTitle: 'Penjualan/Omzet',
+              fieldTitle: 'Sales/Turnover',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
               controller: controller.cogsController,
-              fieldTitle: 'Harga Pokok Pembelian',
+              fieldTitle: 'Cost of Goods Sold',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
               controller: controller.dailyLaborController,
-              fieldTitle: 'Biaya Tenaga Kerja Harian',
+              fieldTitle: 'Daily Labor Costs',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
               controller: controller.consumptionController,
-              fieldTitle: 'Biaya Konsumsi',
+              fieldTitle: 'Consumption Costs',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
               controller: controller.transportCostController,
-              fieldTitle: 'Biaya Transportasi Usaha',
+              fieldTitle: 'Business Transportation Costs',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
               controller: controller.fuelController,
-              fieldTitle: 'Biaya Bahan Bakar',
+              fieldTitle: 'Fuel Costs',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
               controller: controller.packagingController,
-              fieldTitle: 'Biaya Kemasan',
+              fieldTitle: 'Packaging Costs',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
               controller: controller.depreciationController,
-              fieldTitle: 'Biaya Susut/Rusak/Tidak Laku',
+              fieldTitle: 'Depreciation/Damage/Unsold Costs',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
               controller: controller.otherCostsController,
-              fieldTitle: 'Biaya Lainnya',
+              fieldTitle: 'Other Costs',
             ),
             const SizedBox(height: 16),
             DayInputFieldWidget(
               controller: controller.activeDaysController,
-              fieldTitle: 'Jumlah Hari Aktif Usaha',
+              fieldTitle: 'Number of Active Business Days',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
               controller: controller.monthlyLaborController,
-              fieldTitle: 'Biaya Tenaga Kerja Bulanan',
+              fieldTitle: 'Monthly Labor Costs',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
               controller: controller.rentalController,
-              fieldTitle: 'Biaya Sewa',
+              fieldTitle: 'Rental Costs',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
               controller: controller.assetMaintenanceController,
-              fieldTitle: 'Biaya Pemeliharaan Aset Usaha',
+              fieldTitle: 'Business Asset Maintenance Costs',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
               controller: controller.utilitiesController,
-              fieldTitle: 'Biaya Rekening Air-Listrik-Telp.',
+              fieldTitle: 'Water-Electricity-Phone Bills',
             ),
             const SizedBox(height: 16),
           ],
@@ -107,14 +107,14 @@ class StepFiveFormWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Data Rincian Usaha Mandiri',
+              'Independent Business Details',
               style: TextStyleConstant.subHeading2.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 16),
             Text(
-              'Pemohon tidak memiliki usaha mandiri. Klik selanjutnya.',
+              'The applicant does not have an independent business. Click Next.',
               style: TextStyleConstant.body.copyWith(
                 color: ColorsConstant.grey900,
               ),

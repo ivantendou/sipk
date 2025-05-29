@@ -75,19 +75,19 @@ class SubmissionDetailController extends GetxController {
 
   void showCancelConfirmationDialog() {
     Get.defaultDialog(
-      title: 'Batalkan Pengajuan',
+      title: 'Cancel Application',
       titleStyle: TextStyleConstant.subHeading.copyWith(
         fontWeight: FontWeight.bold,
       ),
       titlePadding: const EdgeInsets.only(top: 16),
       content: const Text(
-        'Apakah Anda yakin ingin membatalkan pengajuan ini?',
+        'Are you sure you want to cancel this application?',
         style: TextStyleConstant.body,
         textAlign: TextAlign.center,
       ),
       contentPadding: const EdgeInsets.all(16),
       confirm: CustomButtonWidget(
-        text: 'Ya',
+        text: 'Yes',
         width: 120,
         onTap: () async {
           Get.back();
@@ -97,7 +97,7 @@ class SubmissionDetailController extends GetxController {
       cancel: Padding(
         padding: const EdgeInsets.only(bottom: 8),
         child: CustomButtonWidget(
-          text: 'Tidak',
+          text: 'No',
           width: 120,
           onTap: () => Get.back(),
           buttonColor: ColorsConstant.white,
@@ -110,19 +110,19 @@ class SubmissionDetailController extends GetxController {
 
   void showRejectConfirmationDialog() {
     Get.defaultDialog(
-      title: 'Tolak Pengajuan',
+      title: 'Reject Application',
       titleStyle: TextStyleConstant.subHeading.copyWith(
         fontWeight: FontWeight.bold,
       ),
       titlePadding: const EdgeInsets.only(top: 16),
       content: const Text(
-        'Apakah Anda yakin ingin menolak pengajuan ini?',
+        'Are you sure you want to reject this application?',
         style: TextStyleConstant.body,
         textAlign: TextAlign.center,
       ),
       contentPadding: const EdgeInsets.all(16),
       confirm: CustomButtonWidget(
-        text: 'Tolak',
+        text: 'Reject',
         width: 120,
         onTap: () async {
           Get.back();
@@ -134,7 +134,7 @@ class SubmissionDetailController extends GetxController {
       cancel: Padding(
         padding: const EdgeInsets.only(bottom: 8),
         child: CustomButtonWidget(
-          text: 'Batal',
+          text: 'Cancel',
           width: 120,
           onTap: () => Get.back(),
           buttonColor: ColorsConstant.white,
@@ -147,7 +147,7 @@ class SubmissionDetailController extends GetxController {
 
   void showAcceptConfirmationDialog() {
     Get.defaultDialog(
-      title: 'Terima Pengajuan',
+      title: 'Approve Application',
       titleStyle: TextStyleConstant.subHeading.copyWith(
         fontWeight: FontWeight.bold,
       ),
@@ -161,11 +161,11 @@ class SubmissionDetailController extends GetxController {
             children: [
               RupiahInputFieldWidget(
                 controller: applicationAmountController,
-                fieldTitle: 'Jumlah Pengajuan yand Disetujui',
+                fieldTitle: 'Number of Approved Applications',
               ),
               const SizedBox(height: 8),
               const Text(
-                'Catatan (Opsional)',
+                'Notes (Optional)',
                 style: TextStyleConstant.body,
               ),
               TextField(
@@ -180,7 +180,7 @@ class SubmissionDetailController extends GetxController {
       ),
       contentPadding: const EdgeInsets.all(16),
       confirm: CustomButtonWidget(
-        text: 'Terima',
+        text: 'Approve',
         width: 120,
         onTap: () async {
           if (formKeys.currentState!.validate()) {
@@ -194,7 +194,7 @@ class SubmissionDetailController extends GetxController {
       cancel: Padding(
         padding: const EdgeInsets.only(bottom: 8),
         child: CustomButtonWidget(
-          text: 'Batal',
+          text: 'Cancel',
           width: 120,
           onTap: () => Get.back(),
           buttonColor: ColorsConstant.white,

@@ -42,7 +42,7 @@ class AoHomeAppbarWidget extends StatelessWidget
               style: TextStyleConstant.body,
               children: [
                 const TextSpan(
-                  text: "Halo, ",
+                  text: "Hi, ",
                 ),
                 TextSpan(
                   text: name,

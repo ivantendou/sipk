@@ -19,20 +19,20 @@ class LoginController extends GetxController {
 
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Email tidak boleh kosong';
+      return 'Email cannot be empty';
     }
     if (!GetUtils.isEmail(value)) {
-      return 'Format email tidak valid';
+      return 'Invalid email format';
     }
     return null;
   }
 
   String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Password tidak boleh kosong';
+      return 'Password cannot be empty';
     }
     if (value.length < 8) {
-      return 'Password minimal 8 karakter';
+      return 'Password must be at least 8 characters';
     }
     return null;
   }
@@ -69,13 +69,13 @@ class LoginController extends GetxController {
         }
       } catch (e) {
         if (e is AuthException && e.statusCode == '400') {
-          showLoginFailedDialog("Email atau password salah.");
+          showLoginFailedDialog("Incorrect email or password.");
         } else if (e is SocketException) {
           showLoginFailedDialog(
-              "Koneksi internet bermasalah. Periksa jaringan Anda.");
+              "Internet connection issue. Please check your network.");
         } else {
           showLoginFailedDialog(
-              "Terjadi kesalahan. Periksa jaringan Anda dan coba lagi.");
+              "An error occurred. Check your network and try again.");
         }
       } finally {
         isLoading(false);
@@ -91,7 +91,7 @@ class LoginController extends GetxController {
     Get.defaultDialog(
       backgroundColor: ColorsConstant.white,
       contentPadding: const EdgeInsets.only(bottom: 24),
-      title: 'Login Gagal',
+      title: 'Login Failed',
       titleStyle: TextStyleConstant.subHeading.copyWith(
         fontWeight: FontWeight.bold,
       ),

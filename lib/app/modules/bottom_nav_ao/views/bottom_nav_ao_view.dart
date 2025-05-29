@@ -69,7 +69,7 @@ class BottomNavAoView extends GetView<BottomNavAoController> {
                           )
                         : Assets.images.scoringOff.svg(width: 24),
                   ),
-                  label: "Skoring",
+                  label: "Scoring",
                 ),
                 BottomNavigationBarItem(
                   icon: Padding(
@@ -84,7 +84,7 @@ class BottomNavAoView extends GetView<BottomNavAoController> {
                           )
                         : Assets.images.submissionOff.svg(width: 24),
                   ),
-                  label: "Pengajuan",
+                  label: "Application",
                 ),
                 BottomNavigationBarItem(
                   icon: Padding(
@@ -99,7 +99,7 @@ class BottomNavAoView extends GetView<BottomNavAoController> {
                           )
                         : Assets.images.manageDataOff.svg(width: 24),
                   ),
-                  label: "Kelola Data",
+                  label: "Manage Data",
                 ),
                 BottomNavigationBarItem(
                   icon: Padding(
@@ -114,7 +114,7 @@ class BottomNavAoView extends GetView<BottomNavAoController> {
                           )
                         : Assets.images.profileOff.svg(width: 24),
                   ),
-                  label: "Profil",
+                  label: "Profile",
                 ),
               ],
             );

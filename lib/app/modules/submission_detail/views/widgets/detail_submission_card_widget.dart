@@ -50,13 +50,13 @@ class DetailSubmissionCardWidget extends StatelessWidget {
         headerBackgroundColor = ColorsConstant.good100;
         borderColor = ColorsConstant.good600;
         textColor = ColorsConstant.good600;
-        statusText = "Diterima";
+        statusText = "Accepted";
         break;
       case 'Rejected':
         headerBackgroundColor = ColorsConstant.doubtful100;
         borderColor = ColorsConstant.doubtful600;
         textColor = ColorsConstant.doubtful600;
-        statusText = "Ditolak";
+        statusText = "Rejected";
         break;
       case 'Pending':
       default:
@@ -64,7 +64,7 @@ class DetailSubmissionCardWidget extends StatelessWidget {
         borderColor = ColorsConstant.average600;
         textColor = ColorsConstant.average600;
         statusText =
-            userRole == 'Manajer' ? "Menunggu Persetujuan" : "Diproses";
+            userRole == 'Manajer' ? "Waiting for Approval" : "In Process";
         break;
     }
 
@@ -151,34 +151,34 @@ class DetailSubmissionCardWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               LabelValueWidget(
-                label: 'Nama Nasabah/Pemohon',
+                label: 'Applicant Name',
                 value: applicantName,
               ),
               const SizedBox(height: 8),
               LabelValueWidget(
-                label: 'Cabang Layanan',
+                label: 'Service Branch',
                 value: officeBranch,
               ),
               const SizedBox(height: 8),
               LabelValueWidget(
-                label: 'Status Anggota',
+                label: 'Member Status',
                 value: memberStatus,
               ),
               const SizedBox(height: 8),
               LabelValueWidget(
-                label: 'Tujuan Pembiayaan',
+                label: 'Financing Purpose',
                 value: allocation,
               ),
               const SizedBox(height: 8),
               LabelValueWidget(
-                label: 'Tanggal Pengajuan',
+                label: 'Application Date',
                 value: submissionDate != null
                     ? formatTimestamp(submissionDate!)
                     : '-',
               ),
               const SizedBox(height: 8),
               LabelValueWidget(
-                  label: 'Jumlah Pengajuan',
+                  label: 'Total Applications',
                   value:
                       'Rp${currencyFormat.format(int.tryParse(applicationAmount ?? '0') ?? 0)}'),
             ],

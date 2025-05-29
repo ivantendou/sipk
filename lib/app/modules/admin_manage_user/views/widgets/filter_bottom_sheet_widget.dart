@@ -22,7 +22,7 @@ void showFilterBottomSheet(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Filter Pengguna',
+                    'Filter User',
                     style: TextStyleConstant.subHeading
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
@@ -75,7 +75,7 @@ void showFilterBottomSheet(
                 onTap: () => controller.toggleRole('Manajer'),
               ),
               CustomButtonWidget(
-                text: 'Terapkan',
+                text: 'Apply',
                 width: double.infinity,
                 onTap: () {
                   controller.applyFilters();

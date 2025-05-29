@@ -42,7 +42,7 @@ class AoHomeView extends GetView<AoHomeController> {
                   Obx(() {
                     return CustomIconButtonWidget(
                       icon: Assets.images.add1.svg(width: 24),
-                      text: "Buat Skoring Pembiayaan Baru",
+                      text: "Start New Credit Scoring",
                       isLoading: controller.isLoadingForm.value,
                       onTap: () {
                         controller.createForm();
@@ -51,7 +51,7 @@ class AoHomeView extends GetView<AoHomeController> {
                   }),
                   const SizedBox(height: 20),
                   HeaderWithSeeAllWidget(
-                    title: "Draf Skoring",
+                    title: "Scoring Draft",
                     onTap: () {
                       Get.toNamed(
                         Routes.SCORING_DATA,
@@ -83,7 +83,7 @@ class AoHomeView extends GetView<AoHomeController> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: const Center(
-                          child: Text('Belum ada draf skoring'),
+                          child: Text('No scoring draft yet'),
                         ),
                       );
                     } else {
@@ -104,7 +104,7 @@ class AoHomeView extends GetView<AoHomeController> {
                   }),
                   const SizedBox(height: 16),
                   HeaderWithSeeAllWidget(
-                    title: "Hasil Skoring",
+                    title: "Scoring Result",
                     onTap: () {
                       Get.toNamed(
                         Routes.SCORING_DATA,
@@ -136,7 +136,7 @@ class AoHomeView extends GetView<AoHomeController> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: const Center(
-                          child: Text('Belum ada hasil skoring'),
+                          child: Text('No scoring results yet'),
                         ),
                       );
                     } else {

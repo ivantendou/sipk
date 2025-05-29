@@ -12,7 +12,7 @@ AppBarWithSearchSwitch buildRegularAppBar(
   return AppBarWithSearchSwitch(
     titleTextStyle: TextStyleConstant.subHeading2,
     scrolledUnderElevation: 0.0,
-    fieldHintText: 'Cari Data Pengguna',
+    fieldHintText: 'Search User Data',
     bottom: PreferredSize(
       preferredSize: const Size.fromHeight(1.0),
       child: Container(
@@ -25,7 +25,7 @@ AppBarWithSearchSwitch buildRegularAppBar(
     animation: AppBarAnimationSlideLeft.call,
     appBarBuilder: (context) {
       return CustomAppBarWidget(
-        title: 'Kelola Pengguna',
+        title: 'Manage User',
         centerTitle: false,
         actions: [
           GestureDetector(

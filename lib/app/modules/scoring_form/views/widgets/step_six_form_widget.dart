@@ -22,15 +22,15 @@ class StepSixFormWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Data Tempat Tinggal',
+            'Residential Data',
             style: TextStyleConstant.subHeading2.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 16),
           DropdownInputFieldWidget(
-            fieldTitle: 'Kepemilikan Tempat Tanggal',
-            hintText: 'Pilih jenis kepemilikan tempat tanggal...',
+            fieldTitle: 'Residence Ownership',
+            hintText: 'Select residence ownership...',
             items: const [
               'Sewa',
               'Milik Keluarga/Rumah Dinas',
@@ -52,12 +52,12 @@ class StepSixFormWidget extends StatelessWidget {
           const SizedBox(height: 16),
           YearsInputFieldWidget(
             controller: controller.residenceDurationController,
-            fieldTitle: 'Lama Tinggal/Menetap',
+            fieldTitle: 'Duration of Stay/Residence',
           ),
           const SizedBox(height: 16),
           DropdownInputFieldWidget(
-            fieldTitle: 'Reputasi di Lingkungan Tempat Tinggal',
-            hintText: 'Pilih reputasi...',
+            fieldTitle: 'Reputation in Residential Area',
+            hintText: 'Select reputation...',
             items: const [
               'Baik',
               'Tidak Baik',

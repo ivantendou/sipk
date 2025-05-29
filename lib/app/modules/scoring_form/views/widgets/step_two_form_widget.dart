@@ -25,15 +25,15 @@ class StepTwoFormWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Data Permohonan',
+            'Application Data',
             style: TextStyleConstant.subHeading2.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 16),
           DropdownInputFieldWidget(
-            fieldTitle: 'Jenis Pembiayaan',
-            hintText: 'Pilih jenis pembiayaan...',
+            fieldTitle: 'Financing Type',
+            hintText: 'Select financing type...',
             items: const [
               'Modal Kerja',
               'Investasi Usaha',
@@ -54,8 +54,8 @@ class StepTwoFormWidget extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           DropdownInputFieldWidget(
-            fieldTitle: 'Pembiayaan ke-',
-            hintText: 'Pilih pembiayaan ke-...',
+            fieldTitle: 'Financing Number',
+            hintText: 'Select financing number...',
             items: const [
               '1',
               '2',
@@ -91,18 +91,18 @@ class StepTwoFormWidget extends StatelessWidget {
           const SizedBox(height: 16),
           RupiahInputFieldWidget(
             controller: controller.applicationAmountController,
-            fieldTitle: 'Jumlah Pengajuan/Harga Barang (Rupiah)',
+            fieldTitle: 'Application Amount/Goods Price (Rupiah)',
           ),
           const SizedBox(height: 16),
           TextFormFieldWidget(
             controller: controller.allocationController,
-            fieldTitle: 'Peruntukan',
+            fieldTitle: 'Purpose/Allocation',
             validator: FormValidators.validateName,
           ),
           const SizedBox(height: 16),
           PercentInputFieldWidget(
             controller: controller.downPaymentPctController,
-            fieldTitle: 'Uang Muka (%)',
+            fieldTitle: 'Down Payment (%)',
           ),
           const SizedBox(height: 16),
         ],

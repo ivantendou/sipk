@@ -12,7 +12,7 @@ AppBarWithSearchSwitch buildRegularAppBar(
   return AppBarWithSearchSwitch(
     titleTextStyle: TextStyleConstant.subHeading2,
     scrolledUnderElevation: 0.0,
-    fieldHintText: 'Cari Data Skoring',
+    fieldHintText: 'Search Scoring Data',
     bottom: PreferredSize(
       preferredSize: const Size.fromHeight(1.0),
       child: Container(
@@ -25,7 +25,7 @@ AppBarWithSearchSwitch buildRegularAppBar(
     animation: AppBarAnimationSlideLeft.call,
     appBarBuilder: (context) {
       return CustomAppBarWidget(
-        title: 'Pilih Data Skoring',
+        title: 'Select Scoring Data',
         centerTitle: false,
         actions: [
           GestureDetector(

@@ -17,7 +17,7 @@ class SubmissionDetailView extends GetView<SubmissionDetailController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBarWidget(title: 'Detail Pengajuan'),
+      appBar: const CustomAppBarWidget(title: 'Application Detail'),
       backgroundColor: ColorsConstant.grey100,
       body: Obx(
         () {
@@ -72,7 +72,7 @@ class SubmissionDetailView extends GetView<SubmissionDetailController> {
                         BlendMode.srcIn,
                       ),
                     ),
-                    text: 'Lihat Hasil Skoring',
+                    text: 'View Scoring Result',
                     onTap: () {
                       Get.toNamed(
                         Routes.AO_SCORING_DETAIL,
@@ -89,7 +89,7 @@ class SubmissionDetailView extends GetView<SubmissionDetailController> {
                   const SizedBox(height: 12),
                   CustomIconButtonWidget(
                     icon: Assets.images.pdf.svg(),
-                    text: 'Lihat Proposal Pembiayaan',
+                    text: 'View Financing Proposal',
                     onTap: () {
                       Get.toNamed(
                         Routes.FINANCING_PROPOSAL,
@@ -117,7 +117,7 @@ class SubmissionDetailView extends GetView<SubmissionDetailController> {
                                 Expanded(
                                   child: CustomIconButtonWidget(
                                     icon: Assets.images.cross.svg(),
-                                    text: 'Tolak',
+                                    text: 'Reject',
                                     backgroundColor: ColorsConstant.error,
                                     onTap: () {
                                       controller.showRejectConfirmationDialog();
@@ -128,7 +128,7 @@ class SubmissionDetailView extends GetView<SubmissionDetailController> {
                                 Expanded(
                                   child: CustomIconButtonWidget(
                                     icon: Assets.images.check.svg(),
-                                    text: 'Terima',
+                                    text: 'Accept',
                                     backgroundColor: ColorsConstant.success,
                                     onTap: () {
                                       controller.showAcceptConfirmationDialog();
@@ -140,7 +140,7 @@ class SubmissionDetailView extends GetView<SubmissionDetailController> {
                           : controller.userRole.value == 'Account Officer'
                               ? CustomIconButtonWidget(
                                   icon: Assets.images.cross.svg(),
-                                  text: 'Batalkan Pengajuan',
+                                  text: 'Cancel Application',
                                   onTap: () {
                                     controller.showCancelConfirmationDialog();
                                   },

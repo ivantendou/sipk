@@ -8,7 +8,7 @@ import 'package:sipk/app/modules/submission_data/views/widgets/delete_confirmati
 AppBar buildSelectionAppBar(SubmissionDataController controller) {
     return AppBar(
       title: Text(
-        '${controller.selectedCount} terpilih',
+        '${controller.selectedCount} selected',
         style: TextStyleConstant.subHeading2,
       ),
       leading: IconButton(

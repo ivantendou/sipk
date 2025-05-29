@@ -147,7 +147,7 @@ class CreditScoreBadgeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final displayText = isUnrated ? 'Belum Dinilai' : 'Skor: ${score!}';
+    final displayText = isUnrated ? 'Belum Dinilai' : 'Score: ${score!}';
 
     return Container(
       width: 124,

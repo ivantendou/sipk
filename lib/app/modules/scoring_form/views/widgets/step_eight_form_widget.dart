@@ -21,15 +21,15 @@ class StepEightFormWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Data Jaminan/Agunan',
+            'Collateral Data',
             style: TextStyleConstant.subHeading2.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 16),
           DropdownInputFieldWidget(
-            fieldTitle: 'Coverage atas Permohonan',
-            hintText: 'Pilih coverage atas permohonan...',
+            fieldTitle: 'Coverage of Application',
+            hintText: 'Select coverage of application...',
             items: const [
               '< 100%',
               '125% <= 100%',
@@ -46,8 +46,8 @@ class StepEightFormWidget extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           DropdownInputFieldWidget(
-            fieldTitle: 'Asuransi Jaminan Kendaraan',
-            hintText: 'Pilih jaminan kendaraan...',
+            fieldTitle: 'Vehicle Collateral Insurance',
+            hintText: 'Select...',
             items: const [
               'Ada Asuransi',
               'Tidak Ada Asuransi',
@@ -62,8 +62,8 @@ class StepEightFormWidget extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           DropdownInputFieldWidget(
-            fieldTitle: 'Asuransi Jiwa Pemohon',
-            hintText: 'Pilih asuransi jiwa pemohon...',
+            fieldTitle: 'Applicant Life Insurance',
+            hintText: 'Select...',
             items: const [
               'Ada Asuransi',
               'Tidak Ada Asuransi',
@@ -78,8 +78,8 @@ class StepEightFormWidget extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           DropdownInputFieldWidget(
-            fieldTitle: 'Pengikatan Agunan',
-            hintText: 'Pilih pengikatan agunan...',
+            fieldTitle: 'Collateral Binding',
+            hintText: 'Select collateral binding...',
             items: const [
               'Notaril',
               'Tidak Notaril',

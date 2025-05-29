@@ -23,7 +23,7 @@ void showFilterBottomSheet(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Filter Data Skoring',
+                  'Filter Scoring Data',
                   style: TextStyleConstant.subHeading
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
@@ -41,14 +41,14 @@ void showFilterBottomSheet(
             ),
             const SizedBox(height: 24),
             Text(
-              'Urutkan Berdasarkan',
+              'Sort by',
               style: TextStyleConstant.subHeading2
                   .copyWith(fontWeight: FontWeight.bold),
             ),
             ListTile(
               contentPadding: const EdgeInsets.all(0),
               title: const Text(
-                'Terbaru',
+                'Newest',
                 style: TextStyleConstant.body,
               ),
               leading: Radio<String>(
@@ -74,7 +74,7 @@ void showFilterBottomSheet(
             ListTile(
               contentPadding: const EdgeInsets.all(0),
               title: const Text(
-                'Terlama',
+                'Oldest',
                 style: TextStyleConstant.body,
               ),
               leading: Radio<String>(
@@ -99,7 +99,7 @@ void showFilterBottomSheet(
             ),
             const SizedBox(height: 16),
             CustomButtonWidget(
-              text: 'Terapkan',
+              text: 'Apply',
               width: double.infinity,
               onTap: () {
                 controller.applyFilters();

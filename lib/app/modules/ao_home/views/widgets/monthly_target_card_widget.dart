@@ -41,7 +41,7 @@ class MonthlyTargetCardWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Pencapaian Target Pembiayaan Bulanan',
+              'Monthly Financing Target Achievement',
               style: TextStyleConstant.body.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -79,7 +79,7 @@ class MonthlyTargetCardWidget extends StatelessWidget {
                     ),
                   ),
                   const TextSpan(
-                    text: " telah tercapai dari ",
+                    text: " has been achieved out of ",
                   ),
                   TextSpan(
                     text: "Rp. ${totalTarget ?? '0'}",
@@ -102,7 +102,7 @@ class MonthlyTargetCardWidget extends StatelessWidget {
                     ),
                   ),
                   const TextSpan(
-                    text: " pengajuan pembiayaan telah diterima.",
+                    text: " financing applications have been approved.",
                   ),
                 ],
               ),

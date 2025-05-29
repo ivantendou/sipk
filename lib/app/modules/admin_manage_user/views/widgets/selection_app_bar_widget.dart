@@ -8,7 +8,7 @@ import 'package:sipk/app/modules/admin_manage_user/views/widgets/delete_confirma
 AppBar buildSelectionAppBar(AdminManageUserController controller) {
     return AppBar(
       title: Text(
-        '${controller.selectedCount} terpilih',
+        '${controller.selectedCount} selected',
         style: TextStyleConstant.subHeading2,
       ),
       leading: IconButton(

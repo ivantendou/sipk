@@ -14,7 +14,7 @@ class ManagerScoringDetailView extends GetView<ManagerScoringDetailController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBarWidget(
-        title: 'Hasil Skoring Pembiayaan',
+        title: 'Scoring Result',
       ),
       backgroundColor: ColorsConstant.grey100,
       body: Padding(

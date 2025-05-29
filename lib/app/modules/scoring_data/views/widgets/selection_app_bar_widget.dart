@@ -8,7 +8,7 @@ import 'package:sipk/app/modules/scoring_data/views/widgets/delete_confirmation_
 AppBar buildSelectionAppBar(ScoringDataController controller) {
     return AppBar(
       title: Text(
-        '${controller.selectedCount} terpilih',
+        '${controller.selectedCount} selected',
         style: TextStyleConstant.subHeading2,
       ),
       leading: IconButton(

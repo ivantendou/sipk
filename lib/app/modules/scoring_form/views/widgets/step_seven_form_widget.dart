@@ -21,15 +21,15 @@ class StepSevenFormWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Data Hubungan dengan Perbankan',
+            'Banking Relationship Information',
             style: TextStyleConstant.subHeading2.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 16),
           DropdownInputFieldWidget(
-            fieldTitle: 'Hubungan dengan Perbankan',
-            hintText: 'Pilih hubungan dengan perbankan...',
+            fieldTitle: 'Banking Relationship',
+            hintText: 'Select banking relationship...',
             items: const [
               'Belum Pernah',
               'Debitur Bank < 1 Tahun',
@@ -50,8 +50,8 @@ class StepSevenFormWidget extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           DropdownInputFieldWidget(
-            fieldTitle: 'Saldo Simpanan Rata-Rata Per-Bulan',
-            hintText: 'Pilih saldo simpanan rata-rata per-bulan...',
+            fieldTitle: 'Average Monthly Savings Balance',
+            hintText: 'Pilih average monthly savings balance...',
             items: const ['Tidak Ada', '< 5 Juta', '5 < 10 Juta', '> 10 Juta'],
             value: ['Tidak Ada', '< 5 Juta', '5 < 10 Juta', '> 10 Juta']
                     .contains(controller.averageMonthlyBalance.value)
@@ -63,8 +63,8 @@ class StepSevenFormWidget extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           DropdownInputFieldWidget(
-            fieldTitle: 'Frekwensi Rata-Rata Mutasi Simpanan',
-            hintText: 'Pilih frekwensi rata-rata mutasi simpanan...',
+            fieldTitle: 'Average Savings Transaction Frequency',
+            hintText: 'Pilih average savings transaction frequency...',
             items: const [
               'Tidak Ada',
               '< 3 kali per-bulan',
@@ -85,8 +85,8 @@ class StepSevenFormWidget extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           DropdownInputFieldWidget(
-            fieldTitle: 'Kualitas Kredit Pemohon (SLIK)',
-            hintText: 'Pilih kualitas kredit pemohon...',
+            fieldTitle: 'Applicant\'s Credit Quality (SLIK)',
+            hintText: 'Select applicant credit quality...',
             items: const [
               'Koll 3 s.d. 5',
               'Koll 2',
@@ -107,8 +107,8 @@ class StepSevenFormWidget extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           DropdownInputFieldWidget(
-            fieldTitle: 'Rating PT CLIK Pemohon',
-            hintText: 'Pilih rating CLIK pemohon...',
+            fieldTitle: 'Applicant\'s PT CLIK Rating',
+            hintText: 'Select applicant\'s CLIK rating...',
             items: const [
               'A - B (Very High Risk)',
               'C - D (High Risk)',
@@ -131,8 +131,8 @@ class StepSevenFormWidget extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           DropdownInputFieldWidget(
-            fieldTitle: 'Rating PT CLIK Pasangan',
-            hintText: 'Pilih rating CLIK pasangan...',
+            fieldTitle: 'Spouse\'s PT CLIK Rating',
+            hintText: 'Select spouse\'s CLIK rating...',
             items: const [
               'Tidak Ada',
               'A - B (Very High Risk)',

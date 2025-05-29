@@ -66,7 +66,7 @@ class BottomNavManagerView extends GetView<BottomNavManagerController> {
                           )
                         : Assets.images.submissionOff.svg(width: 24),
                   ),
-                  label: "Pengajuan",
+                  label: "Application",
                 ),
                 BottomNavigationBarItem(
                   icon: Padding(
@@ -81,7 +81,7 @@ class BottomNavManagerView extends GetView<BottomNavManagerController> {
                           )
                         : Assets.images.profileOff.svg(width: 24),
                   ),
-                  label: "Profil",
+                  label: "Profile",
                 ),
               ],
             );

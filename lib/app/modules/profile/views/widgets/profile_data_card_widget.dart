@@ -39,17 +39,17 @@ class ProfileDataCardWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           LabelValueWidget(
-            label: 'Nama',
+            label: 'Name',
             value: name,
           ),
           const SizedBox(height: 8),
           LabelValueWidget(
-            label: 'Jabatan',
+            label: 'Role',
             value: role,
           ),
           const SizedBox(height: 8),
           LabelValueWidget(
-            label: 'Nomor Telepon',
+            label: 'Phone Number',
             value: telephoneNumber,
           ),
           const SizedBox(height: 8),

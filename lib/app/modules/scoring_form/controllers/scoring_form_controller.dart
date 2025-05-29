@@ -691,7 +691,7 @@ class ScoringFormController extends GetxController {
     Get.defaultDialog(
       backgroundColor: ColorsConstant.white,
       contentPadding: const EdgeInsets.only(bottom: 24),
-      title: 'Perhitungan Skor Selesai',
+      title: 'Scoring Completed',
       titleStyle: TextStyleConstant.subHeading.copyWith(
         fontWeight: FontWeight.bold,
       ),
@@ -713,7 +713,7 @@ class ScoringFormController extends GetxController {
             ),
             const SizedBox(height: 8),
             const Text(
-              'Skor kredit telah berhasil dihitung',
+              'Credit Score calculated successfully',
               style: TextStyleConstant.body,
               textAlign: TextAlign.center,
             ),
@@ -739,7 +739,7 @@ class ScoringFormController extends GetxController {
           ),
           child: Center(
             child: Text(
-              'Lihat Skor',
+              'View Score',
               style: TextStyleConstant.subHeading2.copyWith(
                 color: ColorsConstant.white,
                 fontWeight: FontWeight.bold,
@@ -755,7 +755,7 @@ class ScoringFormController extends GetxController {
     Get.defaultDialog(
       backgroundColor: ColorsConstant.white,
       contentPadding: const EdgeInsets.only(bottom: 24),
-      title: 'Perhitungan Skor Gagal',
+      title: 'Scoring Failed',
       titleStyle: TextStyleConstant.subHeading.copyWith(
         fontWeight: FontWeight.bold,
       ),
@@ -777,7 +777,7 @@ class ScoringFormController extends GetxController {
             ),
             const SizedBox(height: 8),
             const Text(
-              'Terjadi kesalahan saat menghitung skor kredit.\nSilakan coba lagi.',
+              'An error occurred while calculating the credit score.\nPlease try again.',
               style: TextStyleConstant.body,
               textAlign: TextAlign.center,
             ),
@@ -814,7 +814,7 @@ class ScoringFormController extends GetxController {
       barrierDismissible: false,
       backgroundColor: ColorsConstant.white,
       contentPadding: const EdgeInsets.only(bottom: 24),
-      title: 'Perhitungan Skor Gagal',
+      title: 'Get Scoring Data Failed',
       titleStyle: TextStyleConstant.subHeading.copyWith(
         fontWeight: FontWeight.bold,
       ),
@@ -836,7 +836,7 @@ class ScoringFormController extends GetxController {
             ),
             const SizedBox(height: 8),
             const Text(
-              'Terjadi kesalahan saat mengambil data skoring. Periksa internet Anda dan coba lagi',
+              'An error occurred while retrieving the scoring data. Please check your internet connection and try again.',
               style: TextStyleConstant.body,
               textAlign: TextAlign.center,
             ),
@@ -891,7 +891,7 @@ class ScoringFormController extends GetxController {
 
       if (kDebugMode) {
         print(
-          'Updated downPaymentAmtController to: ${downPaymentAmtController.text}');
+            'Updated downPaymentAmtController to: ${downPaymentAmtController.text}');
       }
     } catch (e) {
       if (kDebugMode) {
@@ -902,7 +902,6 @@ class ScoringFormController extends GetxController {
 
   void _onDownPaymentAmtChanged() {
     if (_isUpdatingFields) return;
-
 
     final amountText = downPaymentAmtController.text;
     if (amountText.isEmpty) return;

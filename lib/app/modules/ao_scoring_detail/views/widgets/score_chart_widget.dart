@@ -306,17 +306,17 @@ class ScoreChartWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     LabelValueWidget(
-                      label: "Nama Pemohon",
+                      label: "Applicant Name",
                       value: applicantName ?? "",
                     ),
                     const SizedBox(height: 8),
                     LabelValueWidget(
-                      label: "Nomor Skoring",
+                      label: "Scoring Number",
                       value: scoringNumber ?? "",
                     ),
                     const SizedBox(height: 8),
                     LabelValueWidget(
-                      label: "Tanggal Skoring",
+                      label: "Scoring Date",
                       value: formatDate(scoringDate),
                     ),
                   ],
@@ -332,18 +332,18 @@ class ScoreChartWidget extends StatelessWidget {
   String formatDate(String? dateStr) {
     DateTime dateTime = DateTime.parse(dateStr ?? "").toLocal();
     List<String> months = [
-      "Januari",
-      "Februari",
-      "Maret",
+      "January",
+      "February",
+      "March",
       "April",
-      "Mei",
-      "Juni",
-      "Juli",
-      "Agustus",
+      "May",
+      "June",
+      "July",
+      "August",
       "September",
-      "Oktober",
+      "October",
       "November",
-      "Desember"
+      "December"
     ];
     return "${dateTime.day} ${months[dateTime.month - 1]} ${dateTime.year}";
   }

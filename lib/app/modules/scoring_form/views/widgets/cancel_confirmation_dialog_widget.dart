@@ -7,7 +7,7 @@ import 'package:sipk/app/widgets/custom_button_widget.dart';
 
 void showCancelConfirmationDialog(ScoringFormController controller) {
   Get.defaultDialog(
-    title: 'Konfirmasi Pembatalan',
+    title: 'Cancel Confirmation',
     titleStyle: TextStyleConstant.subHeading.copyWith(
       fontWeight: FontWeight.bold,
     ),
@@ -18,10 +18,10 @@ void showCancelConfirmationDialog(ScoringFormController controller) {
         style: TextStyleConstant.body.copyWith(color: Colors.black),
         children: [
           const TextSpan(
-              text: 'Apakah Anda ingin mengakhiri proses skoring ini? '),
+              text: 'Do you want to end this scoring process? '),
           TextSpan(
             text:
-                'Hanya data pada tahap yang telah selesai yang akan disimpan.',
+                'Only data from completed stages will be saved.',
             style: TextStyleConstant.body.copyWith(
               color: ColorsConstant.primary,
               fontWeight: FontWeight.bold,
@@ -32,7 +32,7 @@ void showCancelConfirmationDialog(ScoringFormController controller) {
     ),
     contentPadding: const EdgeInsets.all(16),
     confirm: CustomButtonWidget(
-      text: 'Tidak',
+      text: 'No',
       width: 120,
       onTap: () {
         Get.back();
@@ -41,7 +41,7 @@ void showCancelConfirmationDialog(ScoringFormController controller) {
     cancel: Padding(
       padding: const EdgeInsets.only(bottom: 4),
       child: CustomButtonWidget(
-        text: 'Ya',
+        text: 'Yes',
         width: 120,
         onTap: () {
           Get.back();
