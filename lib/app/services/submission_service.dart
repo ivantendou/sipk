@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:sipk/models/financing_applications_model.dart';
+import 'package:sipk/models/monthy_target_summary_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SubmissionService {
@@ -281,7 +282,6 @@ class SubmissionService {
     try {
       await supabase.from('financing_applications').update({
         'application_status': 'Accepted',
-        'application_amount': applicationAmount,
         'accepted_amount': applicationAmount,
         'remarks': remarks,
       }).eq('id', applicationId);
@@ -292,4 +292,33 @@ class SubmissionService {
       throw Exception("Gagal mengirim data: $e");
     }
   }
+
+
+  Future<MonthlyTargetSummary> fetchMonthlySummary(String userId) async {
+  final now = DateTime.now();
+  final startOfMonth = DateTime(now.year, now.month, 1);
+  final endOfMonthBoundary = DateTime(now.year, now.month + 1, 1);
+
+  final List<Map<String, dynamic>> response = await supabase
+      .from('financing_applications')
+      .select('accepted_amount')
+      .eq('account_officer_id', userId)
+      .gte('created_at', startOfMonth.toIso8601String())
+      .lt('created_at', endOfMonthBoundary.toIso8601String()); 
+
+  double totalAmount = 0.0;
+  for (final record in response) {
+    final amount = record['accepted_amount'];
+    if (amount != null && amount is num) {
+      totalAmount += amount.toDouble();
+    }
+  }
+
+  int approvedCount = response.length;
+
+  return MonthlyTargetSummary(
+    totalAcceptedAmount: totalAmount,
+    approvedApplicationsCount: approvedCount,
+  );
+}
 }

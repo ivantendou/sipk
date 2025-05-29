@@ -57,8 +57,14 @@ class SubmissionDetailView extends GetView<SubmissionDetailController> {
                             .toString() ??
                         "2025-04-03 11:57:06.956956+00",
                     applicationAmount: controller.financingApplicationData.value
-                        ?.financingApplication?.applicationAmount
-                        .toString(),
+                                ?.financingApplication?.acceptedAmount ==
+                            null
+                        ? controller.financingApplicationData.value
+                            ?.financingApplication?.applicationAmount
+                            .toString()
+                        : controller.financingApplicationData.value
+                            ?.financingApplication?.acceptedAmount
+                            .toString(),
                     applicationStatus: controller.financingApplicationData.value
                         ?.financingApplication?.applicationStatus,
                     applicantName: controller

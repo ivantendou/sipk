@@ -53,6 +53,7 @@ class FinancingApplication {
     String? memberStatus;
     String? allocation;
     int? applicationAmount;
+    int? acceptedAmount;
     String? applicationStatus;
     dynamic updatedAt;
 
@@ -65,6 +66,7 @@ class FinancingApplication {
         this.memberStatus,
         this.allocation,
         this.applicationAmount,
+        this.acceptedAmount,
         this.applicationStatus,
         this.updatedAt,
     });
@@ -78,6 +80,7 @@ class FinancingApplication {
         memberStatus: json["member_status"],
         allocation: json["allocation"],
         applicationAmount: json["application_amount"],
+        acceptedAmount: json["accepted_amount"],
         applicationStatus: json["application_status"],
         updatedAt: json["updated_at"],
     );
@@ -91,6 +94,7 @@ class FinancingApplication {
         "member_status": memberStatus,
         "allocation": allocation,
         "application_amount": applicationAmount,
+        "accepted_amount": acceptedAmount,
         "application_status": applicationStatus,
         "updated_at": updatedAt,
     };

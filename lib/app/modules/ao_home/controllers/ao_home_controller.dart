@@ -3,14 +3,20 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sipk/app/routes/app_pages.dart';
 import 'package:sipk/app/services/scoring_service.dart';
+import 'package:sipk/app/services/submission_service.dart';
 import 'package:sipk/models/credit_scores_model.dart';
+import 'package:sipk/models/monthy_target_summary_model.dart';
 
 class AoHomeController extends GetxController {
   final ScoringService scoringService = ScoringService();
+  final SubmissionService submissionService = SubmissionService();
   final applicantId = ''.obs;
   final username = ''.obs;
   final isLoading = false.obs;
   final isLoadingForm = false.obs;
+  final targetCollected = 0.0.obs;
+  final targetPercentage = 0.0.obs;
+  final approvedSubmissionsCount = 0.obs;
   final RxList<CreditScoresModel> scoringDraft = <CreditScoresModel>[].obs;
   final RxList<CreditScoresModel> scoringResult = <CreditScoresModel>[].obs;
 
@@ -20,6 +26,7 @@ class AoHomeController extends GetxController {
     final prefs = await SharedPreferences.getInstance();
     username.value = prefs.getString('username') ?? "";
     fetchCreditScores();
+    fetchMonthlySummary();
   }
 
   Future<void> createForm() async {
@@ -63,6 +70,25 @@ class AoHomeController extends GetxController {
       }
     } finally {
       isLoading(false);
+    }
+  }
+
+  void fetchMonthlySummary() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final userId = prefs.getString('userId');
+      final MonthlyTargetSummary summary =
+          await submissionService.fetchMonthlySummary(userId!);
+
+      targetCollected.value = summary.totalAcceptedAmount;
+      approvedSubmissionsCount.value = summary.approvedApplicationsCount;
+
+      double calculatedPercentage = targetCollected.value / 200000000;
+      targetPercentage.value = calculatedPercentage.clamp(0.0, 1.0);
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 }

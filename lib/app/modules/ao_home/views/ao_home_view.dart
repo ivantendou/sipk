@@ -37,7 +37,14 @@ class AoHomeView extends GetView<AoHomeController> {
               child: Column(
                 children: [
                   const SizedBox(height: 16),
-                  const MonthlyTargetCardWidget(),
+                  Obx(() {
+                    return MonthlyTargetCardWidget(
+                      percent: controller.targetPercentage.value,
+                      totalCollected:
+                          controller.targetCollected.value.toString(),
+                      totalSubmission: controller.approvedSubmissionsCount.value.toString(),
+                    );
+                  }),
                   const SizedBox(height: 16),
                   Obx(() {
                     return CustomIconButtonWidget(

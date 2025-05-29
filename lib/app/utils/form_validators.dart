@@ -1,7 +1,7 @@
 class FormValidators {
   static String? validateRequired(String? value, String fieldName) {
     if (value == null || value.trim().isEmpty) {
-      return "$fieldName wajib diisi";
+      return "$fieldName is required";
     }
     return null;
   }
@@ -11,7 +11,7 @@ class FormValidators {
     if (requiredError != null) return requiredError;
 
     if (!RegExp(r"^[a-zA-Z\s]+$").hasMatch(value!)) {
-      return "$fieldName hanya boleh berisi huruf dan spasi";
+      return "$fieldName can only contain letters and spaces";
     }
     return null;
   }
@@ -21,7 +21,7 @@ class FormValidators {
     if (requiredError != null) return requiredError;
 
     if (!RegExp(r"^[a-zA-Z0-9\s.,-/]+$").hasMatch(value!)) {
-      return "$fieldName hanya boleh berisi huruf, angka, spasi, koma, titik, strip, dan garis miring";
+      return "$fieldName may contain letters, numbers, spaces, commas, periods, hyphens, and slashes.";
     }
     return null;
   }
@@ -31,7 +31,7 @@ class FormValidators {
     if (requiredError != null) return requiredError;
 
     if (!RegExp(r"^\d+$").hasMatch(value!)) {
-      return "$fieldName hanya boleh berisi angka";
+      return "$fieldName may only contain numbers";
     }
     return null;
   }
@@ -51,7 +51,7 @@ class FormValidators {
     );
 
     if (!emailRegex.hasMatch(value!)) {
-      return "$fieldName harus berupa alamat email yang valid";
+      return "$fieldName must be a valid email address";
     }
     return null;
   }
@@ -61,7 +61,7 @@ class FormValidators {
     if (requiredError != null) return requiredError;
 
     if (value!.length < 8) {
-      return "$fieldName minimal 8 karakter";
+      return "$fieldName must be at least 8 characters";
     }
     return null;
   }
