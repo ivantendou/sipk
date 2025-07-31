@@ -93,7 +93,7 @@ class SelectDataCardWidget extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 4),
                                   Text(
-                                    "Skoring Completed",
+                                    "Scoring Completed",
                                     style: TextStyleConstant.body.copyWith(
                                       fontWeight: FontWeight.bold,
                                     ),

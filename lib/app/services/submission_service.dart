@@ -293,32 +293,32 @@ class SubmissionService {
     }
   }
 
-
   Future<MonthlyTargetSummary> fetchMonthlySummary(String userId) async {
-  final now = DateTime.now();
-  final startOfMonth = DateTime(now.year, now.month, 1);
-  final endOfMonthBoundary = DateTime(now.year, now.month + 1, 1);
+    final now = DateTime.now();
+    final startOfMonth = DateTime(now.year, now.month, 1);
+    final endOfMonthBoundary = DateTime(now.year, now.month + 1, 1);
 
-  final List<Map<String, dynamic>> response = await supabase
-      .from('financing_applications')
-      .select('accepted_amount')
-      .eq('account_officer_id', userId)
-      .gte('created_at', startOfMonth.toIso8601String())
-      .lt('created_at', endOfMonthBoundary.toIso8601String()); 
+    final List<Map<String, dynamic>> response = await supabase
+        .from('financing_applications')
+        .select('accepted_amount')
+        .eq('account_officer_id', userId)
+        .eq('application_status', 'Accepted')
+        .gte('created_at', startOfMonth.toIso8601String())
+        .lt('created_at', endOfMonthBoundary.toIso8601String());
 
-  double totalAmount = 0.0;
-  for (final record in response) {
-    final amount = record['accepted_amount'];
-    if (amount != null && amount is num) {
-      totalAmount += amount.toDouble();
+    double totalAmount = 0.0;
+    for (final record in response) {
+      final amount = record['accepted_amount'];
+      if (amount != null && amount is num) {
+        totalAmount += amount.toDouble();
+      }
     }
+
+    int approvedCount = response.length;
+
+    return MonthlyTargetSummary(
+      totalAcceptedAmount: totalAmount,
+      approvedApplicationsCount: approvedCount,
+    );
   }
-
-  int approvedCount = response.length;
-
-  return MonthlyTargetSummary(
-    totalAcceptedAmount: totalAmount,
-    approvedApplicationsCount: approvedCount,
-  );
-}
 }

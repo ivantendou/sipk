@@ -105,7 +105,7 @@ class ScoringDataCardWidget extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 4),
                                   Text(
-                                    "Skoring Incomplete",
+                                    "Scoring Incomplete",
                                     style: TextStyleConstant.body.copyWith(
                                       fontWeight: FontWeight.bold,
                                       color: ColorsConstant.white,
@@ -124,7 +124,7 @@ class ScoringDataCardWidget extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 4),
                                   Text(
-                                    "Skoring Completed",
+                                    "Scoring Completed",
                                     style: TextStyleConstant.body.copyWith(
                                       fontWeight: FontWeight.bold,
                                       color: ColorsConstant.white,
