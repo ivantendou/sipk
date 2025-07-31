@@ -11,7 +11,7 @@ abstract class Routes {
   static const AO_MANAGE_DATA = _Paths.AO_MANAGE_DATA;
   static const PROFILE = _Paths.PROFILE;
   static const NOTIFICATION = _Paths.NOTIFICATION;
-  static const AO_SUBMISSION_DETAIL = _Paths.AO_SUBMISSION_DETAIL;
+  static const SUBMISSION_DETAIL = _Paths.SUBMISSION_DETAIL;
   static const MANAGER_SUBMISSION_DETAIL = _Paths.MANAGER_SUBMISSION_DETAIL;
   static const AO_SCORING_DETAIL = _Paths.AO_SCORING_DETAIL;
   static const MANAGER_SCORING_DETAIL = _Paths.MANAGER_SCORING_DETAIL;
@@ -24,8 +24,11 @@ abstract class Routes {
   static const SUBMISSION_DATA = _Paths.SUBMISSION_DATA;
   static const SCORING_FORM = _Paths.SCORING_FORM;
   static const SUBMISSION_FORM = _Paths.SUBMISSION_FORM;
-  static const ADMIN_USER_INFO = _Paths.ADMIN_USER_INFO;
   static const ADMIN_USER_EDIT = _Paths.ADMIN_USER_EDIT;
+  static const ADMIN_USER_ADD = _Paths.ADMIN_USER_ADD;
+  static const ADMIN_USER_DETAIL = _Paths.ADMIN_USER_DETAIL;
+  static const AO_SELECT_SCORING = _Paths.AO_SELECT_SCORING;
+  static const FINANCING_PROPOSAL = _Paths.FINANCING_PROPOSAL;
 }
 
 abstract class _Paths {
@@ -38,7 +41,7 @@ abstract class _Paths {
   static const AO_MANAGE_DATA = '/ao-manage-data';
   static const PROFILE = '/profile';
   static const NOTIFICATION = '/notification';
-  static const AO_SUBMISSION_DETAIL = '/ao-submission-detail';
+  static const SUBMISSION_DETAIL = '/submission-detail';
   static const MANAGER_SUBMISSION_DETAIL = '/manager-submission-detail';
   static const AO_SCORING_DETAIL = '/ao-scoring-detail';
   static const MANAGER_SCORING_DETAIL = '/manager-scoring-detail';
@@ -51,6 +54,9 @@ abstract class _Paths {
   static const SUBMISSION_DATA = '/submission-data';
   static const SCORING_FORM = '/scoring-form';
   static const SUBMISSION_FORM = '/submission-form';
-  static const ADMIN_USER_INFO = '/admin-user-info';
   static const ADMIN_USER_EDIT = '/admin-user-edit';
+  static const ADMIN_USER_ADD = '/admin-user-add';
+  static const ADMIN_USER_DETAIL = '/admin-user-detail';
+  static const AO_SELECT_SCORING = '/ao-select-scoring';
+  static const FINANCING_PROPOSAL = '/financing-proposal';
 }

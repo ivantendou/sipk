@@ -19,85 +19,85 @@ class StepFiveFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      if (controller.selectedOption == Rx<String>('Ya')) {
+      if (controller.hasBusiness == Rx<String>('Ya')) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Data Rincian Usaha Mandiri',
+              'Independent Business Details',
               style: TextStyleConstant.subHeading2.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
-              controller: controller.sampleController,
-              fieldTitle: 'Penjualan/Omzet',
+              controller: controller.salesController,
+              fieldTitle: 'Sales/Turnover',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
-              controller: controller.sampleController,
-              fieldTitle: 'Harga Pokok Pembelian',
+              controller: controller.cogsController,
+              fieldTitle: 'Cost of Goods Sold',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
-              controller: controller.sampleController,
-              fieldTitle: 'Biaya Tenaga Kerja Harian',
+              controller: controller.dailyLaborController,
+              fieldTitle: 'Daily Labor Costs',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
-              controller: controller.sampleController,
-              fieldTitle: 'Biaya Konsumsi',
+              controller: controller.consumptionController,
+              fieldTitle: 'Consumption Costs',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
-              controller: controller.sampleController,
-              fieldTitle: 'Biaya Transportasi Usaha',
+              controller: controller.transportCostController,
+              fieldTitle: 'Business Transportation Costs',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
-              controller: controller.sampleController,
-              fieldTitle: 'Biaya Bahan Bakar',
+              controller: controller.fuelController,
+              fieldTitle: 'Fuel Costs',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
-              controller: controller.sampleController,
-              fieldTitle: 'Biaya Kemasan',
+              controller: controller.packagingController,
+              fieldTitle: 'Packaging Costs',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
-              controller: controller.sampleController,
-              fieldTitle: 'Biaya Susut/Rusak/Tidak Laku',
+              controller: controller.depreciationController,
+              fieldTitle: 'Depreciation/Damage/Unsold Costs',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
-              controller: controller.sampleController,
-              fieldTitle: 'Biaya Lainnya',
+              controller: controller.otherCostsController,
+              fieldTitle: 'Other Costs',
             ),
             const SizedBox(height: 16),
             DayInputFieldWidget(
-              controller: controller.sampleController,
-              fieldTitle: 'Jumlah Hari Aktif Usaha',
+              controller: controller.activeDaysController,
+              fieldTitle: 'Number of Active Business Days',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
-              controller: controller.sampleController,
-              fieldTitle: 'Biaya Tenaga Kerja Bulanan',
+              controller: controller.monthlyLaborController,
+              fieldTitle: 'Monthly Labor Costs',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
-              controller: controller.sampleController,
-              fieldTitle: 'Biaya Sewa',
+              controller: controller.rentalController,
+              fieldTitle: 'Rental Costs',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
-              controller: controller.sampleController,
-              fieldTitle: 'Biaya Pemeliharaan Aset Usaha',
+              controller: controller.assetMaintenanceController,
+              fieldTitle: 'Business Asset Maintenance Costs',
             ),
             const SizedBox(height: 16),
             RupiahInputFieldWidget(
-              controller: controller.sampleController,
-              fieldTitle: 'Biaya Rekening Air-Listrik-Telp.',
+              controller: controller.utilitiesController,
+              fieldTitle: 'Water-Electricity-Phone Bills',
             ),
             const SizedBox(height: 16),
           ],
@@ -107,14 +107,14 @@ class StepFiveFormWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Data Rincian Usaha Mandiri',
+              'Independent Business Details',
               style: TextStyleConstant.subHeading2.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 16),
             Text(
-              'Pemohon tidak memiliki usaha mandiri. Klik selanjutnya.',
+              'The applicant does not have an independent business. Click Next.',
               style: TextStyleConstant.body.copyWith(
                 color: ColorsConstant.grey900,
               ),

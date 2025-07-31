@@ -1,12 +1,11 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 
 import 'package:sipk/app/constants/assets.gen.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
-import 'package:badges/badges.dart' as badges;
+// import 'package:badges/badges.dart' as badges;
 
 class AoHomeAppbarWidget extends StatelessWidget
     implements PreferredSizeWidget {
@@ -43,7 +42,7 @@ class AoHomeAppbarWidget extends StatelessWidget
               style: TextStyleConstant.body,
               children: [
                 const TextSpan(
-                  text: "Halo, ",
+                  text: "Hi, ",
                 ),
                 TextSpan(
                   text: name,
@@ -62,31 +61,31 @@ class AoHomeAppbarWidget extends StatelessWidget
           height: 1.0,
         ),
       ),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 0),
-          child: Stack(
-            children: [
-              IconButton(
-                onPressed: () {
-                  Get.toNamed('/notification');
-                },
-                icon: Assets.images.bell.svg(width: 24),
-              ),
-              const Positioned(
-                right: 15, 
-                top: 10, 
-                child: badges.Badge(
-                  badgeStyle: badges.BadgeStyle(
-                    badgeColor: Colors.red,
-                    padding: EdgeInsets.all(4), 
-                  ),
-                ),
-              ),
-            ],
-          ),
-        )
-      ],
+      // actions: [
+      //   Padding(
+      //     padding: const EdgeInsets.only(right: 0),
+      //     child: Stack(
+      //       children: [
+      //         IconButton(
+      //           onPressed: () {
+      //             Get.toNamed('/notification');
+      //           },
+      //           icon: Assets.images.bell.svg(width: 24),
+      //         ),
+      //         const Positioned(
+      //           right: 15,
+      //           top: 10,
+      //           child: badges.Badge(
+      //             badgeStyle: badges.BadgeStyle(
+      //               badgeColor: Colors.red,
+      //               padding: EdgeInsets.all(4),
+      //             ),
+      //           ),
+      //         ),
+      //       ],
+      //     ),
+      //   )
+      // ],
     );
   }
 

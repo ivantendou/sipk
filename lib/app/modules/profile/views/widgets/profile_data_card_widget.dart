@@ -9,7 +9,6 @@ class ProfileDataCardWidget extends StatelessWidget {
   final String? role;
   final String? telephoneNumber;
   final String? email;
-  final String? dateOfJoining;
 
   const ProfileDataCardWidget({
     Key? key,
@@ -17,7 +16,6 @@ class ProfileDataCardWidget extends StatelessWidget {
     this.role,
     this.telephoneNumber,
     this.email,
-    this.dateOfJoining,
   }) : super(key: key);
 
   @override
@@ -30,9 +28,10 @@ class ProfileDataCardWidget extends StatelessWidget {
         color: ColorsConstant.white,
         boxShadow: [
           BoxShadow(
-            color: ColorsConstant.black.withValues(alpha: 0.2),
-            offset: const Offset(0, 1),
-            blurRadius: 2,
+            color: ColorsConstant.black.withValues(alpha: 0.05),
+            offset: const Offset(0, 2),
+            blurRadius: 8,
+            spreadRadius: 1,
           ),
         ],
       ),
@@ -40,28 +39,23 @@ class ProfileDataCardWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           LabelValueWidget(
-            label: 'Nama',
+            label: 'Name',
             value: name,
           ),
           const SizedBox(height: 8),
           LabelValueWidget(
-            label: 'Jabatan',
+            label: 'Role',
             value: role,
           ),
           const SizedBox(height: 8),
           LabelValueWidget(
-            label: 'Nomor Telepon',
+            label: 'Phone Number',
             value: telephoneNumber,
           ),
           const SizedBox(height: 8),
           LabelValueWidget(
             label: 'Email',
             value: email,
-          ),
-          const SizedBox(height: 8),
-          LabelValueWidget(
-            label: 'Tanggal Mulai Tugas',
-            value: dateOfJoining,
           ),
         ],
       ),

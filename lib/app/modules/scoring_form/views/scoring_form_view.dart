@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:loading_indicator/loading_indicator.dart';
+import 'package:sipk/app/constants/assets.gen.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
+import 'package:sipk/app/constants/text_style_constant.dart';
+import 'package:sipk/app/modules/scoring_form/views/widgets/cancel_confirmation_dialog_widget.dart';
 import 'package:sipk/app/modules/scoring_form/views/widgets/form_step_progress_widget.dart';
 import 'package:sipk/app/modules/scoring_form/views/widgets/step_eight_form_widget.dart';
 import 'package:sipk/app/modules/scoring_form/views/widgets/step_five_form_widget.dart';
@@ -12,7 +16,6 @@ import 'package:sipk/app/modules/scoring_form/views/widgets/step_seven_form_widg
 import 'package:sipk/app/modules/scoring_form/views/widgets/step_six_form_widget.dart';
 import 'package:sipk/app/modules/scoring_form/views/widgets/step_three_form_widget.dart';
 import 'package:sipk/app/modules/scoring_form/views/widgets/step_two_form_widget.dart';
-import 'package:sipk/app/widgets/custom_app_bar_widget.dart';
 
 import '../controllers/scoring_form_controller.dart';
 
@@ -20,40 +23,79 @@ class ScoringFormView extends GetView<ScoringFormController> {
   const ScoringFormView({super.key});
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: const CustomAppBarWidget(title: 'Data Skoring'),
-        backgroundColor: ColorsConstant.grey100,
-        body: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    padding:
-                        const EdgeInsets.only(top: 76, left: 16, right: 16),
-                    width: double.infinity,
-                    child: Column(
-                      children: [
-                        Obx(() {
-                          return Form(
-                            key: controller
-                                .formKeys[controller.currentIndex.value],
-                            child: getStepWidget(
-                              controller.currentIndex.value,
-                            ),
-                          );
-                        })
-                      ],
-                    ),
-                  ),
-                  StepNavigationButtonsWidget(controller: controller),
-                ],
-              ),
-            ),
-            FormStepProgressWidget(controller: controller),
-          ],
+    return Scaffold(
+      appBar: AppBar(
+        scrolledUnderElevation: 0.0,
+        title: Text(
+          'Scoring Form',
+          style: TextStyleConstant.subHeading2.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
         ),
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            if (controller.currentIndex.value == 0 &&
+                controller.dependentsCountController.text.isEmpty) {
+              controller.deleteForm();
+            } else {
+              showCancelConfirmationDialog(controller);
+            }
+          },
+          icon: SizedBox(
+            height: 24,
+            width: 24,
+            child: Assets.images.arrowLeft.svg(),
+          ),
+        ),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(
+            color: ColorsConstant.grey500,
+            height: 1.0,
+          ),
+        ),
+      ),
+      backgroundColor: ColorsConstant.grey100,
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(top: 76, left: 16, right: 16),
+                  width: double.infinity,
+                  child: Column(
+                    children: [
+                      Obx(() {
+                        return controller.isLoading.value
+                            ? Center(
+                                child: SizedBox(
+                                  width: 48,
+                                  child: LoadingIndicator(
+                                    indicatorType: Indicator.ballBeat,
+                                    strokeWidth: 4.0,
+                                    colors: [Theme.of(context).primaryColor],
+                                  ),
+                                ),
+                              )
+                            : Form(
+                                key: controller
+                                    .formKeys[controller.currentIndex.value],
+                                child: getStepWidget(
+                                  controller.currentIndex.value,
+                                ),
+                              );
+                      })
+                    ],
+                  ),
+                ),
+                StepNavigationButtonsWidget(controller: controller),
+              ],
+            ),
+          ),
+          FormStepProgressWidget(controller: controller),
+        ],
       ),
     );
   }

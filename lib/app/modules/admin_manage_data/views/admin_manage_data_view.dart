@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/modules/ao_home/views/widgets/ao_home_appbar_widget.dart';
+import 'package:sipk/app/routes/app_pages.dart';
 import 'package:sipk/app/widgets/folder_card_widget.dart';
 
 import '../controllers/admin_manage_data_controller.dart';
@@ -13,7 +14,15 @@ class AdminManageDataView extends GetView<AdminManageDataController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: const AoHomeAppbarWidget(),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(56),
+          child: Obx(
+            () => AoHomeAppbarWidget(
+              imageUrl: "",
+              name: controller.username.value,
+            ),
+          ),
+        ),
         backgroundColor: ColorsConstant.grey100,
         body: SingleChildScrollView(
           child: Padding(
@@ -25,15 +34,17 @@ class AdminManageDataView extends GetView<AdminManageDataController> {
             ),
             child: Column(
               children: [
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     FolderCardWidget(
-                      folderName: 'Data Pengguna',
+                      folderName: 'User Data',
+                      onTap: () => Get.toNamed(Routes.ADMIN_MANAGE_USER),
                     ),
-                    SizedBox(width: 16),
+                    const SizedBox(width: 16),
                     FolderCardWidget(
-                      folderName: 'Data Skoring Pembiayaan',
+                      folderName: 'Scoring Data',
+                      onTap: () => Get.toNamed(Routes.SCORING_DATA),
                     ),
                   ],
                 ),
@@ -41,8 +52,9 @@ class AdminManageDataView extends GetView<AdminManageDataController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const FolderCardWidget(
-                      folderName: 'Data Pengajuan Pembiayaan',
+                    FolderCardWidget(
+                      folderName: 'Application Data',
+                      onTap: () => Get.toNamed(Routes.SUBMISSION_DATA),
                     ),
                     const SizedBox(width: 16),
                     Expanded(

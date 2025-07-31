@@ -4,34 +4,36 @@ import '../modules/admin_manage_data/bindings/admin_manage_data_binding.dart';
 import '../modules/admin_manage_data/views/admin_manage_data_view.dart';
 import '../modules/admin_manage_user/bindings/admin_manage_user_binding.dart';
 import '../modules/admin_manage_user/views/admin_manage_user_view.dart';
+import '../modules/admin_user_add/bindings/admin_user_add_binding.dart';
+import '../modules/admin_user_add/views/admin_user_add_view.dart';
+import '../modules/admin_user_detail/bindings/admin_user_detail_binding.dart';
+import '../modules/admin_user_detail/views/admin_user_detail_view.dart';
 import '../modules/admin_user_edit/bindings/admin_user_edit_binding.dart';
 import '../modules/admin_user_edit/views/admin_user_edit_view.dart';
-import '../modules/admin_user_info/bindings/admin_user_info_binding.dart';
-import '../modules/admin_user_info/views/admin_user_info_view.dart';
 import '../modules/ao_home/bindings/ao_home_binding.dart';
 import '../modules/ao_home/views/ao_home_view.dart';
 import '../modules/ao_manage_data/bindings/ao_manage_data_binding.dart';
 import '../modules/ao_manage_data/views/ao_manage_data_view.dart';
 import '../modules/ao_scoring_detail/bindings/ao_scoring_detail_binding.dart';
 import '../modules/ao_scoring_detail/views/ao_scoring_detail_view.dart';
+import '../modules/ao_select_scoring/bindings/ao_select_scoring_binding.dart';
+import '../modules/ao_select_scoring/views/ao_select_scoring_view.dart';
 import '../modules/ao_submission/bindings/ao_submission_binding.dart';
 import '../modules/ao_submission/views/ao_submission_view.dart';
-import '../modules/ao_submission_detail/bindings/ao_submission_detail_binding.dart';
-import '../modules/ao_submission_detail/views/ao_submission_detail_view.dart';
 import '../modules/bottom_nav_admin/bindings/bottom_nav_admin_binding.dart';
 import '../modules/bottom_nav_admin/views/bottom_nav_admin_view.dart';
 import '../modules/bottom_nav_ao/bindings/bottom_nav_ao_binding.dart';
 import '../modules/bottom_nav_ao/views/bottom_nav_ao_view.dart';
 import '../modules/bottom_nav_manager/bindings/bottom_nav_manager_binding.dart';
 import '../modules/bottom_nav_manager/views/bottom_nav_manager_view.dart';
+import '../modules/financing_proposal/bindings/financing_proposal_binding.dart';
+import '../modules/financing_proposal/views/financing_proposal_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/manager_scoring_detail/bindings/manager_scoring_detail_binding.dart';
 import '../modules/manager_scoring_detail/views/manager_scoring_detail_view.dart';
 import '../modules/manager_submission/bindings/manager_submission_binding.dart';
 import '../modules/manager_submission/views/manager_submission_view.dart';
-import '../modules/manager_submission_detail/bindings/manager_submission_detail_binding.dart';
-import '../modules/manager_submission_detail/views/manager_submission_detail_view.dart';
 import '../modules/notification/bindings/notification_binding.dart';
 import '../modules/notification/views/notification_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
@@ -44,6 +46,8 @@ import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/submission_data/bindings/submission_data_binding.dart';
 import '../modules/submission_data/views/submission_data_view.dart';
+import '../modules/submission_detail/bindings/submission_detail_binding.dart';
+import '../modules/submission_detail/views/submission_detail_view.dart';
 import '../modules/submission_form/bindings/submission_form_binding.dart';
 import '../modules/submission_form/views/submission_form_view.dart';
 
@@ -96,21 +100,16 @@ class AppPages {
       binding: NotificationBinding(),
     ),
     GetPage(
-      name: _Paths.AO_SUBMISSION_DETAIL,
-      page: () => const AoSubmissionDetailView(),
-      binding: AoSubmissionDetailBinding(),
+      name: _Paths.SUBMISSION_DETAIL,
+      page: () => const SubmissionDetailView(),
+      binding: SubmissionDetailBinding(),
       children: [
         GetPage(
-          name: _Paths.AO_SUBMISSION_DETAIL,
-          page: () => const AoSubmissionDetailView(),
-          binding: AoSubmissionDetailBinding(),
+          name: _Paths.SUBMISSION_DETAIL,
+          page: () => const SubmissionDetailView(),
+          binding: SubmissionDetailBinding(),
         ),
       ],
-    ),
-    GetPage(
-      name: _Paths.MANAGER_SUBMISSION_DETAIL,
-      page: () => const ManagerSubmissionDetailView(),
-      binding: ManagerSubmissionDetailBinding(),
     ),
     GetPage(
       name: _Paths.AO_SCORING_DETAIL,
@@ -168,14 +167,29 @@ class AppPages {
       binding: SubmissionFormBinding(),
     ),
     GetPage(
-      name: _Paths.ADMIN_USER_INFO,
-      page: () => const AdminUserInfoView(),
-      binding: AdminUserInfoBinding(),
-    ),
-    GetPage(
       name: _Paths.ADMIN_USER_EDIT,
       page: () => const AdminUserEditView(),
       binding: AdminUserEditBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_USER_ADD,
+      page: () => const AdminUserAddView(),
+      binding: AdminUserAddBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_USER_DETAIL,
+      page: () => const AdminUserDetailView(),
+      binding: AdminUserDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.AO_SELECT_SCORING,
+      page: () => const AoSelectScoringView(),
+      binding: AoSelectScoringBinding(),
+    ),
+    GetPage(
+      name: _Paths.FINANCING_PROPOSAL,
+      page: () => const FinancingProposalView(),
+      binding: FinancingProposalBinding(),
     ),
   ];
 }

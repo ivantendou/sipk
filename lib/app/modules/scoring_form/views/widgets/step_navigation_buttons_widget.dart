@@ -52,7 +52,7 @@ class StepNavigationButtonsWidget extends StatelessWidget {
                           ),
                           const SizedBox(width: 6),
                           Text(
-                            'Sebelumnya',
+                            'Previous',
                             style: TextStyleConstant.body.copyWith(
                               color: ColorsConstant.white,
                             ),
@@ -80,8 +80,8 @@ class StepNavigationButtonsWidget extends StatelessWidget {
                   Obx(
                     () => Text(
                       controller.currentIndex.value != 7
-                          ? "Selanjutnya"
-                          : "Hitung Skor",
+                          ? "Next"
+                          : "Calculate",
                       style: TextStyleConstant.body.copyWith(
                         color: ColorsConstant.white,
                       ),

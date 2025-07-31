@@ -5,25 +5,147 @@ import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/widgets/label_value_widget.dart';
 
 class ScoreChartWidget extends StatelessWidget {
-  final String? score;
-  final String? rating;
-  final String? scoreCategory;
+  final double? score;
   final String? applicantName;
   final String? scoringNumber;
   final String? scoringDate;
 
-  const ScoreChartWidget ({
+  const ScoreChartWidget({
     Key? key,
     this.score,
-    this.rating,
-    this.scoreCategory,
-    this.applicantName,
-    this.scoringNumber,
-    this.scoringDate,
+    required this.applicantName,
+    required this.scoringNumber,
+    required this.scoringDate,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Map<String, dynamic> getRatingCategory(double? score) {
+      if (score == null || score.toString().toLowerCase() == 'null') {
+        return {
+          'rating': 'Belum Dinilai',
+          'category': 'Belum Dinilai',
+          'containerColor': ColorsConstant.unrated100,
+          'textColor': ColorsConstant.unrated600,
+        };
+      }
+
+      final int scoreNum = score.toInt();
+      String rating = 'Belum Dinilai';
+      String category = 'Belum Dinilai';
+      Color containerColor = ColorsConstant.unrated100;
+      Color textColor = ColorsConstant.unrated600;
+
+      if (scoreNum >= 98) {
+        rating = 'AAA';
+        category = 'Outstanding';
+        containerColor = ColorsConstant.outstanding100;
+        textColor = ColorsConstant.outstanding600;
+      } else if (scoreNum >= 95) {
+        rating = 'AA+';
+        category = 'Strong';
+        containerColor = ColorsConstant.strong100;
+        textColor = ColorsConstant.strong600;
+      } else if (scoreNum >= 92) {
+        rating = 'AA';
+        category = 'Strong';
+        containerColor = ColorsConstant.strong100;
+        textColor = ColorsConstant.strong600;
+      } else if (scoreNum >= 89) {
+        rating = 'AA-';
+        category = 'Strong';
+        containerColor = ColorsConstant.strong100;
+        textColor = ColorsConstant.strong600;
+      } else if (scoreNum >= 86) {
+        rating = 'A+';
+        category = 'Good';
+        containerColor = ColorsConstant.good100;
+        textColor = ColorsConstant.good600;
+      } else if (scoreNum >= 83) {
+        rating = 'A';
+        category = 'Good';
+        containerColor = ColorsConstant.good100;
+        textColor = ColorsConstant.good600;
+      } else if (scoreNum >= 80) {
+        rating = 'A-';
+        category = 'Good';
+        containerColor = ColorsConstant.good100;
+        textColor = ColorsConstant.good600;
+      } else if (scoreNum >= 77) {
+        rating = 'BBB+';
+        category = 'Average';
+        containerColor = ColorsConstant.average100;
+        textColor = ColorsConstant.average600;
+      } else if (scoreNum >= 74) {
+        rating = 'BBB';
+        category = 'Average';
+        containerColor = ColorsConstant.average100;
+        textColor = ColorsConstant.average600;
+      } else if (scoreNum >= 71) {
+        rating = 'BBB-';
+        category = 'Average';
+        containerColor = ColorsConstant.average100;
+        textColor = ColorsConstant.average600;
+      } else if (scoreNum >= 68) {
+        rating = 'BB+';
+        category = 'Acceptable';
+        containerColor = ColorsConstant.acceptable100;
+        textColor = ColorsConstant.acceptable600;
+      } else if (scoreNum >= 65) {
+        rating = 'BB';
+        category = 'Acceptable';
+        containerColor = ColorsConstant.acceptable100;
+        textColor = ColorsConstant.acceptable600;
+      } else if (scoreNum >= 62) {
+        rating = 'BB-';
+        category = 'High Risk';
+        containerColor = ColorsConstant.highRisk100;
+        textColor = ColorsConstant.highRisk600;
+      } else if (scoreNum >= 59) {
+        rating = 'B+';
+        category = 'Watch List';
+        containerColor = ColorsConstant.watchList100;
+        textColor = ColorsConstant.watchList600;
+      } else if (scoreNum >= 56) {
+        rating = 'B';
+        category = 'Watch List';
+        containerColor = ColorsConstant.watchList100;
+        textColor = ColorsConstant.watchList600;
+      } else if (scoreNum >= 53) {
+        rating = 'B-';
+        category = 'High Risk';
+        containerColor = ColorsConstant.highRisk100;
+        textColor = ColorsConstant.highRisk600;
+      } else if (scoreNum >= 50) {
+        rating = 'CCC+';
+        category = 'Special Mention';
+        containerColor = ColorsConstant.specialMention100;
+        textColor = ColorsConstant.specialMention600;
+      } else if (scoreNum >= 47) {
+        rating = 'CCC';
+        category = 'Special Mention';
+        containerColor = ColorsConstant.specialMention100;
+        textColor = ColorsConstant.specialMention600;
+      } else if (scoreNum >= 44) {
+        rating = 'CCC-';
+        category = 'Substandard';
+        containerColor = ColorsConstant.substandard100;
+        textColor = ColorsConstant.substandard600;
+      } else if (scoreNum >= 0) {
+        rating = 'D';
+        category = 'Doubtful';
+        containerColor = ColorsConstant.doubtful100;
+        textColor = ColorsConstant.doubtful600;
+      }
+
+      return {
+        'rating': rating,
+        'category': category,
+        'containerColor': containerColor,
+        'textColor': textColor,
+      };
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -38,11 +160,13 @@ class ScoreChartWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
                   color: ColorsConstant.white,
+                  border: Border.all(color: ColorsConstant.grey300),
                   boxShadow: [
                     BoxShadow(
-                      color: ColorsConstant.black.withValues(alpha: 0.2),
-                      offset: const Offset(0, 1),
-                      blurRadius: 2,
+                      color: ColorsConstant.black.withValues(alpha: 0.05),
+                      offset: const Offset(0, 2),
+                      blurRadius: 8,
+                      spreadRadius: 1,
                     ),
                   ],
                 ),
@@ -50,7 +174,7 @@ class ScoreChartWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AnimatedRadialGauge(
-                      value: 93.2,
+                      value: score ?? 0,
                       duration: const Duration(milliseconds: 3000),
                       radius: (MediaQuery.of(context).size.width - 64) / 2,
                       axis: const GaugeAxis(
@@ -112,39 +236,41 @@ class ScoreChartWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                      builder: (context, child, value) => Column(
-                        children: [
-                          Text(
-                            score ?? "",
-                            style: TextStyleConstant.h1,
-                          ),
-                          const SizedBox(height: 4),
-                          Container(
-                            width: 124,
-                            height: 28,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: ColorsConstant.average100,
+                      builder: (context, child, value) {
+                        final ratingInfo = getRatingCategory(score);
+                        return Column(
+                          children: [
+                            Text(
+                              score?.toStringAsFixed(1) ?? '0.0',
+                              style: TextStyleConstant.h1,
                             ),
-                            child: Center(
-                              child: Text(
-                                rating ?? "",
-                                style: TextStyleConstant.body.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: ColorsConstant.average600,
+                            const SizedBox(height: 4),
+                            Container(
+                              width: 124,
+                              height: 28,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: ratingInfo['containerColor'],
+                              ),
+                              child: Center(
+                                child: Text(
+                                  ratingInfo['rating'],
+                                  style: TextStyleConstant.body.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: ratingInfo['textColor'],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            scoreCategory ?? "",
-                            style: TextStyleConstant.body.copyWith(
-                              fontWeight: FontWeight.bold,
+                            Text(
+                              ratingInfo['category'],
+                              style: TextStyleConstant.body.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          )
-                        ],
-                      ),
+                          ],
+                        );
+                      },
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width - 56,
@@ -180,18 +306,18 @@ class ScoreChartWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     LabelValueWidget(
-                      label: "Nama Pemohon",
-                      value: applicantName,
+                      label: "Applicant Name",
+                      value: applicantName ?? "",
                     ),
                     const SizedBox(height: 8),
                     LabelValueWidget(
-                      label: "Nomor Skoring",
-                      value: scoringNumber,
+                      label: "Scoring Number",
+                      value: scoringNumber ?? "",
                     ),
                     const SizedBox(height: 8),
                     LabelValueWidget(
-                      label: "Tanggal Skoring",
-                      value: scoringDate,
+                      label: "Scoring Date",
+                      value: formatDate(scoringDate),
                     ),
                   ],
                 ),
@@ -201,5 +327,24 @@ class ScoreChartWidget extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  String formatDate(String? dateStr) {
+    DateTime dateTime = DateTime.parse(dateStr ?? "").toLocal();
+    List<String> months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ];
+    return "${dateTime.day} ${months[dateTime.month - 1]} ${dateTime.year}";
   }
 }

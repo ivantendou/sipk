@@ -8,6 +8,7 @@ class DropdownInputFieldWidget extends StatelessWidget {
   final String hintText;
   final List<String> items;
   final void Function(String?)? onChanged;
+  final String? value;
 
   const DropdownInputFieldWidget({
     Key? key,
@@ -15,6 +16,7 @@ class DropdownInputFieldWidget extends StatelessWidget {
     required this.hintText,
     required this.items,
     required this.onChanged,
+    this.value,
   }) : super(key: key);
 
   @override
@@ -27,6 +29,7 @@ class DropdownInputFieldWidget extends StatelessWidget {
           style: TextStyleConstant.body,
         ),
         DropdownButtonFormField2<String>(
+          value: value,
           style: TextStyleConstant.body,
           isExpanded: true,
           decoration: InputDecoration(

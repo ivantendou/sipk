@@ -1,39 +1,38 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/routes/app_pages.dart';
+import 'package:sipk/app/services/auth_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginController extends GetxController {
+  final AuthService authService = AuthService();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final formKeys = GlobalKey<FormState>();
-
   RxBool isLoading = false.obs;
   RxBool isPasswordVisible = false.obs;
 
-  final supabase = Supabase.instance.client;
-
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Email tidak boleh kosong';
+      return 'Email cannot be empty';
     }
     if (!GetUtils.isEmail(value)) {
-      return 'Format email tidak valid';
+      return 'Invalid email format';
     }
     return null;
   }
 
   String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Password tidak boleh kosong';
+      return 'Password cannot be empty';
     }
     if (value.length < 8) {
-      return 'Password minimal 8 karakter';
+      return 'Password must be at least 8 characters';
     }
     return null;
   }
@@ -42,7 +41,7 @@ class LoginController extends GetxController {
     if (formKeys.currentState!.validate()) {
       try {
         isLoading(true);
-        final AuthResponse res = await supabase.auth.signInWithPassword(
+        final AuthResponse res = await authService.signInWithPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
         );
@@ -50,22 +49,33 @@ class LoginController extends GetxController {
         if (res.user != null) {
           final user = res.user!;
           final role = user.userMetadata?['role'];
-          if (role == 'admin') {
-            Get.offAllNamed(Routes.ADMIN_MANAGE_DATA);
-          } else if (role == 'manager') {
-            Get.offAllNamed(Routes.MANAGER_SUBMISSION);
+          final userId = user.id;
+          final username = user.userMetadata?['full_name'];
+
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString('userId', userId);
+          await prefs.setString('role', role);
+          await prefs.setString('username', username);
+          await prefs.setInt(
+              'loginTimestamp', DateTime.now().millisecondsSinceEpoch);
+
+          if (role == 'Admin') {
+            Get.offAllNamed(Routes.BOTTOM_NAV_ADMIN);
+          } else if (role == 'Manajer') {
+            Get.offAllNamed(Routes.BOTTOM_NAV_MANAGER);
           } else {
-            Get.offAllNamed(Routes.AO_HOME);
+            Get.offAllNamed(Routes.BOTTOM_NAV_AO);
           }
         }
       } catch (e) {
         if (e is AuthException && e.statusCode == '400') {
-          showLoginFailedDialog("Email atau password salah.");
+          showLoginFailedDialog("Incorrect email or password.");
         } else if (e is SocketException) {
           showLoginFailedDialog(
-              "Koneksi internet bermasalah. Periksa jaringan Anda.");
+              "Internet connection issue. Please check your network.");
         } else {
-          showLoginFailedDialog("Terjadi kesalahan. Coba lagi nanti.");
+          showLoginFailedDialog(
+              "An error occurred. Check your network and try again.");
         }
       } finally {
         isLoading(false);
@@ -81,15 +91,15 @@ class LoginController extends GetxController {
     Get.defaultDialog(
       backgroundColor: ColorsConstant.white,
       contentPadding: const EdgeInsets.only(bottom: 24),
-      title: 'Login Gagal',
+      title: 'Login Failed',
       titleStyle: TextStyleConstant.subHeading.copyWith(
         fontWeight: FontWeight.bold,
       ),
       titlePadding: const EdgeInsets.only(top: 24, bottom: 4),
       content: Text(
-          errorMessage,
-          style: TextStyleConstant.body,
-        ),
+        errorMessage,
+        style: TextStyleConstant.body,
+      ),
       confirm: InkWell(
         onTap: () {
           Get.back();

@@ -6,17 +6,15 @@ import 'package:sipk/app/modules/ao_home/views/widgets/credit_score_badge_widget
 import 'package:sipk/app/widgets/label_value_widget.dart';
 
 class ScoringResultCardWidget extends StatelessWidget {
-  final String applicantName;
-  final String scoringNumber;
-  final String rating;
-  final String score;
+  final String? applicantName;
+  final String? scoringNumber;
+  final String? score;
   final void Function()? onTap;
 
   const ScoringResultCardWidget({
     Key? key,
     required this.applicantName,
     required this.scoringNumber,
-    required this.rating,
     required this.score,
     required this.onTap,
   }) : super(key: key);
@@ -32,9 +30,10 @@ class ScoringResultCardWidget extends StatelessWidget {
           color: ColorsConstant.white,
           boxShadow: [
             BoxShadow(
-              color: ColorsConstant.black.withValues(alpha: 0.2),
-              offset: const Offset(0, 1),
-              blurRadius: 2,
+              color: ColorsConstant.black.withValues(alpha: 0.05),
+              offset: const Offset(0, 2),
+              blurRadius: 8,
+              spreadRadius: 1,
             ),
           ],
         ),
@@ -46,21 +45,20 @@ class ScoringResultCardWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   LabelValueWidget(
-                    label: "Nama Pemohon",
-                    value: applicantName,
+                    label: "Applicant Name",
+                    value: applicantName ?? "",
                   ),
                   const SizedBox(height: 8),
                   LabelValueWidget(
-                    label: "Nomor Skoring",
-                    value: scoringNumber,
+                    label: "Scoring Number",
+                    value: scoringNumber ?? "",
                   ),
                 ],
               ),
             ),
             const SizedBox(width: 8),
             CreditScoreBadgeWidget(
-              rating: rating,
-              score: score,
+              score: score ?? "",
             ),
           ],
         ),

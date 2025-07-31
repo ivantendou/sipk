@@ -8,6 +8,7 @@ class PhoneInputField extends StatelessWidget {
   final TextEditingController controller;
   final void Function(String)? onChanged;
   final String? hintText;
+  final String? initialValue;
 
   const PhoneInputField({
     Key? key,
@@ -15,6 +16,7 @@ class PhoneInputField extends StatelessWidget {
     required this.controller,
     this.onChanged,
     this.hintText,
+    required this.initialValue,
   }) : super(key: key);
 
   @override
@@ -27,43 +29,30 @@ class PhoneInputField extends StatelessWidget {
           style: TextStyleConstant.body,
         ),
         TextFormField(
+          textInputAction: TextInputAction.next,
+          initialValue: initialValue,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 0,
             ),
+            hintText: hintText,
+            hintStyle: TextStyleConstant.body.copyWith(
+              color: ColorsConstant.grey700,
+            ),
+            prefixIcon: const Padding(
+              padding: EdgeInsets.only(right: 16),
+              child: SizedBox(),
+            ),
             prefixIconConstraints: const BoxConstraints(
               minWidth: 0,
               minHeight: 0,
             ),
-            prefixIcon: Container(
-              margin: const EdgeInsets.only(right: 16),
-              decoration: const BoxDecoration(
-                border: Border(
-                  right: BorderSide(
-                    color: ColorsConstant.grey500,
-                    width: 1,
-                  ),
-                ),
-              ),
-              width: 56,
-              child: Center(
-                child: Text(
-                  '+62',
-                  style: TextStyleConstant.body.copyWith(
-                    color: ColorsConstant.grey900,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
           ),
           keyboardType: TextInputType.number,
           style: TextStyleConstant.body,
-          validator: (value) => FormValidators.validateNumber(value, fieldTitle),
+          validator: (value) =>
+              FormValidators.validateNumber(value, fieldTitle),
         )
       ],
     );

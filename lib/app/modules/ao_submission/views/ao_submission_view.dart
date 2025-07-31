@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:sipk/app/constants/assets.gen.dart';
 import 'package:sipk/app/constants/colors_constant.dart';
 import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/modules/ao_submission/views/widgets/submission_card_widget.dart';
+import 'package:sipk/app/routes/app_pages.dart';
 import 'package:sipk/app/widgets/custom_icon_button_widget.dart';
-
+import 'package:sipk/models/financing_application_model.dart';
 import '../controllers/ao_submission_controller.dart';
 
 class AoSubmissionView extends GetView<AoSubmissionController> {
   const AoSubmissionView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -37,26 +39,23 @@ class AoSubmissionView extends GetView<AoSubmissionController> {
               ),
               indicatorSize: TabBarIndicatorSize.label,
               tabs: const [
-                Tab(
-                  text: 'Diproses',
-                ),
-                Tab(
-                  text: 'Disetujui',
-                ),
-                Tab(
-                  text: 'Ditolak',
-                ),
+                Tab(text: 'In Process'),
+                Tab(text: 'Approved'),
+                Tab(text: 'Rejected'),
               ],
             ),
             title: Column(
               children: [
                 CustomIconButtonWidget(
                   icon: Assets.images.add1.svg(width: 24),
-                  text: 'Ajukan Permohonan Pembiayaan',
+                  text: 'Submit Financing Application',
+                  onTap: () {
+                    Get.toNamed(Routes.SUBMISSION_FORM);
+                  },
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  'Status Pengajuan Pembiayaan Bulan Ini',
+                  "This Month's Financing Application Status",
                   style: TextStyleConstant.subHeading2.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -64,36 +63,96 @@ class AoSubmissionView extends GetView<AoSubmissionController> {
               ],
             ),
           ),
-          body: const TabBarView(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: SubmissionCardWidget(
-                  applicantName: 'Muhamad Ivan Fadillah',
-                  scoringNumber: "08314",
-                  status: "Diproses",
+          body: Obx(() {
+            if (controller.isLoading.value) {
+              return Center(
+                child: SizedBox(
+                  width: 48,
+                  child: LoadingIndicator(
+                    indicatorType: Indicator.ballBeat,
+                    strokeWidth: 4.0,
+                    colors: [Theme.of(context).primaryColor],
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: SubmissionCardWidget(
-                  applicantName: 'Muhamad Ivan Fadillah',
-                  scoringNumber: "08314",
-                  status: "Disetujui",
+              );
+            }
+
+            return TabBarView(
+              children: [
+                RefreshIndicator(
+                  color: ColorsConstant.primary,
+                  onRefresh: controller.refreshApplications,
+                  child: _buildApplicationsList(
+                      controller.pendingApplications, 'In Process'),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: SubmissionCardWidget(
-                  applicantName: 'Muhamad Ivan Fadillah',
-                  scoringNumber: "08314",
-                  status: "Ditolak",
+                RefreshIndicator(
+                  color: ColorsConstant.primary,
+                  onRefresh: controller.refreshApplications,
+                  child: _buildApplicationsList(
+                      controller.acceptedApplications, 'Approved'),
                 ),
-              ),
-            ],
-          ),
+                RefreshIndicator(
+                  color: ColorsConstant.primary,
+                  onRefresh: controller.refreshApplications,
+                  child: _buildApplicationsList(
+                      controller.rejectedApplications, 'Rejected'),
+                ),
+              ],
+            );
+          }),
         ),
       ),
+    );
+  }
+
+  Widget _buildApplicationsList(
+      List<FinancingApplicationModel> applications, String status) {
+    return applications.isEmpty
+        ? _buildEmptyList(status)
+        : ListView.builder(
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            itemCount: applications.length,
+            itemBuilder: (context, index) {
+              final application = applications[index];
+              final scoringNumber =
+                  application.financingApplication?.id?.toString() ?? '';
+
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: SubmissionCardWidget(
+                  applicantName: application.applicant?.name ?? '-',
+                  scoringNumber: scoringNumber,
+                  status: status,
+                  onTap: () {
+                    Get.toNamed(
+                      Routes.SUBMISSION_DETAIL,
+                      parameters: {
+                        'id': application.financingApplication?.id.toString() ??
+                            "",
+                      },
+                    );
+                  },
+                ),
+              );
+            },
+          );
+  }
+
+  Widget _buildEmptyList(String status) {
+    return ListView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      children: [
+        SizedBox(
+          height: 300,
+          child: Center(
+            child: Text(
+              'No applications with $status status',
+              style: TextStyleConstant.body,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

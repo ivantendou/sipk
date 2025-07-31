@@ -26,12 +26,12 @@ class LabelValueWidget extends StatelessWidget {
             height: 1.2,
           ),
         ),
+        const SizedBox(height: 4),
         Text(
+          overflow: TextOverflow.ellipsis,
           value ?? "-",
-          style: TextStyleConstant.body.copyWith(
-            fontWeight: FontWeight.bold,
-            fontSize: 17
-          ),
+          style: TextStyleConstant.body
+              .copyWith(fontWeight: FontWeight.bold, fontSize: 17),
         ),
       ],
     );

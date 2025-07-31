@@ -1,0 +1,685 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:sipk/models/credit_scores_model.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+class ScoringService {
+  final supabase = Supabase.instance.client;
+  final supabaseAuthAdmin = SupabaseClient(
+    dotenv.env['PROJECT_URL'] ?? '',
+    dotenv.env['SERVICE_ROLE_KEY'] ?? '',
+  );
+
+  Future<Map<String, dynamic>> fetchCreditScore(String applicantId) async {
+    try {
+      final applicant = await supabase
+          .from('applicants')
+          .select(
+              'id, account_officer_id, name, mobile_phone, residential_address, ktp_number, gender')
+          .eq('id', applicantId)
+          .single();
+
+      final creditEvaluations = await supabase
+          .from('credit_evaluations')
+          .select('applicant_category, credit_scores (total_score, updated_at)')
+          .eq('applicant_id', applicantId);
+
+      final financingApplications = await supabase
+          .from('financing_data')
+          .select('application_amount')
+          .eq('applicant_id', applicantId);
+
+      final accountOfficerId = applicant['account_officer_id'];
+
+      final profileData = await supabase
+          .from('profiles')
+          .select('full_name')
+          .eq('id', accountOfficerId)
+          .single();
+
+      return {
+        'applicant': applicant,
+        'creditEvaluations': creditEvaluations,
+        'financingApplications': financingApplications,
+        'accountOfficer': profileData['full_name'],
+      };
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in fetchFirstStep: $e");
+      }
+      throw Exception("Gagal mengambil data: $e");
+    }
+  }
+
+  Future<List<CreditScoresModel>> fetchCreditScores({
+    required String searchQuery,
+    required String accountOfficerId,
+    required int from,
+    required int to,
+    required bool ascending,
+    required bool isDraft,
+  }) async {
+    try {
+      var query = supabase
+          .from('applicants')
+          .select('''
+          id, name, ktp_number,
+          credit_evaluations (
+            credit_scores (
+              total_score,
+              is_draft,
+              updated_at
+            )
+          )
+        ''')
+          .or('name.ilike.%$searchQuery%,ktp_number.ilike.%$searchQuery%')
+          .eq('account_officer_id', accountOfficerId)
+          .order('created_at', ascending: ascending)
+          .range(from, to);
+
+      final data = await query;
+
+      final filteredData = data.where((applicant) {
+        final evaluations = applicant['credit_evaluations'] as List?;
+        if (evaluations == null || evaluations.isEmpty) return false;
+
+        final scores = evaluations.first['credit_scores'] as Map?;
+        return scores != null && scores['is_draft'] == isDraft;
+      }).toList();
+
+      if (kDebugMode) {
+        print('Fetched ${data.length} records');
+        print('Filtered to ${filteredData.length} records');
+        print(
+            'First item: ${filteredData.isNotEmpty ? filteredData.first : null}');
+      }
+
+      return filteredData
+          .map((json) => CreditScoresModel.fromJson(json))
+          .toList();
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error in fetchCreditScores: $e');
+      }
+      throw Exception('Failed to fetch data: ${e.toString()}');
+    }
+  }
+
+  Future<List<CreditScoresModel>> fetchCreditScoresAdmin({
+    required String searchQuery,
+    required int from,
+    required int to,
+    required bool ascending,
+    required bool isDraft,
+  }) async {
+    try {
+      var query = supabase
+          .from('applicants')
+          .select('''
+          id, name, ktp_number,
+          credit_evaluations (
+            credit_scores (
+              total_score,
+              is_draft,
+              updated_at
+            )
+          )
+        ''')
+          .or('name.ilike.%$searchQuery%,ktp_number.ilike.%$searchQuery%')
+          .order('created_at', ascending: ascending)
+          .range(from, to);
+
+      final data = await query;
+
+      final filteredData = data.where((applicant) {
+        final evaluations = applicant['credit_evaluations'] as List?;
+        if (evaluations == null || evaluations.isEmpty) return false;
+
+        final scores = evaluations.first['credit_scores'] as Map?;
+        return scores != null && scores['is_draft'] == isDraft;
+      }).toList();
+
+      if (kDebugMode) {
+        print('Fetched ${data.length} records');
+        print('Filtered to ${filteredData.length} records');
+        print(
+            'First item: ${filteredData.isNotEmpty ? filteredData.first : null}');
+      }
+
+      return filteredData
+          .map((json) => CreditScoresModel.fromJson(json))
+          .toList();
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error in fetchCreditScores: $e');
+      }
+      throw Exception('Failed to fetch data: ${e.toString()}');
+    }
+  }
+
+  Future<String> createForm({required String userId}) async {
+    final List<Map<String, dynamic>> applicantId =
+        await supabase.from('applicants').insert([
+      {'account_officer_id': userId},
+    ]).select('id');
+
+    if (applicantId.isEmpty || !applicantId.first.containsKey('id')) {
+      throw Exception("Gagal mendapatkan ID");
+    }
+
+    return applicantId.first['id'].toString();
+  }
+
+  Future<Map<String, dynamic>> fetchFirstStep(String applicantId) async {
+    try {
+      final applicantData = await supabase.from('applicants').select('''
+          name,
+          ktp_number,
+          residential_address,
+          regency,
+          province,
+          postal_code,
+          place_of_birth,
+          date_of_birth,
+          mother_name,
+          home_phone,
+          mobile_phone,
+          gender,
+          ktp_address,
+          company_name,
+          company_address,
+          boss_name
+        ''').eq('id', applicantId).single();
+
+      final creditEvaluationData =
+          await supabase.from('credit_evaluations').select('''
+          applicant_age,
+          applicant_category,
+          marital_status,
+          dependents_count,
+          education_level,
+          self_employment_type,
+          employment_type,
+          is_employee
+        ''').eq('applicant_id', applicantId).single();
+
+      final spouseData = await supabase.from('spouses').select('''
+          name,
+          ktp_number,
+          place_of_birth,
+          date_of_birth,
+          occupation,
+          mother_name,
+          address
+        ''').eq('applicant_id', applicantId).single();
+
+      return {
+        'applicant': applicantData,
+        'creditEvaluation': creditEvaluationData,
+        'spouse': spouseData,
+      };
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in fetchFirstStep: $e");
+      }
+      throw Exception("Gagal mengambil data: $e");
+    }
+  }
+
+  Future<Map<String, dynamic>> fetchSecondStep(String applicantId) async {
+    try {
+      final financingAppData = await supabase.from('financing_data').select('''
+          financing_type,
+          application_amount,
+          down_payment_pct,
+          down_payment_amt,
+          allocation
+        ''').eq('applicant_id', applicantId).single();
+
+      final creditEvaluationData = await supabase
+          .from('credit_evaluations')
+          .select('financing_iteration')
+          .eq('applicant_id', applicantId)
+          .single();
+
+      return {
+        'financingApplication': financingAppData,
+        'creditEvaluation': creditEvaluationData,
+      };
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in fetchSecondStep: $e");
+      }
+      throw Exception("Gagal mengambil data: $e");
+    }
+  }
+
+  Future<Map<String, dynamic>> fetchThirdStep(String applicantId) async {
+    try {
+      final financialData = await supabase
+          .from('financial_data')
+          .select()
+          .eq('applicant_id', applicantId)
+          .maybeSingle();
+
+      final creditEvaluation = await supabase
+          .from('credit_evaluations')
+          .select('financing_term')
+          .eq('applicant_id', applicantId)
+          .maybeSingle();
+
+      return {
+        "financial_data": financialData,
+        "credit_evaluation": creditEvaluation,
+      };
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in fetchThirdStep: $e");
+      }
+      throw Exception("Gagal mengambil data: $e");
+    }
+  }
+
+  Future<Map<String, dynamic>> fetchFourthStep(String applicantId) async {
+    try {
+      final response = await supabase
+          .from('credit_evaluations')
+          .select()
+          .eq('applicant_id', applicantId)
+          .single();
+
+      return response;
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in fetchFourthStep: $e");
+      }
+      throw Exception("Gagal mengambil data: $e");
+    }
+  }
+
+  Future<Map<String, dynamic>> fetchFifthStep(String applicantId) async {
+    try {
+      final response = await supabase
+          .from('business_financial_details')
+          .select()
+          .eq('applicant_id', applicantId)
+          .single();
+      return response;
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in fetchFifthStep: $e");
+      }
+      throw Exception("Gagal mengambil data: $e");
+    }
+  }
+
+  Future<Map<String, dynamic>> fetchSixthStep(String applicantId) async {
+    try {
+      final response = await supabase
+          .from('credit_evaluations')
+          .select(
+              'residence_ownership, residence_duration, neighborhood_reputation')
+          .eq('applicant_id', applicantId)
+          .single();
+      return response;
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in fetchSixthStep: $e");
+      }
+      throw Exception("Gagal mengambil data: $e");
+    }
+  }
+
+  Future<Map<String, dynamic>> fetchSeventhStep(String applicantId) async {
+    try {
+      final response = await supabase
+          .from('credit_evaluations')
+          .select(
+              'banking_relationship, average_monthly_balance, average_transaction_frequency, applicant_credit_quality, applicant_credit_rating, spouse_credit_rating')
+          .eq('applicant_id', applicantId)
+          .single();
+      return response;
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in fetchSeventhStep: $e");
+      }
+      throw Exception("Gagal mengambil data: $e");
+    }
+  }
+
+  Future<Map<String, dynamic>> fetchEightStep(String applicantId) async {
+    try {
+      final response = await supabase
+          .from('credit_evaluations')
+          .select(
+              'application_coverage, vehicle_collateral_insurance, applicant_life_insurance, collateral_binding')
+          .eq('applicant_id', applicantId)
+          .single();
+      return response;
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in fetchEightStep: $e");
+      }
+      throw Exception("Gagal mengambil data: $e");
+    }
+  }
+
+  Future<void> deleteForm({required String applicantId}) async {
+    await supabase.from('applicants').delete().eq('id', applicantId);
+  }
+
+  Future<void> updateFirstStep({
+    required String applicantId,
+    required String? applicantName,
+    required String? applicantCategory,
+    required String? ktpAddress,
+    required String? residentialAddress,
+    required String? regency,
+    required String? province,
+    required String? postalCode,
+    required String? placeOfBirth,
+    required String? dateOfBirth,
+    required String? applicantAge,
+    required String? ktpNumber,
+    required String? motherName,
+    required String? homePhone,
+    required String? mobilePhone,
+    required String? gender,
+    required String? educationLevel,
+    required String? selfEmploymentType,
+    required String? employmentType,
+    required String? companyName,
+    required String? companyAddress,
+    required String? bossName,
+    required String? maritalStatus,
+    required String? spouseName,
+    required String? spouseMotherName,
+    required String? spouseAddress,
+    required String? spouseKtpNumber,
+    required String? spousePlaceOfBirth,
+    required String? spouseDateOfBirth,
+    required String? spouseOccupation,
+    required String? dependentsCount,
+    required bool? isEmployee,
+  }) async {
+    try {
+      await supabase.from('applicants').update({
+        'name': applicantName,
+        'ktp_number': ktpNumber,
+        'residential_address': residentialAddress,
+        'regency': regency,
+        'province': province,
+        'postal_code': postalCode,
+        'place_of_birth': placeOfBirth,
+        'date_of_birth': dateOfBirth,
+        'mother_name': motherName,
+        'home_phone': homePhone,
+        'mobile_phone': mobilePhone,
+        'gender': gender,
+        'ktp_address': ktpAddress,
+        'company_name': companyName,
+        'company_address': companyAddress,
+        'boss_name': bossName
+      }).eq('id', applicantId);
+
+      await supabase.from('credit_evaluations').update({
+        'applicant_age': applicantAge,
+        'applicant_category': applicantCategory,
+        'marital_status': maritalStatus,
+        'dependents_count': dependentsCount,
+        'education_level': educationLevel,
+        'self_employment_type': selfEmploymentType,
+        'employment_type': employmentType,
+        'is_employee': isEmployee,
+      }).eq('applicant_id', applicantId);
+
+      await supabase.from('spouses').update({
+        'name': spouseName,
+        'ktp_number': spouseKtpNumber,
+        'place_of_birth': spousePlaceOfBirth,
+        'date_of_birth': spouseDateOfBirth,
+        'occupation': spouseOccupation,
+        'mother_name': spouseMotherName,
+        'address': spouseAddress,
+      }).eq('applicant_id', applicantId);
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in updateFirstStep: $e");
+      }
+      throw Exception("Gagal mengupdate data: $e");
+    }
+  }
+
+  Future<void> updateSecondStep({
+    required String applicantId,
+    required String? financingType,
+    required String? applicationAmount,
+    required String? allocation,
+    required String? downPaymentPct,
+    required String? downPaymentAmt,
+    required String? financingIteration,
+  }) async {
+    try {
+      await supabase.from('financing_data').update({
+        'financing_type': financingType,
+        'application_amount': applicationAmount,
+        'down_payment_pct': downPaymentPct,
+        'down_payment_amt': downPaymentAmt,
+        'allocation': allocation,
+      }).eq('applicant_id', applicantId);
+
+      await supabase.from('credit_evaluations').update({
+        'financing_iteration': financingIteration,
+      }).eq('applicant_id', applicantId);
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in updateSecondStep: $e");
+      }
+      throw Exception("Gagal mengupdate data: $e");
+    }
+  }
+
+  Future<void> updateThirdStep({
+    required String applicantId,
+    required String? netSalaryApplicant,
+    required String? netSalarySpouse,
+    required String? netBusinessIncomeApplicant,
+    required String? netBusinessIncomeSpouse,
+    required String? householdExpense,
+    required String? transportationExpense,
+    required String? communicationExpense,
+    required String? educationExpense,
+    required String? utilityBills,
+    required String? ongoingInstallment,
+    required String? entertainmentExpense,
+    required double? financingTerm,
+    required String? ekvRate,
+    required String? installmentType,
+  }) async {
+    try {
+      await supabase.from('financial_data').update({
+        'net_salary_applicant': netSalaryApplicant,
+        'net_salary_spouse': netSalarySpouse,
+        'net_business_income_applicant': netBusinessIncomeApplicant,
+        'net_business_income_spouse': netBusinessIncomeSpouse,
+        'household_expense': householdExpense,
+        'transportation_expense': transportationExpense,
+        'communication_expense': communicationExpense,
+        'education_expense': educationExpense,
+        'utility_bills': utilityBills,
+        'ongoing_installment': ongoingInstallment,
+        'entertainment_social_expense': entertainmentExpense,
+        'ekv_rate': ekvRate,
+        'installment_type': installmentType,
+      }).eq('applicant_id', applicantId);
+
+      await supabase.from('credit_evaluations').update({
+        'financing_term': financingTerm,
+      }).eq('applicant_id', applicantId);
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in updateThirdStep: $e");
+      }
+      throw Exception("Gagal mengupdate data: $e");
+    }
+  }
+
+  Future<void> updateFourthStep({
+    required String applicantId,
+    required String? businessReport,
+    required int? employmentBusinessDuration,
+    required String? paymentReceiptMethod,
+    required String? businessPremisesStatus,
+    required String? salesMethod,
+    required int? employeeCount,
+    required String? businessAdministration,
+    required String? businessLiabilities,
+    required String? employmentStatus,
+    required String? employerCredibility,
+    required String? salarySlip,
+    required String? accountStatement,
+    required String? workplaceReputation,
+  }) async {
+    try {
+      await supabase.from('credit_evaluations').update({
+        'business_report': businessReport,
+        'employment_business_duration': employmentBusinessDuration,
+        'payment_receipt_method': paymentReceiptMethod,
+        'business_premises_status': businessPremisesStatus,
+        'sales_method': salesMethod,
+        'employee_count': employeeCount,
+        'business_administration': businessAdministration,
+        'business_liabilities': businessLiabilities,
+        'employment_status': employmentStatus,
+        'employer_credibility': employerCredibility,
+        'salary_slip': salarySlip,
+        'account_statement': accountStatement,
+        'workplace_reputation': workplaceReputation,
+      }).eq('applicant_id', applicantId);
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in updateFourthStep: $e");
+      }
+      throw Exception("Gagal mengupdate data: $e");
+    }
+  }
+
+  Future<void> updateFifthStep({
+    required String applicantId,
+    required double? sales,
+    required double? cogs,
+    required double? dailyLabor,
+    required double? consumption,
+    required double? transportCost,
+    required double? fuel,
+    required double? packaging,
+    required double? depreciation,
+    required double? otherCosts,
+    required double? activeDays,
+    required double? monthlyLabor,
+    required double? rental,
+    required double? assetMaintenance,
+    required double? utilities,
+  }) async {
+    try {
+      await supabase.from('business_financial_details').update({
+        'sales': sales,
+        'cogs': cogs,
+        'daily_labor': dailyLabor,
+        'consumption': consumption,
+        'transport_costs': transportCost,
+        'fuel': fuel,
+        'packaging': packaging,
+        'depreciation': depreciation,
+        'other_costs': otherCosts,
+        'active_days': activeDays,
+        'monthly_labor': monthlyLabor,
+        'rental': rental,
+        'asset_maintenance': assetMaintenance,
+        'utilities': utilities,
+      }).eq('applicant_id', applicantId);
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in updateFifthStep: $e");
+      }
+      throw Exception("Gagal mengupdate data: $e");
+    }
+  }
+
+  Future<void> updateSixStep({
+    required String applicantId,
+    required String? residenceOwnership,
+    required String? residenceDuration,
+    required String? neighborhoodReputation,
+  }) async {
+    try {
+      await supabase.from('credit_evaluations').update({
+        'residence_ownership': residenceOwnership,
+        'residence_duration': residenceDuration,
+        'neighborhood_reputation': neighborhoodReputation,
+      }).eq('applicant_id', applicantId);
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in updateSixStep: $e");
+      }
+      throw Exception("Gagal mengupdate data: $e");
+    }
+  }
+
+  Future<void> updateSevenStep({
+    required String applicantId,
+    required String? bankingRelationship,
+    required String? averageMonthlyBalance,
+    required String? averageTransactionFrequency,
+    required String? applicantCreditQuality,
+    required String? applicantCreditRating,
+    required String? spouseCreditRating,
+  }) async {
+    try {
+      await supabase.from('credit_evaluations').update({
+        'banking_relationship': bankingRelationship,
+        'average_monthly_balance': averageMonthlyBalance,
+        'average_transaction_frequency': averageTransactionFrequency,
+        'applicant_credit_quality': applicantCreditQuality,
+        'applicant_credit_rating': applicantCreditRating,
+        'spouse_credit_rating': spouseCreditRating,
+      }).eq('applicant_id', applicantId);
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in updateSevenStep: $e");
+      }
+      throw Exception("Gagal mengupdate data: $e");
+    }
+  }
+
+  Future<void> updateEightStep({
+    required String applicantId,
+    required String? applicationCoverage,
+    required String? vehicleCollateralInsurance,
+    required String? applicantLifeInsurance,
+    required String? collateralBinding,
+  }) async {
+    try {
+      await supabase.from('credit_evaluations').update({
+        'application_coverage': applicationCoverage,
+        'vehicle_collateral_insurance': vehicleCollateralInsurance,
+        'applicant_life_insurance': applicantLifeInsurance,
+        'collateral_binding': collateralBinding,
+      }).eq('applicant_id', applicantId);
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error in updateEightStep: $e");
+      }
+      throw Exception("Gagal mengupdate data: $e");
+    }
+  }
+
+  Future<void> deleteCreditScores(List<String> dataIds) async {
+    if (kDebugMode) {
+      print(dataIds);
+    }
+    await Future.wait(dataIds.map((dataId) async {
+      await supabase.from('applicants').delete().eq('id', dataId);
+    }));
+  }
+}

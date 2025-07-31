@@ -1,11 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/modules/scoring_form/controllers/scoring_form_controller.dart';
 import 'package:sipk/app/utils/form_validators.dart';
 import 'package:sipk/app/widgets/dropdown_input_field_widget.dart';
-import 'package:sipk/app/widgets/month_input_field_widget.dart';
 import 'package:sipk/app/widgets/percent_input_field_widget.dart';
 import 'package:sipk/app/widgets/rupiah_input_field_widget.dart';
 import 'package:sipk/app/widgets/text_form_field_widget.dart';
@@ -20,95 +20,93 @@ class StepTwoFormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Data Permohonan',
-          style: TextStyleConstant.subHeading2.copyWith(
-            fontWeight: FontWeight.bold,
+    return Obx(() {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Application Data',
+            style: TextStyleConstant.subHeading2.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        const SizedBox(height: 16),
-        DropdownInputFieldWidget(
-          fieldTitle: 'Jenis Pembiayaan',
-          hintText: 'Pilih jenis pembiayaan...',
-          items: const [
-            'Modal Kerja',
-            'Investasi Usaha',
-            'Investasi Rumah Tangga',
-            'Konsumer',
-          ],
-          onChanged: (value) {
-            controller.selectedJob.value = value!;
-          },
-        ),
-        const SizedBox(height: 16),
-        DropdownInputFieldWidget(
-          fieldTitle: 'Pembiayaan ke-',
-          hintText: 'Pilih pembiayaan ke-...',
-          items: const [
-            '1',
-            '2',
-            '3',
-            '4',
-            '5',
-            '6',
-            '7',
-            '8',
-            '9',
-            '10',
-            '>10',
-          ],
-          onChanged: (value) {
-            controller.selectedJob.value = value!;
-          },
-        ),
-        const SizedBox(height: 16),
-        RupiahInputFieldWidget(
-          controller: controller.sampleController,
-          fieldTitle: 'Jumlah Pengajuan/Harga Barang (Rupiah)',
-        ),
-        const SizedBox(height: 16),
-        TextFormFieldWidget(
-          controller: controller.sampleController,
-          fieldTitle: 'Peruntukan',
-          validator: FormValidators.validateName,
-        ),
-        const SizedBox(height: 16),
-        PercentInputFieldWidget(
-          controller: controller.sampleController,
-          fieldTitle: 'Uang Muka (%)',
-        ),
-        const SizedBox(height: 16),
-        RupiahInputFieldWidget(
-          controller: controller.sampleController,
-          fieldTitle: 'Uang Muka (Rupiah)',
-        ),
-        const SizedBox(height: 16),
-        PercentInputFieldWidget(
-          controller: controller.sampleController,
-          fieldTitle: 'Ekv. Rate Margin Per-Bulan (%)',
-        ),
-        const SizedBox(height: 16),
-        MonthInputFieldWidget(
-          controller: controller.sampleController,
-          fieldTitle: 'Jangka Waktu Pembiayaan',
-        ),
-        const SizedBox(height: 16),
-        DropdownInputFieldWidget(
-          fieldTitle: 'Jenis Pengambilan Keuntungan',
-          hintText: 'Pilih jenis pengambilan keuntungan...',
-          items: const [
-            'Flat',
-            'Anuitas',
-          ],
-          onChanged: (value) {
-            controller.selectedJob.value = value!;
-          },
-        ),
-        const SizedBox(height: 16),
-      ],
-    );
+          const SizedBox(height: 16),
+          DropdownInputFieldWidget(
+            fieldTitle: 'Financing Type',
+            hintText: 'Select financing type...',
+            items: const [
+              'Modal Kerja',
+              'Investasi Usaha',
+              'Investasi Rumah Tangga',
+              'Konsumer',
+            ],
+            value: [
+              'Modal Kerja',
+              'Investasi Usaha',
+              'Investasi Rumah Tangga',
+              'Konsumer'
+            ].contains(controller.financingType.value)
+                ? controller.financingType.value
+                : null,
+            onChanged: (value) {
+              controller.financingType.value = value!;
+            },
+          ),
+          const SizedBox(height: 16),
+          DropdownInputFieldWidget(
+            fieldTitle: 'Financing Number',
+            hintText: 'Select financing number...',
+            items: const [
+              '1',
+              '2',
+              '3',
+              '4',
+              '5',
+              '6',
+              '7',
+              '8',
+              '9',
+              '10',
+              '>10',
+            ],
+            value: [
+              '1',
+              '2',
+              '3',
+              '4',
+              '5',
+              '6',
+              '7',
+              '8',
+              '9',
+              '10',
+              '>10',
+            ].contains(controller.financingIteration.value)
+                ? controller.financingIteration.value
+                : null,
+            onChanged: (value) {
+              controller.financingIteration.value = value!;
+            },
+          ),
+          const SizedBox(height: 16),
+          RupiahInputFieldWidget(
+            controller: controller.applicationAmountController,
+            fieldTitle: 'Application Amount/Goods Price (Rupiah)',
+          ),
+          const SizedBox(height: 16),
+          TextFormFieldWidget(
+            controller: controller.allocationController,
+            fieldTitle: 'Purpose/Allocation',
+            validator: FormValidators.validateName,
+          ),
+          const SizedBox(height: 16),
+          PercentInputFieldWidget(
+            controller: controller.downPaymentPctController,
+            fieldTitle: 'Down Payment (%)',
+          ),
+          const SizedBox(height: 16),
+        ],
+      );
+    });
   }
 }

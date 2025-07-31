@@ -14,10 +14,10 @@ class LoginView extends GetView<LoginController> {
   const LoginView({super.key});
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: ColorsConstant.white,
-        body: SizedBox(
+    return Scaffold(
+      backgroundColor: ColorsConstant.white,
+      body: SingleChildScrollView(
+        child: SizedBox(
           height: MediaQuery.of(context).size.height,
           child: Center(
             child: Padding(
@@ -36,7 +36,7 @@ class LoginView extends GetView<LoginController> {
                     ),
                     const SizedBox(height: 6),
                     const Text(
-                      'Sistem Informasi Penilaian Kredit',
+                      'Credit Scoring Information System',
                       style: TextStyle(
                         fontFamily: FontFamily.koblenzSerial,
                         fontSize: 16,
@@ -51,7 +51,7 @@ class LoginView extends GetView<LoginController> {
                         children: [
                           AuthTextFieldWidget(
                             controller: controller.emailController,
-                            hintText: 'Masukkan email Anda',
+                            hintText: 'Enter your email address',
                             prefixIcon: Assets.images.email.svg(),
                             validator: controller.validateEmail,
                             obscureText: false,
@@ -60,9 +60,8 @@ class LoginView extends GetView<LoginController> {
                           Obx(
                             () => AuthTextFieldWidget(
                               controller: controller.passwordController,
-                              hintText: 'Masukkan kata sandi Anda',
-                              obscureText:
-                                  !controller.isPasswordVisible.value,
+                              hintText: 'Enter your password',
+                              obscureText: !controller.isPasswordVisible.value,
                               prefixIcon: Assets.images.password.svg(),
                               suffixIcon: GestureDetector(
                                 onTap: () {
@@ -91,15 +90,15 @@ class LoginView extends GetView<LoginController> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    InkWell(
-                      onTap: () {},
-                      child: Text(
-                        'Lupa Password?',
-                        style: TextStyleConstant.caption.copyWith(
-                          color: ColorsConstant.primary,
-                        ),
-                      ),
-                    ),
+                    // InkWell(
+                    //   onTap: () {},
+                    //   child: Text(
+                    //     'Lupa Password?',
+                    //     style: TextStyleConstant.caption.copyWith(
+                    //       color: ColorsConstant.primary,
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

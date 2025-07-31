@@ -7,12 +7,14 @@ import 'package:sipk/app/widgets/custom_icon_button_widget.dart';
 
 class SubmissionButtonWidget extends StatelessWidget {
   final void Function()? onTap;
+  final bool isLoading;
 
   const SubmissionButtonWidget({
     Key? key,
     required this.onTap,
+    required this.isLoading,
   }) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,8 +30,9 @@ class SubmissionButtonWidget extends StatelessWidget {
       ),
       child: CustomIconButtonWidget(
         icon: Assets.images.document.svg(),
-        text: 'Ajukan Permohonan Pembiayaan',
-        onTap: (){},
+        text: 'Submit Application',
+        onTap: onTap,
+        isLoading: isLoading,
       ),
     );
   }

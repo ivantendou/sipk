@@ -4,7 +4,11 @@ import 'package:get/get.dart';
 
 import 'package:sipk/app/constants/text_style_constant.dart';
 import 'package:sipk/app/modules/scoring_form/controllers/scoring_form_controller.dart';
+import 'package:sipk/app/utils/form_validators.dart';
 import 'package:sipk/app/widgets/dropdown_input_field_widget.dart';
+import 'package:sipk/app/widgets/month_input_field_widget.dart';
+import 'package:sipk/app/widgets/text_form_field_widget.dart';
+import 'package:sipk/app/widgets/years_input_field_widget.dart';
 
 class StepFourFormWidget extends StatelessWidget {
   final ScoringFormController controller;
@@ -22,43 +26,42 @@ class StepFourFormWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Data Terkait Usaha',
+              'Business-Related Data',
               style: TextStyleConstant.subHeading2.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Laporan Usaha',
-              hintText: 'Pilih jenis laporan usaha...',
+              fieldTitle: 'Business Report',
+              hintText: 'Select business report type...',
               items: const [
                 'Tidak Ada',
                 'Catatan Jual Beli',
                 'LK Inhouse Unaudited',
                 'LK Audited',
               ],
+              value: [
+                'Tidak Ada',
+                'Catatan Jual Beli',
+                'LK Inhouse Unaudited',
+                'LK Audited'
+              ].contains(controller.businessReport.value)
+                  ? controller.businessReport.value
+                  : null,
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.businessReport.value = value!;
               },
             ),
             const SizedBox(height: 16),
-            DropdownInputFieldWidget(
-              fieldTitle: 'Lama Usaha yang Sama',
-              hintText: 'Pilih lama waktu usaha...',
-              items: const [
-                '1 Tahun',
-                '> 1 s.d. 5 Tahun',
-                '> 5 s.d. 10 Tahun',
-                '> 10 Tahun',
-              ],
-              onChanged: (value) {
-                controller.selectedOption.value = value!;
-              },
+            MonthInputFieldWidget(
+              controller: controller.employmentBusinessDurationController,
+              fieldTitle: 'Duration of Same Business',
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Cara Penerimaan Pembayaran',
-              hintText: 'Pilih cara penerimaan pembayaran...',
+              fieldTitle: 'Method of Payment Receipt',
+              hintText: 'Select method of payment receipt...',
               items: const [
                 'Tunai Tagihan Bon 1 sd 3',
                 'Piutang > 30 Hari',
@@ -66,70 +69,92 @@ class StepFourFormWidget extends StatelessWidget {
                 'Konsinyasi',
                 'Tunai Tanpa Bon',
               ],
+              value: [
+                'Tunai Tagihan Bon 1 sd 3',
+                'Piutang > 30 Hari',
+                'Piutang < 30 Hari',
+                'Konsinyasi',
+                'Tunai Tanpa Bon'
+              ].contains(controller.paymentReceiptMethod.value)
+                  ? controller.paymentReceiptMethod.value
+                  : null,
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.paymentReceiptMethod.value = value!;
               },
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Status Tempat Usaha',
-              hintText: 'Pilih status tempat usaha...',
+              fieldTitle: 'Business Premises Status',
+              hintText: 'Select business premises status...',
               items: const [
                 'Pinjam Pakai',
                 'Sewa',
                 'Angsuran',
                 'Milik Sendiri',
               ],
+              value: ['Pinjam Pakai', 'Sewa', 'Angsuran', 'Milik Sendiri']
+                      .contains(controller.businessPremisesStatus.value)
+                  ? controller.businessPremisesStatus.value
+                  : null,
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.businessPremisesStatus.value = value!;
               },
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Metode Menjual/Menjajakan',
-              hintText: 'Pilih metode menjual/menjajakan...',
+              fieldTitle: 'Selling/Vending Method',
+              hintText: 'Select selling/vending method...',
               items: const [
                 'Dijajakan Keliling',
                 'Mangkal Kaki Lima',
                 'Menetap Sewa',
                 'Menetap Milik Sendiri',
               ],
+              value: [
+                'Dijajakan Keliling',
+                'Mangkal Kaki Lima',
+                'Menetap Sewa',
+                'Menetap Milik Sendiri'
+              ].contains(controller.salesMethod.value)
+                  ? controller.salesMethod.value
+                  : null,
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.salesMethod.value = value!;
               },
             ),
             const SizedBox(height: 16),
-            DropdownInputFieldWidget(
-              fieldTitle: 'Jumlah Tenaga Kerja',
-              hintText: 'Pilih jumlah tenaga kerja...',
-              items: const [
-                '<= 2 Orang',
-                '> 2 s.d 5 Orang',
-                '> 5 s.d 10 Orang',
-                '> 10 Orang',
-              ],
-              onChanged: (value) {
-                controller.selectedOption.value = value!;
-              },
+            TextFormFieldWidget(
+              controller: controller.employeeCountController,
+              fieldTitle: 'Number of Employees',
+              validator: FormValidators.validateNumber,
+              keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Administrasi Usaha',
-              hintText: 'Pilih administrasi usaha...',
+              fieldTitle: 'Business Administrationa',
+              hintText: 'Select business administration...',
               items: const [
                 'Tidak Ada',
                 'Sederhana - Usaha dan Keluarga Bercampur',
                 'Sederhana - Usaha dan Keluarga Dipisah',
                 'Ada - Teradministrasi Sesuai Standar',
               ],
+              value: [
+                'Tidak Ada',
+                'Sederhana - Usaha dan Keluarga Bercampur',
+                'Sederhana - Usaha dan Keluarga Dipisah',
+                'Ada - Teradministrasi Sesuai Standar'
+              ].contains(controller.businessAdministration.value)
+                  ? controller.businessAdministration.value
+                  : null,
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.businessAdministration.value = value!;
               },
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Kewajiban Usaha',
-              hintText: 'Pilih kewajiban usaha...',
+              fieldTitle: 'Business Liabilities',
+              hintText: 'Select business liabilities...',
               items: const [
                 '> Pengajuan',
                 '50% > 100% Pengajuan',
@@ -137,8 +162,50 @@ class StepFourFormWidget extends StatelessWidget {
                 '5% > 25% Pengajuan',
                 'Tidak Ada atau < 5% Pengajuan',
               ],
+              value: [
+                '> Pengajuan',
+                '50% > 100% Pengajuan',
+                '25% > 50% Pengajuan',
+                '5% > 25% Pengajuan',
+                'Tidak Ada atau < 5% Pengajuan'
+              ].contains(controller.businessLiabilities.value)
+                  ? controller.businessLiabilities.value
+                  : null,
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.businessLiabilities.value = value!;
+              },
+            ),
+            const SizedBox(height: 16),
+            DropdownInputFieldWidget(
+              fieldTitle: 'Business Account Statement',
+              hintText: 'Select business account statement...',
+              items: const [
+                'Ada',
+                'Tidak Ada',
+              ],
+              value: ['Ada', 'Tidak Ada']
+                      .contains(controller.accountStatement.value)
+                  ? controller.accountStatement.value
+                  : null,
+              onChanged: (value) {
+                controller.accountStatement.value = value!;
+              },
+            ),
+            const SizedBox(height: 16),
+            DropdownInputFieldWidget(
+              fieldTitle: 'Reputation at Business Place',
+              hintText: 'Select reputation...',
+              items: const [
+                'Baik',
+                'Tidak Baik',
+                'Tidak Dikenal',
+              ],
+              value: ['Baik', 'Tidak Baik', 'Tidak Dikenal']
+                      .contains(controller.workplaceReputation.value)
+                  ? controller.workplaceReputation.value
+                  : null,
+              onChanged: (value) {
+                controller.workplaceReputation.value = value!;
               },
             ),
             const SizedBox(height: 16),
@@ -149,15 +216,15 @@ class StepFourFormWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Data Terkait Pekerjaan',
+              'Employment-Related Data',
               style: TextStyleConstant.subHeading2.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Status Bekerja Pemohon',
-              hintText: 'Pilih status bekerja...',
+              fieldTitle: 'Applicant\'s Employment Status',
+              hintText: 'Select employment status...',
               items: const [
                 'Freelance',
                 'Part Time',
@@ -165,73 +232,88 @@ class StepFourFormWidget extends StatelessWidget {
                 'Kontrak (PKWT)',
                 'Tetap (PKWTT)',
               ],
+              value: [
+                'Freelance',
+                'Part Time',
+                'Honorer',
+                'Kontrak (PKWT)',
+                'Tetap (PKWTT)'
+              ].contains(controller.employmentStatus.value)
+                  ? controller.employmentStatus.value
+                  : null,
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.employmentStatus.value = value!;
               },
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Bonafiditas Perusahaan',
-              hintText: 'Pilih bonafiditas perusahaan...',
+              fieldTitle: 'Company Credibility',
+              hintText: 'Select company credibility...',
               items: const [
                 'Bonafid',
                 'Cukup Bonafid',
                 'Tidak Bonafid',
               ],
+              value: ['Bonafid', 'Cukup Bonafid', 'Tidak Bonafid']
+                      .contains(controller.employerCredibility.value)
+                  ? controller.employerCredibility.value
+                  : null,
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.employerCredibility.value = value!;
               },
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Slip Gaji',
-              hintText: 'Pilih status slip gaji...',
+              fieldTitle: 'Payslip',
+              hintText: 'Select payslip...',
               items: const [
                 'Ada',
                 'Tidak Ada',
               ],
+              value: ['Ada', 'Tidak Ada'].contains(controller.salarySlip.value)
+                  ? controller.salarySlip.value
+                  : null,
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.salarySlip.value = value!;
               },
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Mutasi Rekening Gaji/Usaha',
-              hintText: 'Pilih status rekening gaji/usaha...',
+              fieldTitle: 'Salary Account Statement',
+              hintText: 'Select salary account...',
               items: const [
                 'Ada',
                 'Tidak Ada',
               ],
+              value: ['Ada', 'Tidak Ada']
+                      .contains(controller.accountStatement.value)
+                  ? controller.accountStatement.value
+                  : null,
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.accountStatement.value = value!;
               },
             ),
             const SizedBox(height: 16),
             DropdownInputFieldWidget(
-              fieldTitle: 'Reputasi di Tempat Bekerja/Berusaha',
-              hintText: 'Pilih reputasi...',
+              fieldTitle: 'Reputation at Workplace',
+              hintText: 'Select reputation...',
               items: const [
                 'Baik',
                 'Tidak Baik',
                 'Tidak Dikenal',
               ],
+              value: ['Baik', 'Tidak Baik', 'Tidak Dikenal']
+                      .contains(controller.workplaceReputation.value)
+                  ? controller.workplaceReputation.value
+                  : null,
               onChanged: (value) {
-                controller.selectedOption.value = value!;
+                controller.workplaceReputation.value = value!;
               },
             ),
             const SizedBox(height: 16),
-            DropdownInputFieldWidget(
-              fieldTitle: 'Lama Bekerja',
-              hintText: 'Pilih waktu lama bekerja...',
-              items: const [
-                '1 Tahun',
-                '> 1 s.d. 5 Tahun',
-                '> 5 s.d. 10 Tahun',
-                '> 10 Tahun',
-              ],
-              onChanged: (value) {
-                controller.selectedOption.value = value!;
-              },
+            YearsInputFieldWidget(
+              controller: controller.employmentBusinessDurationController,
+              fieldTitle: 'Years of Employment',
             ),
             const SizedBox(height: 16),
           ],
