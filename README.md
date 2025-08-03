@@ -7,10 +7,7 @@
 [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/Alterra-Greeve/flutter-capstone/blob/main/LICENSE)
 [![platform](https://img.shields.io/badge/platform-Flutter-blue.svg)](https://flutter.dev/)
 
-This project belong to capstone project on
-**Alterra Academy Flutter Path - Kampus Merdeka Batch 6.**
-
-## 🌿 About SIPK
+## About SIPK
 
 SIPK is a mobile-based application developed to accelerate the credit assessment process at the Tadbiirul Ummah Sharia Savings and Loan Cooperative. This application transforms manual credit assessment forms into digital forms and then automatically performs the assessment process based on the inputted data.
 
