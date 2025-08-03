@@ -1,8 +1,8 @@
 # Greeve
 
-[![Stars](https://img.shields.io/github/stars/ivantendou/bookstash.svg)](https://github.com/Alterra-Greeve/flutter-capstone/stargazers)
-[![Forks](https://img.shields.io/github/forks/ivantendou/bookstash.svg)](https://github.com/Alterra-Greeve/flutter-capstone/network/members)
-[![Watchers](https://img.shields.io/github/watchers/ivantendou/bookstash.svg)](https://github.com/Alterra-Greeve/flutter-capstone/watchers)
+[![Stars](https://img.shields.io/github/stars/ivantendou/sipk.svg)](https://github.com/ivantendou/sipk/stargazers)
+[![Forks](https://img.shields.io/github/forks/ivantendou/sipk.svg)](https://github.com/ivantendou/sipk/network/members)
+[![Watchers](https://img.shields.io/github/watchers/ivantendou/sipk.svg)](https://github.com/ivantendou/sipk/watchers)
 
 [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/Alterra-Greeve/flutter-capstone/blob/main/LICENSE)
 [![platform](https://img.shields.io/badge/platform-Flutter-blue.svg)](https://flutter.dev/)
@@ -12,8 +12,8 @@ This project belong to capstone project on
 
 Star ⭐ the repository if you like what you see😉.
 
-![Presentasi Greeve All Team ](<img width="1920" height="1080" alt="Blue Modern Mobile Application Presentation" src="https://github.com/user-attachments/assets/990bb290-984b-4171-9b3a-1059058296ee" />
-)
+<img width="1920" height="1080" alt="Blue Modern Mobile Application Presentation" src="https://github.com/user-attachments/assets/990bb290-984b-4171-9b3a-1059058296ee" />
+
 
 ## 🌿 About Greeve
 
