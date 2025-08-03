@@ -10,58 +10,43 @@
 This project belong to capstone project on
 **Alterra Academy Flutter Path - Kampus Merdeka Batch 6.**
 
+## 🌿 About SIPK
+
+SIPK is a mobile-based application developed to accelerate the credit assessment process at the Tadbiirul Ummah Sharia Savings and Loan Cooperative. This application transforms manual credit assessment forms into digital forms and then automatically performs the assessment process based on the inputted data.
+
 Star ⭐ the repository if you like what you see😉.
 
 <img width="1920" height="1080" alt="Blue Modern Mobile Application Presentation" src="https://github.com/user-attachments/assets/990bb290-984b-4171-9b3a-1059058296ee" />
 
+## 📱 SIPK Features
 
-## 🌿 About Greeve
+### 🔐 Login & Authentication
+Secure login and role-based access allow Account Officers, Managers, and Admins to use the system according to their responsibilities.
 
-Welcome to Greeve, where sustainable living becomes effortless! 🌍 Greeve is not just another eco-friendly app; it's your gateway to a greener lifestyle. We've identified three common challenges people face in their efforts to protect the environment: lack of information, motivation, and access to eco-friendly products. To overcome these issues, we have designed Greeve with a range of innovative features.
+### 📄 Digital Credit Scoring Form
+Transform manual paper forms into digital ones. Account Officers can input applicant data directly via mobile devices, making the process faster and paperless.
 
-## 🌿 Greeve Features
+### 📊 Automatic Credit Score Calculation
+The system calculates credit scores automatically based on predefined parameters, ensuring objective and consistent assessments.
 
-### 📝 Register/Join Membership
+### 🧾 Financing Application Submission
+Digitally submit financing proposals. No need to wait for paper forms—Account Officers can send applications in real-time.
 
-Become part of the Greeve community. Sign up to access more challenges, rewards and benefits for sustainable living.
+### ✅ Credit Approval & Verification
+Managers can review and approve or reject applications through the app, streamlining decision-making and reducing delays.
 
-### 📊 Measure Environmental Impacts
-
-Track your environmental impact. Get detailed data on how your actions affect the planet and see your progress in reducing your carbon footprint.
-
-### 🛒 View Environment-Friendly Products
-
-Discover eco-friendly products. Browse our curated marketplace for items that help you make greener choices.
-
-### 📚 View Challenges About the Environment
-
-Stay informed and motivated. Access a wealth of information and participate in challenges designed to promote sustainable living.
-
-### 💳 Purchase a Product (Manual Transfer)
-
-Buy eco-friendly products with ease. Use our manual transfer payment option to make your purchases securely.
-
-### 🎯 Personalized Content Recommendations
-
-Enjoy content tailored to you. Our AI provides personalized recommendations based on your interests and eco-friendly goals.
-
-### 💬 AI Chatbot
-
-Get instant support and tips. Our AI chatbot is here to answer your questions and provide eco-friendly advice.
-
-### 🏆 View Leaderboard of Challenges & Get Rewards
-
-Compete and earn rewards. Participate in challenges, view the leaderboard, and earn rewards for your sustainable efforts.
-
-## Screenshots
+### 🔍 Application Monitoring
+Track the status of each application. The system offers transparency in the credit evaluation pipeline for all stakeholders.
 
 Below are some screenshots that demonstrate the usage of the project:
 
-| | | |
+| **Home Screen** | **Application Screen** | **Form Screen** |
 |:--:|:--:|:--:|
-| **Loading Screen** | **Splash Screen** | **On Boarding Page 1** |
-| ![Loading Screen](images/feature/loading_screen.png) | ![Splash Screen](images/feature/splash_screen.png) | ![On Boarding Page 1](images/feature/on_boarding_page1.png) |
-| **On Boarding Page 2** | **On Boarding Page 3** | **Login Screen** |
-| ![On Boarding Page 2](images/feature/on_boarding_page2.png) | ![On Boarding Page 3](images/feature/on_boarding_page3.png) | ![Login Screen](images/feature/login_screen.png) |
+| <img src="https://github.com/user-attachments/assets/f3b23d9c-8847-4443-9aa0-792037551473" width="200" /> | <img src="https://github.com/user-attachments/assets/e435a14c-dbe2-4b64-ae67-4821de25c309" width="200" /> | <img src="https://github.com/user-attachments/assets/1f0d713c-99e9-4ca1-9126-e412df4eb0e9" width="200" /> |
+
+| **Scoring Data Search** | **Scoring Result Screen** | **Detail Application Screen** |
+|:--:|:--:|:--:|
+| <img src="https://github.com/user-attachments/assets/55e76db2-3a36-4170-b53a-7c27a8228b31" width="200" /> | <img src="https://github.com/user-attachments/assets/6ae11d9f-af06-4c85-aad7-f58d90f7ef08" width="200" /> | <img src="https://github.com/user-attachments/assets/7fa93890-7a5e-4df2-9e61-15a3e244c382" width="200" /> |
+
 
 
