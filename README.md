@@ -12,7 +12,8 @@ This project belong to capstone project on
 
 Star ⭐ the repository if you like what you see😉.
 
-![Presentasi Greeve All Team ](https://github.com/Alterra-Greeve/flutter-capstone/assets/70643310/2b31811a-1df5-4efc-be01-0c67ae31c782)
+![Presentasi Greeve All Team ](<img width="1920" height="1080" alt="Blue Modern Mobile Application Presentation" src="https://github.com/user-attachments/assets/990bb290-984b-4171-9b3a-1059058296ee" />
+)
 
 ## 🌿 About Greeve
 
